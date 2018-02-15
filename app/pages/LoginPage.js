@@ -5,12 +5,16 @@ import {
   Text,
   TouchableHighlight,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  Alert
 } from "react-native";
 
 //custom components
 import CustomTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
+
+//helpers
+import Validation from "../common/helpers/Validation";
 
 class LoginPage extends Component {
   static navigationOptions = {
@@ -25,8 +29,39 @@ class LoginPage extends Component {
     };
   }
 
-  render() {
+  validateLoginCredentials() {
+    
+    //move this to validation
+    if(Validation.fieldIsEmpty(this.state.username)) {
+      Alert.alert(
+        "Empty username", 
+        "Please enter a username",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    } else {
+      this.navigateToHomePage();
+    }
+  }
+
+
+  navigateToHomePage() {
+    //daca o sa folosesc in mai multe locuri, il declar in constructor
     const { navigate } = this.props.navigation;
+    navigate("HomePage", { screen: "Home page" });
+
+    // if(!Validation.fieldIsEmpty(this.state.username, this.state.password)) {
+    //   navigate("HomePage", { screen: "Home page" });
+    // }
+
+
+  }
+
+
+  render() {
+    //const { navigate } = this.props.navigation;
 
     return (
       <View style={styles.container}>
@@ -62,12 +97,13 @@ class LoginPage extends Component {
 
           <CustomButton
             style={{ marginTop: 30 }}
-            onPress={() => navigate("HomePage", { screen: "Home page" })}
+            //onPress={() => navigate("HomePage", { screen: "Home page" })}
+            onPress = {() => this.validateLoginCredentials()}
           />
 
           <Text style={styles.accountText}>Don't have an account?</Text>
           <TouchableHighlight
-            onPress={() => navigate("HomePage", { screen: "Home page" })}
+            onPress={() => {}}
             underlayColor="transparent"
           >
             <Text style={styles.registerText}>Register here </Text>
