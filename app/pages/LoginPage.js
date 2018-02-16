@@ -21,6 +21,7 @@ class LoginPage extends Component {
     header: null
   };
 
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -31,19 +32,20 @@ class LoginPage extends Component {
 
   validateLoginCredentials() {
     
+    this.navigateToHomePage();
     //move this to validation
-    if(Validation.fieldIsEmpty(this.state.username)) {
-      Alert.alert(
-        "Empty username", 
-        "Please enter a username",
-        [
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: false }
-      )
-    } else {
-      this.navigateToHomePage();
-    }
+    // if(Validation.fieldIsEmpty(this.state.username)) {
+    //   Alert.alert(
+    //     "Empty username", 
+    //     "Please enter a username",
+    //     [
+    //       {text: 'OK', onPress: () => console.log('OK Pressed')},
+    //     ],
+    //     { cancelable: false }
+    //   )
+    // } else {
+    //   this.navigateToHomePage();
+    // }
   }
 
 
@@ -52,9 +54,7 @@ class LoginPage extends Component {
     const { navigate } = this.props.navigation;
     navigate("HomePage", { screen: "Home page" });
 
-    // if(!Validation.fieldIsEmpty(this.state.username, this.state.password)) {
-    //   navigate("HomePage", { screen: "Home page" });
-    // }
+    
 
 
   }
