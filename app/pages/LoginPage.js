@@ -21,7 +21,7 @@ class LoginPage extends Component {
     header: null
   };
 
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +31,7 @@ class LoginPage extends Component {
   }
 
   validateLoginCredentials() {
-    
+
     this.navigateToHomePage();
     //move this to validation
     // if(Validation.fieldIsEmpty(this.state.username)) {
@@ -53,10 +53,11 @@ class LoginPage extends Component {
     //daca o sa folosesc in mai multe locuri, il declar in constructor
     const { navigate } = this.props.navigation;
     navigate("HomePage", { screen: "Home page" });
+  }
 
-    
-
-
+  navigateToRegisterPage() {
+    const { navigate } = this.props.navigation;
+    navigate("RegisterPage", { screen: "Register page" });
   }
 
 
@@ -65,49 +66,49 @@ class LoginPage extends Component {
 
     return (
       <View style={styles.container}>
-        
-          <Text style={styles.appTitle}> TRAFFIC BUDDY </Text>
-          <CustomTextInput
-            style={{ marginTop: 30 }}
-            placeholder="Username"
-            onChangeText={text =>
-              this.setState({
-                ...this.state,
-                username: text
-              })
-            }
-            value={this.state.username}
-            maxLength={7}
-            autoCapitalize="characters"
-          />
 
-          <CustomTextInput
-            style={{ marginTop: 10 }}
-            placeholder="Password"
-            onChangeText={text =>
-              this.setState({
-                ...this.state,
-                password: text
-              })
-            }
-            value={this.state.password}
-            maxLength={20}
-            isPassword={true}
-          />
+        <Text style={styles.appTitle}> TRAFFIC BUDDY </Text>
+        <CustomTextInput
+          style={{ marginTop: 30 }}
+          placeholder="Username"
+          onChangeText={text =>
+            this.setState({
+              ...this.state,
+              username: text
+            })
+          }
+          value={this.state.username}
+          maxLength={7}
+          autoCapitalize="characters"
+        />
 
-          <CustomButton
-            style={{ marginTop: 30 }}
-            //onPress={() => navigate("HomePage", { screen: "Home page" })}
-            onPress = {() => this.validateLoginCredentials()}
-          />
+        <CustomTextInput
+          style={{ marginTop: 10 }}
+          placeholder="Password"
+          onChangeText={text =>
+            this.setState({
+              ...this.state,
+              password: text
+            })
+          }
+          value={this.state.password}
+          maxLength={20}
+          isPassword={true}
+        />
 
-          <Text style={styles.accountText}>Don't have an account?</Text>
-          <TouchableHighlight
-            onPress={() => {}}
-            underlayColor="transparent"
-          >
-            <Text style={styles.registerText}>Register here </Text>
-          </TouchableHighlight>
+        <CustomButton
+          style={{ marginTop: 30 }}
+          //onPress={() => navigate("HomePage", { screen: "Home page" })}
+          onPress={() => this.validateLoginCredentials()}
+        />
+
+        <Text style={styles.accountText}>Don't have an account?</Text>
+        <TouchableHighlight
+          onPress={() => this.navigateToRegisterPage() }
+          underlayColor="transparent"
+        >
+          <Text style={styles.registerText}>Register here </Text>
+        </TouchableHighlight>
       </View>
     );
   }
