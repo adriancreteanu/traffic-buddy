@@ -10,7 +10,7 @@ class CustomTextInput extends Component {
         style={[
           this.props.style,
           {
-            width: 200,
+            width: this.props.width,
             height: 40,
             borderColor: "gray",
             borderWidth: 1,
@@ -30,6 +30,7 @@ class CustomTextInput extends Component {
         maxLength={this.props.maxLength}
         autoCapitalize={this.props.autoCapitalize}
         secureTextEntry={this.props.isPassword}
+        keyboardType={this.props.keyboardType}
       />
     );
   }

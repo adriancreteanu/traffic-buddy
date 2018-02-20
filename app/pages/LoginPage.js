@@ -69,6 +69,7 @@ class LoginPage extends Component {
 
         <Text style={styles.appTitle}> TRAFFIC BUDDY </Text>
         <CustomTextInput
+          width={200}
           style={{ marginTop: 30 }}
           placeholder="Username"
           onChangeText={text =>
@@ -83,6 +84,7 @@ class LoginPage extends Component {
         />
 
         <CustomTextInput
+          width={200}
           style={{ marginTop: 10 }}
           placeholder="Password"
           onChangeText={text =>
@@ -97,6 +99,8 @@ class LoginPage extends Component {
         />
 
         <CustomButton
+          width={200}
+          buttonTitle="Log In"
           style={{ marginTop: 30 }}
           //onPress={() => navigate("HomePage", { screen: "Home page" })}
           onPress={() => this.validateLoginCredentials()}
@@ -133,10 +137,12 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   registerText: {
+    width: 200, //necessary because of the fontweight
+    textAlign: 'center',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: "#FFFFFF",
-    marginTop: 10
+    marginTop: 10,
   }
 });
 

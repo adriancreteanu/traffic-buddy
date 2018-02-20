@@ -9,7 +9,7 @@ class CustomButton extends Component {
         style={[
           this.props.style,
           {
-            width: 200,
+            width: this.props.width,
             height: 40,
             borderColor: "gray",
             borderWidth: 1,
@@ -21,7 +21,7 @@ class CustomButton extends Component {
         onPress={this.props.onPress}
         underlayColor={"#396924"}
       >
-        <Text style={{ color: "#FFFFFF", fontSize: 16 }}> Log In </Text>
+        <Text style={{ color: "#FFFFFF", fontSize: 16 }}> {this.props.buttonTitle} </Text>
       </TouchableHighlight>
     );
   }
