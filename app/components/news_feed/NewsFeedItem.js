@@ -10,15 +10,22 @@ class NewsFeedItem extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.defaultTextStyle}> {this.props.username} </Text>
-                <Text style={styles.defaultTextStyle}> Rank: {this.props.rank} </Text>
-                <Text style={styles.defaultTextStyle}> Category: {this.props.category} </Text>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    <View style={styles.userContainerStyle}>
+                        <Text style={styles.defaultTextStyle}> {this.props.username} </Text>
+                        <Text style={styles.defaultTextStyle}> Rank: {this.props.rank} </Text>
+                        <Text style={styles.defaultTextStyle}> Categorie: {this.props.category} </Text>
+                    </View>
+                    <View style={styles.hourContainerStyle}>
+                        <Text style={styles.hourTextStyle}> {this.props.hour} </Text>
+                    </View>
+                </View>
                 <View
                     style={{
-                        flex: 1, 
+                        flex: 1,
                         borderBottomColor: '#a94242',
                         borderBottomWidth: 1,
-                        marginTop: 10, 
+                        marginTop: 10,
                         marginBottom: 10,
                         marginRight: 10
                     }}
@@ -35,7 +42,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         marginBottom: 20,
         borderWidth: 2,
-        borderColor: '#a94242',
+        borderColor: '#000',
         backgroundColor: '#fff',
         marginHorizontal: 20,
         paddingVertical: 5,
@@ -54,7 +61,23 @@ const styles = StyleSheet.create({
         //backgroundColor: 'cyan',
         //alignSelf: 'flex-start',
         //textAlign: 'justify'
-
+    }, 
+    userContainerStyle: {
+        flex: 1, 
+       // backgroundColor: 'red'
+        //textAlign: 'left'
+    },
+    hourContainerStyle: {
+        flex: 1, 
+        //textAlign: 'right'
+       // backgroundColor: 'cyan', 
+        paddingRight: 10,
+    }, 
+    hourTextStyle: {
+        textAlign: 'right',
+        //marginTop: 10, 
+        fontSize: 20, 
+        color: '#000'
     }
 });
 

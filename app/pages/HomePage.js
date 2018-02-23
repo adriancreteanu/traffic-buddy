@@ -31,7 +31,8 @@ class HomePage extends Component {
             <ScrollView contentContainerStyle={{
                 flex: 1,
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center", 
+                backgroundColor: '#a94242'
             }}>
                 <NextFeedList />
             </ScrollView>

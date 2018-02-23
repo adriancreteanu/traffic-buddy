@@ -14,55 +14,64 @@ const mockNewsFeedItems = [
         username: "TM15ABI",
         rank: 14,
         category: "radar",
-        message: "Atentie radar pe Take Ionescu"
+        message: "Atentie radar pe Take Ionescu", 
+        hour: "13:55"
     }, {
         id: 2,
         username: "GJ22KJI",
         rank: -2,
         category: "accident",
-        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara"
+        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
+        hour: "16:22"
     }, {
         id: 3,
         username: "AR12OPI",
         rank: 0,
         category: "trafic",
-        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici"
+        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
+        hour: "09:32"
     }, {
         id: 4,
         username: "TM15ABI",
         rank: 14,
         category: "radar",
-        message: "Atentie radar pe Take Ionescu"
+        message: "Atentie radar pe Take Ionescu", 
+        hour: "16:22"
     }, {
         id: 5,
         username: "GJ22KJI",
         rank: -2,
         category: "accident",
-        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara"
+        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
+        hour: "05:12"
     }, {
         id: 6,
         username: "AR12OPI",
         rank: 0,
         category: "trafic",
-        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici"
+        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
+        hour: "00:12"
     }, {
         id: 6,
         username: "TM15ABI",
         rank: 14,
         category: "radar",
-        message: "Atentie radar pe Take Ionescu"
+        message: "Atentie radar pe Take Ionescu",
+        hour: "11:10"
     }, {
         id: 7,
         username: "GJ22KJI",
         rank: -2,
         category: "accident",
-        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara"
+        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
+        hour: "19:45"
     }, {
         id: 8,
         username: "AR12OPI",
         rank: 0,
         category: "trafic",
-        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici"
+        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
+        hour: "06:42"
     }
 ]
 
@@ -88,6 +97,7 @@ class NewsFeedList extends Component {
                 rank={item.rank}
                 category={item.category}
                 message={item.message}
+                hour={item.hour}
             />
         );
     };
