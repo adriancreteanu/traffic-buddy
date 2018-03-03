@@ -33,9 +33,9 @@ let stackNavigationOptions = {
         shadowRadius: 0,
         borderBottomWidth: 0,
         elevation: 0,
-        backgroundColor: "red",
-        paddingTop: 25,
-        height: 70
+        //backgroundColor: "red",
+        //paddingTop: 25,
+        //height: 70
     }
 };
 
