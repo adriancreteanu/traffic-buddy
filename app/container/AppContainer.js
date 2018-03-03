@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-    View
+    View, 
+    BackHandler
 } from 'react-native';
 
 //Navigation
@@ -8,6 +9,7 @@ import {
     StackNavigator,
     addNavigationHelpers
 } from 'react-navigation';
+import * as navActions from "../common/redux/actions/NavigationActions";
 
 //Redux
 import { connect } from 'react-redux';
@@ -87,6 +89,35 @@ export const middleware = createReactNavigationReduxMiddleware(
 const addListener = createReduxBoundAddListener("root");
 
 class AppContainer extends Component {
+
+    componentDidMount() {
+        this.loadAndroidBackButtonSupport();
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener("hardwareBackPress");
+    }
+
+    loadAndroidBackButtonSupport() {
+        BackHandler.addEventListener(
+            "hardwareBackPress", 
+            this.onAndroidBackButtonPressed.bind(this)
+        );
+    }
+
+    onAndroidBackButtonPressed() {
+        if (this.shouldCloseApp()) {
+            return false;
+        } else {
+            navActions.navigateBack()(this.props.dispatch);
+            return true;
+        }
+    }
+
+    shouldCloseApp() {
+        return false;
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>
