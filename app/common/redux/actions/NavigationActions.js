@@ -39,3 +39,12 @@ export function navigateBack() {
         dispatch(action);
     };
 }
+
+export function resetStack() {
+    return function(dispatch: any) {
+        let action = {
+            type: "none"
+        };
+        dispatch(action);
+    };
+}

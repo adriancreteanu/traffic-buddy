@@ -5,7 +5,7 @@ import UserViewModel from "../viewmodels/UserViewModel";
 import UserModel from "../models/UserModel";
 import ErrorViewModel from "../viewmodels/error/ErrorViewModel";
 
-export default class AuthenticationManger {
+export default class AuthenticationManager {
 
     _service: AuthenticationService;
 

@@ -1,6 +1,7 @@
 import { NavigationActions } from 'react-navigation';
 import { AppNavigator } from "../../../container/AppContainer";
 import { navigationActionTypes } from "../actions/NavigationActions";
+import { authenticationActionTypes } from '../actions/AuthenticationActions';
 
 //The initial page is Home page
 //If the user is logged in, on app restart, navigation remains at home page
@@ -30,6 +31,10 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
                 ]
             });
             nextState = AppNavigator.router.getStateForAction(getToLoginPageNavigator, state);
+            break;
+
+        case authenticationActionTypes.loginSuccess: 
+            nextState = AppNavigator.router.getStateForAction(action, tempNavState);
             break;
 
         // case navigationActionTypes.navigateToHomePage:

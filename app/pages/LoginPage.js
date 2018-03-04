@@ -16,7 +16,12 @@ import CustomButton from "../components/CustomButton";
 //helpers
 import Validation from "../common/helpers/Validation";
 
+//Navigation
 import * as navActions from "../common/redux/actions/NavigationActions";
+
+//Authentication
+import * as authActions from "../common/redux/actions/AuthenticationActions";
+import * as authPayloads from "../common/data/payloads/AuthenticationPayloads";
 
 import { connect } from 'react-redux';
 
@@ -34,22 +39,22 @@ class LoginPage extends Component {
     };
   }
 
-  validateLoginCredentials() {
+  async validateLoginCredentials() {
 
-    this.navigateToHomePage();
     //move this to validation
-    // if(Validation.fieldIsEmpty(this.state.username)) {
-    //   Alert.alert(
-    //     "Empty username", 
-    //     "Please enter a username",
-    //     [
-    //       {text: 'OK', onPress: () => console.log('OK Pressed')},
-    //     ],
-    //     { cancelable: false }
-    //   )
-    // } else {
-    //   this.navigateToHomePage();
-    // }
+    if(Validation.fieldIsEmpty(this.state.username)) {
+      Alert.alert(
+        "Empty username", 
+        "Please enter a username",
+        [
+          {text: 'OK', onPress: () => console.log('OK Pressed')},
+        ],
+        { cancelable: false }
+      )
+    } else {
+      let payload = authPayloads.createLoginCredentialsPayload(this.state.username, this.state.password);
+      authActions.loginWithEmailAction(payload)(this.props.dispatch);
+    }
   }
 
 
@@ -80,8 +85,8 @@ class LoginPage extends Component {
             })
           }
           value={this.state.username}
-          maxLength={7}
-          autoCapitalize="characters"
+          //maxLength={7}
+          //autoCapitalize="characters"
         />
 
         <CustomTextInput

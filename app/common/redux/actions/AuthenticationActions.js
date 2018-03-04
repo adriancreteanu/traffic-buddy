@@ -3,6 +3,8 @@ import * as authPayloads from "../../data/payloads/AuthenticationPayloads";
 import UserViewModel from "../../data/viewmodels/UserViewModel";
 import ErrorViewModel from "../../data/viewmodels/error/ErrorViewModel";
 
+import * as navActions from "../actions/NavigationActions";
+
 export const authenticationActionTypes = {
     loginInProgress: "loginInProgress",
     loginSuccess: "loginSuccess",
@@ -59,14 +61,16 @@ function handleAuthenticationResponse(
             isFinishedWithSuccess: true
         };
         dispatch(action);
+        navActions.resetStack()(dispatch);
     } else if(response instanceof ErrorViewModel) {
-        let action = {
+        let action2 = {
             type: authenticationActionTypes.loginFailure,
             isInProgress: false, 
             errorViewModel: response, 
             viewModel: null,
-            isFinishedWithSuccess: false
+            isFinishedWithSuccess: false,
         };
-        dispatch(action);
+        alert("Eroare!!!!");
+        dispatch(action2);
     }
 }

@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 import { firebaseConfig } from '../config/FirebaseConfig';
 
 export default class SuperService {
@@ -12,7 +12,7 @@ export default class SuperService {
     }
 
     initFirebaseApp() {
-        this.firebaseApp == !firebase.app.length
+        this.firebaseApp = !firebase.apps.length
             ? firebase.initializeApp(firebaseConfig)
             : firebase.app()
     }

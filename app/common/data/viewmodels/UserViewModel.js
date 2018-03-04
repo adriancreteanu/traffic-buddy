@@ -6,7 +6,7 @@ export default class UserViewModel {
     _viewModel: ?UserModel;
 
     constructor(model: UserModel) {
-        this._viewModel = mode;
+        this._viewModel = model;
     }
 
     get userViewModel() {

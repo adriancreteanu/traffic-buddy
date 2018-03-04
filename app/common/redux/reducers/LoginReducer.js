@@ -9,7 +9,8 @@ export const loginReducer = (state = initialLoginState(), action: any) => {
                 type: action.type,
                 isInProgress: true,
                 errorViewModel: null,
-                viewModel: null
+                viewModel: null,
+                isFinishedWithSuccess: false,
             };
 
         case authenticationActionTypes.loginFailure:
@@ -18,7 +19,8 @@ export const loginReducer = (state = initialLoginState(), action: any) => {
                 type: action.type,
                 isInProgress: false,
                 errorViewModel: action.errorViewModel,
-                viewModel: null
+                viewModel: null,
+                isFinishedWithSuccess: false,
             }
         case authenticationActionTypes.loginSuccess:
             return {
@@ -26,7 +28,8 @@ export const loginReducer = (state = initialLoginState(), action: any) => {
                 type: action.type,
                 isInProgress: false,
                 errorViewModel: null,
-                viewModel: action.viewModel
+                viewModel: action.viewModel,
+                isFinishedWithSuccess: true,
             };
         default: 
             return initialLoginState();

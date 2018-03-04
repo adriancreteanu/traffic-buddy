@@ -20,7 +20,7 @@ export default class AuthenticationService extends SuperService {
             .signInWithEmailAndPassword(payload.username, payload.password)
             .then(user => {
                 //save user is preferences
-                response = new UserModel(user, user.key);
+                response = new UserModel(user);
             })
             .catch(error => {
                 response = ApiErrorModel.createDefaultErrorInstance(error);
