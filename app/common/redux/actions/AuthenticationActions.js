@@ -25,7 +25,7 @@ export function loginWithEmailAction(
 }
 
 export function verifyAuthAction() {
-    return async function(dispatch: any) {
+    return async function (dispatch: any) {
         let authManager = new AuthenticationManager();
         await authManager.verifyAuth(dispatch);
     }
@@ -48,29 +48,28 @@ function dispatchInProgressAction(
 }
 
 function handleAuthenticationResponse(
-    dispatch: any, 
+    dispatch: any,
     response: UserViewModel | ErrorViewModel
 ) {
-
-    if(response instanceof UserViewModel) {
-        let action = {
-            type: authenticationActionTypes.loginSuccess, 
-            isInProgress: false, 
-            errorViewModel: null, 
+    let action = null;
+    if (response instanceof UserViewModel) {
+        action = {
+            type: authenticationActionTypes.loginSuccess,
+            isInProgress: false,
+            errorViewModel: null,
             viewModel: response,
             isFinishedWithSuccess: true
         };
         dispatch(action);
         navActions.resetStack()(dispatch);
-    } else if(response instanceof ErrorViewModel) {
-        let action2 = {
+    } else if (response instanceof ErrorViewModel) {
+        action = {
             type: authenticationActionTypes.loginFailure,
-            isInProgress: false, 
-            errorViewModel: response, 
+            isInProgress: false,
+            errorViewModel: response,
             viewModel: null,
             isFinishedWithSuccess: false,
         };
-        alert("Eroare!!!!");
-        dispatch(action2);
+        dispatch(action);
     }
 }

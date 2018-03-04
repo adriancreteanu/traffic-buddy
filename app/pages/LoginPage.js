@@ -31,6 +31,7 @@ class LoginPage extends Component {
   };
 
 
+  /* Lifecycle methods */
   constructor(props) {
     super(props);
     this.state = {
@@ -39,15 +40,31 @@ class LoginPage extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    //Check if user has authenticated successfully
+    let login = nextProps.loginReducer;
+    if (login != null) {
+      if (login.errorViewModel != null) {
+        this.displayMessage("Error", login.errorViewModel.errorMessage);
+      }
+    }
+  }
+
+  displayMessage(title: String, message: String) {
+    Alert.alert(title, message, [{ text: "Ok", onPress: () => { } }], {
+      cancelable: true
+    });
+  }
+
   async validateLoginCredentials() {
 
     //move this to validation
-    if(Validation.fieldIsEmpty(this.state.username)) {
+    if (Validation.fieldIsEmpty(this.state.username)) {
       Alert.alert(
-        "Empty username", 
+        "Empty username",
         "Please enter a username",
         [
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
         ],
         { cancelable: false }
       )
@@ -68,11 +85,8 @@ class LoginPage extends Component {
 
 
   render() {
-    //const { navigate } = this.props.navigation;
-
     return (
       <View style={styles.container}>
-
         <Text style={styles.appTitle}> TRAFFIC BUDDY </Text>
         <CustomTextInput
           width={200}
@@ -85,8 +99,8 @@ class LoginPage extends Component {
             })
           }
           value={this.state.username}
-          //maxLength={7}
-          //autoCapitalize="characters"
+        //maxLength={7}
+        //autoCapitalize="characters"
         />
 
         <CustomTextInput
@@ -114,7 +128,7 @@ class LoginPage extends Component {
 
         <Text style={styles.accountText}>Don't have an account?</Text>
         <TouchableHighlight
-          onPress={() => this.navigateToRegisterPage() }
+          onPress={() => this.navigateToRegisterPage()}
           underlayColor="transparent"
         >
           <Text style={styles.registerText}>Register here </Text>
