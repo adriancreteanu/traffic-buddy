@@ -52,21 +52,21 @@ const mockNewsFeedItems = [
         message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
         hour: "00:12"
     }, {
-        id: 6,
+        id: 7,
         username: "TM15ABI",
         rank: 14,
         category: "radar",
         message: "Atentie radar pe Take Ionescu",
         hour: "11:10"
     }, {
-        id: 7,
+        id: 8,
         username: "GJ22KJI",
         rank: -2,
         category: "accident",
         message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
         hour: "19:45"
     }, {
-        id: 8,
+        id: 9,
         username: "AR12OPI",
         rank: 0,
         category: "trafic",

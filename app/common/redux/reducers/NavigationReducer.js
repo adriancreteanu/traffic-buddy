@@ -18,7 +18,6 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
     const defaultState = AppNavigator.router.getStateForAction(action, state);
     let nextState = defaultState;
 
-    if(action !== null) {
     switch (action.type) {
         case navigationActionTypes.navigateToLoginPage:
             const getToLoginPageNavigator = NavigationActions.reset({
@@ -33,30 +32,39 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             nextState = AppNavigator.router.getStateForAction(getToLoginPageNavigator, state);
             break;
 
+        // case navigationActionTypes.navigateToHomePage:
+        //     const getToHomePageNavigator = NavigationActions.reset({
+        //         index: 0,
+        //         actions: [
+        //             NavigationActions.navigate({
+        //                 key: "MainNavigator",
+        //                 routeName: "MainNavigator"
+        //             })
+        //         ]
+        //     });
+        //     nextState = AppNavigator.router.getStateForAction(getToHomePageNavigator, state);
+        //     break;
+
         case navigationActionTypes.navigateToHomePage:
-            const getToHomePageNavigator = NavigationActions.reset({
-                index: 0,
-                actions: [
-                    NavigationActions.navigate({
-                        key: "MainNavigator",
-                        routeName: "MainNavigator"
-                    })
-                ]
-            });
-            nextState = AppNavigator.router.getStateForAction(getToHomePageNavigator, state);
-            break;
+        nextState = AppNavigator.router.getStateForAction(
+            NavigationActions.navigate({
+                routeName: "Home"
+            }),
+            state
+        );
+        break;
 
         case navigationActionTypes.navigateToRegisterPage:
             nextState = AppNavigator.router.getStateForAction(
                 NavigationActions.navigate({
-                    routeName: "RegisterPage"
+                    routeName: "Register"
                 }),
                 state
             );
             break;
         default:
             break;
-    }}
+    }
     return nextState;
 
 }

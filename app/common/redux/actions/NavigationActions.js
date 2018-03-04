@@ -15,6 +15,24 @@ export function navigateToLoginPage() {
     };
 }
 
+export function navigateToRegisterPage() {
+    return function(dispatch: any) {
+        let action = {
+            type: navigationActionTypes.navigateToRegisterPage
+        };
+        dispatch(action); 
+    };
+}
+
+export function navigateToHomePage() {
+    return function(dispatch: any) {
+        let action = {
+            type: navigationActionTypes.navigateToHomePage
+        };
+        dispatch(action); 
+    };
+}
+
 export function navigateBack() {
     return function(dispatch: any) {
         let action = NavigationActions.back();

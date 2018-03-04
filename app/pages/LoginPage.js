@@ -16,6 +16,10 @@ import CustomButton from "../components/CustomButton";
 //helpers
 import Validation from "../common/helpers/Validation";
 
+import * as navActions from "../common/redux/actions/NavigationActions";
+
+import { connect } from 'react-redux';
+
 class LoginPage extends Component {
   static navigationOptions = {
     header: null
@@ -50,14 +54,11 @@ class LoginPage extends Component {
 
 
   navigateToHomePage() {
-    //daca o sa folosesc in mai multe locuri, il declar in constructor
-    const { navigate } = this.props.navigation;
-    navigate("HomePage", { screen: "Home page" });
+    navActions.navigateToHomePage()(this.props.dispatch);
   }
 
   navigateToRegisterPage() {
-    const { navigate } = this.props.navigation;
-    navigate("RegisterPage", { screen: "Register page" });
+    navActions.navigateToRegisterPage()(this.props.dispatch);
   }
 
 
@@ -146,7 +147,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginPage;
+function mapStateToProps(state) {
+  return {
+    loginReducer: state.loginReducer,
+  };
+}
+
+export default connect(mapStateToProps)(LoginPage);
 
 
 // <ImageBackground
