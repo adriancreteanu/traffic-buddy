@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-    View, 
+    View,
     BackHandler
 } from 'react-native';
 
 //Navigation
 import {
     StackNavigator,
+    TabNavigator,
     addNavigationHelpers
 } from 'react-navigation';
 import * as navActions from "../common/redux/actions/NavigationActions";
@@ -22,6 +23,9 @@ import {
 import LoginPage from '../pages/LoginPage';
 import HomePage from '../pages/HomePage';
 import RegisterPage from '../pages/RegisterPage';
+import MessagesPage from '../pages/MessagesPage';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 let stackNavigationOptions = {
@@ -53,17 +57,48 @@ export const LoginNavigator = StackNavigator(
     }
 );
 
+export const MainNavigator = TabNavigator({
+    Home: {
+        screen: HomePage,
+        navigationOptions: {
+            tabBarLabel: "News feed",
+            tabBarIcon: <Icon
+                name='search'
+                size={20}
+                color="#000"
+            />
+        }
+    }, 
+    Messages: {
+        screen: MessagesPage,
+        navigationOption: {
+            tabBarLabel: "Messages",
+            tabBarIcon: <Icon
+                name='search'
+                size={20}
+                color="#000"
+            />
+        }
+    }
+}, 
+    {
+        initialRouteName: "Home"
+    }
+);
+
+
+
 export const AppNavigator = StackNavigator(
     {
-        HomePage: {
+        Home: {
             screen: HomePage,
-            navigationOptions: stackNavigationOptions
+            //navigationOptions: stackNavigationOptions
         },
-        RegisterPage: {
+        Register: {
             screen: RegisterPage,
             navigationOptions: stackNavigationOptions
         },
-        LoginNavigator: {
+        Login: {
             screen: LoginNavigator,
             navigationOptions: {
                 // backgroundColor: "transparent",
@@ -77,7 +112,7 @@ export const AppNavigator = StackNavigator(
         }
     },
     {
-        initialRouteName: "HomePage",
+        initialRouteName: "Home",
         headerMode: "float"
     }
 );
@@ -100,7 +135,7 @@ class AppContainer extends Component {
 
     loadAndroidBackButtonSupport() {
         BackHandler.addEventListener(
-            "hardwareBackPress", 
+            "hardwareBackPress",
             this.onAndroidBackButtonPressed.bind(this)
         );
     }

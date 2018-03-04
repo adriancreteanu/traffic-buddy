@@ -5,9 +5,9 @@ import { navigationActionTypes } from "../actions/NavigationActions";
 //The initial page is Home page
 //If the user is logged in, on app restart, navigation remains at home page
 //Othewise, the app navigates to Login page
-const homeAction = AppNavigator.router.getActionForPathAndParams('HomePage');
+const homeAction = AppNavigator.router.getActionForPathAndParams('Home');
 const tempNavState = AppNavigator.router.getStateForAction(homeAction);
-const loginAction = AppNavigator.router.getActionForPathAndParams('LoginNavigator');
+const loginAction = AppNavigator.router.getActionForPathAndParams('Login');
 const initialNavigationState = AppNavigator.router.getStateForAction(
     loginAction,
     tempNavState
@@ -18,6 +18,7 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
     const defaultState = AppNavigator.router.getStateForAction(action, state);
     let nextState = defaultState;
 
+    if(action !== null) {
     switch (action.type) {
         case navigationActionTypes.navigateToLoginPage:
             const getToLoginPageNavigator = NavigationActions.reset({
@@ -31,6 +32,20 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             });
             nextState = AppNavigator.router.getStateForAction(getToLoginPageNavigator, state);
             break;
+
+        case navigationActionTypes.navigateToHomePage:
+            const getToHomePageNavigator = NavigationActions.reset({
+                index: 0,
+                actions: [
+                    NavigationActions.navigate({
+                        key: "MainNavigator",
+                        routeName: "MainNavigator"
+                    })
+                ]
+            });
+            nextState = AppNavigator.router.getStateForAction(getToHomePageNavigator, state);
+            break;
+
         case navigationActionTypes.navigateToRegisterPage:
             nextState = AppNavigator.router.getStateForAction(
                 NavigationActions.navigate({
@@ -41,7 +56,7 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             break;
         default:
             break;
-    }
+    }}
     return nextState;
 
 }
