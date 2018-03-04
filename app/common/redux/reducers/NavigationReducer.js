@@ -23,9 +23,10 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
         case navigationActionTypes.navigateToLoginPage:
             const getToLoginPageNavigator = NavigationActions.reset({
                 index: 0,
+                key: "LoginNavigator",
                 actions: [
                     NavigationActions.navigate({
-                        key: "LoginNavigator",
+                        //key: "LoginNavigator",
                         routeName: "LoginNavigator"
                     })
                 ]
@@ -36,6 +37,8 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
         case authenticationActionTypes.loginSuccess: 
             nextState = AppNavigator.router.getStateForAction(action, tempNavState);
             break;
+
+        
 
         // case navigationActionTypes.navigateToHomePage:
         //     const getToHomePageNavigator = NavigationActions.reset({

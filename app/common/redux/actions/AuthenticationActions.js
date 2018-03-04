@@ -8,7 +8,10 @@ import * as navActions from "../actions/NavigationActions";
 export const authenticationActionTypes = {
     loginInProgress: "loginInProgress",
     loginSuccess: "loginSuccess",
-    loginFailure: "loginFailure"
+    loginFailure: "loginFailure",
+    signOutInProgress: "signOutInProgress", 
+    signOutSuccess: "signOutSuccess", 
+    signOutFailure: "signOutFailure"
 };
 
 
@@ -27,7 +30,18 @@ export function loginWithEmailAction(
 export function verifyAuthAction() {
     return async function (dispatch: any) {
         let authManager = new AuthenticationManager();
-        await authManager.verifyAuth(dispatch);
+        authManager.verifyAuth(dispatch);
+    }
+}
+
+export function signOutAction() {
+    return async function (dispatch: any) {
+        let type = authenticationActionTypes.signOutInProgress;
+        dispatchInProgressAction(dispatch, true, type);
+        let authManager = new AuthenticationManager();
+        let response = await authManager.signOut();
+        type = response ? authenticationActionTypes.signOutSuccess : authenticationActionTypes.signOutFailure;
+        dispatchInProgressAction(dispatch, false, type);
     }
 }
 

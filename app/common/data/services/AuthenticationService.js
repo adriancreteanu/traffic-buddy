@@ -28,8 +28,8 @@ export default class AuthenticationService extends SuperService {
         return response;
     }
 
-    async verifyAuth() {
-        await this.firebaseApp
+    async verifyAuth(dispatch: any) {
+        this.firebaseApp
             .auth()
             .onAuthStateChanged(user => {
                 if (user) {
@@ -38,6 +38,18 @@ export default class AuthenticationService extends SuperService {
                     navActions.navigateToLoginPage()(dispatch);
                 }
             });
+    }
+
+    async signOut(): boolean{
+        let response = false;
+        await this.firebaseApp
+            .auth()
+            .signOut()
+            .then(() => {
+                response = true;
+            })
+            .catch();
+            return response;
     }
 
 

@@ -14,7 +14,7 @@ class NavRightIcon extends Component {
       <View style={{ marginRight: 20}}>
         <TouchableHighlight
         underlayColor={"transparent"}
-        onPress={ this.ceFacAcum }
+        onPress={ this.props.onPress }
         >
             <Icon 
               name='bars'

@@ -15,11 +15,11 @@ export default class AuthenticationManager {
 
     async loginWithEmail(
         payload: authPayloads.loginCredentialsPayloadType
-    ) : Promise<UserViewModel | ErrorViewModel> {
+    ): Promise<UserViewModel | ErrorViewModel> {
         let response = await this._service.loginWithEmail(payload);
         var viewModel = null;
 
-        if(response instanceof UserModel) {
+        if (response instanceof UserModel) {
             viewModel = new UserViewModel(response);
         } else {
             viewModel = new ErrorViewModel(response);
@@ -28,6 +28,10 @@ export default class AuthenticationManager {
     }
 
     async verifyAuth(dispatch: any) {
-        await this._service.verifyAuth(dispatch);
+         this._service.verifyAuth(dispatch);
+    }
+
+    async signOut() {
+        return response = await this._service.signOut();
     }
 }

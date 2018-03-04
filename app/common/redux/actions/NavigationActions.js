@@ -1,4 +1,5 @@
 import { NavigationActions } from 'react-navigation';
+import * as authActions from "../actions/AuthenticationActions";
 
 export const navigationActionTypes = {
     navigateToLoginPage: "navigateToLoginPage",
@@ -31,6 +32,12 @@ export function navigateToHomePage() {
         };
         dispatch(action); 
     };
+}
+
+export function initialNavigation() {
+    return async function(dispatch: any) {
+        dispatch(authActions.verifyAuthAction());
+    }
 }
 
 export function navigateBack() {

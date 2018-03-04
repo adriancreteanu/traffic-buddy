@@ -16,14 +16,25 @@ import NavTitleUI from '../components/navigation/NavTitleUI';
 //components
 import NextFeedList from '../components/news_feed/NewsFeedList';
 
+//Authentication
+import * as authActions from "../common/redux/actions/AuthenticationActions";
+
+//Navigation 
+import { connect } from 'react-redux';
+
 class HomePage extends Component {
 
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         //title: DateHelper.generateCurrentDate(),
         headerTitle: <NavTitleUI title={DateHelper.generateCurrentDate()} />,
         headerLeft: <NavLeftIcon />,
-        headerRight: <NavRightIcon />
-    }
+        headerRight:
+             <NavRightIcon 
+                onPress={() => {
+                    authActions.signOutAction()(navigation.dispatch);
+                }}
+             />
+    });
 
 
     render() {
@@ -40,4 +51,10 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+function mapStateToProps(state) {
+    return {
+      navigationReducer: state.navigationReducer
+    };
+  }
+  
+  export default connect(mapStateToProps)(HomePage);

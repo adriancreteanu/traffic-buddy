@@ -11,6 +11,7 @@ import {
     addNavigationHelpers
 } from 'react-navigation';
 import * as navActions from "../common/redux/actions/NavigationActions";
+import * as authActions from "../common/redux/actions/AuthenticationActions";
 
 //Redux
 import { connect } from 'react-redux';
@@ -52,6 +53,7 @@ export const LoginNavigator = StackNavigator(
         }
     },
     {
+        initialRouteName: "LoginPage",
         headerMode: "none",
         mode: "modal"
     }
@@ -127,6 +129,9 @@ class AppContainer extends Component {
 
     componentDidMount() {
         this.loadAndroidBackButtonSupport();
+        //navActions.initialNavigation()(this.props.dispatch);
+        authActions.verifyAuthAction()(this.props.dispatch);
+        
     }
 
     componentWillUnmount() {
@@ -169,7 +174,8 @@ class AppContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    navigationReducer: state.navigationReducer
+    navigationReducer: state.navigationReducer,
+    appReducer: state.appReducer,
 });
 
 export default connect(mapStateToProps)(AppContainer);
