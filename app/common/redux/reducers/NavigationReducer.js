@@ -6,12 +6,8 @@ import { authenticationActionTypes } from '../actions/AuthenticationActions';
 //The initial page is Home page
 //If the user is logged in, on app restart, navigation remains at home page
 //Othewise, the app navigates to Login page
-const homeAction = AppNavigator.router.getActionForPathAndParams('Home');
-const tempNavState = AppNavigator.router.getStateForAction(homeAction);
-const loginAction = AppNavigator.router.getActionForPathAndParams('Login');
 const initialNavigationState = AppNavigator.router.getStateForAction(
-    loginAction,
-    tempNavState
+    AppNavigator.router.getActionForPathAndParams('Home')
 );
 
 export const navigationReducer = (state: any = initialNavigationState, action: any) => {
@@ -23,11 +19,10 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
         case navigationActionTypes.navigateToLoginPage:
             const getToLoginPageNavigator = NavigationActions.reset({
                 index: 0,
-                key: "LoginNavigator",
+                key: null, //the root navigator will reset
                 actions: [
                     NavigationActions.navigate({
-                        //key: "LoginNavigator",
-                        routeName: "LoginNavigator"
+                        routeName: "Login"
                     })
                 ]
             });
@@ -35,23 +30,8 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             break;
 
         case authenticationActionTypes.loginSuccess: 
-            nextState = AppNavigator.router.getStateForAction(action, tempNavState);
+            nextState = AppNavigator.router.getStateForAction(action, initialNavigationState);
             break;
-
-        
-
-        // case navigationActionTypes.navigateToHomePage:
-        //     const getToHomePageNavigator = NavigationActions.reset({
-        //         index: 0,
-        //         actions: [
-        //             NavigationActions.navigate({
-        //                 key: "MainNavigator",
-        //                 routeName: "MainNavigator"
-        //             })
-        //         ]
-        //     });
-        //     nextState = AppNavigator.router.getStateForAction(getToHomePageNavigator, state);
-        //     break;
 
         case navigationActionTypes.navigateToHomePage:
         nextState = AppNavigator.router.getStateForAction(
