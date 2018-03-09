@@ -18,6 +18,8 @@ import {
     compose
 } from 'redux';
 
+import SplashScreen from 'react-native-splash-screen';
+
 class App extends React.Component {
 
     store: typeof createStore;
@@ -28,6 +30,10 @@ class App extends React.Component {
             RootReducer,
             applyMiddleware(middleware)
         )
+    }
+
+    componentDidMount() {
+        SplashScreen.hide();
     }
 
     render() {

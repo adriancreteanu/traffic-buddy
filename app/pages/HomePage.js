@@ -36,7 +36,6 @@ class HomePage extends Component {
              />
     });
 
-
     render() {
         return (
             <ScrollView contentContainerStyle={{
@@ -49,6 +48,8 @@ class HomePage extends Component {
             </ScrollView>
         )
     }
+
+
 }
 
 function mapStateToProps(state) {
