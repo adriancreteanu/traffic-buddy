@@ -41,7 +41,9 @@ buck-out
 .gradle/
 local.properties
 *.iml
-/android/
+/android/app/build/
+/android/app/src/main/assets/
+/android/build/
 
 #iOS
 /ios/build
