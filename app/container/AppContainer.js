@@ -92,8 +92,8 @@ export const MainNavigator = TabNavigator({
 
 export const AppNavigator = StackNavigator(
     {
-        Home: {
-            screen: HomePage,
+        Main: {
+            screen: MainNavigator,
             //navigationOptions: stackNavigationOptions
         },
         Register: {
@@ -114,7 +114,7 @@ export const AppNavigator = StackNavigator(
         }
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: "Main",
         headerMode: "float"
     }
 );

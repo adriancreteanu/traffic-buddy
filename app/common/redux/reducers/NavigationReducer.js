@@ -6,8 +6,19 @@ import { authenticationActionTypes } from '../actions/AuthenticationActions';
 //The initial page is Home page
 //If the user is logged in, on app restart, navigation remains at home page
 //Othewise, the app navigates to Login page
-const initialNavigationState = AppNavigator.router.getStateForAction(
-    AppNavigator.router.getActionForPathAndParams('Home')
+
+
+//Force a Init of the main router
+let initialNavigationState = AppNavigator.router.getStateForAction(
+    NavigationActions.init()
+);
+
+const firstAction = AppNavigator.router.getActionForPathAndParams("Main/Home");
+
+//Then calculate the state with a navigate action to the first route, sending the previous initialized state as argument
+initialNavigationState = AppNavigator.router.getStateForAction(
+    firstAction,
+    initialNavigationState
 );
 
 export const navigationReducer = (state: any = initialNavigationState, action: any) => {
@@ -29,18 +40,18 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             nextState = AppNavigator.router.getStateForAction(getToLoginPageNavigator, state);
             break;
 
-        case authenticationActionTypes.loginSuccess: 
+        case authenticationActionTypes.loginSuccess:
             nextState = AppNavigator.router.getStateForAction(action, initialNavigationState);
             break;
 
         case navigationActionTypes.navigateToHomePage:
-        nextState = AppNavigator.router.getStateForAction(
-            NavigationActions.navigate({
-                routeName: "Home"
-            }),
-            state
-        );
-        break;
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({
+                    routeName: "Home"
+                }),
+                state
+            );
+            break;
 
         case navigationActionTypes.navigateToRegisterPage:
             nextState = AppNavigator.router.getStateForAction(
