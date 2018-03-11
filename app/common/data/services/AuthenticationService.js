@@ -7,6 +7,8 @@ import ApiErrorModel from "../models/error/ApiErrorModel";
 
 import * as navActions from "../../redux/actions/NavigationActions";
 
+import SplashScreen from 'react-native-splash-screen';
+
 export default class AuthenticationService extends SuperService {
 
     async loginWithEmail(
@@ -29,7 +31,7 @@ export default class AuthenticationService extends SuperService {
     }
 
     async verifyAuth(dispatch: any) {
-        this.firebaseApp
+         await this.firebaseApp
             .auth()
             .onAuthStateChanged(user => {
                 if (user) {
@@ -37,6 +39,7 @@ export default class AuthenticationService extends SuperService {
                 } else {
                     navActions.navigateToLoginPage()(dispatch);
                 }
+                SplashScreen.hide();
             });
     }
 
