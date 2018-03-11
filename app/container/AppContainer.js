@@ -59,13 +59,25 @@ export const LoginNavigator = StackNavigator(
     }
 );
 
+const tabBarOptionsIOS = {
+    activeTintColor: "#F00", 
+    inactiveTintColor: "#000",
+    labelStyle: {
+        fontSize: 12, 
+    }, 
+    style: {
+        height: 48
+    }
+    
+}
+
 export const MainNavigator = TabNavigator({
     Home: {
         screen: HomePage,
         navigationOptions: {
             tabBarLabel: "News feed",
             tabBarIcon: <Icon
-                name='search'
+                name='car'
                 size={20}
                 color="#000"
             />
@@ -73,10 +85,10 @@ export const MainNavigator = TabNavigator({
     }, 
     Messages: {
         screen: MessagesPage,
-        navigationOption: {
+        navigationOptions: {
             tabBarLabel: "Messages",
             tabBarIcon: <Icon
-                name='search'
+                name='envelope'
                 size={20}
                 color="#000"
             />
@@ -84,7 +96,13 @@ export const MainNavigator = TabNavigator({
     }
 }, 
     {
-        initialRouteName: "Home"
+        initialRouteName: "Home", 
+        swipeEnabled: true, 
+        animationEnabled: true, 
+        lazy: true, 
+        backBehavior: "none", 
+        tabBarOptions: tabBarOptionsIOS
+        
     }
 );
 

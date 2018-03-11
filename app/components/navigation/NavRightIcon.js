@@ -17,7 +17,7 @@ class NavRightIcon extends Component {
         onPress={ this.props.onPress }
         >
             <Icon 
-              name='bars'
+              name='cogs'
               size={20}
               color="#000"
             />
