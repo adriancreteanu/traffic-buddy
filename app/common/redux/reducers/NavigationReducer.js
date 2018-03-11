@@ -16,9 +16,13 @@ let initialNavigationState = AppNavigator.router.getStateForAction(
 const firstAction = AppNavigator.router.getActionForPathAndParams("Main/Home");
 
 //Then calculate the state with a navigate action to the first route, sending the previous initialized state as argument
+// initialNavigationState = AppNavigator.router.getStateForAction(
+//     firstAction,
+//     initialNavigationState
+// );
+
 initialNavigationState = AppNavigator.router.getStateForAction(
-    firstAction,
-    initialNavigationState
+    {}
 );
 
 export const navigationReducer = (state: any = initialNavigationState, action: any) => {
