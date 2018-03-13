@@ -6,7 +6,9 @@ import {
   TouchableHighlight,
   StyleSheet,
   ImageBackground,
-  Alert
+  Alert,
+  Keyboard,
+  TouchableWithoutFeedback
 } from "react-native";
 
 //custom components
@@ -86,54 +88,61 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.appTitle}> TRAFFIC BUDDY </Text>
-        <CustomTextInput
-          width={200}
-          style={{ marginTop: 30 }}
-          placeholder="Username"
-          onChangeText={text =>
-            this.setState({
-              ...this.state,
-              username: text
-            })
-          }
-          value={this.state.username}
-        //maxLength={7}
-        //autoCapitalize="characters"
-        />
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.container}>
+          <Text style={styles.appTitle}> TRAFFIC BUDDY </Text>
+          <CustomTextInput
+            width={200}
+            style={{ marginTop: 30 }}
+            placeholder="Username"
+            onChangeText={text =>
+              this.setState({
+                ...this.state,
+                username: text
+              })
+            }
+            value={this.state.username}
+          //maxLength={7}
+          //autoCapitalize="characters"
+          />
 
-        <CustomTextInput
-          width={200}
-          style={{ marginTop: 10 }}
-          placeholder="Password"
-          onChangeText={text =>
-            this.setState({
-              ...this.state,
-              password: text
-            })
-          }
-          value={this.state.password}
-          maxLength={20}
-          isPassword={true}
-        />
+          <CustomTextInput
+            width={200}
+            style={{ marginTop: 10 }}
+            placeholder="Password"
+            onChangeText={text =>
+              this.setState({
+                ...this.state,
+                password: text
+              })
+            }
+            value={this.state.password}
+            maxLength={20}
+            isPassword={true}
+          />
 
-        <CustomButton
-          width={200}
-          buttonTitle="Log In"
-          style={{ marginTop: 30 }}
-          //onPress={() => navigate("HomePage", { screen: "Home page" })}
-          onPress={() => this.validateLoginCredentials()}
-        />
+          <CustomButton
+            width={200}
+            buttonTitle="Log In"
+            style={{ marginTop: 30 }}
+            //onPress={() => navigate("HomePage", { screen: "Home page" })}
+            onPress={() => {
+              Keyboard.dismiss()
+              this.validateLoginCredentials()
+            }}
+          />
 
-        <Text style={styles.accountText}>Don't have an account?</Text>
-        <TouchableHighlight
-          onPress={() => this.navigateToRegisterPage()}
-          underlayColor="transparent"
-        >
-          <Text style={styles.registerText}>Register here </Text>
-        </TouchableHighlight>
-      </View>
+          <Text style={styles.accountText}>Don't have an account?</Text>
+          <TouchableHighlight
+            onPress={() => {
+              this.navigateToRegisterPage()
+            }}
+            underlayColor="transparent"
+          >
+            <Text style={styles.registerText}>Register here </Text>
+          </TouchableHighlight>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
