@@ -13,7 +13,8 @@ class CustomButton extends Component {
             height: 40,
             borderColor: "gray",
             borderWidth: 1,
-            backgroundColor: "#3d5e2f",
+            //backgroundColor: "#3d5e2f", old color
+            backgroundColor: "#a94242",
             alignItems: "center",
             justifyContent: "center",
           }

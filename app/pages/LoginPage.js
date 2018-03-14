@@ -154,7 +154,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     // justifyContent: 'center',
-    backgroundColor: "#a94242"
+    //backgroundColor: "#a94242" //initial red color
+    backgroundColor: "#4F6D7A"
   },
   appTitle: {
     fontSize: 26,

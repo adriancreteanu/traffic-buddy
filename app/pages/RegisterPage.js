@@ -19,7 +19,7 @@ class RegisterPage extends Component {
         title: 'Registration',
         //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
         headerStyle: {
-            backgroundColor: '#a94242',
+            backgroundColor: '#4F6D7A',
             borderBottomColor: '#FFF',
             borderBottomWidth: 1
         },
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#a94242"
+        backgroundColor: "#4F6D7A"
     }
 });
 
