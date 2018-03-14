@@ -27,6 +27,8 @@ import * as authPayloads from "../common/data/payloads/AuthenticationPayloads";
 
 import { connect } from 'react-redux';
 
+import { strings } from "../common/localization/strings-repository";
+
 class LoginPage extends Component {
   static navigationOptions = {
     header: null
@@ -90,11 +92,11 @@ class LoginPage extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
-          <Text style={styles.appTitle}> TRAFFIC BUDDY </Text>
+          <Text style={styles.appTitle}> {strings.appName.toUpperCase()} </Text>
           <CustomTextInput
             width={200}
             style={{ marginTop: 30 }}
-            placeholder="Username"
+            placeholder={strings.username}
             onChangeText={text =>
               this.setState({
                 ...this.state,
@@ -123,7 +125,7 @@ class LoginPage extends Component {
 
           <CustomButton
             width={200}
-            buttonTitle="Log In"
+            buttonTitle={strings.loginButton}
             style={{ marginTop: 30 }}
             //onPress={() => navigate("HomePage", { screen: "Home page" })}
             onPress={() => {
