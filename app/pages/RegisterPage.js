@@ -24,8 +24,8 @@ class RegisterPage extends Component {
             borderBottomWidth: 1
         },
         headerTitleStyle: {
-            color: '#FFF', 
-            width: 250, 
+            color: '#FFF',
+            width: 250,
             textAlign: 'center'
         },
         //the back button color
@@ -41,7 +41,6 @@ class RegisterPage extends Component {
             firstName: "",
             lastName: "",
             email: "",
-            phoneNumber: "",
             password: "",
             confirmPassword: "",
 
@@ -51,7 +50,6 @@ class RegisterPage extends Component {
     render() {
         return (
             <View style={styles.container}>
-
 
                 <CustomTextInput
                     width={270}
@@ -66,6 +64,7 @@ class RegisterPage extends Component {
                     value={this.state.plateNumber}
                     autoCapitalize="characters"
                     maxLength={7}
+                    borderRadius={25}
                 />
 
                 <CustomTextInput
@@ -79,7 +78,8 @@ class RegisterPage extends Component {
                         })
                     }
                     value={this.state.firstName}
-                    //autoCapitalize="characters"
+                //autoCapitalize="characters"
+                    borderRadius={25}
                 />
 
                 <CustomTextInput
@@ -93,7 +93,8 @@ class RegisterPage extends Component {
                         })
                     }
                     value={this.state.lastName}
-                    //autoCapitalize="characters"
+                    borderRadius={25}
+                //autoCapitalize="characters"
                 />
 
                 <CustomTextInput
@@ -107,24 +108,8 @@ class RegisterPage extends Component {
                         })
                     }
                     value={this.state.email}
+                    borderRadius={25}
                 />
-
-                <CustomTextInput
-                    width={270}
-                    style={{ marginTop: 10 }}
-                    placeholder="Phone number"
-                    onChangeText={text =>
-                        this.setState({
-                            ...this.state,
-                            phoneNumber: text
-                        })
-                    }
-                    value={this.state.phoneNumber}
-                    keyboardType="numeric"
-                    maxLength={10}
-                />
-
-
 
                 <CustomTextInput
                     width={270}
@@ -139,6 +124,7 @@ class RegisterPage extends Component {
                     value={this.state.password}
                     maxLength={20}
                     isPassword={true}
+                    borderRadius={25}
                 />
 
                 <CustomTextInput
@@ -154,6 +140,7 @@ class RegisterPage extends Component {
                     value={this.state.confirmPassword}
                     maxLength={20}
                     isPassword={true}
+                    borderRadius={25}
                 />
 
                 <CustomButton
@@ -162,6 +149,7 @@ class RegisterPage extends Component {
                     style={{ marginTop: 30 }}
                     onPress={() => { }}
                     borderRadius={0}
+                    borderRadius={25}
                 />
             </View>
         );
