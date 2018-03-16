@@ -31,7 +31,11 @@ import { strings } from "../common/localization/strings-repository";
 
 class LoginPage extends Component {
   static navigationOptions = {
-    header: null
+    //header: null
+    headerStyle: {
+      backgroundColor: '#4F6D7A',
+      borderBottomColor: 'transparent',
+    },
   };
 
 
@@ -158,8 +162,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: 'center',
     //backgroundColor: "#a94242" //initial red color
-    backgroundColor: "#455A64", 
-    flexDirection: "column", 
+    backgroundColor: "#4F6D7A"
   },
   appTitle: {
     fontSize: 26,

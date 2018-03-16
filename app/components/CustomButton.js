@@ -21,12 +21,11 @@ class CustomButton extends Component {
           }
         ]}
         onPress={this.props.onPress}
-        underlayColor={"#396924"}
+        underlayColor={"rgba(169, 66, 66, 0.85)"}
       >
         <Text style={{
           color: "#FFFFFF",
           fontSize: 16, 
-          fontWeight: 'bold',
         }}>
           {this.props.buttonTitle}
         </Text>
