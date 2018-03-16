@@ -60,15 +60,14 @@ export const LoginNavigator = StackNavigator(
 );
 
 const tabBarOptionsIOS = {
-    activeTintColor: "#F00", 
+    activeTintColor: "#a94242", 
     inactiveTintColor: "#000",
     labelStyle: {
         fontSize: 12, 
     }, 
     style: {
         height: 48
-    }
-    
+    },
 }
 
 export const MainNavigator = TabNavigator({
@@ -79,7 +78,7 @@ export const MainNavigator = TabNavigator({
             tabBarIcon: <Icon
                 name='car'
                 size={20}
-                color="#000"
+                color="#455A64"
             />
         }
     }, 
@@ -90,7 +89,7 @@ export const MainNavigator = TabNavigator({
             tabBarIcon: <Icon
                 name='envelope'
                 size={20}
-                color="#000"
+                color="#455A64"
             />
         }
     }
@@ -116,7 +115,7 @@ export const AppNavigator = StackNavigator(
         },
         Register: {
             screen: RegisterPage,
-            navigationOptions: stackNavigationOptions
+            //navigationOptions: stackNavigationOptions
         },
         Login: {
             screen: LoginNavigator,

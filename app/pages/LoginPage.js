@@ -94,8 +94,9 @@ class LoginPage extends Component {
         <View style={styles.container}>
           <Text style={styles.appTitle}> {strings.appName.toUpperCase()} </Text>
           <CustomTextInput
-            width={200}
+            width={220}
             style={{ marginTop: 30 }}
+            borderRadius={25}
             placeholder={strings.username}
             onChangeText={text =>
               this.setState({
@@ -109,9 +110,10 @@ class LoginPage extends Component {
           />
 
           <CustomTextInput
-            width={200}
+            width={220}
             style={{ marginTop: 10 }}
-            placeholder="Password"
+            borderRadius={25}
+            placeholder={strings.password}
             onChangeText={text =>
               this.setState({
                 ...this.state,
@@ -124,9 +126,10 @@ class LoginPage extends Component {
           />
 
           <CustomButton
-            width={200}
+            width={220}
             buttonTitle={strings.loginButton}
             style={{ marginTop: 30 }}
+            borderRadius={25}
             //onPress={() => navigate("HomePage", { screen: "Home page" })}
             onPress={() => {
               Keyboard.dismiss()
@@ -155,7 +158,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: 'center',
     //backgroundColor: "#a94242" //initial red color
-    backgroundColor: "#4F6D7A"
+    backgroundColor: "#455A64", 
+    flexDirection: "column", 
   },
   appTitle: {
     fontSize: 26,
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
   accountText: {
     fontSize: 16,
     color: "#FFFFFF",
-    marginTop: 30
+    marginTop: 200
   },
   registerText: {
     width: 200, //necessary because of the fontweight

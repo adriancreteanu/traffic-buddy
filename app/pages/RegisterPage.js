@@ -19,8 +19,8 @@ class RegisterPage extends Component {
         title: 'Registration',
         //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
         headerStyle: {
-            backgroundColor: '#4F6D7A',
-            borderBottomColor: '#FFF',
+            backgroundColor: '#455A64',
+            borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },
         headerTitleStyle: {
@@ -161,6 +161,7 @@ class RegisterPage extends Component {
                     buttonTitle="Register"
                     style={{ marginTop: 30 }}
                     onPress={() => { }}
+                    borderRadius={0}
                 />
             </View>
         );
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#4F6D7A"
+        backgroundColor: "#455A64"
     }
 });
 

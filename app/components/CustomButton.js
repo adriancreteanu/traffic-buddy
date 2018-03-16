@@ -17,12 +17,19 @@ class CustomButton extends Component {
             backgroundColor: "#a94242",
             alignItems: "center",
             justifyContent: "center",
+            borderRadius: this.props.borderRadius
           }
         ]}
         onPress={this.props.onPress}
         underlayColor={"#396924"}
       >
-        <Text style={{ color: "#FFFFFF", fontSize: 16 }}> {this.props.buttonTitle} </Text>
+        <Text style={{
+          color: "#FFFFFF",
+          fontSize: 16, 
+          fontWeight: 'bold',
+        }}>
+          {this.props.buttonTitle}
+        </Text>
       </TouchableHighlight>
     );
   }
