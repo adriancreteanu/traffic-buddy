@@ -9,10 +9,26 @@ export const authenticationActionTypes = {
     loginInProgress: "loginInProgress",
     loginSuccess: "loginSuccess",
     loginFailure: "loginFailure",
-    signOutInProgress: "signOutInProgress", 
-    signOutSuccess: "signOutSuccess", 
-    signOutFailure: "signOutFailure"
+    signOutInProgress: "signOutInProgress",
+    signOutSuccess: "signOutSuccess",
+    signOutFailure: "signOutFailure",
+    registerInProgress: "registerInProgress",
+    registerSuccess: "registerSuccess",
+    registerFailure: "registerFailure"
 };
+
+export function registerAction(
+    payload: authPayloads.registerCredentialsPayloadType
+) {
+    return async function (dispatch: any) {
+        let type = authenticationActionTypes.registerInProgress;
+        dispatchInProgressAction(dispatch, true, type);
+        let authManager = new AuthenticationManager();
+        let response = await authManager.registerUser(payload);
+        handleAuthenticationResponse(dispatch, response);
+    }
+}
+
 
 
 export function loginWithEmailAction(

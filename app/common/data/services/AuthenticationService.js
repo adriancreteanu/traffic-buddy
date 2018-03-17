@@ -11,6 +11,28 @@ import SplashScreen from 'react-native-splash-screen';
 
 export default class AuthenticationService extends SuperService {
 
+    async registerUser(
+        payload: authPayloads.registerCredentialsPayloadType
+    ) {
+        
+        // TODO: Create UserProfileModel
+        var response: ApiErrorModel = null;
+
+        await this.firebaseApp
+            .database()
+            .ref("users")
+            .once("value")
+            .then(snapshot => {
+                var userAlreadyExists = snapshot.hasChild("BH11DUL");
+                console.log(userAlreadyExists);
+            })
+            .catch(error => {
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+            return response;
+    }
+
+
     async loginWithEmail(
         payload: authPayloads.loginCredentialsPayloadType
     ) {

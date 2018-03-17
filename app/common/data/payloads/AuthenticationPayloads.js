@@ -1,15 +1,34 @@
 
 export type loginCredentialsPayloadType = {
-    username: ?string, 
+    username: ?string,
     password: ?string,
 };
 
+export type registerCredentialsPayloadType = {
+    plateNumber: ?string,
+    firstName: ?string,
+    lastName: ?string,
+    email: ?string,
+    password: ?string
+};
+
 export function createLoginCredentialsPayload(
-    username: ?string, 
-    password: ?string, 
-) {
+    loginCredentials: loginCredentialsPayloadType
+): loginCredentialsPayloadType {
     return {
-        username: username, 
-        password: password
+        username: loginCredentials.username,
+        password: loginCredentials.password
+    };
+};
+
+export function createRegisterCredentialsPayload(
+    registerCredentials: registerCredentialsPayloadType
+): registerCredentialsPayloadType {
+    return {
+        plateNumber: registerCredentials.plateNumber,
+        firstName: registerCredentials.firstName,
+        lastName: registerCredentials.lastName,
+        email: registerCredentials.email,
+        password: registerCredentials.password
     };
 };

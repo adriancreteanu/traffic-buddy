@@ -64,7 +64,7 @@ class LoginPage extends Component {
     });
   }
 
-  async validateLoginCredentials() {
+  validateLoginCredentials() {
 
     //move this to validation
     if (Validation.fieldIsEmpty(this.state.username)) {
@@ -77,7 +77,11 @@ class LoginPage extends Component {
         { cancelable: false }
       )
     } else {
-      let payload = authPayloads.createLoginCredentialsPayload(this.state.username, this.state.password);
+      let loginPayload: authPayloads.loginCredentialsPayloadType = {
+        username: this.state.username,
+        password: this.state.password
+      };
+      let payload = authPayloads.createLoginCredentialsPayload(loginPayload);
       authActions.loginWithEmailAction(payload)(this.props.dispatch);
     }
   }
