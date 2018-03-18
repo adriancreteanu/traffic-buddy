@@ -12,24 +12,40 @@ import SplashScreen from 'react-native-splash-screen';
 export default class AuthenticationService extends SuperService {
 
     async registerUser(payload: authPayloads.registerCredentialsPayloadType) {
-
-        // TODO: Create UserProfileModel
         var response: ApiErrorModel = null;
-
         // Check if plate number is already used by another user
-        //let userExists = await this.verifyIfPlateExists(payload.plateNumber);
+        let userExists: ApiErrorModel | bool = await this.verifyIfPlateExists(payload.plateNumber);
 
-        await this.firebaseApp
-            .auth()
-            .createUserWithEmailAndPassword(payload.email, payload.password)
-            .then(user => {
-                //write data to firebase
-                console.log(user);
-                this.insertUserDataInDatabase(payload);
-            })
-            .catch(error => {
-                response = ApiErrorModel.createDefaultErrorInstance(error);
-            });
+        if (userExists instanceof ApiErrorModel) {
+            response = userExists;
+        } else if (userExists) {
+            // TODO: Create error saying that plate already exists -> this won't compile yet
+            // Example: 
+            let error = {
+                errorMessage: "User already exists!",
+                erorrCode: "13123123221"
+            };
+            response = ApiErrorModel.createDefaultErrorInstance(error);
+        } else {
+            // TODO: Create UserProfileModel
+            await this.firebaseApp
+                .auth()
+                .createUserWithEmailAndPassword(payload.email, payload.password)
+                .then(user => {
+                    //write data to firebase
+                    console.log(user);
+                    let insertResponse = this.insertUserDataInDatabase(payload);
+
+                    if(insertResponse instanceof ApiErrorModel) {
+                        response = insertResponse;
+                    } else {
+                        // response = new UserProfileModel(payload);
+                    }
+                })
+                .catch(error => {
+                    response = ApiErrorModel.createDefaultErrorInstance(error);
+                });
+        }
         return response;
     }
 
@@ -52,6 +68,7 @@ export default class AuthenticationService extends SuperService {
     async insertUserDataInDatabase(
         payload: authPayloads.registerCredentialsPayloadType
     ) {
+        var response: ApiErrorModel | bool;
         await this.firebaseApp
             .database()
             .ref("users")
@@ -63,10 +80,12 @@ export default class AuthenticationService extends SuperService {
             })
             .then(() => {
                 console.log("Synchronization succeeded");
+                response = true;
             })
             .catch(erorr => {
-                return ApiErrorModel.createDefaultErrorInstance(error);
-            })
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+        return response;
     }
 
     async loginWithEmail(
