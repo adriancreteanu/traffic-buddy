@@ -16,13 +16,16 @@ export default class AuthenticationService extends SuperService {
         // TODO: Create UserProfileModel
         var response: ApiErrorModel = null;
 
+        // Check if plate number is already used by another user
+        //let userExists = await this.verifyIfPlateExists(payload.plateNumber);
+
         await this.firebaseApp
-            .database()
-            .ref("users")
-            .once("value")
-            .then(snapshot => {
-                var userAlreadyExists = snapshot.hasChild(payload.plateNumber);
-                console.log(userAlreadyExists);
+            .auth()
+            .createUserWithEmailAndPassword(payload.email, payload.password)
+            .then(user => {
+                //write data to firebase
+                console.log(user);
+                this.insertUserDataInDatabase(payload);
             })
             .catch(error => {
                 response = ApiErrorModel.createDefaultErrorInstance(error);
@@ -30,6 +33,41 @@ export default class AuthenticationService extends SuperService {
         return response;
     }
 
+    async verifyIfPlateExists(plateNumber: ?string) {
+        var plateAlreadyExists: bool;
+        await this.firebaseApp
+            .database()
+            .ref("users")
+            .once("value")
+            .then(snapshot => {
+                plateAlreadyExists = snapshot.hasChild(plateNumber);
+            })
+            .catch(error => {
+                return ApiErrorModel.createDefaultErrorInstance(error);
+            });
+
+        return plateAlreadyExists;
+    }
+
+    async insertUserDataInDatabase(
+        payload: authPayloads.registerCredentialsPayloadType
+    ) {
+        await this.firebaseApp
+            .database()
+            .ref("users")
+            .child(payload.plateNumber)
+            .set({
+                email: payload.email,
+                firstName: payload.firstName,
+                lastName: payload.lastName
+            })
+            .then(() => {
+                console.log("Synchronization succeeded");
+            })
+            .catch(erorr => {
+                return ApiErrorModel.createDefaultErrorInstance(error);
+            })
+    }
 
     async loginWithEmail(
         payload: authPayloads.loginCredentialsPayloadType
