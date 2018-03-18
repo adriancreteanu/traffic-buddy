@@ -16,6 +16,14 @@ export function initialSignOutState() {
     }
 }
 
+export function initialRegisterState() {
+    return {
+        isInProgress: false, 
+        errorViewModel: null, 
+        viewModel: null
+    };
+}
+
 export interface LoginState {
     isInProgress: boolean,
     errorViewModel: ErrorViewModel,
@@ -26,3 +34,5 @@ export interface SignOutState {
     isInProgress: boolean, 
     isFinishedWithSuccess: boolean
 }
+
+// TODO: create RegisterState interface

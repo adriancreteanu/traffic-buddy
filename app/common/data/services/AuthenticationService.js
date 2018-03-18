@@ -11,10 +11,8 @@ import SplashScreen from 'react-native-splash-screen';
 
 export default class AuthenticationService extends SuperService {
 
-    async registerUser(
-        payload: authPayloads.registerCredentialsPayloadType
-    ) {
-        
+    async registerUser(payload: authPayloads.registerCredentialsPayloadType) {
+
         // TODO: Create UserProfileModel
         var response: ApiErrorModel = null;
 
@@ -23,13 +21,13 @@ export default class AuthenticationService extends SuperService {
             .ref("users")
             .once("value")
             .then(snapshot => {
-                var userAlreadyExists = snapshot.hasChild("BH11DUL");
+                var userAlreadyExists = snapshot.hasChild(payload.plateNumber);
                 console.log(userAlreadyExists);
             })
             .catch(error => {
                 response = ApiErrorModel.createDefaultErrorInstance(error);
             });
-            return response;
+        return response;
     }
 
 
@@ -53,7 +51,7 @@ export default class AuthenticationService extends SuperService {
     }
 
     async verifyAuth(dispatch: any) {
-         await this.firebaseApp
+        await this.firebaseApp
             .auth()
             .onAuthStateChanged(user => {
                 if (user) {
@@ -65,7 +63,7 @@ export default class AuthenticationService extends SuperService {
             });
     }
 
-    async signOut(): boolean{
+    async signOut(): boolean {
         let response = false;
         await this.firebaseApp
             .auth()
@@ -74,7 +72,7 @@ export default class AuthenticationService extends SuperService {
                 response = true;
             })
             .catch();
-            return response;
+        return response;
     }
 
 

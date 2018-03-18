@@ -29,9 +29,11 @@ export default class AuthenticationManager {
 
     async registerUser(
         payload: authPayloads.registerCredentialsPayloadType
-    ): Promise<ErrorViewModel> {
+    ): Promise<UserViewModel | ErrorViewModel> {
         let response = await this._service.registerUser(payload);
         var viewModel = null;
+
+        return viewModel;
     }
 
     async verifyAuth(dispatch: any) {
