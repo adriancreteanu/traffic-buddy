@@ -45,6 +45,7 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             break;
 
         case authenticationActionTypes.loginSuccess:
+        case authenticationActionTypes.registerSuccess:
             nextState = AppNavigator.router.getStateForAction(action, initialNavigationState);
             break;
 

@@ -4,6 +4,7 @@ import UserViewModel from "../../data/viewmodels/UserViewModel";
 import ErrorViewModel from "../../data/viewmodels/error/ErrorViewModel";
 
 import * as navActions from "../actions/NavigationActions";
+import UserProfileViewModel from "../../data/viewmodels/UserProfileViewModel";
 
 export const authenticationActionTypes = {
     loginInProgress: "loginInProgress",
@@ -25,7 +26,7 @@ export function registerAction(
         dispatchInProgressAction(dispatch, true, type);
         let authManager = new AuthenticationManager();
         let response = await authManager.registerUser(payload);
-        handleAuthenticationResponse(dispatch, response);
+        handleRegisterResponse(dispatch, response);
     }
 }
 
@@ -39,7 +40,7 @@ export function loginWithEmailAction(
         dispatchInProgressAction(dispatch, true, type);
         let authManager = new AuthenticationManager();
         let response = await authManager.loginWithEmail(payload);
-        handleAuthenticationResponse(dispatch, response);
+        handleLoginResponse(dispatch, response);
     }
 }
 
@@ -77,7 +78,7 @@ function dispatchInProgressAction(
     dispatch(action);
 }
 
-function handleAuthenticationResponse(
+function handleLoginResponse(
     dispatch: any,
     response: UserViewModel | ErrorViewModel
 ) {
@@ -95,6 +96,32 @@ function handleAuthenticationResponse(
     } else if (response instanceof ErrorViewModel) {
         action = {
             type: authenticationActionTypes.loginFailure,
+            isInProgress: false,
+            errorViewModel: response,
+            viewModel: null,
+            isFinishedWithSuccess: false,
+        };
+        dispatch(action);
+    }
+}
+
+function handleRegisterResponse(
+    dispatch: any,
+    response: UserProfileViewModel | ErrorViewModel
+) {
+    let action = null;
+    if (response instanceof UserProfileViewModel) {
+        action = {
+            type: authenticationActionTypes.registerSuccess,
+            isInProgress: false,
+            errorViewModel: null,
+            viewModel: response,
+            isFinishedWithSuccess: true
+        };
+        dispatch(action);
+    } else if (response instanceof ErrorViewModel) {
+        action = {
+            type: authenticationActionTypes.registerFailure,
             isInProgress: false,
             errorViewModel: response,
             viewModel: null,

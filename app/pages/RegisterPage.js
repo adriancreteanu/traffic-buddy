@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     Keyboard,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback, 
+    Alert
 } from 'react-native';
 
 import CustomTextInput from '../components/CustomTextInput';
@@ -54,6 +55,15 @@ class RegisterPage extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        let register = nextProps.registerReducer;
+        if(register != null) {
+            if(register.errorViewModel != null) {
+                this.displayMessage("Error", register.errorViewModel.errorMessage);
+            }
+        }
+    }
+
     validateRegisterCredentials() {
         let registerPayload: authPayloads.registerCredentialsPayloadType = {
             plateNumber: this.state.plateNumber,
@@ -64,6 +74,12 @@ class RegisterPage extends Component {
         };
         let payload = authPayloads.createRegisterCredentialsPayload(registerPayload);
         authActions.registerAction(payload)(this.props.dispatch);
+    }
+
+    displayMessage(title: String, message: String) {
+        Alert.alert(title, message, [{ text: "Ok", onPress: () => { } }], {
+            cancelable: true
+        });
     }
 
     render() {

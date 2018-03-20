@@ -8,11 +8,12 @@ import ApiErrorModel from "../models/error/ApiErrorModel";
 import * as navActions from "../../redux/actions/NavigationActions";
 
 import SplashScreen from 'react-native-splash-screen';
+import UserProfileModel from "../models/UserProfileModel";
 
 export default class AuthenticationService extends SuperService {
 
     async registerUser(payload: authPayloads.registerCredentialsPayloadType) {
-        var response: ApiErrorModel = null;
+        var response: UserProfileModel | ApiErrorModel = null;
         // Check if plate number is already used by another user
         let userExists: ApiErrorModel | bool = await this.verifyIfPlateExists(payload.plateNumber);
 
@@ -22,24 +23,23 @@ export default class AuthenticationService extends SuperService {
             // TODO: Create error saying that plate already exists -> this won't compile yet
             // Example: 
             let error = {
-                errorMessage: "User already exists!",
-                erorrCode: "13123123221"
+                message: "User already exists",
+                code: "13123123221"
             };
             response = ApiErrorModel.createDefaultErrorInstance(error);
         } else {
-            // TODO: Create UserProfileModel
             await this.firebaseApp
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
                 .then(user => {
-                    //write data to firebase
-                    console.log(user);
-                    let insertResponse = this.insertUserDataInDatabase(payload);
-
-                    if(insertResponse instanceof ApiErrorModel) {
+                    // Write user data to firebase
+                    // TODO: see how can I await this function call - ask Cristi
+                    let insertResponse: ApiErrorModel | bool = this.insertUserDataInDatabase(payload);
+                    if (insertResponse instanceof ApiErrorModel) {
                         response = insertResponse;
                     } else {
-                        // response = new UserProfileModel(payload);
+                        // User data successfully inserted into firebase
+                        response = new UserProfileModel(payload);
                     }
                 })
                 .catch(error => {
@@ -50,25 +50,24 @@ export default class AuthenticationService extends SuperService {
     }
 
     async verifyIfPlateExists(plateNumber: ?string) {
-        var plateAlreadyExists: bool;
+        var response: bool | ApiErrorModel;
         await this.firebaseApp
             .database()
             .ref("users")
             .once("value")
             .then(snapshot => {
-                plateAlreadyExists = snapshot.hasChild(plateNumber);
+                response = snapshot.hasChild(plateNumber);
             })
             .catch(error => {
-                return ApiErrorModel.createDefaultErrorInstance(error);
+                response = ApiErrorModel.createDefaultErrorInstance(error);
             });
-
-        return plateAlreadyExists;
+        return response;
     }
 
     async insertUserDataInDatabase(
         payload: authPayloads.registerCredentialsPayloadType
     ) {
-        var response: ApiErrorModel | bool;
+        var response: bool | ApiErrorModel;
         await this.firebaseApp
             .database()
             .ref("users")
