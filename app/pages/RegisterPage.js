@@ -4,7 +4,7 @@ import {
     Text,
     StyleSheet,
     Keyboard,
-    TouchableWithoutFeedback, 
+    TouchableWithoutFeedback,
     Alert
 } from 'react-native';
 
@@ -18,6 +18,9 @@ import NavLeftIcon from '../components/navigation/NavLeftIcon';
 import * as authPayloads from "../common/data/payloads/AuthenticationPayloads";
 import * as authActions from "../common/redux/actions/AuthenticationActions";
 import { connect } from 'react-redux';
+
+// spinner
+import { LinesLoader } from 'react-native-indicator';
 
 class RegisterPage extends Component {
 
@@ -57,8 +60,8 @@ class RegisterPage extends Component {
 
     componentWillReceiveProps(nextProps) {
         let register = nextProps.registerReducer;
-        if(register != null) {
-            if(register.errorViewModel != null) {
+        if (register != null) {
+            if (register.errorViewModel != null) {
                 this.displayMessage("Error", register.errorViewModel.errorMessage);
             }
         }
@@ -189,11 +192,28 @@ class RegisterPage extends Component {
                         borderRadius={0}
                         borderRadius={25}
                     />
+
+                    {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (
+                        <View style={{
+                            marginTop: 40,
+                            marginBottom: 30
+                        }}>
+                            <LinesLoader
+                                color="a94242"
+                                barHeight={60}
+                                barWidth={5}
+                                betweenSpace={5}
+                            />
+                        </View>
+                    ) : (
+                            <View style={{ height: 50, backgroundColor: "transparent" }} />
+                        )}
                 </View>
             </TouchableWithoutFeedback>
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {

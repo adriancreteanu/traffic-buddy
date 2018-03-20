@@ -29,6 +29,9 @@ import { connect } from 'react-redux';
 
 import { strings } from "../common/localization/strings-repository";
 
+// spinner 
+import { LinesLoader } from 'react-native-indicator';
+
 class LoginPage extends Component {
   static navigationOptions = {
     //header: null
@@ -144,6 +147,22 @@ class LoginPage extends Component {
               this.validateLoginCredentials()
             }}
           />
+
+          {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
+            <View style={{
+              marginTop: 40,
+              marginBottom: -50
+            }}>
+              <LinesLoader
+                color="a94242"
+                barHeight={60}
+                barWidth={5}
+                betweenSpace={5}
+              />
+            </View>
+          ) : (
+              <View style={{ height: 50, backgroundColor: "transparent" }} />
+            )}
 
           <Text style={styles.accountText}>Don't have an account?</Text>
           <TouchableHighlight
