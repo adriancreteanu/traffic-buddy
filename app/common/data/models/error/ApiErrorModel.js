@@ -21,6 +21,9 @@ export default class ApiErrorModel {
             // case strings.noInternet: 
             //     errorModel.errorMessage = "test";
         }
+
+        //TODO 
+        // treat for errorCode: undefined and errorMessage: "error is not defined" ->> Something went wrong
         return errorModel;
 
     }

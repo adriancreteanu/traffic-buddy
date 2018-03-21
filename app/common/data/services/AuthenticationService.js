@@ -31,10 +31,9 @@ export default class AuthenticationService extends SuperService {
             await this.firebaseApp
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
-                .then(user => {
+                .then(async() => {
                     // Write user data to firebase
-                    // TODO: see how can I await this function call - ask Cristi
-                    let insertResponse: ApiErrorModel | bool = this.insertUserDataInDatabase(payload);
+                    let insertResponse: ApiErrorModel | bool = await this.insertUserDataInDatabase(payload);
                     if (insertResponse instanceof ApiErrorModel) {
                         response = insertResponse;
                     } else {

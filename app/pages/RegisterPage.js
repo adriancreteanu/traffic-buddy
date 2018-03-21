@@ -22,12 +22,15 @@ import { connect } from 'react-redux';
 // spinner
 import { LinesLoader } from 'react-native-indicator';
 
+// strings
+import { strings } from "../common/localization/strings-repository";
+
 class RegisterPage extends Component {
 
     static navigationOptions = {
 
 
-        title: 'Registration',
+        title: strings.registerPageTitle,
         //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
         headerStyle: {
             backgroundColor: '#4F6D7A',
@@ -92,7 +95,7 @@ class RegisterPage extends Component {
                     <CustomTextInput
                         width={270}
                         style={{ marginTop: 40 }}
-                        placeholder="Plate number"
+                        placeholder={strings.plateNumber}
                         onChangeText={text =>
                             this.setState({
                                 ...this.state,
@@ -108,7 +111,7 @@ class RegisterPage extends Component {
                     <CustomTextInput
                         width={270}
                         style={{ marginTop: 10 }}
-                        placeholder="First name"
+                        placeholder={strings.firstName}
                         onChangeText={text =>
                             this.setState({
                                 ...this.state,
@@ -123,7 +126,7 @@ class RegisterPage extends Component {
                     <CustomTextInput
                         width={270}
                         style={{ marginTop: 10 }}
-                        placeholder="Last name"
+                        placeholder={strings.lastName}
                         onChangeText={text =>
                             this.setState({
                                 ...this.state,
@@ -138,7 +141,7 @@ class RegisterPage extends Component {
                     <CustomTextInput
                         width={270}
                         style={{ marginTop: 10 }}
-                        placeholder="Email"
+                        placeholder={strings.email}
                         onChangeText={text =>
                             this.setState({
                                 ...this.state,
@@ -152,7 +155,7 @@ class RegisterPage extends Component {
                     <CustomTextInput
                         width={270}
                         style={{ marginTop: 10 }}
-                        placeholder="Password"
+                        placeholder={strings.password}
                         onChangeText={text =>
                             this.setState({
                                 ...this.state,
@@ -168,7 +171,7 @@ class RegisterPage extends Component {
                     <CustomTextInput
                         width={270}
                         style={{ marginTop: 10 }}
-                        placeholder="Confirm password"
+                        placeholder={strings.confirmPassword}
                         onChangeText={text =>
                             this.setState({
                                 ...this.state,
@@ -183,7 +186,7 @@ class RegisterPage extends Component {
 
                     <CustomButton
                         width={270}
-                        buttonTitle="Register"
+                        buttonTitle={strings.registerButton}
                         style={{ marginTop: 30 }}
                         onPress={() => {
                             Keyboard.dismiss()
