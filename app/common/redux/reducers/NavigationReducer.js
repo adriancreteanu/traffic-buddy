@@ -66,6 +66,15 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
                 state
             );
             break;
+
+        case navigationActionTypes.navigateToSettingsPage:
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({
+                    routeName: "Settings"
+                }),
+                state
+            );
+            break;
         default:
             break;
     }

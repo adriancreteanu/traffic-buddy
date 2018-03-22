@@ -21,19 +21,33 @@ import * as authActions from "../common/redux/actions/AuthenticationActions";
 
 //Navigation 
 import { connect } from 'react-redux';
+import * as navActions from "../common/redux/actions/NavigationActions";
 
 class HomePage extends Component {
 
-    static navigationOptions = ({navigation}) => ({
+    static navigationOptions = ({ navigation }) => ({
         //title: DateHelper.generateCurrentDate(),
         headerTitle: <NavTitleUI title={DateHelper.generateCurrentDate()} />,
         headerLeft: <NavLeftIcon />,
         headerRight:
-             <NavRightIcon 
+            <NavRightIcon
                 onPress={() => {
-                    authActions.signOutAction()(navigation.dispatch);
+                    //authActions.signOutAction()(navigation.dispatch);
+                    navActions.navigateToSettingsPage()(navigation.dispatch);
                 }}
-             />
+            />,
+        headerStyle: {
+            backgroundColor: '#4F6D7A',
+            borderBottomColor: 'transparent',
+            borderBottomWidth: 1
+        },
+        headerTitleStyle: {
+            color: '#FFF',
+            width: 250,
+            textAlign: 'center'
+        },
+        //the back button color
+        headerTintColor: '#FFF'
     });
 
     render() {
@@ -41,7 +55,7 @@ class HomePage extends Component {
             <ScrollView contentContainerStyle={{
                 flex: 1,
                 alignItems: "center",
-                justifyContent: "center", 
+                justifyContent: "center",
                 backgroundColor: '#4F6D7A'
             }}>
                 <NextFeedList />
@@ -54,8 +68,8 @@ class HomePage extends Component {
 
 function mapStateToProps(state) {
     return {
-      navigationReducer: state.navigationReducer
+        navigationReducer: state.navigationReducer
     };
-  }
-  
-  export default connect(mapStateToProps)(HomePage);
+}
+
+export default connect(mapStateToProps)(HomePage);

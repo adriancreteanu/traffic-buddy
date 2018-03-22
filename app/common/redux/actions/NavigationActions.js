@@ -4,7 +4,8 @@ import * as authActions from "../actions/AuthenticationActions";
 export const navigationActionTypes = {
     navigateToLoginPage: "navigateToLoginPage",
     navigateToHomePage: "navigateToHomePage",
-    navigateToRegisterPage: "navigateToRegisterPage"
+    navigateToRegisterPage: "navigateToRegisterPage", 
+    navigateToSettingsPage: "navigateToSettingsPage",
 };
 
 export function navigateToLoginPage() {
@@ -20,6 +21,15 @@ export function navigateToRegisterPage() {
     return function(dispatch: any) {
         let action = {
             type: navigationActionTypes.navigateToRegisterPage
+        };
+        dispatch(action); 
+    };
+}
+
+export function navigateToSettingsPage() {
+    return function(dispatch: any) {
+        let action = {
+            type: navigationActionTypes.navigateToSettingsPage
         };
         dispatch(action); 
     };

@@ -17,5 +17,7 @@ firstName: "First name",
 lastName: "Last name", 
 email: "Email", 
 confirmPassword: "Confirm password",
-registerButton: "Register"
+registerButton: "Register", 
+// Settings page
+settingsPageTitle: "Settings", 
 };

@@ -1,23 +1,21 @@
-//imports 
 import React, { Component } from 'react';
 import {
     View,
     Text,
-    TouchableHighlight,
-    StyleSheet,
-    ScrollView
+    StyleSheet
 } from 'react-native';
 
-import NavRightIcon from "../components/navigation/NavRightIcon";
-import NavLeftIcon from '../components/navigation/NavLeftIcon';
-import NavTitleUI from '../components/navigation/NavTitleUI';
+// strings
+import { strings } from "../common/localization/strings-repository";
 
-class MessagesPage extends Component {
+
+class SettingsPage extends Component {
 
     static navigationOptions = {
-        headerTitle: <NavTitleUI title="Messages" />,
-        headerLeft: <NavLeftIcon />,
-        headerRight: <NavRightIcon />,
+
+
+        title: strings.settingsPageTitle,
+        //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
         headerStyle: {
             backgroundColor: '#4F6D7A',
             borderBottomColor: 'transparent',
@@ -32,12 +30,16 @@ class MessagesPage extends Component {
         headerTintColor: '#FFF'
     }
 
-
     render() {
         return (
-            <Text>No messages found</Text>
+            <View>
+                <Text>SETTINGS</Text>
+            </View>
         )
     }
+
+
 }
 
-export default MessagesPage;
+
+export default SettingsPage;

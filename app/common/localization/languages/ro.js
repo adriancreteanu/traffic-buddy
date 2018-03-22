@@ -17,5 +17,7 @@ firstName: "Prenume",
 lastName: "Nume", 
 email: "Email", 
 confirmPassword: "Confirmare parolă",
-registerButton: "Înregistrare"
+registerButton: "Înregistrare", 
+// Settings page
+settingsPageTitle: "Setări", 
 };

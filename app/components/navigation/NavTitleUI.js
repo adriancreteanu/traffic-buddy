@@ -16,7 +16,7 @@ class NavTitleUI extends Component {
             textAlign: "center",
             alignSelf: "center",
             fontSize: 20, 
-            color: "#000"
+            color: "#FFF"
         }}> 
         {this.props.title}
          </Text>
