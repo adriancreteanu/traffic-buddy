@@ -4,6 +4,8 @@ import AuthenticationService from "../services/AuthenticationService";
 import UserViewModel from "../viewmodels/UserViewModel";
 import UserModel from "../models/UserModel";
 import ErrorViewModel from "../viewmodels/error/ErrorViewModel";
+import UserProfileModel from "../models/UserProfileModel";
+import UserProfileViewModel from "../viewmodels/UserProfileViewModel";
 
 export default class AuthenticationManager {
 
@@ -17,7 +19,7 @@ export default class AuthenticationManager {
         payload: authPayloads.loginCredentialsPayloadType
     ): Promise<UserViewModel | ErrorViewModel> {
         let response = await this._service.loginWithEmail(payload);
-        var viewModel = null;
+        var viewModel: UserViewModel | ErrorViewModel = null;
 
         if (response instanceof UserModel) {
             viewModel = new UserViewModel(response);
@@ -27,8 +29,22 @@ export default class AuthenticationManager {
         return viewModel;
     }
 
+    async registerUser(
+        payload: authPayloads.registerCredentialsPayloadType
+    ): Promise<UserProfileModel | ErrorViewModel> {
+        let response = await this._service.registerUser(payload);
+        var viewModel: UserProfileViewModel | ErrorViewModel = null;
+
+        if(response instanceof UserProfileModel) {
+            viewModel = new UserProfileViewModel(response);
+        } else {
+            viewModel = new ErrorViewModel(response);
+        }
+        return viewModel;
+    }
+
     async verifyAuth(dispatch: any) {
-         this._service.verifyAuth(dispatch);
+        this._service.verifyAuth(dispatch);
     }
 
     async signOut() {

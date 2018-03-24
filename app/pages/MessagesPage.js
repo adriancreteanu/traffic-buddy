@@ -17,7 +17,19 @@ class MessagesPage extends Component {
     static navigationOptions = {
         headerTitle: <NavTitleUI title="Messages" />,
         headerLeft: <NavLeftIcon />,
-        headerRight: <NavRightIcon />
+        headerRight: <NavRightIcon />,
+        headerStyle: {
+            backgroundColor: '#4F6D7A',
+            borderBottomColor: 'transparent',
+            borderBottomWidth: 1
+        },
+        headerTitleStyle: {
+            color: '#FFF',
+            width: 250,
+            textAlign: 'center'
+        },
+        //the back button color
+        headerTintColor: '#FFF'
     }
 
 

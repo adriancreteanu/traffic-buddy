@@ -8,8 +8,83 @@ import ApiErrorModel from "../models/error/ApiErrorModel";
 import * as navActions from "../../redux/actions/NavigationActions";
 
 import SplashScreen from 'react-native-splash-screen';
+import UserProfileModel from "../models/UserProfileModel";
 
 export default class AuthenticationService extends SuperService {
+
+    async registerUser(payload: authPayloads.registerCredentialsPayloadType) {
+        var response: UserProfileModel | ApiErrorModel = null;
+        // Check if plate number is already used by another user
+        let userExists: ApiErrorModel | bool = await this.verifyIfPlateExists(payload.plateNumber);
+
+        if (userExists instanceof ApiErrorModel) {
+            response = userExists;
+        } else if (userExists) {
+            // TODO: Create error saying that plate already exists -> this won't compile yet
+            // Example: 
+            let error = {
+                message: "User already exists",
+                code: "13123123221"
+            };
+            response = ApiErrorModel.createDefaultErrorInstance(error);
+        } else {
+            await this.firebaseApp
+                .auth()
+                .createUserWithEmailAndPassword(payload.email, payload.password)
+                .then(async() => {
+                    // Write user data to firebase
+                    let insertResponse: ApiErrorModel | bool = await this.insertUserDataInDatabase(payload);
+                    if (insertResponse instanceof ApiErrorModel) {
+                        response = insertResponse;
+                    } else {
+                        // User data successfully inserted into firebase
+                        response = new UserProfileModel(payload);
+                    }
+                })
+                .catch(error => {
+                    response = ApiErrorModel.createDefaultErrorInstance(error);
+                });
+        }
+        return response;
+    }
+
+    async verifyIfPlateExists(plateNumber: ?string) {
+        var response: bool | ApiErrorModel;
+        await this.firebaseApp
+            .database()
+            .ref("users")
+            .once("value")
+            .then(snapshot => {
+                response = snapshot.hasChild(plateNumber);
+            })
+            .catch(error => {
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+        return response;
+    }
+
+    async insertUserDataInDatabase(
+        payload: authPayloads.registerCredentialsPayloadType
+    ) {
+        var response: bool | ApiErrorModel;
+        await this.firebaseApp
+            .database()
+            .ref("users")
+            .child(payload.plateNumber)
+            .set({
+                email: payload.email,
+                firstName: payload.firstName,
+                lastName: payload.lastName
+            })
+            .then(() => {
+                console.log("Synchronization succeeded");
+                response = true;
+            })
+            .catch(erorr => {
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+        return response;
+    }
 
     async loginWithEmail(
         payload: authPayloads.loginCredentialsPayloadType
@@ -31,7 +106,7 @@ export default class AuthenticationService extends SuperService {
     }
 
     async verifyAuth(dispatch: any) {
-         await this.firebaseApp
+        await this.firebaseApp
             .auth()
             .onAuthStateChanged(user => {
                 if (user) {
@@ -43,7 +118,7 @@ export default class AuthenticationService extends SuperService {
             });
     }
 
-    async signOut(): boolean{
+    async signOut(): boolean {
         let response = false;
         await this.firebaseApp
             .auth()
@@ -52,7 +127,7 @@ export default class AuthenticationService extends SuperService {
                 response = true;
             })
             .catch();
-            return response;
+        return response;
     }
 
 

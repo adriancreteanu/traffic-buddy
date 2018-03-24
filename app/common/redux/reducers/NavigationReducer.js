@@ -45,6 +45,7 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             break;
 
         case authenticationActionTypes.loginSuccess:
+        case authenticationActionTypes.registerSuccess:
             nextState = AppNavigator.router.getStateForAction(action, initialNavigationState);
             break;
 
@@ -61,6 +62,15 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             nextState = AppNavigator.router.getStateForAction(
                 NavigationActions.navigate({
                     routeName: "Register"
+                }),
+                state
+            );
+            break;
+
+        case navigationActionTypes.navigateToSettingsPage:
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({
+                    routeName: "Settings"
                 }),
                 state
             );

@@ -19,7 +19,7 @@ class NavRightIcon extends Component {
             <Icon 
               name='cogs'
               size={20}
-              color="#000"
+              color="#FFF"
             />
             
         </TouchableHighlight>

@@ -19,7 +19,7 @@ class NavLeftIcon extends Component {
             <Icon 
               name='search'
               size={20}
-              color="#000"
+              color="#FFF"
             />
             
         </TouchableHighlight>

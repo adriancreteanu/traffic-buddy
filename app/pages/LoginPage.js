@@ -29,6 +29,9 @@ import { connect } from 'react-redux';
 
 import { strings } from "../common/localization/strings-repository";
 
+// spinner 
+import { LinesLoader } from 'react-native-indicator';
+
 class LoginPage extends Component {
   static navigationOptions = {
     //header: null
@@ -64,7 +67,7 @@ class LoginPage extends Component {
     });
   }
 
-  async validateLoginCredentials() {
+  validateLoginCredentials() {
 
     //move this to validation
     if (Validation.fieldIsEmpty(this.state.username)) {
@@ -77,7 +80,11 @@ class LoginPage extends Component {
         { cancelable: false }
       )
     } else {
-      let payload = authPayloads.createLoginCredentialsPayload(this.state.username, this.state.password);
+      let loginPayload: authPayloads.loginCredentialsPayloadType = {
+        username: this.state.username,
+        password: this.state.password
+      };
+      let payload = authPayloads.createLoginCredentialsPayload(loginPayload);
       authActions.loginWithEmailAction(payload)(this.props.dispatch);
     }
   }
@@ -141,14 +148,30 @@ class LoginPage extends Component {
             }}
           />
 
-          <Text style={styles.accountText}>Don't have an account?</Text>
+          {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
+            <View style={{
+              marginTop: 40,
+              marginBottom: -50
+            }}>
+              <LinesLoader
+                color="a94242"
+                barHeight={60}
+                barWidth={5}
+                betweenSpace={5}
+              />
+            </View>
+          ) : (
+              <View style={{ height: 50, backgroundColor: "transparent" }} />
+            )}
+
+          <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
           <TouchableHighlight
             onPress={() => {
               this.navigateToRegisterPage()
             }}
             underlayColor="transparent"
           >
-            <Text style={styles.registerText}>Register here </Text>
+            <Text style={styles.registerText}>{strings.registerHere}</Text>
           </TouchableHighlight>
         </View>
       </TouchableWithoutFeedback>
@@ -173,7 +196,7 @@ const styles = StyleSheet.create({
   accountText: {
     fontSize: 16,
     color: "#FFFFFF",
-    marginTop: 200
+    marginTop: 150
   },
   registerText: {
     width: 200, //necessary because of the fontweight
