@@ -20,4 +20,5 @@ confirmPassword: "Confirm password",
 registerButton: "Register", 
 // Settings page
 settingsPageTitle: "Settings", 
+logOut: "Log out"
 };

@@ -20,4 +20,5 @@ confirmPassword: "Confirmare parolă",
 registerButton: "Înregistrare", 
 // Settings page
 settingsPageTitle: "Setări", 
+logOut: "Deconectare"
 };
