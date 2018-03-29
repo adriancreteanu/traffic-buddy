@@ -23,7 +23,8 @@ class NewsFeedItem extends Component {
                 <View
                     style={{
                         flex: 1,
-                        borderBottomColor: '#a94242',
+                        //borderBottomColor: '#a94242',
+                        borderBottomColor: 'rgba(169, 20, 20, 0.9)',
                         borderBottomWidth: 1,
                         marginTop: 10,
                         marginBottom: 10,
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
         flex: 1,
         //flexDirection: 'row',
         fontSize: 16,
-        color: '#a94242',
+        color: 'rgba(169, 20, 20, 0.9)',
         //backgroundColor: 'cyan',
         //alignSelf: 'flex-start',
         //textAlign: 'justify'

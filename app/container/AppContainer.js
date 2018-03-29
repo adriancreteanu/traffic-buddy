@@ -61,7 +61,7 @@ export const LoginNavigator = StackNavigator(
 );
 
 const tabBarOptionsIOS = {
-    activeTintColor: "#a94242", 
+    activeTintColor: 'rgba(169, 20, 20, 0.9)',
     inactiveTintColor: "#000",
     labelStyle: {
         fontSize: 12, 
@@ -69,6 +69,20 @@ const tabBarOptionsIOS = {
     style: {
         height: 48
     },
+}
+
+const tabBarOptionsAndroid = {
+
+    labelStyle: {
+        fontSize: 14
+    },
+    indicatorStyle: {
+        backgroundColor: "#FFF"
+    },
+    style: {
+        //backgroundColor: "#a94242"
+        backgroundColor: 'rgba(169, 20, 20, 0.9)',
+    }
 }
 
 export const MainNavigator = TabNavigator({
@@ -101,7 +115,7 @@ export const MainNavigator = TabNavigator({
         animationEnabled: true, 
         lazy: true, 
         backBehavior: "none", 
-        tabBarOptions: tabBarOptionsIOS
+        tabBarOptions: tabBarOptionsAndroid
         
     }
 );

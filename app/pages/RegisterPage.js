@@ -202,7 +202,7 @@ class RegisterPage extends Component {
                             marginBottom: 30
                         }}>
                             <LinesLoader
-                                color="a94242"
+                                color='rgba(169, 20, 20, 0.9)'
                                 barHeight={60}
                                 barWidth={5}
                                 betweenSpace={5}
