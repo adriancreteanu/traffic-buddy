@@ -24,7 +24,17 @@ class NewsFeedItem extends Component {
                 </View>
 
                 <View style={styles.messageSectionStyle}>
+
+                <View style={{
+                    borderBottomColor: "#bbb", 
+                    borderBottomWidth: StyleSheet.hairlineWidth,
+                    marginRight: '60%',
+                    
+                }}>
+
                     <Text style={styles.messageCategoryStyle}>{this.props.category}</Text>
+
+                </View>
                     <Text style={styles.messageStyle}>{this.props.message}</Text>
                 </View>
 
@@ -61,8 +71,8 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 20,
-        paddingRight: 0,
-        borderBottomColor: "#bbb",
+        paddingRight: 20,
+        borderBottomColor: "#222",
         borderBottomWidth: StyleSheet.hairlineWidth,
         flexDirection: "column"
     },
@@ -95,12 +105,15 @@ const styles = StyleSheet.create({
         color: '#000'
     },
     messageStyle: {
+        marginTop: 10,
         fontSize: 16,
         color: "#555"
     },
     messageCategoryStyle: {
         color: "#333",
-        fontSize: 16, 
+        fontSize: 18, 
+        marginBottom: 2, 
+        marginTop: 5, 
     },
     messageSectionStyle: {
         flex: 1,
