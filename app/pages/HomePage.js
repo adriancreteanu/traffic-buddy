@@ -56,7 +56,7 @@ class HomePage extends Component {
                 flex: 1,
                 alignItems: "center",
                 justifyContent: "center",
-                backgroundColor: '#4F6D7A'
+                backgroundColor: '#FFF'
             }}>
                 <NextFeedList />
             </ScrollView>
