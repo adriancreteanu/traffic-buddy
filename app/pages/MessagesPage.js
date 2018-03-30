@@ -19,7 +19,7 @@ class MessagesPage extends Component {
         headerLeft: <NavLeftIcon />,
         headerRight: <NavRightIcon />,
         headerStyle: {
-            backgroundColor: '#4F6D7A',
+            backgroundColor: '#c6bf69',
             borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },

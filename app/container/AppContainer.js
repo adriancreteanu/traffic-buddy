@@ -61,13 +61,15 @@ export const LoginNavigator = StackNavigator(
 );
 
 const tabBarOptionsIOS = {
-    activeTintColor: 'rgba(169, 20, 20, 0.9)',
-    inactiveTintColor: "#000",
+    activeTintColor: '#000',
+    
+    inactiveTintColor: "#888",
     labelStyle: {
         fontSize: 12, 
     }, 
     style: {
-        height: 48
+        height: 48, 
+        //backgroundColor: '#aa9f3f',
     },
 }
 
@@ -81,7 +83,8 @@ const tabBarOptionsAndroid = {
     },
     style: {
         //backgroundColor: "#a94242"
-        backgroundColor: 'rgba(169, 20, 20, 0.9)',
+        //backgroundColor: 'rgba(169, 20, 20, 0.9)',
+        backgroundColor: '#ddd37a'
     }
 }
 
@@ -93,7 +96,7 @@ export const MainNavigator = TabNavigator({
             tabBarIcon: <Icon
                 name='car'
                 size={20}
-                color="#455A64"
+                color="#c6bf69"
             />
         }
     }, 
@@ -104,7 +107,7 @@ export const MainNavigator = TabNavigator({
             tabBarIcon: <Icon
                 name='envelope'
                 size={20}
-                color="#455A64"
+                color="#c6bf69"
             />
         }
     }

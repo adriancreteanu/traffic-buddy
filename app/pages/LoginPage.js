@@ -36,7 +36,7 @@ class LoginPage extends Component {
   static navigationOptions = {
     //header: null
     headerStyle: {
-      backgroundColor: '#4F6D7A',
+      backgroundColor: '#c6bf69',
       borderBottomColor: 'transparent',
     },
   };
@@ -185,7 +185,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // justifyContent: 'center',
     //backgroundColor: "#a94242" //initial red color
-    backgroundColor: "#4F6D7A"
+    //backgroundColor: "#4F6D7A"
+    backgroundColor: "#c6bf69"
   },
   appTitle: {
     fontSize: 26,

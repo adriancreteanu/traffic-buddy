@@ -22,7 +22,7 @@ class SettingsPage extends Component {
         title: strings.settingsPageTitle,
         //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
         headerStyle: {
-            backgroundColor: '#4F6D7A',
+            backgroundColor: '#c6bf69',
             borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },
