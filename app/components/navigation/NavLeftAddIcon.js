@@ -14,7 +14,7 @@ class NavLeftAddIcon extends Component {
       <View style={{ marginLeft: 30}}>
         <TouchableHighlight
         underlayColor={"transparent"}
-        onPress={ this.ceFacAcum }
+        onPress={ this.props.onPress }
         >
             <Icon 
               name='plus'
@@ -25,17 +25,6 @@ class NavLeftAddIcon extends Component {
         </TouchableHighlight>
       </View>
     );
-  }
-
-  ceFacAcum() {
-    Alert.alert(
-          "Warning", 
-          "Not implemented yet",
-          [
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ],
-          { cancelable: false }
-        )
   }
 }
 

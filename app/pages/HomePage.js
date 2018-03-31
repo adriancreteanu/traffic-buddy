@@ -39,7 +39,10 @@ class HomePage extends Component {
                 flexDirection: 'row'
             }}>
                 <NavLeftIcon />
-                <NavLeftAddIcon />
+                <NavLeftAddIcon 
+                    onPress={() => {
+                    }}
+                 />
             </View>,
         headerRight:
             <NavRightIcon
