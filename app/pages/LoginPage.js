@@ -156,7 +156,8 @@ class LoginPage extends Component {
           {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
             <View style={{
               marginTop: 40,
-              marginBottom: -50
+              marginBottom: -50, 
+             backgroundColor: 'transparent',
             }}>
               <LinesLoader
                 color='rgba(169, 20, 20, 0.9)'

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     View,
-    BackHandler
+    BackHandler, 
+    Platform
 } from 'react-native';
 
 //Navigation
@@ -118,7 +119,7 @@ export const MainNavigator = TabNavigator({
         animationEnabled: true, 
         lazy: true, 
         backBehavior: "none", 
-        tabBarOptions: tabBarOptionsAndroid
+        tabBarOptions: Platform.OS == "ios" ? tabBarOptionsIOS :  tabBarOptionsAndroid
         
     }
 );
