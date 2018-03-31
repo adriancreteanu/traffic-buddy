@@ -22,13 +22,25 @@ import * as authActions from "../common/redux/actions/AuthenticationActions";
 //Navigation 
 import { connect } from 'react-redux';
 import * as navActions from "../common/redux/actions/NavigationActions";
+import NavLeftAddIcon from '../components/navigation/NavLeftAddIcon';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class HomePage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
         //title: DateHelper.generateCurrentDate(),
         headerTitle: <NavTitleUI title={DateHelper.generateCurrentDate()} />,
-        headerLeft: <NavLeftIcon />,
+        headerLeft:
+            <View style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row'
+            }}>
+                <NavLeftIcon />
+                <NavLeftAddIcon />
+            </View>,
         headerRight:
             <NavRightIcon
                 onPress={() => {
