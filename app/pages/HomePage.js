@@ -38,14 +38,16 @@ class HomePage extends Component {
                 justifyContent: 'center',
                 flexDirection: 'row'
             }}>
-                <NavLeftIcon />
+                <NavLeftIcon icon="search"/>
                 <NavLeftAddIcon 
                     onPress={() => {
+                        navActions.navigateToPostPage()(navigation.dispatch);
                     }}
                  />
             </View>,
         headerRight:
             <NavRightIcon
+                icon="cog"
                 onPress={() => {
                     //authActions.signOutAction()(navigation.dispatch);
                     navActions.navigateToSettingsPage()(navigation.dispatch);

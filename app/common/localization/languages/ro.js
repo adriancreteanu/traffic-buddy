@@ -5,11 +5,11 @@ export const ro = {
 // App name
 appName: "Traffic Buddy",
 // Login page
-loginButton: "Conectează-te",
+loginButton: "Conectare",
 username: "Utilizator",
 password: "Parolă",
-dontHaveAccount: "Nu ai cont?",
-registerHere: "Înregistrează-te aici",
+dontHaveAccount: "Nu aveți cont?",
+registerHere: "Înregistrați-vă aici",
 // Register page
 registerPageTitle: "Înregistrare",
 plateNumber: "Număr înmatriculare", 
@@ -20,5 +20,11 @@ confirmPassword: "Confirmare parolă",
 registerButton: "Înregistrare", 
 // Settings page
 settingsPageTitle: "Setări", 
-logOut: "Deconectare"
+logOut: "Deconectare",
+
+// Alerts
+yesAlertOption: "Da", 
+cancelAlertOption: "Anulare", 
+confirmSignOut: "Confirmare", 
+areYouSureSignOut: "Sunteți sigur că doriți să vă deconectați?"
 };

@@ -14,10 +14,10 @@ class NavLeftIcon extends Component {
       <View style={{ marginLeft: 20}}>
         <TouchableHighlight
         underlayColor={"transparent"}
-        onPress={ this.ceFacAcum }
+        onPress={ this.props.onPress }
         >
             <Icon 
-              name='search'
+              name={this.props.icon}
               size={20}
               color="#FFF"
             />

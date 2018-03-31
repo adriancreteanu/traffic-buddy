@@ -27,6 +27,7 @@ import HomePage from '../pages/HomePage';
 import RegisterPage from '../pages/RegisterPage';
 import MessagesPage from '../pages/MessagesPage';
 import SettingsPage from '../pages/SettingsPage';
+import PostPage from '../pages/PostPage';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -138,6 +139,9 @@ export const AppNavigator = StackNavigator(
         },
         Settings: {
             screen: SettingsPage
+        },
+        Post: {
+            screen: PostPage,
         },
         Login: {
             screen: LoginNavigator,

@@ -20,5 +20,11 @@ confirmPassword: "Confirm password",
 registerButton: "Register", 
 // Settings page
 settingsPageTitle: "Settings", 
-logOut: "Log out"
+logOut: "Log out",
+
+// Alerts
+yesAlertOption: "Yes", 
+cancelAlertOption: "Cancel", 
+confirmSignOut: "Confirm", 
+areYouSureSignOut: "Are you sure you want to sign out?"
 };

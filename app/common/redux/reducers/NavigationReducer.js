@@ -75,6 +75,16 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
                 state
             );
             break;
+
+        case navigationActionTypes.navigateToPostPage:
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({
+                    routeName: "Post"
+                }),
+                state
+            );
+            break;
+
         default:
             break;
     }

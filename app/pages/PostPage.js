@@ -12,12 +12,11 @@ import NavRightIcon from "../components/navigation/NavRightIcon";
 import NavLeftIcon from '../components/navigation/NavLeftIcon';
 import NavTitleUI from '../components/navigation/NavTitleUI';
 
-class MessagesPage extends Component {
+class PostPage extends Component {
 
     static navigationOptions = {
-        headerTitle: <NavTitleUI title="Messages" />,
-        headerLeft: <NavLeftIcon icon="search"/>,
-        headerRight: <NavRightIcon icon="settings" />,
+        headerTitle: <NavTitleUI title="Post" />,
+        headerLeft: <NavLeftIcon icon="arrow-left"/>,
         headerStyle: {
             backgroundColor: '#c6bf69',
             borderBottomColor: 'transparent',
@@ -40,4 +39,4 @@ class MessagesPage extends Component {
     }
 }
 
-export default MessagesPage;
+export default PostPage;

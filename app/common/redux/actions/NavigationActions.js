@@ -6,6 +6,7 @@ export const navigationActionTypes = {
     navigateToHomePage: "navigateToHomePage",
     navigateToRegisterPage: "navigateToRegisterPage", 
     navigateToSettingsPage: "navigateToSettingsPage",
+    navigateToPostPage: "navigateToPostPage",
 };
 
 export function navigateToLoginPage() {
@@ -39,6 +40,15 @@ export function navigateToHomePage() {
     return function(dispatch: any) {
         let action = {
             type: navigationActionTypes.navigateToHomePage
+        };
+        dispatch(action); 
+    };
+}
+
+export function navigateToPostPage() {
+    return function(dispatch: any) {
+        let action = {
+            type: navigationActionTypes.navigateToPostPage
         };
         dispatch(action); 
     };

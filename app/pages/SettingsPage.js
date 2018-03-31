@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Alert
 } from 'react-native';
 
 import CustomButton from "../components/CustomButton";
@@ -13,14 +14,19 @@ import { strings } from "../common/localization/strings-repository";
 // redux
 import { connect } from 'react-redux';
 import * as authActions from "../common/redux/actions/AuthenticationActions";
+import NavLeftIcon from '../components/navigation/NavLeftIcon';
 
 class SettingsPage extends Component {
 
-    static navigationOptions = {
-
+    static navigationOptions = ({ navigation }) => ({
 
         title: strings.settingsPageTitle,
-        //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
+        headerLeft: <NavLeftIcon
+            icon="chevron-left"
+            onPress={() => {
+                navigation.goBack();
+            }}
+        />,
         headerStyle: {
             backgroundColor: '#c6bf69',
             borderBottomColor: 'transparent',
@@ -33,6 +39,26 @@ class SettingsPage extends Component {
         },
         //the back button color
         headerTintColor: '#FFF'
+    });
+
+    logOutAlert() {
+        Alert.alert(
+            strings.confirmSignOut,
+            strings.areYouSureSignOut,
+            [
+                { 
+                    text: strings.yesAlertOption, 
+                    onPress: () => this.logOutUser(), 
+                    style: 'default'
+                },
+                { 
+                    text: strings.cancelAlertOption, 
+                    onPress: () => {}, 
+                    style: 'cancel'
+                },
+            ],
+            { cancelable: false }
+        )
     }
 
     logOutUser() {
@@ -44,13 +70,13 @@ class SettingsPage extends Component {
         return (
             <View style={styles.container}>
                 <CustomButton
-                    width={220}
+                    width={270}
+                    height={50}
                     buttonTitle={strings.logOut}
-                    style={{ marginTop: 30 }}
-                    borderRadius={25}
-                    //onPress={() => navigate("HomePage", { screen: "Home page" })}
+                    style={{ marginTop: 30, marginBottom: 40 }}
+                    borderRadius={5}
                     onPress={() => {
-                        this.logOutUser();
+                        this.logOutAlert();
                     }}
                 />
             </View>
@@ -64,7 +90,7 @@ class SettingsPage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         alignItems: 'center'
     }
 });
