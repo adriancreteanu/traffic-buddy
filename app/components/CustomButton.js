@@ -10,9 +10,9 @@ class CustomButton extends Component {
           this.props.style,
           {
             width: this.props.width,
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
+            height: this.props.height,
+            //borderColor: "gray",
+            //borderWidth: 1,
             //backgroundColor: "#3d5e2f", old color
             //backgroundColor: "#a94242",
             backgroundColor: 'rgba(169, 20, 20, 0.9)',

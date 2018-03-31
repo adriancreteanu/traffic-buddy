@@ -10,11 +10,12 @@ class CustomTextInput extends Component {
         style={[
           this.props.style,
           {
-            color: '#FFF',
-            fontWeight: 'bold',
+            color: '#000',
+            //fontWeight: 'bold',
+            fontSize: 16,
             width: this.props.width,
-            height: 40,
-            borderColor: "gray",
+            height: this.props.height,
+            borderColor: "transparent",
             borderWidth: 1,
             backgroundColor: 'rgba(255, 255, 255, 0.3)',
             paddingLeft: 20,
@@ -28,7 +29,7 @@ class CustomTextInput extends Component {
         underlineColorAndroid='transparent'
         clearTextOnFocus={true}
         placeholder={this.props.placeholder}
-        placeholderTextColor="#FFF"
+        placeholderTextColor="#000"
         autoCorrect={false}
         maxLength={this.props.maxLength}
         autoCapitalize={this.props.autoCapitalize}

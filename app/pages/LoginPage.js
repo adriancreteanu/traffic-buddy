@@ -102,12 +102,15 @@ class LoginPage extends Component {
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <View style={styles.container}>
-          <Text style={styles.appTitle}> {strings.appName.toUpperCase()} </Text>
+      <View style={{flex: 1}}>
+      <ImageBackground source={require('../assets/images/login_background.png')} style={styles.container} >
+          
+       
           <CustomTextInput
-            width={220}
+            width={240}
+            height={50}
             style={{ marginTop: 30 }}
-            borderRadius={25}
+            borderRadius={5}
             placeholder={strings.username}
             onChangeText={text =>
               this.setState({
@@ -121,9 +124,10 @@ class LoginPage extends Component {
           />
 
           <CustomTextInput
-            width={220}
+            width={240}
+            height={50}
             style={{ marginTop: 10 }}
-            borderRadius={25}
+            borderRadius={5}
             placeholder={strings.password}
             onChangeText={text =>
               this.setState({
@@ -137,10 +141,11 @@ class LoginPage extends Component {
           />
 
           <CustomButton
-            width={220}
-            buttonTitle={strings.loginButton}
+            width={240}
+            height={45}
+            buttonTitle={strings.loginButton.toUpperCase()}
             style={{ marginTop: 30 }}
-            borderRadius={25}
+            borderRadius={5}
             //onPress={() => navigate("HomePage", { screen: "Home page" })}
             onPress={() => {
               Keyboard.dismiss()
@@ -173,6 +178,8 @@ class LoginPage extends Component {
           >
             <Text style={styles.registerText}>{strings.registerHere}</Text>
           </TouchableHighlight>
+          
+          </ImageBackground>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -183,10 +190,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    // justifyContent: 'center',
+    justifyContent: 'center',
+    paddingTop: 170
     //backgroundColor: "#a94242" //initial red color
     //backgroundColor: "#4F6D7A"
-    backgroundColor: "#c6bf69"
+    //backgroundColor: "#c6bf69"
   },
   appTitle: {
     fontSize: 26,
@@ -196,7 +204,7 @@ const styles = StyleSheet.create({
   },
   accountText: {
     fontSize: 16,
-    color: "#FFFFFF",
+    color: "#000",
     marginTop: 150
   },
   registerText: {
@@ -204,8 +212,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
-    color: "#FFFFFF",
-    marginTop: 10,
+    color: "#000",
+    marginTop: 3,
   }
 });
 

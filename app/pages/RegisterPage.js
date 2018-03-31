@@ -94,7 +94,8 @@ class RegisterPage extends Component {
                 <View style={styles.container}>
                     <CustomTextInput
                         width={270}
-                        style={{ marginTop: 40 }}
+                        height={50}
+                        style={{ marginTop: 20 }}
                         placeholder={strings.plateNumber}
                         onChangeText={text =>
                             this.setState({
@@ -105,11 +106,12 @@ class RegisterPage extends Component {
                         value={this.state.plateNumber}
                         autoCapitalize="characters"
                         maxLength={7}
-                        borderRadius={25}
+                        borderRadius={5}
                     />
 
                     <CustomTextInput
                         width={270}
+                        height={50}
                         style={{ marginTop: 10 }}
                         placeholder={strings.firstName}
                         onChangeText={text =>
@@ -120,11 +122,12 @@ class RegisterPage extends Component {
                         }
                         value={this.state.firstName}
                         //autoCapitalize="characters"
-                        borderRadius={25}
+                        borderRadius={5}
                     />
 
                     <CustomTextInput
                         width={270}
+                        height={50}
                         style={{ marginTop: 10 }}
                         placeholder={strings.lastName}
                         onChangeText={text =>
@@ -134,12 +137,13 @@ class RegisterPage extends Component {
                             })
                         }
                         value={this.state.lastName}
-                        borderRadius={25}
+                        borderRadius={5}
                     //autoCapitalize="characters"
                     />
 
                     <CustomTextInput
                         width={270}
+                        height={50}
                         style={{ marginTop: 10 }}
                         placeholder={strings.email}
                         onChangeText={text =>
@@ -149,11 +153,12 @@ class RegisterPage extends Component {
                             })
                         }
                         value={this.state.email}
-                        borderRadius={25}
+                        borderRadius={5}
                     />
 
                     <CustomTextInput
                         width={270}
+                        height={50}
                         style={{ marginTop: 10 }}
                         placeholder={strings.password}
                         onChangeText={text =>
@@ -165,11 +170,12 @@ class RegisterPage extends Component {
                         value={this.state.password}
                         maxLength={20}
                         isPassword={true}
-                        borderRadius={25}
+                        borderRadius={5}
                     />
 
                     <CustomTextInput
                         width={270}
+                        height={50}
                         style={{ marginTop: 10 }}
                         placeholder={strings.confirmPassword}
                         onChangeText={text =>
@@ -181,19 +187,20 @@ class RegisterPage extends Component {
                         value={this.state.confirmPassword}
                         maxLength={20}
                         isPassword={true}
-                        borderRadius={25}
+                        borderRadius={5}
                     />
 
                     <CustomButton
                         width={270}
+                        height={40}
                         buttonTitle={strings.registerButton}
                         style={{ marginTop: 30 }}
                         onPress={() => {
                             Keyboard.dismiss()
                             this.validateRegisterCredentials();
                         }}
-                        borderRadius={0}
-                        borderRadius={25}
+                        
+                        borderRadius={5}
                     />
 
                     {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (
