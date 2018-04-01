@@ -2,6 +2,7 @@ import { NavigationActions } from 'react-navigation';
 import { AppNavigator } from "../../../container/AppContainer";
 import { navigationActionTypes } from "../actions/NavigationActions";
 import { authenticationActionTypes } from '../actions/AuthenticationActions';
+import { newsFeedActionTypes } from "../actions/NewsFeedActions";
 
 //The initial page is Home page
 //If the user is logged in, on app restart, navigation remains at home page
@@ -46,6 +47,7 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
 
         case authenticationActionTypes.loginSuccess:
         case authenticationActionTypes.registerSuccess:
+        case newsFeedActionTypes.postSuccess:
             nextState = AppNavigator.router.getStateForAction(action, initialNavigationState);
             break;
 

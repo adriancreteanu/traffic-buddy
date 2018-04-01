@@ -102,84 +102,82 @@ class LoginPage extends Component {
   render() {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={{flex: 1}}>
-      <ImageBackground source={require('../assets/images/login_background.png')} style={styles.container} >
-          
-       
-          <CustomTextInput
-            width={240}
-            height={50}
-            style={{ marginTop: 30 }}
-            borderRadius={5}
-            placeholder={strings.username}
-            onChangeText={text =>
-              this.setState({
-                ...this.state,
-                username: text
-              })
-            }
-            value={this.state.username}
-          //maxLength={7}
-          //autoCapitalize="characters"
-          />
+        <View style={{ flex: 1 }}>
+          <ImageBackground source={require('../assets/images/login_background.png')} style={styles.container} >
+            <CustomTextInput
+              width={240}
+              height={50}
+              style={{ marginTop: 30 }}
+              borderRadius={5}
+              placeholder={strings.username}
+              onChangeText={text =>
+                this.setState({
+                  ...this.state,
+                  username: text
+                })
+              }
+              value={this.state.username}
+            //maxLength={7}
+            //autoCapitalize="characters"
+            />
 
-          <CustomTextInput
-            width={240}
-            height={50}
-            style={{ marginTop: 10 }}
-            borderRadius={5}
-            placeholder={strings.password}
-            onChangeText={text =>
-              this.setState({
-                ...this.state,
-                password: text
-              })
-            }
-            value={this.state.password}
-            maxLength={20}
-            isPassword={true}
-          />
+            <CustomTextInput
+              width={240}
+              height={50}
+              style={{ marginTop: 10 }}
+              borderRadius={5}
+              placeholder={strings.password}
+              onChangeText={text =>
+                this.setState({
+                  ...this.state,
+                  password: text
+                })
+              }
+              value={this.state.password}
+              maxLength={20}
+              isPassword={true}
+            />
 
-          <CustomButton
-            width={240}
-            height={45}
-            buttonTitle={strings.loginButton.toUpperCase()}
-            style={{ marginTop: 30 }}
-            borderRadius={5}
-            //onPress={() => navigate("HomePage", { screen: "Home page" })}
-            onPress={() => {
-              Keyboard.dismiss()
-              this.validateLoginCredentials()
-            }}
-          />
+            <CustomButton
+              width={240}
+              height={45}
+              buttonTitle={strings.loginButton.toUpperCase()}
+              style={{ marginTop: 30 }}
+              borderRadius={5}
+              //onPress={() => navigate("HomePage", { screen: "Home page" })}
+              onPress={() => {
+                Keyboard.dismiss()
+                this.validateLoginCredentials()
+              }}
+            />
 
-          {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
-            <View style={{
-              marginTop: 40,
-              marginBottom: -50, 
-             backgroundColor: 'transparent',
-            }}>
-              <LinesLoader
-                color='rgba(169, 20, 20, 0.9)'
-                barHeight={60}
-                barWidth={5}
-                betweenSpace={5}
-              />
-            </View>
-          ) : (
-              <View style={{ height: 50, backgroundColor: "transparent" }} />
-            )}
+            {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
+              <View style={{
+                marginTop: 40,
+                marginBottom: -50,
+                backgroundColor: 'transparent',
+              }}>
+                <LinesLoader
+                  color='rgba(169, 20, 20, 0.9)'
+                  barHeight={60}
+                  barWidth={5}
+                  betweenSpace={5}
+                />
+              </View>
+            ) : (
+                <View style={{ height: 50, backgroundColor: "transparent" }} />
+              )}
 
-          <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
-          <TouchableHighlight
-            onPress={() => {
-              this.navigateToRegisterPage()
-            }}
-            underlayColor="transparent"
-          >
-            <Text style={styles.registerText}>{strings.registerHere}</Text>
-          </TouchableHighlight>
-          
+            <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
+            <TouchableHighlight
+              onPress={() => {
+                this.navigateToRegisterPage()
+              }}
+              underlayColor="transparent"
+            >
+              <Text style={styles.registerText}>{strings.registerHere}</Text>
+            </TouchableHighlight>
+
           </ImageBackground>
         </View>
       </TouchableWithoutFeedback>
