@@ -17,12 +17,12 @@ export default class AuthenticationManager {
 
     async loginWithEmail(
         payload: authPayloads.loginCredentialsPayloadType
-    ): Promise<UserViewModel | ErrorViewModel> {
-        let response = await this._service.loginWithEmail(payload);
-        var viewModel: UserViewModel | ErrorViewModel = null;
+    ): Promise<UserProfileViewModel | ErrorViewModel> {
+        let response = await this._service.fetchUserProfile(payload);
+        var viewModel: UserProfileViewModel | ErrorViewModel = null;
 
         if (response instanceof UserModel) {
-            viewModel = new UserViewModel(response);
+            viewModel = new UserProfileViewModel(response);
         } else {
             viewModel = new ErrorViewModel(response);
         }

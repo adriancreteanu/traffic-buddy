@@ -80,10 +80,10 @@ function dispatchInProgressAction(
 
 function handleLoginResponse(
     dispatch: any,
-    response: UserViewModel | ErrorViewModel
+    response: UserProfileViewModel | ErrorViewModel
 ) {
     let action = null;
-    if (response instanceof UserViewModel) {
+    if (response instanceof UserProfileViewModel) {
         action = {
             type: authenticationActionTypes.loginSuccess,
             isInProgress: false,

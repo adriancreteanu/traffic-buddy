@@ -105,6 +105,39 @@ export default class AuthenticationService extends SuperService {
         return response;
     }
 
+    async fetchUserProfile(
+        payload: authPayloads.loginCredentialsPayloadType
+    ) {
+        var response: UserProfileModel | ApiErrorModel;
+        await this.firebaseApp
+            .database()
+            .ref("users/TM")
+            .child(payload.username)
+            .once("value")
+            .then(async snapshot => {
+                let user = snapshot.val();
+                if (user) {
+                    //daca username exista in DB
+                    let payloadEmailAndPassword = {
+                        username: user.email, 
+                        password: payload.password
+                    };
+                    response = await this.loginWithEmail(payloadEmailAndPassword);
+                } else {
+                    let error = {
+                        message: "User does not exist2as",
+                        code: "123456789"
+                    };
+                    response = ApiErrorModel.createDefaultErrorInstance(error);
+                }
+            })
+            .catch(error => {
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+        let x = 2;
+        return response;
+    }
+
     async verifyAuth(dispatch: any) {
         await this.firebaseApp
             .auth()

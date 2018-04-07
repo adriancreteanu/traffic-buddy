@@ -15,7 +15,7 @@ export default class NewsFeedService extends SuperService {
     async postGeneralMessage(
         payload: newsFeedPayloads.postGeneralMessagePayloadType
     ) {
-        var response;
+        var response: PostModel | ApiErrorModel;
         await this.firebaseApp
             .database()
             .ref("feed")

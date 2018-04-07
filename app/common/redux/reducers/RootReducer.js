@@ -5,6 +5,7 @@ import { signOutReducer } from "./SignOutReducer";
 import { appReducer } from "./AppReducer";
 import { registerReducer } from "./RegisterReducer";
 import { postReducer } from "./PostReducer";
+import { userReducer }from "./UserReducer";
 
 export const RootReducer = combineReducers({
     navigationReducer: navigationReducer, 
@@ -13,4 +14,5 @@ export const RootReducer = combineReducers({
     appReducer: appReducer,
     registerReducer: registerReducer,
     postReducer: postReducer,
+    userReducer: userReducer, 
 });
