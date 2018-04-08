@@ -85,7 +85,7 @@ class LoginPage extends Component {
         password: this.state.password
       };
       let payload = authPayloads.createLoginCredentialsPayload(loginPayload);
-      authActions.loginWithEmailAction(payload)(this.props.dispatch);
+      authActions.loginUser(payload)(this.props.dispatch);
     }
   }
 
@@ -117,8 +117,8 @@ class LoginPage extends Component {
                 })
               }
               value={this.state.username}
-            //maxLength={7}
-            //autoCapitalize="characters"
+              maxLength={7}
+              autoCapitalize="characters"
             />
 
             <CustomTextInput

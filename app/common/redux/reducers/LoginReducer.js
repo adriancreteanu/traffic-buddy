@@ -31,7 +31,7 @@ export const loginReducer = (state = initialLoginState(), action: any) => {
                 viewModel: action.viewModel,
                 isFinishedWithSuccess: true,
             };
-        default: 
-            return initialLoginState();
+        default:
+            return state;
     }
 }

@@ -32,14 +32,27 @@ export function registerAction(
 
 
 
-export function loginWithEmailAction(
+export function loginUser(
     payload: authPayloads.loginCredentialsPayloadType
 ) {
     return async function (dispatch: any) {
         let type = authenticationActionTypes.loginInProgress;
         dispatchInProgressAction(dispatch, true, type);
         let authManager = new AuthenticationManager();
-        let response = await authManager.loginWithEmail(payload);
+        /* 
+            response is going to be either: 
+                -> UserProfileViewModel - if user exists
+                -> ErrorViewModel - if user does not exist or a firebase error occurs
+         */
+        var response = await authManager.checkIfUsernameExists(payload.username);
+
+        if (response instanceof UserProfileViewModel) {
+            let loginPayload: authPayloads.loginCredentialsPayloadType = {
+                username: response.userProfileViewModel.email,
+                password: payload.password
+            }
+            response = await authManager.loginWithEmail(loginPayload);
+        }
         handleLoginResponse(dispatch, response);
     }
 }
@@ -80,10 +93,10 @@ function dispatchInProgressAction(
 
 function handleLoginResponse(
     dispatch: any,
-    response: UserProfileViewModel | ErrorViewModel
+    response: UserViewModel | UserProfileViewModel | ErrorViewModel
 ) {
     let action = null;
-    if (response instanceof UserProfileViewModel) {
+    if (response instanceof UserViewModel) {
         action = {
             type: authenticationActionTypes.loginSuccess,
             isInProgress: false,

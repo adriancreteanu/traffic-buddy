@@ -42,7 +42,7 @@ class PostPage extends Component {
         headerRight: <NavRightIcon />,
         headerStyle: {
             backgroundColor: '#c6bf69',
-            borderBottomColor: '#FFF',
+            borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },
         headerTitleStyle: {

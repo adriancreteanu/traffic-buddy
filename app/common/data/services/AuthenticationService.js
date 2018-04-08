@@ -15,11 +15,11 @@ export default class AuthenticationService extends SuperService {
     async registerUser(payload: authPayloads.registerCredentialsPayloadType) {
         var response: UserProfileModel | ApiErrorModel = null;
         // Check if plate number is already used by another user
-        let userExists: ApiErrorModel | bool = await this.verifyIfPlateExists(payload.plateNumber);
+        let userAlreadyExists: UserProfileModel | ApiErrorModel = await this.checkIfUsernameExists(payload.plateNumber);
 
-        if (userExists instanceof ApiErrorModel) {
+        if (userAlreadyExists instanceof ApiErrorModel) {
             response = userExists;
-        } else if (userExists) {
+        } else if (userAlreadyExists instanceof UserProfileModel) {
             // TODO: Create error saying that plate already exists -> this won't compile yet
             // Example: 
             let error = {
@@ -31,7 +31,7 @@ export default class AuthenticationService extends SuperService {
             await this.firebaseApp
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
-                .then(async() => {
+                .then(async () => {
                     // Write user data to firebase
                     let insertResponse: ApiErrorModel | bool = await this.insertUserDataInDatabase(payload);
                     if (insertResponse instanceof ApiErrorModel) {
@@ -48,14 +48,20 @@ export default class AuthenticationService extends SuperService {
         return response;
     }
 
-    async verifyIfPlateExists(plateNumber: ?string) {
-        var response: bool | ApiErrorModel;
+    async checkIfUsernameExists(plateNumber: ?string) {
+        var response: boolean | ApiErrorModel;
         await this.firebaseApp
             .database()
-            .ref("users")
+            .ref("users/TM") // de vazut cum manipulez stringul ai sa fie parametrizat
+            .child(plateNumber)
             .once("value")
             .then(snapshot => {
-                response = snapshot.hasChild(plateNumber);
+                let user = snapshot.val();
+                if(user) {
+                    response = new UserProfileModel(user);
+                } else {
+                    response = null;
+                }
             })
             .catch(error => {
                 response = ApiErrorModel.createDefaultErrorInstance(error);
@@ -69,7 +75,7 @@ export default class AuthenticationService extends SuperService {
         var response: bool | ApiErrorModel;
         await this.firebaseApp
             .database()
-            .ref("users")
+            .ref("users/TM")
             .child(payload.plateNumber)
             .set({
                 email: payload.email,
@@ -119,7 +125,7 @@ export default class AuthenticationService extends SuperService {
                 if (user) {
                     //daca username exista in DB
                     let payloadEmailAndPassword = {
-                        username: user.email, 
+                        username: user.email,
                         password: payload.password
                     };
                     response = await this.loginWithEmail(payloadEmailAndPassword);
