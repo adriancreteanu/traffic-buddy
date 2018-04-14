@@ -80,11 +80,12 @@ class LoginPage extends Component {
         { cancelable: false }
       )
     } else {
-      let loginPayload: authPayloads.loginCredentialsPayloadType = {
-        username: this.state.username,
+      let payload: authPayloads.loginCredentialsPayloadType = {
+        username: this.state.username, 
+        email: "", // empty because we don't have user's email initially
         password: this.state.password
       };
-      let payload = authPayloads.createLoginCredentialsPayload(loginPayload);
+      //let payload = authPayloads.createLoginCredentialsPayload(loginPayload);
       authActions.loginUser(payload)(this.props.dispatch);
     }
   }

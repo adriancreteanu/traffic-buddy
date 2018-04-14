@@ -48,7 +48,8 @@ export function loginUser(
 
         if (response instanceof UserProfileViewModel) {
             let loginPayload: authPayloads.loginCredentialsPayloadType = {
-                username: response.userProfileViewModel.email,
+                username: payload.username,
+                email: response.userProfileViewModel.email,
                 password: payload.password
             }
             response = await authManager.loginWithEmail(loginPayload);

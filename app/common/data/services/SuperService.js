@@ -1,14 +1,15 @@
 import * as firebase from 'firebase';
 import { firebaseConfig } from '../config/FirebaseConfig';
+import PreferencesRepo from "../repos/PreferencesRepo";
 
 export default class SuperService {
 
     firebaseApp: firebase.app.App = null;
-    //preference repo = null
+    preferencesRepo: PreferencesRepo = null;
 
     constructor() {
         this.initFirebaseApp();
-        //init preferenceRepo
+        this.preferencesRepo = new PreferencesRepo();
     }
 
     initFirebaseApp() {

@@ -1,6 +1,7 @@
 
 export type loginCredentialsPayloadType = {
     username: ?string,
+    email: ?string,
     password: ?string,
 };
 
@@ -12,6 +13,8 @@ export type registerCredentialsPayloadType = {
     password: ?string
 };
 
+
+//to delete 
 export function createLoginCredentialsPayload(
     loginCredentials: loginCredentialsPayloadType
 ): loginCredentialsPayloadType {

@@ -10,6 +10,8 @@ import * as navActions from "../../redux/actions/NavigationActions";
 import SplashScreen from 'react-native-splash-screen';
 import UserProfileModel from "../models/UserProfileModel";
 
+import { PreferenceKeys } from "../../constants/PreferenceKeys";
+
 export default class AuthenticationService extends SuperService {
 
     async registerUser(payload: authPayloads.registerCredentialsPayloadType) {
@@ -57,7 +59,7 @@ export default class AuthenticationService extends SuperService {
             .once("value")
             .then(snapshot => {
                 let user = snapshot.val();
-                if(user) {
+                if (user) {
                     response = new UserProfileModel(user);
                 } else {
                     response = null;
@@ -100,15 +102,26 @@ export default class AuthenticationService extends SuperService {
 
         await this.firebaseApp
             .auth()
-            .signInWithEmailAndPassword(payload.username, payload.password)
+            .signInWithEmailAndPassword(payload.email, payload.password)
             .then(user => {
-                //save user is preferences
+                //save user data in preferences
+                this.saveUserDataInPreferences(
+                    payload.username,
+                    payload.email,
+                    user.uid
+                );
                 response = new UserModel(user);
             })
             .catch(error => {
                 response = ApiErrorModel.createDefaultErrorInstance(error);
             });
         return response;
+    }
+
+    async saveUserDataInPreferences(username: string, email: string, uid: string) {
+        await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUsername, username);
+        await this.preferencesRepo.saveValue(PreferenceKeys.loggedInEmail, email);
+        await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUID, uid);
     }
 
     async fetchUserProfile(
@@ -163,6 +176,7 @@ export default class AuthenticationService extends SuperService {
             .auth()
             .signOut()
             .then(() => {
+                this.preferencesRepo.deleteAllDataFromPreferences();
                 response = true;
             })
             .catch();

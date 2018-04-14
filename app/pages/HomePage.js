@@ -25,6 +25,8 @@ import * as navActions from "../common/redux/actions/NavigationActions";
 import NavLeftAddIcon from '../components/navigation/NavLeftAddIcon';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PreferencesRepo from '../common/data/repos/PreferencesRepo';
+import { PreferenceKeys } from '../common/constants/PreferenceKeys';
 
 class HomePage extends Component {
 
@@ -66,6 +68,30 @@ class HomePage extends Component {
         //the back button color
         headerTintColor: '#FFF'
     });
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "", 
+            email: "", 
+            uid: ""
+        };
+        this.preferencesRepo = new PreferencesRepo();
+    }
+
+    async componentWillMount() {
+        
+        await this.getDataFromPreferences();
+    }
+
+    async getDataFromPreferences() {
+        this.setState({
+            ...this.state, 
+            username: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername), 
+            email: await this.preferencesRepo.getValue(PreferenceKeys.loggedInEmail), 
+            uid: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUID), 
+        });
+    }
 
     render() {
         return (
