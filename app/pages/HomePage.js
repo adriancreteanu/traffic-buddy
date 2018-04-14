@@ -22,6 +22,7 @@ import * as authActions from "../common/redux/actions/AuthenticationActions";
 //Navigation 
 import { connect } from 'react-redux';
 import * as navActions from "../common/redux/actions/NavigationActions";
+import * as userActions from "../common/redux/actions/UserActions";
 import NavLeftAddIcon from '../components/navigation/NavLeftAddIcon';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -79,9 +80,19 @@ class HomePage extends Component {
         this.preferencesRepo = new PreferencesRepo();
     }
 
-    async componentWillMount() {
-        
+
+    componentWillReceiveProps(nextProps) {
+        let userProfile = nextProps.userReducer;
+    }
+
+    async componentDidMount() {
+        // Get user info (email, plate number and uid) from preferences
         await this.getDataFromPreferences();
+        
+        if(this.state.username) {
+            userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
+        }
+
     }
 
     async getDataFromPreferences() {
@@ -111,7 +122,8 @@ class HomePage extends Component {
 
 function mapStateToProps(state) {
     return {
-        navigationReducer: state.navigationReducer
+        navigationReducer: state.navigationReducer,
+        userReducer: state.userReducer
     };
 }
 

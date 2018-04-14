@@ -32,6 +32,6 @@ export const userReducer = (state = initialUserState(), action: any) => {
                 isFinishedWithSuccess: true,
             };
         default: 
-            return initialUserState();
+            return state;
     }
 }

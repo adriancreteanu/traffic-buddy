@@ -35,5 +35,20 @@ send: "Send",
 yesAlertOption: "Yes", 
 cancelAlertOption: "Cancel", 
 confirmSignOut: "Confirm", 
-areYouSureSignOut: "Are you sure you want to sign out?"
+areYouSureSignOut: "Are you sure you want to sign out?", 
+
+// Months
+january: "Jan", 
+february: "Feb", 
+march: "Mar", 
+april: "Apr", 
+may: "May", 
+june: "Jun", 
+july: "Jul", 
+august: "Aug", 
+september: "Sep", 
+october: "Oct", 
+november: "Nov", 
+december: "Dec",
+
 };

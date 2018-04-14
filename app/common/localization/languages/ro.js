@@ -37,4 +37,19 @@ cancelAlertOption: "Anulare",
 confirmSignOut: "Confirmare", 
 areYouSureSignOut: "Sunteți sigur că doriți să vă deconectați?",
 
+
+// Months
+january: "Ian", 
+february: "Feb", 
+march: "Mar", 
+april: "Apr", 
+may: "Mai", 
+june: "Iun", 
+july: "Iul", 
+august: "Aug", 
+september: "Sep", 
+october: "Oct", 
+november: "Noi", 
+december: "Dec",
+
 };
