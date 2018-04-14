@@ -15,8 +15,7 @@ class NewsFeedItem extends Component {
             <View style={styles.container}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
                     <View style={styles.userContainerStyle}>
-                        <Text style={styles.usernameTextStyle}>{this.props.username}</Text>
-                        <Text style={styles.defaultTextStyle}>Rank {this.props.rank}</Text>
+
                     </View>
                     <View style={styles.hourContainerStyle}>
                         <Text style={styles.hourTextStyle}> {this.props.hour} </Text>
@@ -25,42 +24,50 @@ class NewsFeedItem extends Component {
 
                 <View style={styles.messageSectionStyle}>
 
-                <View style={{
-                    borderBottomColor: "#bbb", 
-                    borderBottomWidth: StyleSheet.hairlineWidth,
-                    marginRight: '60%',
-                    
-                }}>
+                    <View style={{
+                        borderBottomColor: "#bbb",
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        //marginRight: '60%',
+                        alignSelf: 'flex-start'
 
-                    <Text style={styles.messageCategoryStyle}>{this.props.category}</Text>
+                    }}>
 
-                </View>
+                        <Text style={styles.messageCategoryStyle}>{this.props.category}</Text>
+
+                    </View>
                     <Text style={styles.messageStyle}>{this.props.message}</Text>
                 </View>
 
-                <View style={styles.iconsSectionStyle}>
-                    <View style={styles.likeIconStyle}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    <View style={styles.iconsSectionStyle}>
+                        <View style={styles.likeIconStyle}>
+                            <Icon
+                                name='thumbs-up'
+                                size={20}
+                                color="#000"
+                                style={{
+                                    marginRight: 5,
+                                }}
+                            />
+                            <Text style={styles.iconCountStyle}>121</Text>
+                        </View>
                         <Icon
-                            name='thumbs-up'
+                            name='comments'
                             size={20}
                             color="#000"
                             style={{
                                 marginRight: 5,
                             }}
                         />
-                        <Text style={styles.iconCountStyle}>121</Text>
+                        <Text style={styles.iconCountStyle}>96</Text>
                     </View>
-                    <Icon
-                        name='comments'
-                        size={20}
-                        color="#000"
-                        style={{
-                            marginRight: 5,
-                        }}
-                    />
-                    <Text style={styles.iconCountStyle}>96</Text>
-                </View>
 
+
+                    <View style={styles.userContainerStyle}>
+                        <Text style={styles.usernameTextStyle}>{this.props.username}</Text>
+                        <Text style={styles.defaultTextStyle}>Rank {this.props.rank}</Text>
+                    </View>
+                </View>
             </View>
         );
     }
@@ -80,27 +87,28 @@ const styles = StyleSheet.create({
         color: "#000",
         fontWeight: "bold",
         fontSize: 18,
-
+        textAlign: 'right'
     },
     defaultTextStyle: {
         color: "#666",
-        fontSize: 16
+        fontSize: 16,
+        textAlign: 'right'
     },
 
     userContainerStyle: {
-        flex: 1,
-        // backgroundColor: 'red'
-        //textAlign: 'left'
+        flex: 1, 
+        flexDirection: "column",
+        justifyContent: "flex-end",
+        padding: 0,
+        paddingLeft: 10,
+        marginTop: 15, 
     },
     hourContainerStyle: {
         flex: 1,
-        //textAlign: 'right'
-        // backgroundColor: 'cyan', 
         paddingRight: 10,
     },
     hourTextStyle: {
         textAlign: 'right',
-        //marginTop: 10, 
         fontSize: 20,
         color: '#000'
     },
@@ -111,26 +119,24 @@ const styles = StyleSheet.create({
     },
     messageCategoryStyle: {
         color: "#333",
-        fontSize: 18, 
-        marginBottom: 2, 
-        marginTop: 5, 
+        fontSize: 18,
+        marginBottom: 2,
     },
     messageSectionStyle: {
         flex: 1,
         flexDirection: "column",
-        marginTop: 10,
     },
     iconsSectionStyle: {
+        flex: 1, 
         flexDirection: "row",
         justifyContent: "flex-start",
         padding: 0,
         paddingLeft: 10,
-        marginTop: 15
+        marginTop: 30
     },
     iconCountStyle: {
         paddingTop: 5,
         fontSize: 12,
-        //paddingLeft: 5
     },
     likeIconStyle: {
         marginRight: 40,

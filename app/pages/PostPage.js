@@ -36,7 +36,7 @@ class PostPage extends Component {
     static navigationOptions = ({ navigation }) => ({
         headerTitle: <NavTitleUI title="Post" />,
         headerLeft: <NavLeftIcon
-            icon="arrow-left"
+            icon="chevron-left"
             onPress={() => navigation.goBack()}
         />,
         headerRight: <NavRightIcon />,

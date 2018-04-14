@@ -35,7 +35,7 @@ const mockNewsFeedItems = [
         username: "TM15ABI",
         rank: 14,
         category: "Radar",
-        message: "Atentie Radar pe Take Ionescu", 
+        message: "Atentie Radar pe Take Ionescu acesta este un mesaj foarte lung asda ad adsnasd asdnasjdas asdnajsdna asdnajdasnd saadsdjnajdnasj andjsandajsnd saanjsnqwnqwnenasd lireajsdsandas najdnjasndjandajn nasjdnasasdas najsdnajsnd andasjnsnasjdnajndasj", 
         hour: "16:22"
     }, {
         id: 5,

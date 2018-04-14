@@ -27,10 +27,14 @@ import { strings } from "../common/localization/strings-repository";
 
 class RegisterPage extends Component {
 
-    static navigationOptions = {
-
-
+    static navigationOptions = ({ navigation }) => ({
         title: strings.registerPageTitle,
+        headerLeft: <NavLeftIcon
+            icon="chevron-left"
+            onPress={() => {
+                navigation.goBack();
+            }}
+        />,
         //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
         headerStyle: {
             backgroundColor: '#c6bf69',
@@ -44,7 +48,7 @@ class RegisterPage extends Component {
         },
         //the back button color
         headerTintColor: '#FFF'
-    }
+    });
 
 
 
@@ -199,7 +203,7 @@ class RegisterPage extends Component {
                             Keyboard.dismiss()
                             this.validateRegisterCredentials();
                         }}
-                        
+
                         borderRadius={5}
                     />
 
