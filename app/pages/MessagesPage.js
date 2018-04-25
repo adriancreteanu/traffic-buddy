@@ -56,9 +56,19 @@ class MessagesPage extends Component {
 
     render() {
         return (
-            <Text>No messages found</Text>
+            <View style={styles.container}> 
+                <Text>No messages found</Text>
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1, 
+        justifyContent: 'center', 
+        alignItems: 'center'
+    }
+});
 
 export default MessagesPage;

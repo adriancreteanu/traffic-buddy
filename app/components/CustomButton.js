@@ -18,7 +18,8 @@ class CustomButton extends Component {
             backgroundColor: 'rgba(169, 20, 20, 0.9)',
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: this.props.borderRadius
+            borderRadius: this.props.borderRadius,
+            flexDirection: this.props.flexDirection
           }
         ]}
         onPress={this.props.onPress}

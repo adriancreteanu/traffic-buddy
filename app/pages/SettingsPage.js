@@ -70,14 +70,15 @@ class SettingsPage extends Component {
         return (
             <View style={styles.container}>
                 <CustomButton
-                    width={270}
+                    
                     height={50}
                     buttonTitle={strings.logOut}
                     style={{ marginTop: 30, marginBottom: 40 }}
-                    borderRadius={5}
+                    //borderRadius={5}
                     onPress={() => {
                         this.logOutAlert();
                     }}
+                    //flexDirection={"row"}
                 />
             </View>
         )
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-end',
-        alignItems: 'center'
+        
     }
 });
 
