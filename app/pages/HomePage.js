@@ -23,11 +23,81 @@ import * as authActions from "../common/redux/actions/AuthenticationActions";
 import { connect } from 'react-redux';
 import * as navActions from "../common/redux/actions/NavigationActions";
 import * as userActions from "../common/redux/actions/UserActions";
+import * as newsFeedActions from "../common/redux/actions/NewsFeedActions";
 import NavLeftAddIcon from '../components/navigation/NavLeftAddIcon';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PreferencesRepo from '../common/data/repos/PreferencesRepo';
 import { PreferenceKeys } from '../common/constants/PreferenceKeys';
+
+
+const mockNewsFeedItems = [
+    {
+        id: 1,
+        username: "TM15ABI",
+        rank: 14,
+        category: "Radar",
+        message: "Atentie Radar pe Take Ionescu",
+        hour: "13:55"
+    }, {
+        id: 2,
+        username: "GJ22KJI",
+        rank: -2,
+        category: "Accident",
+        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
+        hour: "16:22"
+    }, {
+        id: 3,
+        username: "AR12OPI",
+        rank: 0,
+        category: "Trafic",
+        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
+        hour: "09:32"
+    }, {
+        id: 4,
+        username: "TM15ABI",
+        rank: 14,
+        category: "Radar",
+        message: "Atentie Radar pe Take Ionescu acesta este un mesaj foarte lung asda ad adsnasd asdnasjdas asdnajsdna asdnajdasnd saadsdjnajdnasj andjsandajsnd saanjsnqwnqwnenasd lireajsdsandas najdnjasndjandajn nasjdnasasdas najsdnajsnd andasjnsnasjdnajndasj",
+        hour: "16:22"
+    }, {
+        id: 5,
+        username: "GJ22KJI",
+        rank: -2,
+        category: "Accident",
+        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
+        hour: "05:12"
+    }, {
+        id: 6,
+        username: "AR12OPI",
+        rank: 0,
+        category: "Trafic",
+        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
+        hour: "00:12"
+    }, {
+        id: 7,
+        username: "TM15ABI",
+        rank: 14,
+        category: "Radar",
+        message: "Atentie Radar pe Take Ionescu",
+        hour: "11:10"
+    }, {
+        id: 8,
+        username: "GJ22KJI",
+        rank: -2,
+        category: "Accident",
+        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
+        hour: "19:45"
+    }, {
+        id: 9,
+        username: "AR12OPI",
+        rank: 0,
+        category: "Trafic",
+        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
+        hour: "06:42"
+    }
+]
+
 
 class HomePage extends Component {
 
@@ -41,12 +111,12 @@ class HomePage extends Component {
                 justifyContent: 'center',
                 flexDirection: 'row'
             }}>
-                <NavLeftIcon icon="search"/>
-                <NavLeftAddIcon 
+                <NavLeftIcon icon="search" />
+                <NavLeftAddIcon
                     onPress={() => {
                         navActions.navigateToPostPage()(navigation.dispatch);
                     }}
-                 />
+                />
             </View>,
         headerRight:
             <NavRightIcon
@@ -73,8 +143,8 @@ class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "", 
-            email: "", 
+            username: "",
+            email: "",
             uid: ""
         };
         this.preferencesRepo = new PreferencesRepo();
@@ -88,19 +158,21 @@ class HomePage extends Component {
     async componentDidMount() {
         // Get user info (email, plate number and uid) from preferences
         await this.getDataFromPreferences();
-        
-        if(this.state.username) {
+
+        if (this.state.username) {
             userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
         }
+
+        newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
 
     }
 
     async getDataFromPreferences() {
         this.setState({
-            ...this.state, 
-            username: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername), 
-            email: await this.preferencesRepo.getValue(PreferenceKeys.loggedInEmail), 
-            uid: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUID), 
+            ...this.state,
+            username: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername),
+            email: await this.preferencesRepo.getValue(PreferenceKeys.loggedInEmail),
+            uid: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUID),
         });
     }
 
@@ -112,7 +184,12 @@ class HomePage extends Component {
                 justifyContent: "center",
                 backgroundColor: '#FFF'
             }}>
-                <NextFeedList />
+
+                { mockNewsFeedItems != null ?
+                    <NextFeedList newsFeedItems={mockNewsFeedItems} /> : 
+                    <Text> No news feed </Text>
+                }
+
             </ScrollView>
         )
     }
@@ -123,7 +200,8 @@ class HomePage extends Component {
 function mapStateToProps(state) {
     return {
         navigationReducer: state.navigationReducer,
-        userReducer: state.userReducer
+        userReducer: state.userReducer,
+        fetchPostsReducer: state.fetchPostsReducer,
     };
 }
 

@@ -36,4 +36,28 @@ export default class NewsFeedService extends SuperService {
 
         return response;
     }
+
+    async fetchPosts(
+        location: string
+    ) {
+        var response: PostModel[] | ApiErrorModel;
+
+        let x = 2;
+
+        await this.firebaseApp
+            .database()
+            .ref("feed")
+            .child(location)
+            .limitToLast(10)
+            .once("value")
+            .then(snapshot => {
+                console.log(snapshot);
+            })
+            .catch(error => {
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+
+        return response;
+    }
+
 }

@@ -20,12 +20,27 @@ export default class NewsFeedManager {
         let response = await this._service.postGeneralMessage(payload);
         var viewModel: PostViewModel | ErrorViewModel = null;
 
-        if (response instanceof  PostModel) {
+        if (response instanceof PostModel) {
             viewModel = new PostViewModel(response);
         } else {
             viewModel = new ErrorViewModel(response);
         }
         return viewModel;
+    }
+
+    async fetchPosts(
+        location: ?string
+    ): Promise<PostViewModel | ErrorViewModel> {
+        let response = await this._service.fetchPosts(location);
+        var viewModel: PostViewModel | ErrorViewModel = null;
+
+        if (response instanceof PostModel) {
+            viewModel = new PostViewModel(response);
+        } else {
+            viewModel = new ErrorViewModel(response);
+        }
+        return viewModel;
+
     }
 
 }

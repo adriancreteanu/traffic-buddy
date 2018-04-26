@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    Alert
+    Alert,
+    ImageBackground
 } from 'react-native';
 
 import CustomButton from "../components/CustomButton";
@@ -46,14 +47,14 @@ class SettingsPage extends Component {
             strings.confirmSignOut,
             strings.areYouSureSignOut,
             [
-                { 
-                    text: strings.yesAlertOption, 
-                    onPress: () => this.logOutUser(), 
+                {
+                    text: strings.yesAlertOption,
+                    onPress: () => this.logOutUser(),
                     style: 'default'
                 },
-                { 
-                    text: strings.cancelAlertOption, 
-                    onPress: () => {}, 
+                {
+                    text: strings.cancelAlertOption,
+                    onPress: () => { },
                     style: 'cancel'
                 },
             ],
@@ -68,18 +69,20 @@ class SettingsPage extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <CustomButton
-                    
-                    height={50}
-                    buttonTitle={strings.logOut}
-                    style={{ marginTop: 30, marginBottom: 40 }}
-                    //borderRadius={5}
-                    onPress={() => {
-                        this.logOutAlert();
-                    }}
+            <View style={{ flex: 1 }}>
+                <ImageBackground source={require('../assets/images/post_background.png')} style={styles.container} >
+                    <CustomButton
+                        width={300}
+                        height={50}
+                        buttonTitle={strings.logOut}
+                        style={{ marginTop: 30, marginBottom: 40 }}
+                        //borderRadius={5}
+                        onPress={() => {
+                            this.logOutAlert();
+                        }}
                     //flexDirection={"row"}
-                />
+                    />
+                </ImageBackground>
             </View>
         )
     }
@@ -92,7 +95,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-end',
-        
+        alignItems: 'center'
+
     }
 });
 

@@ -36,7 +36,8 @@ class LoginPage extends Component {
   static navigationOptions = {
     //header: null
     headerStyle: {
-      backgroundColor: '#c6bf69',
+      //backgroundColor: '#c6bf69',
+      backgroundColor: 'transparent',
       borderBottomColor: 'transparent',
     },
   };

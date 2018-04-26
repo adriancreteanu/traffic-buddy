@@ -1,9 +1,9 @@
 import { newsFeedActionTypes } from "../actions/NewsFeedActions";
-import { initialPostState } from "../states/NewsFeedStates";
+import { initialFetchPostsState } from "../states/NewsFeedStates";
 
-export const postReducer = (state = initialPostState(), action: any) => {
+export const fetchPostsReducer = (state = initialFetchPostsState(), action: any) => {
     switch (action.type) {
-        case newsFeedActionTypes.postInProgress:
+        case newsFeedActionTypes.fetchInProgress:
             return {
                 ...state,
                 type: action.type,
@@ -13,7 +13,7 @@ export const postReducer = (state = initialPostState(), action: any) => {
                 isFinishedWithSuccess: false,
             };
 
-        case newsFeedActionTypes.postFailure:
+        case newsFeedActionTypes.fetchFailure:
             return {
                 ...state,
                 type: action.type,
@@ -22,7 +22,7 @@ export const postReducer = (state = initialPostState(), action: any) => {
                 viewModel: null,
                 isFinishedWithSuccess: false,
             }
-        case newsFeedActionTypes.postSuccess:
+        case newsFeedActionTypes.fetchSuccess:
             return {
                 ...state,
                 type: action.type,

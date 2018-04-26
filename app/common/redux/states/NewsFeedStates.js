@@ -9,6 +9,14 @@ export function initialPostState() {
     };
 }
 
+export function initialFetchPostsState() {
+    return {
+        isInProgress: false,
+        errorViewModel: null, 
+        viewModel: null
+    };
+}
+
 export interface PostState {
     isInProgress: boolean, 
     errorViewModel: ErrorViewModel, 

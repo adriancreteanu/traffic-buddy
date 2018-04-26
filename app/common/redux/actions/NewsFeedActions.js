@@ -2,12 +2,16 @@
 import * as newsFeedPayloads from "../../data/payloads/NewsFeedPayloads";
 import NewsFeedManager from "../../data/managers/NewsFeedManager";
 import PostViewModel from "../../data/viewmodels/PostViewModel";
+import ErrorViewModel from "../../data/viewmodels/error/ErrorViewModel";
 
 
 export const newsFeedActionTypes = {
     postInProgress: "postInProgress", 
     postSuccess: "postSuccess", 
     postFailure: "postFailure", 
+    fetchInProgress: "fetchInProgress", 
+    fetchSuccess: "fetchSuccess", 
+    fetchFailure: "fetchFailure"
 };
 
 export function postAction(
@@ -18,6 +22,18 @@ export function postAction(
         dispatchInProgressAction(dispatch, true, type);
         let newsFeedManager = new NewsFeedManager();
         let response = await newsFeedManager.postGeneralMessage(payload);
+        handlePostResponse(dispatch, response);
+    }
+}
+
+export function fetchPosts(
+    location: string
+) {
+    return async function(dispatch: any) {
+        let type = newsFeedActionTypes.fetchInProgress;
+        dispatchInProgressAction(dispatch, true, type);
+        let newsFeedManager = new NewsFeedManager();
+        let response = newsFeedManager.fetchPosts(location);
         handlePostResponse(dispatch, response);
     }
 }

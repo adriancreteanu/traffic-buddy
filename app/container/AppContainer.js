@@ -86,7 +86,7 @@ const tabBarOptionsAndroid = {
     style: {
         //backgroundColor: "#a94242"
         //backgroundColor: 'rgba(169, 20, 20, 0.9)',
-        backgroundColor: '#ddd37a'
+        backgroundColor: 'rgba(221,211,122, 0.8)'
     }
 }
 
