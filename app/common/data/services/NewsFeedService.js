@@ -6,6 +6,7 @@ import * as navActions from "../../redux/actions/NavigationActions";
 import * as newsFeedPayloads from "../payloads/NewsFeedPayloads";
 import PostModel from "../models/PostModel";
 import DateHelper from "../../helpers/DateHelper";
+import PostsModel from "../models/PostsModel";
 
 
 
@@ -22,7 +23,7 @@ export default class NewsFeedService extends SuperService {
             .child(payload.location)
             .push({
                 username: payload.username,
-                rank: payload.userRank,
+                rank: payload.rank,
                 category: payload.category,
                 message: payload.message,
                 date: payload.date
@@ -41,9 +42,7 @@ export default class NewsFeedService extends SuperService {
         location: string
     ) {
         var response: PostModel[] | ApiErrorModel;
-
-        let x = 2;
-
+        
         await this.firebaseApp
             .database()
             .ref("feed")
@@ -51,7 +50,7 @@ export default class NewsFeedService extends SuperService {
             .limitToLast(10)
             .once("value")
             .then(snapshot => {
-                console.log(snapshot);
+                response = new PostsModel(snapshot.val());
             })
             .catch(error => {
                 response = ApiErrorModel.createDefaultErrorInstance(error);

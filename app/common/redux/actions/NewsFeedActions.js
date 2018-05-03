@@ -3,6 +3,7 @@ import * as newsFeedPayloads from "../../data/payloads/NewsFeedPayloads";
 import NewsFeedManager from "../../data/managers/NewsFeedManager";
 import PostViewModel from "../../data/viewmodels/PostViewModel";
 import ErrorViewModel from "../../data/viewmodels/error/ErrorViewModel";
+import PostsViewModel from "../../data/viewmodels/PostsViewModel";
 
 
 export const newsFeedActionTypes = {
@@ -33,8 +34,8 @@ export function fetchPosts(
         let type = newsFeedActionTypes.fetchInProgress;
         dispatchInProgressAction(dispatch, true, type);
         let newsFeedManager = new NewsFeedManager();
-        let response = newsFeedManager.fetchPosts(location);
-        handlePostResponse(dispatch, response);
+        let response = await newsFeedManager.fetchPosts(location);
+        handleFetchResponse(dispatch, response);
     }
 }
 
@@ -70,6 +71,32 @@ function handlePostResponse(
     } else if (response instanceof ErrorViewModel) {
         action = {
             type: newsFeedActionTypes.postFailure,
+            isInProgress: false,
+            errorViewModel: response,
+            viewModel: null,
+            isFinishedWithSuccess: false,
+        };
+        dispatch(action);
+    }
+}
+
+function handleFetchResponse(
+    dispatch: any,
+    response: PostsViewModel | ErrorViewModel
+) {
+    let action = null;
+    if (response instanceof PostsViewModel) {
+        action = {
+            type: newsFeedActionTypes.fetchSuccess,
+            isInProgress: false,
+            errorViewModel: null,
+            viewModel: response,
+            isFinishedWithSuccess: true
+        };
+        dispatch(action);
+    } else if (response instanceof ErrorViewModel) {
+        action = {
+            type: newsFeedActionTypes.fetchFailure,
             isInProgress: false,
             errorViewModel: response,
             viewModel: null,

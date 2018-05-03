@@ -161,9 +161,10 @@ class HomePage extends Component {
 
         if (this.state.username) {
             userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
+            newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
         }
 
-        newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
+
 
     }
 
@@ -177,21 +178,36 @@ class HomePage extends Component {
     }
 
     render() {
-        return (
+
+        let posts = null;
+        let { viewModel } = this.props.fetchPostsReducer;
+
+        if (viewModel) {
+            posts = viewModel.postsViewModel.postsModel;
+        }
+
+        return viewModel != null ? (
             <ScrollView contentContainerStyle={{
                 flex: 1,
-                alignItems: "center",
                 justifyContent: "center",
                 backgroundColor: '#FFF'
             }}>
 
-                { mockNewsFeedItems != null ?
-                    <NextFeedList newsFeedItems={mockNewsFeedItems} /> : 
+                { posts != null ?
+                    <NextFeedList newsFeedItems={posts} /> :
                     <Text> No news feed </Text>
                 }
 
             </ScrollView>
-        )
+        ) : (
+                <View style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <Text>Loading...</Text>
+                </View>
+            )
     }
 
 

@@ -1,7 +1,7 @@
 
 export type postGeneralMessagePayloadType = {
     username: ?string,
-    userRank: ?number,
+    rank: ?number,
     location: ?string,
     category: ?string,
     message: ?string, 
@@ -13,7 +13,7 @@ export function createPostGeneralMessagePayload(
 ): postGeneralMessagePayloadType {
     return {
         username: postDetails.username,
-        userRank: postDetails.userRank, 
+        rank: postDetails.rank, 
         location: postDetails.location,
         category: postDetails.category, 
         message: postDetails.message, 

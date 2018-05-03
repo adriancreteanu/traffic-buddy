@@ -77,7 +77,7 @@ class PostPage extends Component {
         } else {
             let postPayload: newsFeedPayloads.postGeneralMessagePayloadType = {
                 username: "TM15ABI",
-                userRank: 2,
+                rank: 2,
                 category: this.state.category,
                 location: this.state.location,
                 message: this.state.message,

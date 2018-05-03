@@ -5,6 +5,8 @@ import ErrorViewModel from "../viewmodels/error/ErrorViewModel";
 import * as newsFeedPayloads from "../payloads/NewsFeedPayloads";
 import PostModel from "../models/PostModel";
 import PostViewModel from "../viewmodels/PostViewModel";
+import PostsViewModel from "../viewmodels/PostsViewModel";
+import PostsModel from "../models/PostsModel";
 
 export default class NewsFeedManager {
 
@@ -30,12 +32,12 @@ export default class NewsFeedManager {
 
     async fetchPosts(
         location: ?string
-    ): Promise<PostViewModel | ErrorViewModel> {
+    ): Promise<PostsViewModel | ErrorViewModel> {
         let response = await this._service.fetchPosts(location);
-        var viewModel: PostViewModel | ErrorViewModel = null;
+        var viewModel: PostsViewModel | ErrorViewModel = null;
 
-        if (response instanceof PostModel) {
-            viewModel = new PostViewModel(response);
+        if (response instanceof PostsModel) {
+            viewModel = new PostsViewModel(response);
         } else {
             viewModel = new ErrorViewModel(response);
         }
