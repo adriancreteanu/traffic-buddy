@@ -42,12 +42,12 @@ export default class NewsFeedService extends SuperService {
         location: string
     ) {
         var response: PostModel[] | ApiErrorModel;
-        
+
         await this.firebaseApp
             .database()
             .ref("feed")
             .child(location)
-            .limitToLast(10)
+            .limitToLast(5)
             .once("value")
             .then(snapshot => {
                 response = new PostsModel(snapshot.val());
@@ -55,6 +55,31 @@ export default class NewsFeedService extends SuperService {
             .catch(error => {
                 response = ApiErrorModel.createDefaultErrorInstance(error);
             });
+
+        return response;
+    }
+
+    async fetchMorePosts(
+        location: string,
+        lastPostId: string
+    ) {
+        var response: PostModel[] | ApiErrorModel;
+
+        let x = 2;
+
+        await this.firebaseApp
+            .database()
+            .ref("feed")
+            .child(location)
+            .endAt(null, lastPostId)
+            .limitToLast(7)
+            .once("value")
+            .then(snapshot => {
+                response = new PostsModel(snapshot.val());
+            })
+            .catch(error => {
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            })
 
         return response;
     }

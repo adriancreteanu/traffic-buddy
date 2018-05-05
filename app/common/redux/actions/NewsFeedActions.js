@@ -39,6 +39,19 @@ export function fetchPosts(
     }
 }
 
+export function fetchMorePosts(
+    location: string, 
+    lastPostId: string
+) {
+    return async function(dispatch: any) {
+        let type = newsFeedActionTypes.fetchInProgress;
+        dispatchInProgressAction(dispatch, true, type);
+        let newsFeedManager = new NewsFeedManager();
+        let response = await newsFeedManager.fetchMorePosts(location, lastPostId);
+        handleFetchResponse(dispatch, response);
+    }
+}
+
 
 // INTERNAL FUNCTIONS
 

@@ -31,7 +31,7 @@ export default class NewsFeedManager {
     }
 
     async fetchPosts(
-        location: ?string
+        location: string
     ): Promise<PostsViewModel | ErrorViewModel> {
         let response = await this._service.fetchPosts(location);
         var viewModel: PostsViewModel | ErrorViewModel = null;
@@ -42,7 +42,21 @@ export default class NewsFeedManager {
             viewModel = new ErrorViewModel(response);
         }
         return viewModel;
+    }
 
+    async fetchMorePosts(
+        location: string, 
+        lastPostId: string
+    ): Promise<PostsViewModel | ErrorViewModel> {
+        let response = await this._service.fetchMorePosts(location, lastPostId);
+        var viewModel: PostsViewModel | ErrorViewModel = null;
+
+        if (response instanceof PostsModel) {
+            viewModel = new PostsViewModel(response);
+        } else {
+            viewModel = new ErrorViewModel(response);
+        }
+        return viewModel;
     }
 
 }

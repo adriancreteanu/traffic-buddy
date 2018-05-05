@@ -145,7 +145,8 @@ class HomePage extends Component {
         this.state = {
             username: "",
             email: "",
-            uid: ""
+            uid: "", 
+            lastPostId: "",
         };
         this.preferencesRepo = new PreferencesRepo();
     }
@@ -153,6 +154,23 @@ class HomePage extends Component {
 
     componentWillReceiveProps(nextProps) {
         let userProfile = nextProps.userReducer;
+
+        let postsReducer = nextProps.fetchPostsReducer;
+        let posts = null;
+
+        if(postsReducer && postsReducer.viewModel) {
+            posts = postsReducer.viewModel.postsViewModel.postsModel;
+
+            if(posts) {
+                this.setState({
+                    ...this.state, 
+                    lastPostId: posts[posts.length - 1].id
+                })
+            }
+        }
+        
+
+        
     }
 
     async componentDidMount() {
@@ -161,11 +179,9 @@ class HomePage extends Component {
 
         if (this.state.username) {
             userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
-            newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
+            await newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
+            await newsFeedActions.fetchMorePosts("Timis", this.state.lastPostId)(this.props.dispatch);            
         }
-
-
-
     }
 
     async getDataFromPreferences() {
@@ -191,6 +207,7 @@ class HomePage extends Component {
                 flex: 1,
                 justifyContent: "center",
                 backgroundColor: '#FFF'
+                
             }}>
 
                 { posts != null ?

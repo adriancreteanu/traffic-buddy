@@ -14,8 +14,17 @@ export default class PostsModel {
             this.postsModel.push(post);
         }
 
+        // define loadMoreLimit as a consts
+        const loadMoreLimit = 5;
+
+        if(this.postsModel.length > loadMoreLimit + 1) {
+            this.postsModel.pop();
+        }
+
+        if(this.postsModel.length > loadMoreLimit) {
+            this.postsModel.shift();
+        }
+
         this.postsModel.reverse();
     }
-
-
 }
