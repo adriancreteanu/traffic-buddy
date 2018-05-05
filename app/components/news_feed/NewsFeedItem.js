@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button } from 'native-base';
 
 class NewsFeedItem extends Component {
 

@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    FlatList
+    FlatList,
+    ActivityIndicator
 } from 'react-native';
 import NewsFeedItem from './NewsFeedItem';
 
@@ -19,14 +20,14 @@ class NewsFeedList extends Component {
     }
 
     addKeysToItems(newsFeedItems: NewsFeedItem[]) {
-        if(newsFeedItems) {
+        if (newsFeedItems) {
             return newsFeedItems.map(newsFeedItem => {
                 return Object.assign(newsFeedItem, { key: newsFeedItem.id });
             });
         }
     }
 
-    _renderItem = ({ item }) => {
+    renderItem = ({ item }) => {
         return (
             <NewsFeedItem
                 username={item.username}
@@ -38,12 +39,29 @@ class NewsFeedList extends Component {
         );
     };
 
+    renderFooter = () => {
+        return (
+            <View
+                style={{
+                    paddingVertical: 20,
+                    borderTopWidth: 1,
+                    borderColor: "#CED0CE"
+                }}
+            >
+                <ActivityIndicator animating size="large" />
+            </View>
+        )
+    }
+
     render() {
         return (
             <View style={{ flex: 1, paddingTop: 5, paddingBottom: 5 }}>
                 <FlatList
                     data={this.state.newsFeedData}
-                    renderItem={this._renderItem}
+                    renderItem={this.renderItem}
+                    ListFooterComponent={this.renderFooter}
+                    onEndReached={this.props.handleLoadMore}
+                    onEndReachedThreshold={0}
                 />
             </View>
         );

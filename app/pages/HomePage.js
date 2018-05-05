@@ -5,7 +5,9 @@ import {
     Text,
     TouchableHighlight,
     StyleSheet,
-    ScrollView
+    ScrollView,
+    FlatList,
+    ActivityIndicator
 } from 'react-native';
 import DateHelper from "../common/helpers/DateHelper";
 
@@ -29,6 +31,12 @@ import NavLeftAddIcon from '../components/navigation/NavLeftAddIcon';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import PreferencesRepo from '../common/data/repos/PreferencesRepo';
 import { PreferenceKeys } from '../common/constants/PreferenceKeys';
+
+import { List, SearchBar } from 'react-native-elements';
+import NewsFeedItem from '../components/news_feed/NewsFeedItem';
+
+// spinner
+import { LinesLoader } from 'react-native-indicator';
 
 
 const mockNewsFeedItems = [
@@ -145,32 +153,36 @@ class HomePage extends Component {
         this.state = {
             username: "",
             email: "",
-            uid: "", 
+            uid: "",
             lastPostId: "",
+            posts: [], 
+            postsHaveEnded: false
         };
         this.preferencesRepo = new PreferencesRepo();
     }
 
 
     componentWillReceiveProps(nextProps) {
-        let userProfile = nextProps.userReducer;
+        //let userProfile = nextProps.userReducer;
 
-        let postsReducer = nextProps.fetchPostsReducer;
-        let posts = null;
+        //let postsReducer = nextProps.fetchPostsReducer;
+        //let posts = null;   
+    }
 
-        if(postsReducer && postsReducer.viewModel) {
+    saveInitialPostsToState = () => {
+        let postsReducer = this.props.fetchPostsReducer;
+        if (postsReducer && postsReducer.viewModel) {
             posts = postsReducer.viewModel.postsViewModel.postsModel;
 
-            if(posts) {
+            if (posts) {
                 this.setState({
-                    ...this.state, 
+                    ...this.state,
+                    //posts: [...this.state.posts, ...newPosts], 
+                    posts: [...this.state.posts, ...posts],
                     lastPostId: posts[posts.length - 1].id
                 })
             }
         }
-        
-
-        
     }
 
     async componentDidMount() {
@@ -180,7 +192,8 @@ class HomePage extends Component {
         if (this.state.username) {
             userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
             await newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
-            await newsFeedActions.fetchMorePosts("Timis", this.state.lastPostId)(this.props.dispatch);            
+
+            this.saveInitialPostsToState();
         }
     }
 
@@ -193,40 +206,87 @@ class HomePage extends Component {
         });
     }
 
-    render() {
+    async handleLoadMore() {
 
-        let posts = null;
-        let { viewModel } = this.props.fetchPostsReducer;
+        let x = 2;
 
-        if (viewModel) {
-            posts = viewModel.postsViewModel.postsModel;
-        }
 
-        return viewModel != null ? (
-            <ScrollView contentContainerStyle={{
-                flex: 1,
-                justifyContent: "center",
-                backgroundColor: '#FFF'
-                
-            }}>
+        if(!this.state.postsHaveEnded) {
+        await newsFeedActions.fetchMorePosts("Timis", this.state.lastPostId)(this.props.dispatch);
 
-                { posts != null ?
-                    <NextFeedList newsFeedItems={posts} /> :
-                    <Text> No news feed </Text>
-                }
+        let newPosts = this.props.fetchPostsReducer.viewModel.postsViewModel.postsModel;
 
-            </ScrollView>
-        ) : (
-                <View style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                }}>
-                    <Text>Loading...</Text>
-                </View>
-            )
+
+        this.setState({
+            postsHaveEnded: newPosts.length < 5 ? true : false,
+            posts: [...this.state.posts, ...newPosts],
+            lastPostId: newPosts[newPosts.length - 1].id
+        });
+
     }
 
+        let y = 2;
+    }
+
+
+
+    renderFooter = () => {
+        if (this.state.postsHaveEnded) return null;
+
+        return (
+            <View
+                style={{
+                    paddingVertical: 20,
+                    borderTopWidth: 1,
+                    borderColor: "#CED0CE"
+                }}
+            >
+                <ActivityIndicator animating size="large" />
+            </View>
+        );
+    };
+
+
+
+    render() {
+
+
+        let x = 2;
+
+
+        return this.state.posts.length != 0 ? (
+            <View style={{
+                backgroundColor: "#FFF",
+                flex: 1
+            }}>
+                <FlatList
+                    data={this.state.posts}
+                    renderItem={({ item }) => (
+                        <NewsFeedItem
+                            username={item.username}
+                            rank={item.rank}
+                            category={item.category}
+                            message={item.message}
+                            hour={item.hour}
+                        />
+                    )}
+                    keyExtractor={item => item.id}
+                    ListFooterComponent={this.renderFooter}
+                    onEndReached={this.handleLoadMore.bind(this)}
+                    onEndReachedThreshold={0}
+                />
+            </View>
+        ) : (
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <LinesLoader
+                        color='rgba(169, 20, 20, 0.9)'
+                        barHeight={80}
+                        barWidth={8}
+                        betweenSpace={7}
+                    />
+                </View>
+            );
+    }
 
 }
 

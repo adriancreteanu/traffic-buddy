@@ -17,7 +17,7 @@ export default class PostsModel {
         // define loadMoreLimit as a consts
         const loadMoreLimit = 5;
 
-        if(this.postsModel.length > loadMoreLimit + 1) {
+        if(this.postsModel.length > loadMoreLimit + 1 || this.postsModel.length < loadMoreLimit) {
             this.postsModel.pop();
         }
 
