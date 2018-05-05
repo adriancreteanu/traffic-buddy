@@ -155,7 +155,7 @@ class HomePage extends Component {
             email: "",
             uid: "",
             lastPostId: "",
-            posts: [], 
+            posts: [],
             postsHaveEnded: false
         };
         this.preferencesRepo = new PreferencesRepo();
@@ -207,25 +207,17 @@ class HomePage extends Component {
     }
 
     async handleLoadMore() {
+        if (!this.state.postsHaveEnded) {
+            await newsFeedActions.fetchMorePosts("Timis", this.state.lastPostId)(this.props.dispatch);
 
-        let x = 2;
+            let newPosts = this.props.fetchPostsReducer.viewModel.postsViewModel.postsModel;
 
-
-        if(!this.state.postsHaveEnded) {
-        await newsFeedActions.fetchMorePosts("Timis", this.state.lastPostId)(this.props.dispatch);
-
-        let newPosts = this.props.fetchPostsReducer.viewModel.postsViewModel.postsModel;
-
-
-        this.setState({
-            postsHaveEnded: newPosts.length < 5 ? true : false,
-            posts: [...this.state.posts, ...newPosts],
-            lastPostId: newPosts[newPosts.length - 1].id
-        });
-
-    }
-
-        let y = 2;
+            this.setState({
+                postsHaveEnded: newPosts.length < 5 ? true : false,
+                posts: [...this.state.posts, ...newPosts],
+                lastPostId: newPosts[newPosts.length - 1].id
+            });
+        }
     }
 
 
@@ -236,12 +228,19 @@ class HomePage extends Component {
         return (
             <View
                 style={{
+                    flex: 1, 
+                    alignItems: 'center',
                     paddingVertical: 20,
                     borderTopWidth: 1,
                     borderColor: "#CED0CE"
                 }}
             >
-                <ActivityIndicator animating size="large" />
+                <LinesLoader
+                    color='rgba(169, 20, 20, 0.9)'
+                    barHeight={60}
+                    barWidth={5}
+                    betweenSpace={5}
+                />
             </View>
         );
     };
@@ -249,11 +248,6 @@ class HomePage extends Component {
 
 
     render() {
-
-
-        let x = 2;
-
-
         return this.state.posts.length != 0 ? (
             <View style={{
                 backgroundColor: "#FFF",
@@ -273,7 +267,7 @@ class HomePage extends Component {
                     keyExtractor={item => item.id}
                     ListFooterComponent={this.renderFooter}
                     onEndReached={this.handleLoadMore.bind(this)}
-                    onEndReachedThreshold={0}
+                    onEndReachedThreshold={1}
                 />
             </View>
         ) : (
