@@ -1,9 +1,9 @@
 //imports
 import React, { Component } from "react";
 import {
-  View, 
+  View,
   Text,
-  TouchableHighlight, 
+  TouchableHighlight,
   Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -11,17 +11,24 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class NavLeftIcon extends Component {
   render() {
     return (
-      <View style={{ marginLeft: 20}}>
+      <View style={{ marginLeft: 5 }}>
         <TouchableHighlight
-        underlayColor={"transparent"}
-        onPress={ this.props.onPress }
+          underlayColor={"transparent"}
+          onPress={this.props.onPress}
         >
-            <Icon 
+          <View style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 40,
+            width: 50,
+            // backgroundColor: '#FA1'
+          }}>
+            <Icon
               name={this.props.icon}
               size={20}
               color="#FFF"
             />
-            
+          </View>
         </TouchableHighlight>
       </View>
     );
@@ -29,13 +36,13 @@ class NavLeftIcon extends Component {
 
   ceFacAcum() {
     Alert.alert(
-          "Warning", 
-          "Not implemented yet",
-          [
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ],
-          { cancelable: false }
-        )
+      "Warning",
+      "Not implemented yet",
+      [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ],
+      { cancelable: false }
+    )
   }
 }
 

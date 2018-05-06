@@ -11,17 +11,24 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 class NavRightIcon extends Component {
   render() {
     return (
-      <View style={{ marginRight: 20}}>
+      <View style={{ marginRight: 5}}>
         <TouchableHighlight
         underlayColor={"transparent"}
         onPress={ this.props.onPress }
         >
+        <View style={{
+          alignItems: 'center', 
+          justifyContent: 'center',
+          height: 40, 
+          width: 50, 
+          // backgroundColor: '#E12'
+        }}>
             <Icon 
               name={this.props.icon}
               size={22}
               color="#FFF"
             />
-            
+        </View>
         </TouchableHighlight>
       </View>
     );
