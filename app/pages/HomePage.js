@@ -156,7 +156,8 @@ class HomePage extends Component {
             uid: "",
             lastPostId: "",
             posts: [],
-            postsHaveEnded: false
+            postsHaveEnded: false,
+            refreshing: false
         };
         this.preferencesRepo = new PreferencesRepo();
     }
@@ -172,14 +173,16 @@ class HomePage extends Component {
     saveInitialPostsToState = () => {
         let postsReducer = this.props.fetchPostsReducer;
         if (postsReducer && postsReducer.viewModel) {
-            posts = postsReducer.viewModel.postsViewModel.postsModel;
+            let posts = postsReducer.viewModel.postsViewModel.postsModel;
 
             if (posts) {
                 this.setState({
                     ...this.state,
                     //posts: [...this.state.posts, ...newPosts], 
-                    posts: [...this.state.posts, ...posts],
-                    lastPostId: posts[posts.length - 1].id
+                    // posts: [...this.state.posts, ...posts],
+                    posts: posts,
+                    lastPostId: posts[posts.length - 1].id,
+                    refreshing: false,
                 })
             }
         }
@@ -206,6 +209,19 @@ class HomePage extends Component {
         });
     }
 
+    async handleRefresh() {
+
+        this.setState({
+            refreshing: true,
+            postsHaveEnded: false,
+            posts: [],
+            lastPostId: ""
+        });
+
+        await newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
+        this.saveInitialPostsToState();
+    }
+
     async handleLoadMore() {
         if (!this.state.postsHaveEnded) {
             await newsFeedActions.fetchMorePosts("Timis", this.state.lastPostId)(this.props.dispatch);
@@ -228,19 +244,14 @@ class HomePage extends Component {
         return (
             <View
                 style={{
-                    flex: 1, 
+                    flex: 1,
                     alignItems: 'center',
                     paddingVertical: 20,
                     borderTopWidth: 1,
                     borderColor: "#CED0CE"
                 }}
             >
-                <LinesLoader
-                    color='rgba(169, 20, 20, 0.9)'
-                    barHeight={60}
-                    barWidth={5}
-                    betweenSpace={5}
-                />
+                <ActivityIndicator animating size="large" />
             </View>
         );
     };
@@ -268,6 +279,8 @@ class HomePage extends Component {
                     ListFooterComponent={this.renderFooter}
                     onEndReached={this.handleLoadMore.bind(this)}
                     onEndReachedThreshold={1}
+                    onRefresh={this.handleRefresh.bind(this)}
+                    refreshing={this.state.refreshing}
                 />
             </View>
         ) : (
