@@ -34,6 +34,7 @@ import { strings } from "../common/localization/strings-repository";
 
 // spinner 
 import { LinesLoader } from 'react-native-indicator';
+import LoginTextInput from "../components/LoginTextInput";
 
 
 class LoginPage extends Component {
@@ -116,10 +117,11 @@ class LoginPage extends Component {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={styles.container}>
 
-            <CustomTextInput
+            <LoginTextInput
+              icon={"car"}
               width={240}
               height={50}
-              style={{ marginTop: 30 }}
+              marginBottom={15}
               borderRadius={5}
               placeholder={strings.username}
               onChangeText={text =>
@@ -133,10 +135,10 @@ class LoginPage extends Component {
               autoCapitalize="characters"
             />
 
-            <CustomTextInput
+            <LoginTextInput
+              icon={"key"}
               width={240}
               height={50}
-              style={{ marginTop: 10 }}
               borderRadius={5}
               placeholder={strings.password}
               onChangeText={text =>
