@@ -15,7 +15,9 @@ class CustomButton extends Component {
             //borderWidth: 1,
             //backgroundColor: "#3d5e2f", old color
             //backgroundColor: "#a94242",
-            backgroundColor: 'rgba(169, 20, 20, 0.9)',
+            //backgroundColor: 'rgba(169, 20, 20, 0.9)',
+            backgroundColor: 'rgba(51,102,136, 0.8)',
+            //backgroundColor: "#368",
             alignItems: "center",
             justifyContent: "center",
             borderRadius: this.props.borderRadius,

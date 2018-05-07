@@ -45,7 +45,7 @@ class NewsFeedItem extends Component {
                             <Icon
                                 name='thumbs-up'
                                 size={25}
-                                color={colors.General.appPrimary}
+                                color={"#368"}
                                 style={{
                                     marginRight: 5,
                                 }}
@@ -53,9 +53,9 @@ class NewsFeedItem extends Component {
                             <Text style={styles.iconCountStyle}>121</Text>
                         </View>
                         <Icon
-                            name='comments'
+                            name='comment'
                             size={25}
-                            color={colors.General.appGradientPrimary}
+                            color={"#368"}
                             style={{
                                 marginRight: 5,
                             }}
@@ -82,11 +82,12 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         borderBottomColor: colors.General.appPrimary,
         borderBottomWidth: StyleSheet.hairlineWidth,
-        flexDirection: "column"
+        flexDirection: "column", 
+        backgroundColor: '#F8F8F8',
     },
     usernameTextStyle: {
         //color: "#000",
-        color: colors.General.appGradientPrimary,
+        color: '#368',
         fontWeight: "bold",
         fontSize: 18,
         textAlign: 'right'
