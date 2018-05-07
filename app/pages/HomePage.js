@@ -257,6 +257,10 @@ class HomePage extends Component {
         );
     };
 
+    onUserPressed = (item) => {
+        alert("User: " + item.username);
+    }
+
 
 
     render() {
@@ -274,14 +278,18 @@ class HomePage extends Component {
                             category={item.category}
                             message={item.message}
                             hour={item.hour}
+                            onUserPress={() => this.onUserPressed(item)}
                         />
+                        
                     )}
+                    
                     keyExtractor={item => item.id}
                     ListFooterComponent={this.renderFooter}
                     onEndReached={this.handleLoadMore.bind(this)}
                     onEndReachedThreshold={1}
                     onRefresh={this.handleRefresh.bind(this)}
                     refreshing={this.state.refreshing}
+                    
                 />
             </View>
         ) : (

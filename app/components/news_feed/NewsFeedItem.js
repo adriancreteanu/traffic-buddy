@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 
 import * as colors from "../../styles/Colors";
@@ -15,7 +16,7 @@ class NewsFeedItem extends Component {
         return (
             <View style={styles.container}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                    
+
                     <View style={styles.hourContainerStyle}>
                         <Text style={styles.hourTextStyle}> {this.props.hour} </Text>
                     </View>
@@ -37,7 +38,7 @@ class NewsFeedItem extends Component {
                     <Text style={styles.messageStyle}>{this.props.message}</Text>
                 </View>
 
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                <View style={{ flex: 1, flexDirection: 'row' }}>
                     <View style={styles.iconsSectionStyle}>
                         <View style={styles.likeIconStyle}>
                             <Icon
@@ -62,10 +63,15 @@ class NewsFeedItem extends Component {
                     </View>
 
 
-                    <View style={styles.userContainerStyle}>
-                        <Text style={styles.usernameTextStyle}>{this.props.username}</Text>
-                        <Text style={styles.defaultTextStyle}>Rank {this.props.rank}</Text>
-                    </View>
+                    <TouchableOpacity
+                        onPress={this.props.onUserPress}
+                        
+                    >
+                        <View style={styles.userContainerStyle}>
+                            <Text style={styles.usernameTextStyle}>{this.props.username}</Text>
+                            <Text style={styles.defaultTextStyle}>Rank {this.props.rank}</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -80,16 +86,16 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         borderBottomColor: colors.General.appPrimary,
         borderBottomWidth: StyleSheet.hairlineWidth,
-        flexDirection: "column", 
+        flexDirection: "column",
         backgroundColor: '#F8F8F8',
 
-        marginBottom: 5, 
+        marginBottom: 5,
         //marginLeft: 10, 
-        
+
 
         borderTopColor: colors.General.appPrimary,
         borderTopWidth: StyleSheet.hairlineWidth,
-        
+
     },
     usernameTextStyle: {
         color: colors.General.appPrimary,
@@ -106,15 +112,15 @@ const styles = StyleSheet.create({
 
     userContainerStyle: {
         alignItems: 'center',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         flexDirection: "column",
         justifyContent: "flex-end",
         paddingVertical: 10,
         paddingHorizontal: 25,
-        marginTop: 15, 
+        marginTop: 15,
         //borderWidth: 1,
         //borderColor: '#368', 
-        borderRadius: 30, 
+        borderRadius: 30,
         backgroundColor: 'rgba(232,232,232, 0.8)'
     },
     hourContainerStyle: {
@@ -141,7 +147,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
     },
     iconsSectionStyle: {
-        flex: 1, 
+        flex: 1,
         flexDirection: "row",
         justifyContent: "flex-start",
         padding: 0,
