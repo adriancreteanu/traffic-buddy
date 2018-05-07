@@ -32,6 +32,7 @@ import SettingsPage from '../pages/SettingsPage';
 import PostPage from '../pages/PostPage';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ProfilePage from '../pages/ProfilePage';
 
 
 let stackNavigationOptions = {
@@ -146,6 +147,9 @@ export const AppNavigator = StackNavigator(
         },
         Post: {
             screen: PostPage,
+        },
+        Profile: {
+            screen: ProfilePage
         },
         Login: {
             screen: LoginNavigator,

@@ -34,6 +34,13 @@ send: "Trimite",
 // Messages page
 messagesPageTitle: "Mesaje",
 
+// Profile page
+rank: "Rang",
+likes: "Aprecieri", 
+dislikes: "Hateri",
+connect: "Conectare",
+sendMessage: "Trimite un mesaj",
+
 // Alerts
 yesAlertOption: "Da", 
 cancelAlertOption: "Anulare", 

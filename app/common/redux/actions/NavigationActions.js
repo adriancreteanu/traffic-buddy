@@ -7,6 +7,7 @@ export const navigationActionTypes = {
     navigateToRegisterPage: "navigateToRegisterPage", 
     navigateToSettingsPage: "navigateToSettingsPage",
     navigateToPostPage: "navigateToPostPage",
+    navigateToProfilePage: "navigateToProfilePage",
 };
 
 export function navigateToLoginPage() {
@@ -42,6 +43,16 @@ export function navigateToHomePage() {
             type: navigationActionTypes.navigateToHomePage
         };
         dispatch(action); 
+    };
+}
+
+export function navigateToProfilePage(user: Any) {
+    return function(dispatch: any) {
+        let action = {
+            type: navigationActionTypes.navigateToProfilePage, 
+            user: user
+        };
+        dispatch(action);
     };
 }
 

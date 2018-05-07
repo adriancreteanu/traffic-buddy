@@ -37,6 +37,7 @@ import NewsFeedItem from '../components/news_feed/NewsFeedItem';
 
 // spinner
 import { LinesLoader } from 'react-native-indicator';
+import PostModel from '../common/data/models/PostModel';
 
 
 const mockNewsFeedItems = [
@@ -261,7 +262,9 @@ class HomePage extends Component {
         alert("User: " + item.username);
     }
 
-
+    navigateToProfilePage(post: PostModel) {
+        navActions.navigateToProfilePage(post)(this.props.dispatch);
+    }
 
     render() {
         return this.state.posts.length != 0 ? (
@@ -278,7 +281,7 @@ class HomePage extends Component {
                             category={item.category}
                             message={item.message}
                             hour={item.hour}
-                            onUserPress={() => this.onUserPressed(item)}
+                            onUserPress={() => this.navigateToProfilePage(item)}
                         />
                         
                     )}

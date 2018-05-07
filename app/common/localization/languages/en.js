@@ -34,6 +34,13 @@ send: "Send",
 // Messages page
 messagesPageTitle: "Messages",
 
+// Profile page
+rank: "Rank",
+likes: "Likes", 
+dislikes: "Dislikes",
+connect: "Connect",
+sendMessage: "Send a message",
+
 // Alerts
 yesAlertOption: "Yes", 
 cancelAlertOption: "Cancel", 

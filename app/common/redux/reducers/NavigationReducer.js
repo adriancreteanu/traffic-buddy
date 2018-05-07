@@ -87,6 +87,18 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
             );
             break;
 
+        case navigationActionTypes.navigateToProfilePage:
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({
+                    routeName: "Profile", 
+                    params: {
+                        user: action.user
+                    }
+                }), 
+                state
+            );
+            break;
+
         default:
             break;
     }
