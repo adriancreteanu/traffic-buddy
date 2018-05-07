@@ -15,9 +15,7 @@ class NewsFeedItem extends Component {
         return (
             <View style={styles.container}>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <View style={styles.userContainerStyle}>
-
-                    </View>
+                    
                     <View style={styles.hourContainerStyle}>
                         <Text style={styles.hourTextStyle}> {this.props.hour} </Text>
                     </View>
@@ -77,7 +75,7 @@ class NewsFeedItem extends Component {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 10,
-        paddingBottom: 10,
+        paddingBottom: 20,
         paddingLeft: 20,
         paddingRight: 20,
         borderBottomColor: colors.General.appPrimary,
@@ -86,11 +84,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#F8F8F8',
     },
     usernameTextStyle: {
-        //color: "#000",
-        color: '#368',
+        color: colors.General.appPrimary,
         fontWeight: "bold",
         fontSize: 18,
-        textAlign: 'right'
+        //textAlign: 'right', 
+        width: 80
     },
     defaultTextStyle: {
         color: "#666",
@@ -99,12 +97,17 @@ const styles = StyleSheet.create({
     },
 
     userContainerStyle: {
-        flex: 1, 
+        alignItems: 'center',
+        justifyContent: 'center', 
         flexDirection: "column",
         justifyContent: "flex-end",
-        padding: 0,
-        paddingLeft: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         marginTop: 15, 
+        borderWidth: 3,
+        borderColor: '#368', 
+        borderRadius: 100, 
+        backgroundColor: 'rgba(232,232,232, 0.8)'
     },
     hourContainerStyle: {
         flex: 1,
@@ -135,7 +138,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         padding: 0,
         paddingLeft: 10,
-        marginTop: 30
+        marginTop: 50
     },
     iconCountStyle: {
         paddingTop: 8,
