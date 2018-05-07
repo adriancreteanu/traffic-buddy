@@ -31,6 +31,9 @@ category: "Categorie",
 message: "Mesaj",
 send: "Trimite", 
 
+// Messages page
+messagesPageTitle: "Mesaje",
+
 // Alerts
 yesAlertOption: "Da", 
 cancelAlertOption: "Anulare", 

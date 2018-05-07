@@ -11,6 +11,9 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 
+import LinearGradient from 'react-native-linear-gradient';
+import * as colors from "../styles/Colors";
+
 //custom components
 import CustomTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
@@ -32,14 +35,15 @@ import { strings } from "../common/localization/strings-repository";
 // spinner 
 import { LinesLoader } from 'react-native-indicator';
 
+
 class LoginPage extends Component {
   static navigationOptions = {
-    //header: null
-    headerStyle: {
-      //backgroundColor: '#c6bf69',
-      backgroundColor: 'transparent',
-      borderBottomColor: 'transparent',
-    },
+    header: null
+    // headerStyle: {
+    //   //backgroundColor: '#c6bf69',
+    //   backgroundColor: 'transparent',
+    //   borderBottomColor: 'transparent',
+    // },
   };
 
 
@@ -82,7 +86,7 @@ class LoginPage extends Component {
       )
     } else {
       let payload: authPayloads.loginCredentialsPayloadType = {
-        username: this.state.username, 
+        username: this.state.username,
         email: "", // empty because we don't have user's email initially
         password: this.state.password
       };
@@ -103,9 +107,15 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <View style={{ flex: 1 }}>
-          <ImageBackground source={require('../assets/images/login_background.png')} style={styles.container} >
+      <LinearGradient
+        start={{ x: 0.0, y: 1.0 }}
+        end={{ x: 1.0, y: 0.1 }}
+        colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
+        style={{ flex: 1 }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.container}>
+
             <CustomTextInput
               width={240}
               height={50}
@@ -180,9 +190,10 @@ class LoginPage extends Component {
               <Text style={styles.registerText}>{strings.registerHere}</Text>
             </TouchableHighlight>
 
-          </ImageBackground>
-        </View>
-      </TouchableWithoutFeedback>
+
+          </View>
+        </TouchableWithoutFeedback>
+      </LinearGradient>
     );
   }
 }

@@ -8,6 +8,9 @@ import {
     Alert
 } from 'react-native';
 
+import LinearGradient from 'react-native-linear-gradient';
+import * as colors from "../styles/Colors";
+
 import CustomTextInput from '../components/CustomTextInput';
 import CustomButton from '../components/CustomButton';
 
@@ -24,20 +27,23 @@ import { LinesLoader } from 'react-native-indicator';
 
 // strings
 import { strings } from "../common/localization/strings-repository";
+import NavTitleUI from '../components/navigation/NavTitleUI';
+import NavRightIcon from '../components/navigation/NavRightIcon';
 
 class RegisterPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        title: strings.registerPageTitle,
+        headerTitle: <NavTitleUI title={strings.registerPageTitle} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => {
                 navigation.goBack();
             }}
         />,
+        headerRight: <NavRightIcon />,
         //headerStyle: { backgroundColor: '#a94242', borderWidth: 1, borderBottomColor: 'white' },
         headerStyle: {
-            backgroundColor: '#c6bf69',
+            backgroundColor: '#FA1',
             borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },
@@ -94,6 +100,12 @@ class RegisterPage extends Component {
 
     render() {
         return (
+            <LinearGradient
+        start={{ x: 0.0, y: 1.0 }}
+        end={{ x: 1.0, y: 0.1 }}
+        colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
+        style={{ flex: 1 }}
+      >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.container}>
                     <CustomTextInput
@@ -224,6 +236,7 @@ class RegisterPage extends Component {
                         )}
                 </View>
             </TouchableWithoutFeedback>
+            </LinearGradient>
         );
     }
 }
@@ -233,7 +246,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "#c6bf69"
+        
     }
 });
 

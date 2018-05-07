@@ -5,6 +5,8 @@ import {
     StyleSheet
 } from 'react-native';
 
+import * as colors from "../../styles/Colors";
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class NewsFeedItem extends Component {
@@ -42,8 +44,8 @@ class NewsFeedItem extends Component {
                         <View style={styles.likeIconStyle}>
                             <Icon
                                 name='thumbs-up'
-                                size={20}
-                                color="#000"
+                                size={25}
+                                color={colors.General.appPrimary}
                                 style={{
                                     marginRight: 5,
                                 }}
@@ -52,8 +54,8 @@ class NewsFeedItem extends Component {
                         </View>
                         <Icon
                             name='comments'
-                            size={20}
-                            color="#000"
+                            size={25}
+                            color={colors.General.appGradientPrimary}
                             style={{
                                 marginRight: 5,
                             }}
@@ -78,12 +80,13 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         paddingLeft: 20,
         paddingRight: 20,
-        borderBottomColor: "#222",
+        borderBottomColor: colors.General.appPrimary,
         borderBottomWidth: StyleSheet.hairlineWidth,
         flexDirection: "column"
     },
     usernameTextStyle: {
-        color: "#000",
+        //color: "#000",
+        color: colors.General.appGradientPrimary,
         fontWeight: "bold",
         fontSize: 18,
         textAlign: 'right'
@@ -134,8 +137,8 @@ const styles = StyleSheet.create({
         marginTop: 30
     },
     iconCountStyle: {
-        paddingTop: 5,
-        fontSize: 12,
+        paddingTop: 8,
+        fontSize: 14,
     },
     likeIconStyle: {
         marginRight: 40,

@@ -135,7 +135,8 @@ class HomePage extends Component {
                 }}
             />,
         headerStyle: {
-            backgroundColor: '#c6bf69',
+            //backgroundColor: '#c6bf69',
+            backgroundColor: "#FA1",
             borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },
@@ -286,9 +287,10 @@ class HomePage extends Component {
         ) : (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <LinesLoader
-                        color='rgba(169, 20, 20, 0.9)'
-                        barHeight={80}
-                        barWidth={8}
+                        //color='rgba(169, 20, 20, 0.9)'
+                        color='#FA1'
+                        barHeight={65}
+                        barWidth={6}
                         betweenSpace={7}
                     />
                 </View>

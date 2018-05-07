@@ -5,6 +5,8 @@ import {
     Platform
 } from 'react-native';
 
+import * as colors from "../styles/Colors";
+
 //Navigation
 import {
     StackNavigator,
@@ -86,7 +88,8 @@ const tabBarOptionsAndroid = {
     style: {
         //backgroundColor: "#a94242"
         //backgroundColor: 'rgba(169, 20, 20, 0.9)',
-        backgroundColor: 'rgba(221,211,122, 0.8)'
+        //backgroundColor: 'rgba(221,211,122, 0.8)'
+        backgroundColor: colors.General.appGradientPrimary
     }
 }
 
@@ -98,7 +101,7 @@ export const MainNavigator = TabNavigator({
             tabBarIcon: <Icon
                 name='car'
                 size={20}
-                color="#c6bf69"
+                color="#FA1"
             />
         }
     }, 
@@ -109,7 +112,7 @@ export const MainNavigator = TabNavigator({
             tabBarIcon: <Icon
                 name='envelope'
                 size={20}
-                color="#c6bf69"
+                color="#FA1"
             />
         }
     }

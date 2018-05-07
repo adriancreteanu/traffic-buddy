@@ -3,6 +3,7 @@ package com.trafficbuddy;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new LinearGradientPackage(),
             new ReactNativeLocalizationPackage(),
             new SplashScreenReactPackage(),
             new VectorIconsPackage()

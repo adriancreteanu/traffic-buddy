@@ -15,10 +15,12 @@ import NavLeftAddIcon from '../components/navigation/NavLeftAddIcon';
 
 import * as navActions from "../common/redux/actions/NavigationActions";
 
+import { strings } from "../common/localization/strings-repository";
+
 class MessagesPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: <NavTitleUI title="Messages" />,
+        headerTitle: <NavTitleUI title={strings.messagesPageTitle} />,
         headerLeft:
             <View style={{
                 flex: 1,
@@ -41,7 +43,7 @@ class MessagesPage extends Component {
                 }}
             />,
         headerStyle: {
-            backgroundColor: '#c6bf69',
+            backgroundColor: '#FA1',
             borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },

@@ -7,7 +7,12 @@ import {
     ImageBackground
 } from 'react-native';
 
+import LinearGradient from 'react-native-linear-gradient';
+import * as colors from "../styles/Colors";
+
 import CustomButton from "../components/CustomButton";
+
+
 
 // strings
 import { strings } from "../common/localization/strings-repository";
@@ -16,20 +21,23 @@ import { strings } from "../common/localization/strings-repository";
 import { connect } from 'react-redux';
 import * as authActions from "../common/redux/actions/AuthenticationActions";
 import NavLeftIcon from '../components/navigation/NavLeftIcon';
+import NavRightIcon from '../components/navigation/NavRightIcon';
+import NavTitleUI from '../components/navigation/NavTitleUI';
 
 class SettingsPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
 
-        title: strings.settingsPageTitle,
+        headerTitle: <NavTitleUI title={strings.settingsPageTitle} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => {
                 navigation.goBack();
             }}
         />,
+        headerRight: <NavRightIcon />, 
         headerStyle: {
-            backgroundColor: '#c6bf69',
+            backgroundColor: '#FA1',
             borderBottomColor: 'transparent',
             borderBottomWidth: 1
         },
@@ -69,8 +77,15 @@ class SettingsPage extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                <ImageBackground source={require('../assets/images/post_background.png')} style={styles.container} >
+
+            <LinearGradient
+                start={{ x: 0.0, y: 1.0 }}
+                end={{ x: 1.0, y: 0.1 }}
+                colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
+                style={{flex: 1}}
+            >
+                <View style={styles.container}>
+
                     <CustomButton
                         width={300}
                         height={50}
@@ -82,8 +97,9 @@ class SettingsPage extends Component {
                         }}
                     //flexDirection={"row"}
                     />
-                </ImageBackground>
-            </View>
+
+                </View>
+            </LinearGradient>
         )
     }
 

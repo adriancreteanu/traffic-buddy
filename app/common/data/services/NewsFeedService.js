@@ -47,7 +47,7 @@ export default class NewsFeedService extends SuperService {
             .database()
             .ref("feed")
             .child(location)
-            .limitToLast(5)
+            .limitToLast(6)
             .once("value")
             .then(snapshot => {
                 response = new PostsModel(snapshot.val());
@@ -72,7 +72,7 @@ export default class NewsFeedService extends SuperService {
             .ref("feed")
             .child(location)
             .endAt(null, lastPostId)
-            .limitToLast(7)
+            .limitToLast(6)
             .once("value")
             .then(snapshot => {
                 response = new PostsModel(snapshot.val());

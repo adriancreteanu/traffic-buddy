@@ -31,11 +31,15 @@ category: "Category",
 message: "Message",
 send: "Send",
 
+// Messages page
+messagesPageTitle: "Messages",
+
 // Alerts
 yesAlertOption: "Yes", 
 cancelAlertOption: "Cancel", 
 confirmSignOut: "Confirm", 
 areYouSureSignOut: "Are you sure you want to sign out?", 
+
 
 // Months
 january: "Jan", 
