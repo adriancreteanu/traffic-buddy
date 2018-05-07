@@ -80,7 +80,7 @@ const tabBarOptionsIOS = {
 const tabBarOptionsAndroid = {
 
     labelStyle: {
-        fontSize: 14
+        fontSize: 16
     },
     indicatorStyle: {
         backgroundColor: "#FFF"
@@ -90,7 +90,7 @@ const tabBarOptionsAndroid = {
         //backgroundColor: 'rgba(169, 20, 20, 0.9)',
         //backgroundColor: 'rgba(221,211,122, 0.8)'
         //backgroundColor: colors.General.appGradientPrimary
-        backgroundColor: 'rgba(51,102,136, 0.6)',
+        backgroundColor: 'rgba(51,102,136, 0.5)',
     }
 }
 

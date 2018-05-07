@@ -82,6 +82,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         flexDirection: "column", 
         backgroundColor: '#F8F8F8',
+
+        marginBottom: 5, 
+        //marginLeft: 10, 
+        
+
+        borderTopColor: colors.General.appPrimary,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        
     },
     usernameTextStyle: {
         color: colors.General.appPrimary,
@@ -102,11 +110,11 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-end",
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 25,
         marginTop: 15, 
-        borderWidth: 3,
-        borderColor: '#368', 
-        borderRadius: 100, 
+        //borderWidth: 1,
+        //borderColor: '#368', 
+        borderRadius: 30, 
         backgroundColor: 'rgba(232,232,232, 0.8)'
     },
     hourContainerStyle: {
