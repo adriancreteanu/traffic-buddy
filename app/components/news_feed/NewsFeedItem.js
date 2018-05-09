@@ -44,7 +44,7 @@ class NewsFeedItem extends Component {
                             <Icon
                                 name='thumbs-up'
                                 size={25}
-                                color={"#368"}
+                                color={colors.General.appGradientPrimary}
                                 style={{
                                     marginRight: 5,
                                 }}
@@ -52,9 +52,9 @@ class NewsFeedItem extends Component {
                             <Text style={styles.iconCountStyle}>121</Text>
                         </View>
                         <Icon
-                            name='comment'
+                            name='comments'
                             size={25}
-                            color={"#368"}
+                            color={colors.General.appGradientPrimary}
                             style={{
                                 marginRight: 5,
                             }}
@@ -81,21 +81,14 @@ class NewsFeedItem extends Component {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 10,
-        paddingBottom: 20,
+        paddingBottom: 10,
         paddingLeft: 20,
         paddingRight: 20,
         borderBottomColor: colors.General.appPrimary,
         borderBottomWidth: StyleSheet.hairlineWidth,
         flexDirection: "column",
-        backgroundColor: '#F8F8F8',
-
-        marginBottom: 5,
-        //marginLeft: 10, 
-
-
+        backgroundColor: "#f8f8f8",
         borderTopColor: colors.General.appPrimary,
-        borderTopWidth: StyleSheet.hairlineWidth,
-
     },
     usernameTextStyle: {
         color: colors.General.appPrimary,
@@ -115,14 +108,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: "column",
         justifyContent: "flex-end",
-        paddingVertical: 5,
-        paddingHorizontal: 25,
+        paddingVertical: 10,
+        paddingLeft: 25, 
+        paddingRight: 40,
         marginTop: 15,
-        borderWidth: 1,
-        borderColor: colors.General.appPrimary, 
-        borderRadius: 30,
-       // backgroundColor: 'rgba(232,232,232, 0.8)'
-       backgroundColor: colors.General.whiteColor
+        marginRight: -40,
+        borderBottomLeftRadius: 40, 
+        borderTopLeftRadius: 40,
+        backgroundColor: colors.General.whiteColor
     },
     hourContainerStyle: {
         flex: 1,
@@ -153,7 +146,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         padding: 0,
         paddingLeft: 10,
-        marginTop: 50
+        marginTop: 35
     },
     iconCountStyle: {
         paddingTop: 8,
