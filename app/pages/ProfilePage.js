@@ -48,47 +48,53 @@ class ProfilePage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.textStyle}>{strings.rank}: 15</Text>
-                <Text style={styles.textStyle}>{strings.likes}: 66</Text>
-                <Text style={styles.textStyle}>{strings.dislikes}: 89</Text>
 
-                <View style={styles.iconsSection}>
-                    <Icon
-                        name={"thumbs-up"}
-                        size={50}
-                        color={colors.General.appSecondary}
-                    />
-
-                    <Icon
-                        name={"thumbs-down"}
-                        size={50}
-                        color={colors.General.appPrimary}
-                    />
+                <View style={styles.topContainer}>
+                    <Text style={styles.textStyle}>{strings.rank}: 15</Text>
+                    <Text style={styles.textStyle}>{strings.likes}: 66</Text>
+                    <Text style={styles.textStyle}>{strings.dislikes}: 89</Text>
                 </View>
 
-                <CustomButton
-                    width={240}
-                    height={45}
-                    buttonTitle={strings.connect.toUpperCase()}
-                    style={{ marginTop: 30 }}
-                    borderRadius={5}
-                    onPress={() => {
+                <View style={styles.bottomContainer}>
+                    <View style={styles.iconsSection}>
+                        <Icon
+                            name={"thumbs-up"}
+                            size={50}
+                            color={colors.General.appPrimary}
+                        />
 
-                    }}
-                />
+                        <Icon
+                            name={"thumbs-down"}
+                            size={50}
+                            color={colors.General.appSecondary}
+                        />
+                    </View>
 
-                <CustomButton
-                    width={240}
-                    height={45}
-                    buttonTitle={strings.sendMessage.toUpperCase()}
-                    style={{ marginTop: 30 }}
-                    borderRadius={5}
-                    onPress={() => {
+                    <CustomButton
+                        width={240}
+                        height={45}
+                        buttonTitle={strings.connect.toUpperCase()}
+                        style={{ marginTop: 30 }}
+                        borderRadius={5}
+                        onPress={() => {
 
-                    }}
-                />
+                        }}
+                    />
 
-              
+                    <CustomButton
+                        width={240}
+                        height={45}
+                        buttonTitle={strings.sendMessage.toUpperCase()}
+                        style={{ marginTop: 30 }}
+                        borderRadius={5}
+                        onPress={() => {
+
+                        }}
+                    />
+
+                </View>
+
+
 
             </View>
         );
@@ -98,21 +104,33 @@ class ProfilePage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        paddingTop: 50,
         backgroundColor: '#F8F8F8',
         paddingHorizontal: 20
     },
+    topContainer: {
+        marginTop: 20,
+        marginBottom: 15, 
+        padding: 30,
+        alignItems: 'center', 
+        backgroundColor: colors.General.whiteColor,
+    },
+    bottomContainer: {
+        padding: 30,
+        alignItems: 'center',
+        backgroundColor: colors.General.whiteColor,
+    },
+    buttonsSection: {
+        alignItems: 'center'
+    },
     textStyle: {
         color: "#333",
-        fontSize: 18,
+        fontSize: 20,
         marginBottom: 20,
     },
     iconsSection: {
         flexDirection: 'row',
         alignSelf: 'stretch',
         justifyContent: 'space-around',
-        marginTop: 40, 
         marginBottom: 20
     }
 });
