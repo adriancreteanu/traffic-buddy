@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    StyleSheet, 
-    ScrollView
+    StyleSheet,
+    ScrollView,
+    TouchableHighlight
 } from 'react-native';
 
 import NavTitleUI from '../components/navigation/NavTitleUI';
@@ -46,6 +47,15 @@ class ProfilePage extends Component {
         headerTintColor: '#FFF'
     });
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            likeIconClicked: false, 
+            dislikeIconClicked: false
+        };
+    }
+
     render() {
         return (
             <ScrollView style={styles.container}>
@@ -72,17 +82,50 @@ class ProfilePage extends Component {
 
                 <View style={styles.bottomContainer}>
                     <View style={styles.iconsSection}>
-                        <Icon
-                            name={"thumbs-up"}
-                            size={50}
-                            color={colors.General.appPrimary}
-                        />
+                        <TouchableHighlight
+                            onShowUnderlay={() => this.setState({
+                                likeIconClicked: true
+                            })}
+                            onHideUnderlay={() => this.setState({
+                                likeIconClicked: false
+                            })}
+                            onPress={() => console.log("Icon pressed")}
+                            underlayColor="transparent"
+                        >
 
-                        <Icon
-                            name={"thumbs-down"}
-                            size={50}
-                            color={colors.General.appSecondary}
-                        />
+                            <Icon
+                                name={"thumbs-up"}
+                                size={50}
+                                color={
+                                    !this.state.likeIconClicked ?
+                                        colors.General.appSecondary :
+                                        colors.General.blueColor
+                                }
+                            />
+                        </TouchableHighlight>
+
+                        <TouchableHighlight
+                            onShowUnderlay={() => this.setState({
+                                dislikeIconClicked: true
+                            })}
+                            onHideUnderlay={() => this.setState({
+                                dislikeIconClicked: false
+                            })}
+                            onPress={() => console.log("Icon pressed")}
+                            underlayColor="transparent"
+                        >
+
+                            <Icon
+                                name={"thumbs-down"}
+                                size={50}
+                                color={
+                                    !this.state.dislikeIconClicked ?
+                                        colors.General.appSecondary :
+                                        colors.General.redColor
+                                }
+                            />
+                        </TouchableHighlight>
+
                     </View>
 
                     <CustomButton
@@ -98,7 +141,6 @@ class ProfilePage extends Component {
                         }}
                     />
 
-                    
                     <CustomButton
                         width={240}
                         height={45}
@@ -139,9 +181,9 @@ const styles = StyleSheet.create({
         backgroundColor: colors.General.whiteColor,
     },
     statisticsSection: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         //justifyContent: 'space-around',
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignSelf: 'stretch',
     },
     textsSection: {
@@ -163,7 +205,7 @@ const styles = StyleSheet.create({
         color: colors.General.appPrimary,
         fontSize: 20,
         marginBottom: 20,
-        textAlign: 'left', 
+        textAlign: 'left',
         fontWeight: 'bold',
     },
     iconsSection: {
