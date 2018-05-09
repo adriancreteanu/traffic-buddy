@@ -115,13 +115,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: "column",
         justifyContent: "flex-end",
-        paddingVertical: 10,
+        paddingVertical: 5,
         paddingHorizontal: 25,
         marginTop: 15,
-        //borderWidth: 1,
-        //borderColor: '#368', 
+        borderWidth: 1,
+        borderColor: colors.General.appPrimary, 
         borderRadius: 30,
-        backgroundColor: 'rgba(232,232,232, 0.8)'
+       // backgroundColor: 'rgba(232,232,232, 0.8)'
+       backgroundColor: colors.General.whiteColor
     },
     hourContainerStyle: {
         flex: 1,

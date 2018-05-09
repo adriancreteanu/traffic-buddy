@@ -35,7 +35,7 @@ class SettingsPage extends Component {
                 navigation.goBack();
             }}
         />,
-        headerRight: <NavRightIcon />, 
+        headerRight: <NavRightIcon />,
         headerStyle: {
             backgroundColor: '#FA1',
             borderBottomColor: 'transparent',
@@ -82,13 +82,15 @@ class SettingsPage extends Component {
                 start={{ x: 0.0, y: 1.0 }}
                 end={{ x: 1.0, y: 0.1 }}
                 colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
-                style={{flex: 1}}
+                style={{ flex: 1 }}
             >
                 <View style={styles.container}>
 
                     <CustomButton
                         width={300}
                         height={50}
+                        buttonColor={colors.General.appSecondary}
+                        pressedColor={colors.General.appSecondary}
                         buttonTitle={strings.logOut}
                         style={{ marginTop: 30, marginBottom: 40 }}
                         //borderRadius={5}

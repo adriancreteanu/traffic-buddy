@@ -116,26 +116,26 @@ class LoginPage extends Component {
         style={{ flex: 1 }}
       >
 
-      <View style={{
-        marginTop: 70, 
-        marginBottom: 30,
-        width: undefined, 
-        height: '25%', 
-        //backgroundColor: colors.General.redColor
-        
-      }}>
-        <Image
-          source={require('../assets/images/login_icon.png')}
-          style={{ 
-            
-            alignSelf: 'center',  
-            width: '100%', 
-            height: '100%', 
-            //backgroundColor: colors.General.blueColor
-          }}
-          resizeMode="contain" />
+        <View style={{
+          marginTop: 70,
+          marginBottom: 30,
+          width: undefined,
+          height: '25%',
+          //backgroundColor: colors.General.redColor
 
-          </View>
+        }}>
+          <Image
+            source={require('../assets/images/login_icon.png')}
+            style={{
+
+              alignSelf: 'center',
+              width: '100%',
+              height: '100%',
+              //backgroundColor: colors.General.blueColor
+            }}
+            resizeMode="contain" />
+
+        </View>
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <View style={styles.container}>
@@ -178,6 +178,8 @@ class LoginPage extends Component {
             <CustomButton
               width={240}
               height={45}
+              buttonColor={colors.General.appSecondary}
+              pressedColor={colors.General.appSecondary}
               buttonTitle={strings.loginButton.toUpperCase()}
               style={{ marginTop: 30 }}
               borderRadius={5}
@@ -228,7 +230,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: 'center',
-    
+
     //backgroundColor: "#a94242" //initial red color
     //backgroundColor: "#4F6D7A"
     //backgroundColor: "#c6bf69"

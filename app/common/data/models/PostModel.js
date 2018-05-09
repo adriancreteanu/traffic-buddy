@@ -1,3 +1,5 @@
+import DateHelper from "../../helpers/DateHelper";
+
 export default class PostModel {
 
     id: string;
@@ -6,7 +8,7 @@ export default class PostModel {
     location: string;
     category: string;
     message: string;
-    date: Date; 
+    date: Date;
     hour: String;
 
     constructor(firebaseObject, key) {
@@ -16,8 +18,10 @@ export default class PostModel {
         this.rank = postDetails.rank;
         this.category = postDetails.category;
         this.message = postDetails.message;
+        
         /* Date saved in Firebase is a timestamp, so now we are converting it back to date. */
-        this.date = new Date(postDetails.date);
-        this.hour = this.date.getHours() + ":" + this.date.getMinutes();
+        let date = new Date(postDetails.date);
+        this.date = DateHelper.formatDate(date);
+        this.hour = DateHelper.formatTime(date);        
     }
 }

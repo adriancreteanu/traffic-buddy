@@ -100,117 +100,119 @@ class PostPage extends Component {
                 style={styles.container}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                    <View style={ styles.container }>
-                        
-                            <CustomTextInput
-                                width={300}
-                                height={50}
-                                style={{ marginTop: 30 }}
-                                borderRadius={5}
-                                placeholder={strings.location}
-                                onChangeText={text =>
-                                    this.setState({
-                                        ...this.state,
-                                        location: text
-                                    })
-                                }
-                                value={this.state.location}
-                                maxLength={20}
-                            />
+                    <View style={styles.container}>
 
-                            <CustomTextInput
-                                width={300}
-                                height={50}
-                                style={{ marginTop: 30 }}
-                                borderRadius={5}
-                                placeholder={strings.category}
-                                onChangeText={text =>
-                                    this.setState({
-                                        ...this.state,
-                                        category: text
-                                    })
-                                }
-                                value={this.state.category}
-                                maxLength={20}
-                            />
+                        <CustomTextInput
+                            width={300}
+                            height={50}
+                            style={{ marginTop: 30 }}
+                            borderRadius={5}
+                            placeholder={strings.location}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    location: text
+                                })
+                            }
+                            value={this.state.location}
+                            maxLength={20}
+                        />
 
-                            <CustomBigTextInput
-                                width={300}
-                                height={200}
-                                style={{ marginTop: 30 }}
-                                borderRadius={5}
-                                placeholder={strings.message}
-                                onChangeText={text =>
-                                    this.setState({
-                                        ...this.state,
-                                        message: text
-                                    })
-                                }
-                                value={this.state.message}
-                                maxLength={400}
-                            />
+                        <CustomTextInput
+                            width={300}
+                            height={50}
+                            style={{ marginTop: 30 }}
+                            borderRadius={5}
+                            placeholder={strings.category}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    category: text
+                                })
+                            }
+                            value={this.state.category}
+                            maxLength={20}
+                        />
 
-                            <CustomButton
-                                width={300}
-                                height={45}
-                                buttonTitle={strings.send.toUpperCase()}
-                                style={{ marginTop: 30 }}
-                                borderRadius={5}
-                                onPress={() => {
-                                    Keyboard.dismiss()
-                                    this.validatePostDetails()
-                                }}
-                            />
+                        <CustomBigTextInput
+                            width={300}
+                            height={200}
+                            style={{ marginTop: 30 }}
+                            borderRadius={5}
+                            placeholder={strings.message}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    message: text
+                                })
+                            }
+                            value={this.state.message}
+                            maxLength={400}
+                        />
 
-                            {typeof this.props.postReducer !== 'undefined' && this.props.postReducer != null && this.props.postReducer.isInProgress ? (
-                                <View style={{
-                                    marginTop: 40,
-                                    marginBottom: -50,
-                                    backgroundColor: 'transparent',
-                                }}>
-                                    <LinesLoader
-                                        color='rgba(169, 20, 20, 0.9)'
-                                        barHeight={60}
-                                        barWidth={5}
-                                        betweenSpace={5}
-                                    />
-                                </View>
-                            ) : (
-                                    <View style={{ height: 50, backgroundColor: "transparent" }} />
-                                )}
-                        
+                        <CustomButton
+                            width={300}
+                            height={45}
+                            buttonColor={colors.General.appSecondary}
+                            pressedColor={colors.General.appSecondary}
+                            buttonTitle={strings.send.toUpperCase()}
+                            style={{ marginTop: 30 }}
+                            borderRadius={5}
+                            onPress={() => {
+                                Keyboard.dismiss()
+                                this.validatePostDetails()
+                            }}
+                        />
+
+                        {typeof this.props.postReducer !== 'undefined' && this.props.postReducer != null && this.props.postReducer.isInProgress ? (
+                            <View style={{
+                                marginTop: 40,
+                                marginBottom: -50,
+                                backgroundColor: 'transparent',
+                            }}>
+                                <LinesLoader
+                                    color='rgba(169, 20, 20, 0.9)'
+                                    barHeight={60}
+                                    barWidth={5}
+                                    betweenSpace={5}
+                                />
+                            </View>
+                        ) : (
+                                <View style={{ height: 50, backgroundColor: "transparent" }} />
+                            )}
+
                     </View>
                 </TouchableWithoutFeedback>
-                </LinearGradient>
-                )
-            }
-        }
-        
+            </LinearGradient>
+        )
+    }
+}
+
 const styles = StyleSheet.create({
-                    container: {
-                    flex: 1,
-                alignItems: 'center',
-                paddingHorizontal: 20
-            },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        paddingHorizontal: 20
+    },
     header: {
-                    borderBottomWidth: 1,
-                borderBottomColor: 'transparent',
-                marginRight: "40%",
-                marginTop: 20,
-                marginBottom: 10,
-            },
+        borderBottomWidth: 1,
+        borderBottomColor: 'transparent',
+        marginRight: "40%",
+        marginTop: 20,
+        marginBottom: 10,
+    },
     headerText: {
-                    marginTop: 10,
-                fontSize: 18,
-                color: "#555",
-                marginBottom: 5,
-            },
-        });
-        
+        marginTop: 10,
+        fontSize: 18,
+        color: "#555",
+        marginBottom: 5,
+    },
+});
+
 function mapStateToProps(state) {
     return {
-                    postReducer: state.postReducer
-            };
-        }
-        
+        postReducer: state.postReducer
+    };
+}
+
 export default connect(mapStateToProps)(PostPage);

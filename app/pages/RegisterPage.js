@@ -101,141 +101,144 @@ class RegisterPage extends Component {
     render() {
         return (
             <LinearGradient
-        start={{ x: 0.0, y: 1.0 }}
-        end={{ x: 1.0, y: 0.1 }}
-        colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
-        style={{ flex: 1 }}
-      >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                <View style={styles.container}>
-                    <CustomTextInput
-                        width={270}
-                        height={50}
-                        style={{ marginTop: 20 }}
-                        placeholder={strings.plateNumber}
-                        onChangeText={text =>
-                            this.setState({
-                                ...this.state,
-                                plateNumber: text
-                            })
-                        }
-                        value={this.state.plateNumber}
-                        autoCapitalize="characters"
-                        maxLength={7}
-                        borderRadius={5}
-                    />
+                start={{ x: 0.0, y: 1.0 }}
+                end={{ x: 1.0, y: 0.1 }}
+                colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
+                style={{ flex: 1 }}
+            >
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                    <View style={styles.container}>
+                        <CustomTextInput
+                            width={270}
+                            height={50}
+                            style={{ marginTop: 20 }}
+                            placeholder={strings.plateNumber}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    plateNumber: text
+                                })
+                            }
+                            value={this.state.plateNumber}
+                            autoCapitalize="characters"
+                            maxLength={7}
+                            borderRadius={5}
+                        />
 
-                    <CustomTextInput
-                        width={270}
-                        height={50}
-                        style={{ marginTop: 10 }}
-                        placeholder={strings.firstName}
-                        onChangeText={text =>
-                            this.setState({
-                                ...this.state,
-                                firstName: text
-                            })
-                        }
-                        value={this.state.firstName}
+                        <CustomTextInput
+                            width={270}
+                            height={50}
+                            style={{ marginTop: 10 }}
+                            placeholder={strings.firstName}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    firstName: text
+                                })
+                            }
+                            value={this.state.firstName}
+                            //autoCapitalize="characters"
+                            borderRadius={5}
+                        />
+
+                        <CustomTextInput
+                            width={270}
+                            height={50}
+                            style={{ marginTop: 10 }}
+                            placeholder={strings.lastName}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    lastName: text
+                                })
+                            }
+                            value={this.state.lastName}
+                            borderRadius={5}
                         //autoCapitalize="characters"
-                        borderRadius={5}
-                    />
+                        />
 
-                    <CustomTextInput
-                        width={270}
-                        height={50}
-                        style={{ marginTop: 10 }}
-                        placeholder={strings.lastName}
-                        onChangeText={text =>
-                            this.setState({
-                                ...this.state,
-                                lastName: text
-                            })
-                        }
-                        value={this.state.lastName}
-                        borderRadius={5}
-                    //autoCapitalize="characters"
-                    />
+                        <CustomTextInput
+                            width={270}
+                            height={50}
+                            style={{ marginTop: 10 }}
+                            placeholder={strings.email}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    email: text
+                                })
+                            }
+                            value={this.state.email}
+                            borderRadius={5}
+                        />
 
-                    <CustomTextInput
-                        width={270}
-                        height={50}
-                        style={{ marginTop: 10 }}
-                        placeholder={strings.email}
-                        onChangeText={text =>
-                            this.setState({
-                                ...this.state,
-                                email: text
-                            })
-                        }
-                        value={this.state.email}
-                        borderRadius={5}
-                    />
+                        <CustomTextInput
+                            width={270}
+                            height={50}
+                            style={{ marginTop: 10 }}
+                            placeholder={strings.password}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    password: text
+                                })
+                            }
+                            value={this.state.password}
+                            maxLength={20}
+                            isPassword={true}
+                            borderRadius={5}
+                        />
 
-                    <CustomTextInput
-                        width={270}
-                        height={50}
-                        style={{ marginTop: 10 }}
-                        placeholder={strings.password}
-                        onChangeText={text =>
-                            this.setState({
-                                ...this.state,
-                                password: text
-                            })
-                        }
-                        value={this.state.password}
-                        maxLength={20}
-                        isPassword={true}
-                        borderRadius={5}
-                    />
+                        <CustomTextInput
+                            width={270}
+                            height={50}
+                            style={{ marginTop: 10 }}
+                            placeholder={strings.confirmPassword}
+                            onChangeText={text =>
+                                this.setState({
+                                    ...this.state,
+                                    confirmPassword: text
+                                })
+                            }
+                            value={this.state.confirmPassword}
+                            maxLength={20}
+                            isPassword={true}
+                            borderRadius={5}
+                        />
 
-                    <CustomTextInput
-                        width={270}
-                        height={50}
-                        style={{ marginTop: 10 }}
-                        placeholder={strings.confirmPassword}
-                        onChangeText={text =>
-                            this.setState({
-                                ...this.state,
-                                confirmPassword: text
-                            })
-                        }
-                        value={this.state.confirmPassword}
-                        maxLength={20}
-                        isPassword={true}
-                        borderRadius={5}
-                    />
+                        <CustomButton
+                            width={270}
+                            height={40}
+                            buttonColor={colors.General.appSecondary}
+                            pressedColor={colors.General.appSecondary}
+                            buttonTitle={strings.registerButton}
+                            style={{ marginTop: 30 }}
+                            onPress={() => {
+                                Keyboard.dismiss()
+                                this.validateRegisterCredentials();
+                            }}
 
-                    <CustomButton
-                        width={270}
-                        height={40}
-                        buttonTitle={strings.registerButton}
-                        style={{ marginTop: 30 }}
-                        onPress={() => {
-                            Keyboard.dismiss()
-                            this.validateRegisterCredentials();
-                        }}
+                            borderRadius={5}
+                        />
 
-                        borderRadius={5}
-                    />
-
-                    {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (
-                        <View style={{
-                            marginTop: 40,
-                            marginBottom: 30
-                        }}>
-                            <LinesLoader
-                                color='rgba(169, 20, 20, 0.9)'
-                                barHeight={60}
-                                barWidth={5}
-                                betweenSpace={5}
-                            />
-                        </View>
-                    ) : (
-                            <View style={{ height: 50, backgroundColor: "transparent" }} />
-                        )}
-                </View>
-            </TouchableWithoutFeedback>
+                        {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (
+                            <View style={{
+                                marginTop: 40,
+                                marginBottom: 30,
+                                backgroundColor: 'transparent',
+                            }}>
+                                <LinesLoader
+                                    color={colors.General.appSecondary}
+                                    barHeight={60}
+                                    barWidth={5}
+                                    betweenSpace={5}
+                                />
+                            </View>
+                        ) : (
+                                <View style={{ height: 50, backgroundColor: "transparent" }} />
+                            )}
+                    </View>
+                </TouchableWithoutFeedback>
             </LinearGradient>
         );
     }
@@ -246,7 +249,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        
+
     }
 });
 
