@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet, 
+    ScrollView
 } from 'react-native';
 
 import NavTitleUI from '../components/navigation/NavTitleUI';
@@ -47,12 +48,26 @@ class ProfilePage extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
 
                 <View style={styles.topContainer}>
-                    <Text style={styles.textStyle}>{strings.rank}: 15</Text>
-                    <Text style={styles.textStyle}>{strings.likes}: 66</Text>
-                    <Text style={styles.textStyle}>{strings.dislikes}: 89</Text>
+
+                    <View style={styles.statisticsSection}>
+                        <View style={styles.textsSection}>
+                            <Text style={styles.textStyle}>{strings.rank}</Text>
+                            <Text style={styles.textStyle}>{strings.likes}</Text>
+                            <Text style={styles.textStyle}>{strings.dislikes}</Text>
+                        </View>
+
+                        <View style={styles.numbersSection}>
+                            <Text style={styles.numberStyle}>15</Text>
+                            <Text style={styles.numberStyle}>77</Text>
+                            <Text style={styles.numberStyle}>134</Text>
+                        </View>
+                    </View>
+
+
+
                 </View>
 
                 <View style={styles.bottomContainer}>
@@ -73,6 +88,8 @@ class ProfilePage extends Component {
                     <CustomButton
                         width={240}
                         height={45}
+                        buttonColor={colors.General.appSecondary}
+                        pressedColor={colors.General.appSecondary}
                         buttonTitle={strings.connect.toUpperCase()}
                         style={{ marginTop: 30 }}
                         borderRadius={5}
@@ -81,22 +98,23 @@ class ProfilePage extends Component {
                         }}
                     />
 
+                    
                     <CustomButton
                         width={240}
                         height={45}
+                        buttonColor={colors.General.appPrimary}
+                        pressedColor={colors.General.appPrimary}
                         buttonTitle={strings.sendMessage.toUpperCase()}
                         style={{ marginTop: 30 }}
                         borderRadius={5}
                         onPress={() => {
-
                         }}
                     />
-
                 </View>
 
 
 
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -109,9 +127,10 @@ const styles = StyleSheet.create({
     },
     topContainer: {
         marginTop: 20,
-        marginBottom: 15, 
-        padding: 30,
-        alignItems: 'center', 
+        marginBottom: 15,
+        paddingTop: 30,
+        paddingBottom: 10,
+        alignItems: 'center',
         backgroundColor: colors.General.whiteColor,
     },
     bottomContainer: {
@@ -119,13 +138,33 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.General.whiteColor,
     },
-    buttonsSection: {
-        alignItems: 'center'
+    statisticsSection: {
+        flexDirection: 'row', 
+        //justifyContent: 'space-around',
+        justifyContent: 'center', 
+        alignSelf: 'stretch',
+    },
+    textsSection: {
+        //backgroundColor: colors.General.blueColor,
+        paddingRight: 15,
+    },
+    numbersSection: {
+        //backgroundColor: colors.General.redColor, 
+        paddingRight: 25
     },
     textStyle: {
         color: "#333",
         fontSize: 20,
         marginBottom: 20,
+        textAlign: 'right',
+        fontWeight: 'bold',
+    },
+    numberStyle: {
+        color: colors.General.appPrimary,
+        fontSize: 20,
+        marginBottom: 20,
+        textAlign: 'left', 
+        fontWeight: 'bold',
     },
     iconsSection: {
         flexDirection: 'row',

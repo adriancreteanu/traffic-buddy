@@ -17,7 +17,7 @@ class CustomButton extends Component {
             //backgroundColor: "#a94242",
             //backgroundColor: 'rgba(169, 20, 20, 0.9)',
             //backgroundColor: 'rgba(51,102,136, 0.8)',
-            backgroundColor: "#368",
+            backgroundColor: this.props.buttonColor,
             alignItems: "center",
             justifyContent: "center",
             borderRadius: this.props.borderRadius,
@@ -25,7 +25,7 @@ class CustomButton extends Component {
           }
         ]}
         onPress={this.props.onPress}
-        underlayColor="#368"
+        underlayColor={this.props.pressedColor}
       >
         <Text style={{
           color: "#FFFFFF",
