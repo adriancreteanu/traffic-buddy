@@ -189,10 +189,11 @@ const styles = StyleSheet.create({
     textsSection: {
         //backgroundColor: colors.General.blueColor,
         paddingRight: 15,
+        width: 100,
     },
     numbersSection: {
         //backgroundColor: colors.General.redColor, 
-        paddingRight: 25
+        paddingRight: 35
     },
     textStyle: {
         color: "#333",

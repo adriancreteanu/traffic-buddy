@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 20,
-        paddingRight: 20,
         borderBottomColor: colors.General.appPrimary,
         borderBottomWidth: StyleSheet.hairlineWidth,
         flexDirection: "column",
@@ -110,16 +109,15 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         paddingVertical: 10,
         paddingLeft: 25, 
-        paddingRight: 40,
+        paddingRight: 20,
         marginTop: 15,
-        marginRight: -40,
         borderBottomLeftRadius: 40, 
         borderTopLeftRadius: 40,
         backgroundColor: colors.General.whiteColor
     },
     hourContainerStyle: {
         flex: 1,
-        paddingRight: 10,
+        paddingRight: 30,
     },
     hourTextStyle: {
         textAlign: 'right',
@@ -135,10 +133,12 @@ const styles = StyleSheet.create({
         color: "#333",
         fontSize: 18,
         marginBottom: 2,
+        paddingRight: 20,
     },
     messageSectionStyle: {
         flex: 1,
         flexDirection: "column",
+        paddingRight: 20,
     },
     iconsSectionStyle: {
         flex: 1,
