@@ -30,6 +30,7 @@ import RegisterPage from '../pages/RegisterPage';
 import MessagesPage from '../pages/MessagesPage';
 import SettingsPage from '../pages/SettingsPage';
 import PostPage from '../pages/PostPage';
+import ChatPage from '../pages/ChatPage';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProfilePage from '../pages/ProfilePage';
@@ -146,10 +147,13 @@ export const AppNavigator = StackNavigator(
             screen: SettingsPage
         },
         Post: {
-            screen: PostPage,
+            screen: PostPage
         },
         Profile: {
             screen: ProfilePage
+        },
+        Chat: {
+            screen: ChatPage
         },
         Login: {
             screen: LoginNavigator,

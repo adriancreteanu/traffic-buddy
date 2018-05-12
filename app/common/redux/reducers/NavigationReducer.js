@@ -90,11 +90,23 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
         case navigationActionTypes.navigateToProfilePage:
             nextState = AppNavigator.router.getStateForAction(
                 NavigationActions.navigate({
-                    routeName: "Profile", 
+                    routeName: "Profile",
                     params: {
                         user: action.user
                     }
-                }), 
+                }),
+                state
+            );
+            break;
+
+        case navigationActionTypes.navigateToChatPage:
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({
+                    routeName: "Chat", 
+                    params: {
+                        user: action.user
+                    }
+                }),
                 state
             );
             break;

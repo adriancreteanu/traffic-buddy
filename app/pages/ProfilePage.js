@@ -22,9 +22,13 @@ import CustomButton from '../components/CustomButton';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomTextInput from '../components/CustomTextInput';
 
+import * as navActions from "../common/redux/actions/NavigationActions";
+import PostModel from '../common/data/models/PostModel';
+
 class ProfilePage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
+         
         headerTitle: <NavTitleUI title={navigation.state.params.user.username} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
@@ -54,6 +58,10 @@ class ProfilePage extends Component {
             likeIconClicked: false, 
             dislikeIconClicked: false
         };
+    }
+
+    navigateToChatPage(post: PostModel) {
+        navActions.navigateToChatPage(post)(this.props.dispatch);
     }
 
     render() {
@@ -149,8 +157,7 @@ class ProfilePage extends Component {
                         buttonTitle={strings.sendMessage.toUpperCase()}
                         style={{ marginTop: 30 }}
                         borderRadius={5}
-                        onPress={() => {
-                        }}
+                        onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user)}
                     />
                 </View>
 

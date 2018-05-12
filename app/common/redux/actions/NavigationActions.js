@@ -8,6 +8,7 @@ export const navigationActionTypes = {
     navigateToSettingsPage: "navigateToSettingsPage",
     navigateToPostPage: "navigateToPostPage",
     navigateToProfilePage: "navigateToProfilePage",
+    navigateToChatPage: "navigateToChatPage",
 };
 
 export function navigateToLoginPage() {
@@ -63,6 +64,16 @@ export function navigateToPostPage() {
         };
         dispatch(action); 
     };
+}
+
+export function navigateToChatPage(user: Any) {
+    return function(dispatch: any) {
+        let action = {
+            type: navigationActionTypes.navigateToChatPage, 
+            user: user
+        };
+        dispatch(action);
+    }
 }
 
 export function initialNavigation() {
