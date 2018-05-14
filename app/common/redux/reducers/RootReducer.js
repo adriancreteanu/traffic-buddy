@@ -7,6 +7,7 @@ import { registerReducer } from "./RegisterReducer";
 import { postReducer } from "./PostReducer";
 import { userReducer }from "./UserReducer";
 import { fetchPostsReducer } from "./FetchPostsReducer";
+import { fetchMessagesReducer } from "./FetchMessagesReducer";
 
 export const RootReducer = combineReducers({
     navigationReducer: navigationReducer, 
@@ -17,4 +18,5 @@ export const RootReducer = combineReducers({
     postReducer: postReducer,
     userReducer: userReducer, 
     fetchPostsReducer: fetchPostsReducer,
+    fetchMessagesReducer: fetchMessagesReducer,
 });

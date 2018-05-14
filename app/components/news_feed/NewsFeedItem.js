@@ -90,26 +90,26 @@ const styles = StyleSheet.create({
         borderTopColor: colors.General.appPrimary,
     },
     usernameTextStyle: {
+        flex: 1,
         color: colors.General.appPrimary,
         fontWeight: "bold",
         fontSize: 18,
-        //textAlign: 'right', 
-        width: 80
+        width: 100, 
+        textAlign: 'center',
     },
     defaultTextStyle: {
         color: "#666",
         fontSize: 16,
-        textAlign: 'right'
     },
 
     userContainerStyle: {
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: "column",
-        justifyContent: "flex-end",
+        justifyContent: "center",
         paddingVertical: 10,
-        paddingLeft: 25, 
-        paddingRight: 20,
+        paddingLeft: 15, 
+        paddingRight: 10,
         marginTop: 15,
         borderBottomLeftRadius: 40, 
         borderTopLeftRadius: 40,

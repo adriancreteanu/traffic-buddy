@@ -23,6 +23,8 @@ registerButton: "Register",
 
 // Settings page
 settingsPageTitle: "Settings", 
+myProfile: "My profile", 
+friends: "Friends",
 logOut: "Log out",
 
 // Post page

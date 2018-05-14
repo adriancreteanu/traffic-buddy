@@ -23,6 +23,8 @@ registerButton: "Înregistrare",
 
 // Settings page
 settingsPageTitle: "Setări", 
+myProfile: "Profilul meu", 
+friends: "Prieteni",
 logOut: "Deconectare",
 
 // Post page

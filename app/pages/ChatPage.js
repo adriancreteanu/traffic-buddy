@@ -12,8 +12,16 @@ import NavLeftIcon from '../components/navigation/NavLeftIcon';
 import * as colors from "../styles/Colors";
 
 import { connect } from 'react-redux';
+import * as chatActions from "../common/redux/actions/ChatActions";
 
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+
+import PreferencesRepo from "../common/data/repos/PreferencesRepo";
+import { PreferenceKeys } from '../common/constants/PreferenceKeys';
+
+import * as chatPayloads from "../common/data/payloads/ChatPayloads";
+
+import { LinesLoader } from 'react-native-indicator';
 
 
 class ChatPage extends Component {
@@ -45,67 +53,116 @@ class ChatPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            messages: []
+            messages: [],
+            loggedInUser: "",
+            chatPartner: "",
+            lastMessageId: "",
         }
+
+        this.preferencesRepo = new PreferencesRepo();
     }
 
     componentWillMount() {
-        this.setState({
-            messages: [
-                {
-                    _id: 132231,
-                    text: 'Hello developer',
-                    createdAt: new Date(),
-                    user: {
-                        _id: 1,
-                        name: 'React Native',
-                    },
-                },
-                {
-                    _id: 121367,
-                    text: 'Hello developer',
-                    createdAt: new Date(),
-                    user: {
-                        _id: 2,
-                        name: 'React Native',
-                    },
-                },
-            ],
-        })
+        // this.setState({
+        //     messages: [
+        //         {
+        //             _id: 132231,
+        //             text: 'Hello developer',
+        //             createdAt: new Date(),
+        //             user: {
+        //                 _id: "TM15ABI",
+        //                 name: 'React Native',
+        //             },
+        //         },
+        //         {
+        //             _id: 121367,
+        //             text: 'Hello bai',
+        //             createdAt: new Date(),
+        //             user: {
+        //                 _id: 2,
+        //                 name: 'React Native',
+        //             },
+        //         },
+        //     ],
+        // })
     }
 
-    renderBubble (props) {
-        return (
-          <Bubble
-            {...props}
-            wrapperStyle={{
-              right: {
-                backgroundColor: colors.General.appPrimary
-              }
-            }}
-          />
-        )
-      }
+    saveInitialMessagesToState = () => {
+        let messagesReducer = this.props.fetchMessagesReducer;
 
-      onSend(messages = []) {
+        if (messagesReducer && messagesReducer.viewModel) {
+            let messages = messagesReducer.viewModel.messagesViewModel.messagesModel;
+
+            if (messages) {
+                this.setState({
+                    ...this.state,
+                    messages: messages,
+                    lastMessageId: messages[0].id
+                })
+            }
+
+        }
+    }
+
+    async componentDidMount() {
+
+        this.setState({
+            loggedInUser: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername),
+        });
+
+        let payload: chatPayloads.fetchChatMessagesPayloadType = {
+            loggedInUser: this.state.loggedInUser,
+            chatPartner: this.props.navigation.state.params.user.username
+        };
+
+        await chatActions.fetchMessages(payload)(this.props.dispatch);
+        this.saveInitialMessagesToState();
+    }
+
+    renderBubble(props) {
+        return (
+            <Bubble
+                {...props}
+                wrapperStyle={{
+                    right: {
+                        backgroundColor: colors.General.appPrimary
+                    }
+                }}
+            />
+        )
+    }
+
+    onSend(messages = []) {
         this.setState(previousState => ({
-          messages: GiftedChat.append(previousState.messages, messages),
+            messages: GiftedChat.append(previousState.messages, messages),
         }))
-      }
+    }
 
     render() {
-        return (
+        return this.state.messages.length != 0 ? (
             <GiftedChat
                 messages={this.state.messages}
                 renderBubble={this.renderBubble}
                 renderAvatar={null}
                 onSend={messages => this.onSend(messages)}
                 user={{
-                    _id: 1
+                    _id: this.state.loggedInUser
                 }}
-                
+
             />
-        )
+        ) :
+            (
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    <LinesLoader
+                        //color='rgba(169, 20, 20, 0.9)'
+                        color='#FA1'
+                        barHeight={65}
+                        barWidth={6}
+                        betweenSpace={7}
+                    />
+                </View>
+            );
+
     }
 }
 
@@ -113,7 +170,8 @@ class ChatPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        userReducer: state.userReducer
+        userReducer: state.userReducer,
+        fetchMessagesReducer: state.fetchMessagesReducer
     };
 }
 

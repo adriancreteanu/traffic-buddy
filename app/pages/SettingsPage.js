@@ -86,13 +86,25 @@ class SettingsPage extends Component {
             >
                 <View style={styles.container}>
 
+
+                    <CustomButton
+                        width={300}
+                        height={50}
+                        buttonColor={colors.General.appSecondary}
+                        pressedColor={colors.General.appSecondary}
+                        buttonTitle={strings.myProfile}
+                        style={{ marginTop: 30, marginBottom: 10 }}
+                        onPress={() => {
+                        }}
+                    />
+
                     <CustomButton
                         width={300}
                         height={50}
                         buttonColor={colors.General.appSecondary}
                         pressedColor={colors.General.appSecondary}
                         buttonTitle={strings.logOut}
-                        style={{ marginTop: 30, marginBottom: 40 }}
+                        style={{ marginTop: 10, marginBottom: 40 }}
                         //borderRadius={5}
                         onPress={() => {
                             this.logOutAlert();
