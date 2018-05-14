@@ -136,6 +136,16 @@ class ChatPage extends Component {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages),
         }))
+
+        let payload: chatPayloads.sendChatMessagePayloadType = {
+            loggedInUser: this.state.loggedInUser,
+            chatPartner: this.props.navigation.state.params.user.username,
+            regionCode: "TM", 
+            message: messages[0].text, 
+            createdAt: messages[0].createdAt.getTime()
+        };
+
+        chatActions.sendMessage(payload)(this.props.dispatch);
     }
 
     render() {

@@ -3,6 +3,7 @@ import MessagesModel from "../models/MessagesModel";
 import ApiErrorModel from "../models/error/ApiErrorModel";
 
 import * as chatPayloads from "../payloads/ChatPayloads";
+import MessageModel from "../models/MessageModel";
 
 
 export default class ChatService extends SuperService {
@@ -29,7 +30,36 @@ export default class ChatService extends SuperService {
         return response;
     }
 
-    
+    async sendMessage(
+        payload: chatPayloads.sendChatMessagePayloadType
+    ) {
+        var response: MessageModel | ApiErrorModel = null;
+
+        await this.firebaseApp
+            .database()
+            .ref("messages")
+            .child(payload.regionCode)
+            .child(payload.loggedInUser)
+            .child(payload.chatPartner)
+            .push({
+                createdAt: payload.createdAt,
+                text: payload.message,
+                user: {
+                    _id: payload.loggedInUser,
+                    name: payload.loggedInUser
+                },
+            })
+            .then(() => {
+                //response = new MessageModel(payload);
+            })
+            .catch(error => {
+                response = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+
+        return response;
+    }
+
+
 
 
 }

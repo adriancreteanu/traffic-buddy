@@ -5,18 +5,24 @@ import { signOutReducer } from "./SignOutReducer";
 import { appReducer } from "./AppReducer";
 import { registerReducer } from "./RegisterReducer";
 import { postReducer } from "./PostReducer";
-import { userReducer }from "./UserReducer";
+import { userReducer } from "./UserReducer";
 import { fetchPostsReducer } from "./FetchPostsReducer";
 import { fetchMessagesReducer } from "./FetchMessagesReducer";
+import { sendMessageReducer } from "./SendMessageReducer";
+
+/*  TODO: maybe concatenate eg. fetchMessagesReducer & sendMessagesReducer into a single ChatReducer     
+    where I treat all the cases
+*/
 
 export const RootReducer = combineReducers({
-    navigationReducer: navigationReducer, 
+    navigationReducer: navigationReducer,
     loginReducer: loginReducer,
     signOutReducer: signOutReducer,
     appReducer: appReducer,
     registerReducer: registerReducer,
     postReducer: postReducer,
-    userReducer: userReducer, 
+    userReducer: userReducer,
     fetchPostsReducer: fetchPostsReducer,
     fetchMessagesReducer: fetchMessagesReducer,
+    sendMessageReducer: sendMessageReducer,
 });
