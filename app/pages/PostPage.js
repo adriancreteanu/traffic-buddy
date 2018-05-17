@@ -9,8 +9,11 @@ import {
     Alert,
     ImageBackground,
     Keyboard,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Picker
 } from 'react-native';
+
+
 
 import LinearGradient from 'react-native-linear-gradient';
 import * as colors from "../styles/Colors";
@@ -102,37 +105,62 @@ class PostPage extends Component {
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <View style={styles.container}>
 
-                        <CustomTextInput
-                            width={300}
-                            height={50}
-                            style={{ marginTop: 30 }}
-                            borderRadius={5}
-                            placeholder={strings.location}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    location: text
-                                })
-                            }
-                            value={this.state.location}
-                            maxLength={20}
-                        />
+                        <View style={styles.pickerViewStyle}>
+                            <Picker
+                                selectedValue={this.state.location}
+                                style={styles.pickerStyle}
+                                onValueChange={(itemValue, itemIndex) => this.setState({ location: itemValue })}
+                                itemStyle={{ marginLeft: 50, marginStart: 20, paddingStart: 50, backgroundColor: '#00f' }}
+                                alignItems={"center"}
+                                prompt={strings.location}
+                                placeholder={strings.location}
+                            >
 
-                        <CustomTextInput
-                            width={300}
-                            height={50}
-                            style={{ marginTop: 30 }}
-                            borderRadius={5}
-                            placeholder={strings.category}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    category: text
-                                })
-                            }
-                            value={this.state.category}
-                            maxLength={20}
-                        />
+                            
+
+                                <Picker.Item label="Timis" value="TM"/>
+
+
+                                
+                                <Picker.Item label="Bihor" value="BH" />
+                                <Picker.Item label="Arad" value="AR" />
+                                <Picker.Item label="Gorj" value="GJ" />
+                                <Picker.Item label="Cluj" value="CJ" />
+                                <Picker.Item label="Iasi" value="IS" />
+                                <Picker.Item label="Brasov" value="BV" />
+                                <Picker.Item label="Timis" value="TM" />
+                                <Picker.Item label="Bihor" value="BH" />
+                                <Picker.Item label="Arad" value="AR" />
+                                <Picker.Item label="Gorj" value="GJ" />
+                                <Picker.Item label="Cluj" value="CJ" />
+                                <Picker.Item label="Iasi" value="IS" />
+                                <Picker.Item label="Brasov" value="BV" />
+                                <Picker.Item label="Timis" value="TM" />
+                                <Picker.Item label="Bihor" value="BH" />
+                                <Picker.Item label="Arad" value="AR" />
+                                <Picker.Item label="Gorj" value="GJ" />
+                                <Picker.Item label="Cluj" value="CJ" />
+                                <Picker.Item label="Iasi" value="IS" />
+                                <Picker.Item label="Brasov" value="BV" />
+                            </Picker>
+                        </View>
+
+
+                        <View style={styles.pickerViewStyle}>
+                            <Picker
+                                selectedValue={this.state.category}
+                                style={styles.pickerStyle}
+                                onValueChange={(itemValue, itemIndex) => this.setState({ category: itemValue })}
+                                itemStyle={{ paddingLeft: 50 }}
+                                prompt={strings.category}
+                            >
+                                <Picker.Item label="Accident" value="ACC" />
+                                <Picker.Item label="Radar" value="RAD" />
+                                <Picker.Item label="Politie" value="PLT" />
+                                <Picker.Item label="Trafic" value="TRF" />
+                                <Picker.Item label="General" value="GNL" />
+                            </Picker>
+                        </View>
 
                         <CustomBigTextInput
                             width={300}
@@ -163,6 +191,9 @@ class PostPage extends Component {
                                 this.validatePostDetails()
                             }}
                         />
+
+
+
 
                         {typeof this.props.postReducer !== 'undefined' && this.props.postReducer != null && this.props.postReducer.isInProgress ? (
                             <View style={{
@@ -207,6 +238,22 @@ const styles = StyleSheet.create({
         color: "#555",
         marginBottom: 5,
     },
+    pickerStyle: {
+        width: 285,
+        color: colors.General.blackColor,
+    },
+    pickerViewStyle: {
+        height: 50,
+        width: 300,
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: "transparent",
+        overflow: "hidden",
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        paddingLeft: 10,
+        marginTop: 30,
+        
+    }
 });
 
 function mapStateToProps(state) {
