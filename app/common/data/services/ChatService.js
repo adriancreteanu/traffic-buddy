@@ -19,7 +19,7 @@ export default class ChatService extends SuperService {
             .child("TM")
             .child(payload.loggedInUser)
             .child(payload.chatPartner)
-            .limitToLast(5)
+            .limitToLast(15)
             .once("value")
             .then(snapshot => {
                 response = new MessagesModel(snapshot.val());
@@ -29,8 +29,49 @@ export default class ChatService extends SuperService {
             });
         return response;
     }
+    
 
-    async sendMessage(
+    constructor(props) {
+        super(props);
+        this.messagesRef = null;
+    }
+
+     async loadMessages(callback) {
+        this.messagesRef = this.firebaseApp.database().ref("messages/TM/TM15ABI/TM55WAR");
+        this.messagesRef.off();
+
+        const onReceive = (data) => {
+            const message = data.val();
+            callback({
+                _id: data.key, 
+                text: message.text, 
+                createdAt: new Date(message.createdAt),
+                user: {
+                    _id: message.user._id, 
+                    name: message.user.name
+                },
+            });
+        };
+        this.messagesRef.limitToLast(20).on('child_added', onReceive);
+    }
+
+     async sendMessage(message) {
+        for(let i = 0; i < message.length; i++) {
+            this.messagesRef.push({
+                text: message[i].text, 
+                user: message[i].user, 
+                createdAt: new Date().getTime()
+            });
+        }
+    }
+    
+    async closeChat() {
+        if(this.messagesRef) {
+            this.messagesRef.off();
+        }
+    }
+
+    async sendMessageOld(
         payload: chatPayloads.sendChatMessagePayloadType
     ) {
         var response: MessageModel | ApiErrorModel = null;

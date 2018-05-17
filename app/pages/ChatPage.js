@@ -23,6 +23,8 @@ import * as chatPayloads from "../common/data/payloads/ChatPayloads";
 
 import { LinesLoader } from 'react-native-indicator';
 
+import ChatService from "../common/data/services/ChatService";
+
 
 class ChatPage extends Component {
 
@@ -60,31 +62,7 @@ class ChatPage extends Component {
         }
 
         this.preferencesRepo = new PreferencesRepo();
-    }
-
-    componentWillMount() {
-        // this.setState({
-        //     messages: [
-        //         {
-        //             _id: 132231,
-        //             text: 'Hello developer',
-        //             createdAt: new Date(),
-        //             user: {
-        //                 _id: "TM15ABI",
-        //                 name: 'React Native',
-        //             },
-        //         },
-        //         {
-        //             _id: 121367,
-        //             text: 'Hello bai',
-        //             createdAt: new Date(),
-        //             user: {
-        //                 _id: 2,
-        //                 name: 'React Native',
-        //             },
-        //         },
-        //     ],
-        // })
+        this.chatService = new ChatService();
     }
 
     saveInitialMessagesToState = () => {
@@ -100,7 +78,6 @@ class ChatPage extends Component {
                     lastMessageId: messages[0].id
                 })
             }
-
         }
     }
 
@@ -110,13 +87,24 @@ class ChatPage extends Component {
             loggedInUser: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername),
         });
 
-        let payload: chatPayloads.fetchChatMessagesPayloadType = {
-            loggedInUser: this.state.loggedInUser,
-            chatPartner: this.props.navigation.state.params.user.username
-        };
+        // let payload: chatPayloads.fetchChatMessagesPayloadType = {
+        //     loggedInUser: this.state.loggedInUser,
+        //     chatPartner: this.props.navigation.state.params.user.username
+        // };
 
-        await chatActions.fetchMessages(payload)(this.props.dispatch);
-        this.saveInitialMessagesToState();
+        // await chatActions.fetchMessages(payload)(this.props.dispatch);
+        // this.saveInitialMessagesToState();
+
+
+        this.chatService.loadMessages((message) => {
+            this.setState((previousState) => {
+                return {
+                    messages: GiftedChat.append(previousState.messages, message)
+                };
+            });
+        });
+
+
     }
 
     renderBubble(props) {
@@ -132,21 +120,21 @@ class ChatPage extends Component {
         )
     }
 
-    onSend(messages = []) {
-        this.setState(previousState => ({
-            messages: GiftedChat.append(previousState.messages, messages),
-        }))
+    // onSend(messages = []) {
+    //     this.setState(previousState => ({
+    //         messages: GiftedChat.append(previousState.messages, messages),
+    //     }))
 
-        let payload: chatPayloads.sendChatMessagePayloadType = {
-            loggedInUser: this.state.loggedInUser,
-            chatPartner: this.props.navigation.state.params.user.username,
-            regionCode: "TM", 
-            message: messages[0].text, 
-            createdAt: messages[0].createdAt.getTime()
-        };
+    //     let payload: chatPayloads.sendChatMessagePayloadType = {
+    //         loggedInUser: this.state.loggedInUser,
+    //         chatPartner: this.props.navigation.state.params.user.username,
+    //         regionCode: "TM", 
+    //         message: messages[0].text, 
+    //         createdAt: messages[0].createdAt.getTime()
+    //     };
 
-        chatActions.sendMessage(payload)(this.props.dispatch);
-    }
+    //     chatActions.sendMessage(payload)(this.props.dispatch);
+    // }
 
     render() {
         return this.state.messages.length != 0 ? (
@@ -154,7 +142,10 @@ class ChatPage extends Component {
                 messages={this.state.messages}
                 renderBubble={this.renderBubble}
                 renderAvatar={null}
-                onSend={messages => this.onSend(messages)}
+                onSend={(message) => {
+                    this.chatService.sendMessage(message)
+                }}
+
                 user={{
                     _id: this.state.loggedInUser
                 }}
