@@ -192,8 +192,8 @@ class LoginPage extends Component {
 
             {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
               <View style={{
-                marginTop: 40,
-                marginBottom: -50,
+                marginTop: 30,
+                marginBottom: -40,
                 backgroundColor: 'transparent',
               }}>
                 <LinesLoader
@@ -215,7 +215,7 @@ class LoginPage extends Component {
             >
               <View style={{
                 justifyContent: 'center', 
-                backgroundColor: "#f00",
+                
               }}>
                 <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
 
@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   accountText: {
     fontSize: 16,
     color: "#000",
-    //marginTop: 60, 
+    marginTop: 50, 
     textAlign: 'center',
   },
   registerText: {

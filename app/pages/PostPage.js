@@ -127,7 +127,7 @@ class PostPage extends Component {
                                 <Picker.Item label="Iasi" value="IS" />
                                 <Picker.Item label="Brasov" value="BV" />
                                 <Picker.Item label="Timis" value="TM" />
-                                <Picker.Item label="Bihor" value="BH" color="#00F" />
+                                <Picker.Item label="Bihor" value="BH" />
                                 <Picker.Item label="Arad" value="AR" />
                                 <Picker.Item label="Gorj" value="GJ" />
                                 <Picker.Item label="Cluj" value="CJ" />
