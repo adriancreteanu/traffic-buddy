@@ -10,10 +10,10 @@ import {
     ImageBackground,
     Keyboard,
     TouchableWithoutFeedback,
-    Picker
+    Platform
 } from 'react-native';
 
-
+import { Picker } from 'native-base'
 
 import LinearGradient from 'react-native-linear-gradient';
 import * as colors from "../styles/Colors";
@@ -108,20 +108,18 @@ class PostPage extends Component {
                         <View style={styles.pickerViewStyle}>
                             <Picker
                                 selectedValue={this.state.location}
-                                style={styles.pickerStyle}
                                 onValueChange={(itemValue, itemIndex) => this.setState({ location: itemValue })}
-                                itemStyle={{ marginLeft: 50, marginStart: 20, paddingStart: 50, backgroundColor: '#00f' }}
-                                alignItems={"center"}
-                                prompt={strings.location}
-                                placeholder={strings.location}
+                                prompt={strings.location} // Android
+                                placeholder={strings.location} //iOS
+                                style={styles.pickerStyle}
+                                // text shown on picker
+                                textStyle={styles.pickerTextStyle}
+                                // text shown on picker list items
+                                itemTextStyle={styles.pickerItemTextStyle}
+                                itemStyle={styles.pickerItemStyle}
                             >
 
-                            
-
-                                <Picker.Item label="Timis" value="TM"/>
-
-
-                                
+                                <Picker.Item label="Timis" value="TM" />
                                 <Picker.Item label="Bihor" value="BH" />
                                 <Picker.Item label="Arad" value="AR" />
                                 <Picker.Item label="Gorj" value="GJ" />
@@ -129,7 +127,7 @@ class PostPage extends Component {
                                 <Picker.Item label="Iasi" value="IS" />
                                 <Picker.Item label="Brasov" value="BV" />
                                 <Picker.Item label="Timis" value="TM" />
-                                <Picker.Item label="Bihor" value="BH" />
+                                <Picker.Item label="Bihor" value="BH" color="#00F" />
                                 <Picker.Item label="Arad" value="AR" />
                                 <Picker.Item label="Gorj" value="GJ" />
                                 <Picker.Item label="Cluj" value="CJ" />
@@ -151,8 +149,14 @@ class PostPage extends Component {
                                 selectedValue={this.state.category}
                                 style={styles.pickerStyle}
                                 onValueChange={(itemValue, itemIndex) => this.setState({ category: itemValue })}
-                                itemStyle={{ paddingLeft: 50 }}
+                                placeholder={strings.category}
                                 prompt={strings.category}
+                                style={styles.pickerStyle}
+                                // text shown on picker
+                                textStyle={styles.pickerTextStyle}
+                                // text shown on picker list items
+                                itemTextStyle={styles.pickerItemTextStyle}
+                                itemStyle={styles.pickerItemStyle}
                             >
                                 <Picker.Item label="Accident" value="ACC" />
                                 <Picker.Item label="Radar" value="RAD" />
@@ -240,7 +244,18 @@ const styles = StyleSheet.create({
     },
     pickerStyle: {
         width: 285,
+    },
+    pickerTextStyle: {
         color: colors.General.blackColor,
+    },
+    pickerItemStyle: {
+        paddingLeft: 20,
+        marginLeft: 0,
+        borderBottomColor: colors.General.blackColor,
+        borderTopColor: colors.General.blackColor
+    },
+    pickerItemTextStyle: {
+        fontSize: 16,
     },
     pickerViewStyle: {
         height: 50,
@@ -250,9 +265,9 @@ const styles = StyleSheet.create({
         borderColor: "transparent",
         overflow: "hidden",
         backgroundColor: 'rgba(255, 255, 255, 0.3)',
-        paddingLeft: 10,
+        paddingLeft: Platform.OS == "ios" ? 0 : 10,
         marginTop: 30,
-        
+
     }
 });
 

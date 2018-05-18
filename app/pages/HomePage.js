@@ -292,6 +292,9 @@ class HomePage extends Component {
                     onEndReachedThreshold={1}
                     onRefresh={this.handleRefresh.bind(this)}
                     refreshing={this.state.refreshing}
+                    style={{
+                        backgroundColor: '#f8f8f8'
+                    }}
                     
                 />
             </View>

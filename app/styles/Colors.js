@@ -4,6 +4,7 @@ let General = {
     appSecondary: "#368",
     whiteColor: "#FFF",
     blackColor: "#000", 
+    blackColorTransparent: "rgba(0, 0, 0, 0.5)",
     blueColor: "#00F", 
     redColor: "#F00",
 

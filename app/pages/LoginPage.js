@@ -207,14 +207,20 @@ class LoginPage extends Component {
                 <View style={{ height: 50, backgroundColor: "transparent" }} />
               )}
 
-            <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
             <TouchableHighlight
               onPress={() => {
                 this.navigateToRegisterPage()
               }}
               underlayColor="transparent"
             >
-              <Text style={styles.registerText}>{strings.registerHere}</Text>
+              <View style={{
+                justifyContent: 'center', 
+                backgroundColor: "#f00",
+              }}>
+                <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
+
+                <Text style={styles.registerText}>{strings.registerHere}</Text>
+              </View>
             </TouchableHighlight>
 
 
@@ -244,7 +250,8 @@ const styles = StyleSheet.create({
   accountText: {
     fontSize: 16,
     color: "#000",
-    marginTop: 80
+    //marginTop: 60, 
+    textAlign: 'center',
   },
   registerText: {
     width: 200, //necessary because of the fontweight
