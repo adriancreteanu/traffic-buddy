@@ -85,6 +85,7 @@ class ChatPage extends Component {
 
         this.setState({
             loggedInUser: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername),
+            chatPartner: this.props.navigation.state.params.user.username,
         });
 
         // let payload: chatPayloads.fetchChatMessagesPayloadType = {
@@ -143,11 +144,12 @@ class ChatPage extends Component {
                 renderBubble={this.renderBubble}
                 renderAvatar={null}
                 onSend={(message) => {
-                    this.chatService.sendMessage(message)
+                    this.chatService.sendMessage(message,this.state.loggedInUser, this.state.chatPartner)
                 }}
 
                 user={{
-                    _id: this.state.loggedInUser
+                    _id: this.state.loggedInUser, 
+                    name: this.state.loggedInUser,
                 }}
 
             />

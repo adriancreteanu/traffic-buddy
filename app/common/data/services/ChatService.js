@@ -8,6 +8,13 @@ import MessageModel from "../models/MessageModel";
 
 export default class ChatService extends SuperService {
 
+
+    constructor(props) {
+        super(props);
+        this.messagesRef = null;
+    }
+
+
     async fetchMessages(
         payload: chatPayloads.fetchChatMessagesPayloadType
     ) {
@@ -29,25 +36,22 @@ export default class ChatService extends SuperService {
             });
         return response;
     }
-    
 
-    constructor(props) {
-        super(props);
-        this.messagesRef = null;
-    }
 
-     async loadMessages(callback) {
+
+
+    async loadMessages(callback) {
         this.messagesRef = this.firebaseApp.database().ref("messages/TM/TM15ABI/TM55WAR");
         this.messagesRef.off();
 
         const onReceive = (data) => {
             const message = data.val();
             callback({
-                _id: data.key, 
-                text: message.text, 
+                _id: data.key,
+                text: message.text,
                 createdAt: new Date(message.createdAt),
                 user: {
-                    _id: message.user._id, 
+                    _id: message.user._id,
                     name: message.user.name
                 },
             });
@@ -55,7 +59,79 @@ export default class ChatService extends SuperService {
         this.messagesRef.limitToLast(20).on('child_added', onReceive);
     }
 
-     async sendMessage(message) {
+
+    async createNewThread(threadKey: string, user1_id: string, user2_id: string) {
+
+        this.messagesRef = this.firebaseApp.database().ref("users");
+
+        // Create new thread for users
+        this.messagesRef
+            .child(`TM/${user1_id}/threads/${threadKey}`)
+            .set({
+                chatPartner: user2_id
+            });
+
+        this.messagesRef
+            .child(`TM/${user2_id}/threads/${threadKey}`)
+            .set({
+                chatPartner: user1_id
+            });
+
+        // Add new thread key in threads list
+        this.messagesRef = this.firebaseApp.database().ref("threads");
+        this.messagesRef
+            .child(`${threadKey}/participants`)
+            .set({
+                '0': user1_id,
+                '1': user2_id
+            });
+    }
+
+    async checkIfThreadExists(loggedUser: string, chatPartner: string) {
+        this.messagesRef = this.firebaseApp.database().ref("users/TM");
+
+        let threadId: string = null;
+
+        await this.messagesRef
+            .child(`${loggedUser}/threads`)
+            .orderByChild("chatPartner")
+            .equalTo(chatPartner)
+            .once('value')
+            .then(snapshot => {
+                snapshot.forEach(function (data) {
+                    threadId = data.key;
+                });
+            })
+            .catch(error => {
+                threadId = ApiErrorModel.createDefaultErrorInstance(error);
+            });
+
+        return threadId;
+    }
+
+    async sendMessage(message, loggedUser: string, chatPartner: string) {
+
+
+        // Check if thread exists first
+        let threadKey = await this.checkIfThreadExists(loggedUser, "TM14FGH");
+
+        let x = threadKey;
+
+        let y = 2;
+
+
+        if (!threadKey) {
+            // Create new thread 
+            let yyy = 55;
+            threadKey = this.messagesRef.push().key;
+            await this.createNewThread(threadKey, "TM15ABI", "TM14FGH");
+        }
+
+        let z = 99;
+
+        // Create new message
+        this.messagesRef = this.firebaseApp.database().ref(`threads/${threadKey}/messages`)
+
         for(let i = 0; i < message.length; i++) {
             this.messagesRef.push({
                 text: message[i].text, 
@@ -64,9 +140,9 @@ export default class ChatService extends SuperService {
             });
         }
     }
-    
+
     async closeChat() {
-        if(this.messagesRef) {
+        if (this.messagesRef) {
             this.messagesRef.off();
         }
     }
