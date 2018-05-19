@@ -97,7 +97,7 @@ class ChatPage extends Component {
         // this.saveInitialMessagesToState();
 
 
-        this.chatService.loadMessages((message) => {
+        await this.chatService.loadMessages(this.state.loggedInUser, this.state.chatPartner, (message) => {
             this.setState((previousState) => {
                 return {
                     messages: GiftedChat.append(previousState.messages, message)

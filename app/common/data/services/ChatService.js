@@ -40,23 +40,30 @@ export default class ChatService extends SuperService {
 
 
 
-    async loadMessages(callback) {
-        this.messagesRef = this.firebaseApp.database().ref("messages/TM/TM15ABI/TM55WAR");
-        this.messagesRef.off();
+    // TODO: What to send when there are no messages?
+    async loadMessages(loggedUser: string, chatPartner: string, callback) {
 
-        const onReceive = (data) => {
-            const message = data.val();
-            callback({
-                _id: data.key,
-                text: message.text,
-                createdAt: new Date(message.createdAt),
-                user: {
-                    _id: message.user._id,
-                    name: message.user.name
-                },
-            });
-        };
-        this.messagesRef.limitToLast(20).on('child_added', onReceive);
+        // Check if thread exists first
+        let threadKey = await this.checkIfThreadExists(loggedUser, chatPartner);
+
+        if (threadKey) {
+            this.messagesRef = this.firebaseApp.database().ref(`threads/${threadKey}/messages`);
+            this.messagesRef.off();
+
+            const onReceive = (data) => {
+                const message = data.val();
+                callback({
+                    _id: data.key,
+                    text: message.text,
+                    createdAt: new Date(message.createdAt),
+                    user: {
+                        _id: message.user._id,
+                        name: message.user.name
+                    },
+                });
+            };
+            this.messagesRef.limitToLast(20).on('child_added', onReceive);
+        }
     }
 
 
@@ -113,7 +120,7 @@ export default class ChatService extends SuperService {
 
 
         // Check if thread exists first
-        let threadKey = await this.checkIfThreadExists(loggedUser, "TM14FGH");
+        let threadKey = await this.checkIfThreadExists(loggedUser, chatPartner);
 
         let x = threadKey;
 
@@ -124,7 +131,7 @@ export default class ChatService extends SuperService {
             // Create new thread 
             let yyy = 55;
             threadKey = this.messagesRef.push().key;
-            await this.createNewThread(threadKey, "TM15ABI", "TM14FGH");
+            await this.createNewThread(threadKey, loggedUser, chatPartner);
         }
 
         let z = 99;
@@ -132,10 +139,10 @@ export default class ChatService extends SuperService {
         // Create new message
         this.messagesRef = this.firebaseApp.database().ref(`threads/${threadKey}/messages`)
 
-        for(let i = 0; i < message.length; i++) {
+        for (let i = 0; i < message.length; i++) {
             this.messagesRef.push({
-                text: message[i].text, 
-                user: message[i].user, 
+                text: message[i].text,
+                user: message[i].user,
                 createdAt: new Date().getTime()
             });
         }
