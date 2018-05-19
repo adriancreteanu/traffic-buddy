@@ -195,7 +195,7 @@ class HomePage extends Component {
         await this.getDataFromPreferences();
 
         if (this.state.username) {
-            userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
+            await userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
             await newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
 
             this.saveInitialPostsToState();
