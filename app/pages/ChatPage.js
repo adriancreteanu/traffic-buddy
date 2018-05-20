@@ -30,7 +30,7 @@ class ChatPage extends Component {
 
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: <NavTitleUI title={navigation.state.params.user.username} />,
+        headerTitle: <NavTitleUI title={navigation.state.params.user} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => {
@@ -85,7 +85,7 @@ class ChatPage extends Component {
 
         this.setState({
             loggedInUser: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername),
-            chatPartner: this.props.navigation.state.params.user.username,
+            chatPartner: this.props.navigation.state.params.user,
         });
 
         // let payload: chatPayloads.fetchChatMessagesPayloadType = {

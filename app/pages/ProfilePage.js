@@ -169,7 +169,7 @@ class ProfilePage extends Component {
                             buttonTitle={strings.sendMessage.toUpperCase()}
                             style={{ marginTop: 30 }}
                             borderRadius={5}
-                            onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user)}
+                            onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user.username)}
                         />
                     </View>
 

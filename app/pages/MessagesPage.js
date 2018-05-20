@@ -81,6 +81,12 @@ class MessagesPage extends Component {
         }
     }
 
+
+    navigateToChatPage(chatPartner: string) {
+        navActions.navigateToChatPage(chatPartner)(this.props.dispatch);
+    }
+
+
     render() {
         return this.state.threads.length != 0 ? (
             <View style={styles.container}>
@@ -90,6 +96,7 @@ class MessagesPage extends Component {
                         <MessageItem
                             chatPartner={item.chatPartner}
                             lastMessageHour={"22:34"}
+                            onThreadPress={() => this.navigateToChatPage(item.chatPartner)}
                         />
                     )}
                     keyExtractor={item => item.id}
