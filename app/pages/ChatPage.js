@@ -59,6 +59,7 @@ class ChatPage extends Component {
             loggedInUser: "",
             chatPartner: "",
             lastMessageId: "",
+            isNewConversation: false,
         }
 
         this.preferencesRepo = new PreferencesRepo();
@@ -81,6 +82,16 @@ class ChatPage extends Component {
         }
     }
 
+    async componentWillReceiveProps(nextProps) {
+
+        if(this.state.messages.length == 0) {
+            this.setState({
+                isNewConversation: true
+            });
+        }
+
+    }
+
     async componentDidMount() {
 
         this.setState({
@@ -96,14 +107,18 @@ class ChatPage extends Component {
         // await chatActions.fetchMessages(payload)(this.props.dispatch);
         // this.saveInitialMessagesToState();
 
+        let x = 2;
 
-        await this.chatService.loadMessages(this.state.loggedInUser, this.state.chatPartner, (message) => {
-            this.setState((previousState) => {
+
+        await this.chatService.loadMessages(this.state.loggedInUser, this.state.chatPartner, async (message) => {
+            await this.setState((previousState) => {
                 return {
                     messages: GiftedChat.append(previousState.messages, message)
                 };
             });
         });
+
+       
 
 
     }
@@ -138,17 +153,24 @@ class ChatPage extends Component {
     // }
 
     render() {
-        return this.state.messages.length != 0 ? (
+        return !this.props.fetchMessagesReducer.isInProgress ? (
             <GiftedChat
                 messages={this.state.messages}
                 renderBubble={this.renderBubble}
                 renderAvatar={null}
                 onSend={(message) => {
-                    this.chatService.sendMessage(message,this.state.loggedInUser, this.state.chatPartner)
+                    this.state.messages.length == 0 || this.state.isNewConversation ?
+                        this.setState((previousState) => {
+                            return {
+                                isNewConversation: true,
+                                messages: GiftedChat.append(previousState.messages, message)
+                            };
+                        }) : null;
+                    this.chatService.sendMessage(message, this.state.loggedInUser, this.state.chatPartner)
                 }}
 
                 user={{
-                    _id: this.state.loggedInUser, 
+                    _id: this.state.loggedInUser,
                     name: this.state.loggedInUser,
                 }}
 
@@ -168,7 +190,6 @@ class ChatPage extends Component {
 
     }
 }
-
 
 
 function mapStateToProps(state) {
