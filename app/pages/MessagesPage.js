@@ -5,7 +5,8 @@ import {
     Text,
     TouchableHighlight,
     StyleSheet,
-    ScrollView
+    ScrollView,
+    FlatList
 } from 'react-native';
 
 import NavRightIcon from "../components/navigation/NavRightIcon";
@@ -16,6 +17,11 @@ import NavLeftAddIcon from '../components/navigation/NavLeftAddIcon';
 import * as navActions from "../common/redux/actions/NavigationActions";
 
 import { strings } from "../common/localization/strings-repository";
+
+import { connect } from "react-redux";
+
+import MessageItem from "../components/MessageItem";
+import { Item } from 'native-base';
 
 class MessagesPage extends Component {
 
@@ -56,21 +62,54 @@ class MessagesPage extends Component {
         headerTintColor: '#FFF'
     });
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            threads: []
+        }
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        let userReducer = nextProps.userReducer;
+
+        if (userReducer && userReducer.viewModel) {
+            let threads = userReducer.viewModel.userProfileViewModel.threads.threadsList;
+            this.setState({
+                threads: threads
+            })
+        }
+    }
+
     render() {
-        return (
-            <View style={styles.container}> 
-                <Text>No messages found</Text>
+        return this.state.threads.length != 0 ? (
+            <View style={styles.container}>
+                <FlatList
+                    data={this.state.threads}
+                    renderItem={({ item }) => (
+                        <MessageItem
+                            chatPartner={item.chatPartner}
+                            lastMessageHour={"22:34"}
+                        />
+                    )}
+                    keyExtractor={item => item.id}
+                />
             </View>
-        )
+        ) : <View />
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center'
+        flex: 1,
+        backgroundColor: "#FFF",
     }
 });
 
-export default MessagesPage;
+function mapStateToProps(state) {
+    return {
+        userReducer: state.userReducer
+    }
+}
+
+export default connect(mapStateToProps)(MessagesPage);
