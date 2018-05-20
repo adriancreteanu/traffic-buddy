@@ -72,33 +72,28 @@ class ProfilePage extends Component {
                 style={styles.container}
                 contentContainerStyle={{ flex: 1, justifyContent: 'center', backgroundColor: colors.General.whiteColor }} >
 
-                <View style={styles.topContainer}>
-
-                    <View style={styles.statisticsSection}>
-                        <View style={styles.textsSection}>
-                            <Text style={styles.textStyle}>{strings.rank}</Text>
-                            <Text style={styles.textStyle}>{strings.likes}</Text>
-                            <Text style={styles.textStyle}>{strings.dislikes}</Text>
-                        </View>
-
-                        <View style={styles.numbersSection}>
-                            <Text style={styles.numberStyle}>15</Text>
-                            <Text style={styles.numberStyle}>77</Text>
-                            <Text style={styles.numberStyle}>134</Text>
-                        </View>
-                    </View>
-
-
-
-                </View>
-
-
                 <LinearGradient
                     start={{ x: 0.0, y: 1.0 }}
                     end={{ x: 1.0, y: 0.1 }}
                     colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
                     style={{ flex: 2 }}
                 >
+                    <View style={styles.topContainer}>
+
+                        <View style={styles.statisticsSection}>
+                            <View style={styles.textsSection}>
+                                <Text style={styles.textStyle}>{strings.rank}</Text>
+                                <Text style={styles.textStyle}>{strings.likes}</Text>
+                                <Text style={styles.textStyle}>{strings.dislikes}</Text>
+                            </View>
+
+                            <View style={styles.numbersSection}>
+                                <Text style={styles.numberStyle}>15</Text>
+                                <Text style={styles.numberStyle}>77</Text>
+                                <Text style={styles.numberStyle}>134</Text>
+                            </View>
+                        </View>
+                    </View>
 
                     <View style={styles.bottomContainer}>
                         <View style={styles.iconsSection}>
@@ -184,22 +179,21 @@ class ProfilePage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.General.whiteColor,
     },
     topContainer: {
         flex: 1,
         paddingTop: 30,
         paddingBottom: 10,
         alignItems: 'center',
-        backgroundColor: "#f8f8f8",
+        backgroundColor: 'rgba(248,248,248, 0.7)',
         justifyContent: 'center',
         shadowOpacity: 0.3,
         shadowOffset: { height: 5 },
         elevation: 6,
     },
     bottomContainer: {
-        flex: 2,
-        padding: 30,
+        flex: 2.5,
+        padding: 40,
         alignItems: 'center',
     },
     statisticsSection: {
