@@ -18,10 +18,16 @@ import * as navActions from "../common/redux/actions/NavigationActions";
 
 import { strings } from "../common/localization/strings-repository";
 
+import * as colors from "../styles/Colors";
+
 import { connect } from "react-redux";
 
 import MessageItem from "../components/MessageItem";
 import { Item } from 'native-base';
+import ChatService from '../common/data/services/ChatService';
+import ThreadModel from '../common/data/models/ThreadModel';
+import PreferencesRepo from '../common/data/repos/PreferencesRepo';
+import { PreferenceKeys } from '../common/constants/PreferenceKeys';
 
 class MessagesPage extends Component {
 
@@ -65,21 +71,40 @@ class MessagesPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loggedUser: "",
             threads: []
         }
+
+        this.chatService = new ChatService();
+        this.preferencesRepo = new PreferencesRepo();
     }
 
+    async componentDidMount() {
 
-    componentWillReceiveProps(nextProps) {
-        let userReducer = nextProps.userReducer;
+        /* Fetch logged user username from storage */
+        this.setState({
+            loggedUser: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername)
+        });
 
-        if (userReducer && userReducer.viewModel) {
-            let threads = userReducer.viewModel.userProfileViewModel.threads.threadsList;
+        /* Load all threads for logged user */
+        await this.chatService.loadThreads(this.state.loggedUser, (thread) => {
             this.setState({
-                threads: threads
-            })
-        }
+                threads: [...this.state.threads, new ThreadModel(thread, thread.id)]
+            });
+        });
     }
+
+
+    // componentWillReceiveProps(nextProps) {
+    //     let userReducer = nextProps.userReducer;
+
+    //     if (userReducer && userReducer.viewModel) {
+    //         let threads = userReducer.viewModel.userProfileViewModel.threads.threadsList;
+    //         this.setState({
+    //             threads: threads
+    //         })
+    //     }
+    // }
 
 
     navigateToChatPage(chatPartner: string) {
@@ -109,7 +134,7 @@ class MessagesPage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFF",
+        backgroundColor: colors.General.appPrimaryBackground,
     }
 });
 

@@ -37,6 +37,21 @@ export default class ChatService extends SuperService {
         return response;
     }
 
+    async loadThreads(loggedUser: string, callback) {
+
+        this.messagesRef = this.firebaseApp.database().ref(`users/TM/${loggedUser}/threads`);
+        this.messagesRef.off();
+
+        const onReceive = (data) => {
+            const thread = data.val();
+            callback({
+                id: data.key,
+                chatPartner: thread.chatPartner
+            });
+        };
+        this.messagesRef.limitToLast(20).on('child_added', onReceive);
+    }
+    
 
 
 
