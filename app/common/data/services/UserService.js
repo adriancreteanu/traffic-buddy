@@ -15,7 +15,7 @@ export default class UserService extends SuperService {
             .then(snapshot => {
                 let user = snapshot.val();
                 if (user) {
-                    response = new UserProfileModel(user);
+                    response = new UserProfileModel(user, snapshot.key);
                 } else {
                     let error = {
                         message: "User does not exist2as",

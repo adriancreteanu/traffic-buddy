@@ -1,20 +1,23 @@
 import ThreadsListModel from "./ThreadsListModel";
+import RankingModel from "./RankingModel";
 
 export default class UserProfileModel {
 
-    email: ?string;
-    firstName: ?string;
-    lastName: ?string;
-    rank: ?number;
+    username: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    ranking: RankingModel;
     threads: ThreadsListModel;
 
 
-    constructor(firebaseObject) {
+    constructor(firebaseObject, key: string) {
         const userProfile = firebaseObject;
+        this.username = key;
         this.email = userProfile.email;
         this.firstName = userProfile.firstName;
         this.lastName = userProfile.lastName;
-        this.rank = userProfile.rank;
+        this.ranking = new RankingModel(userProfile.ranking);
         this.threads = new ThreadsListModel(userProfile.threads);
     }
 }

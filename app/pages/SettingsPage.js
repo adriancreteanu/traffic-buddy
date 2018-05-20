@@ -23,6 +23,10 @@ import * as authActions from "../common/redux/actions/AuthenticationActions";
 import NavLeftIcon from '../components/navigation/NavLeftIcon';
 import NavRightIcon from '../components/navigation/NavRightIcon';
 import NavTitleUI from '../components/navigation/NavTitleUI';
+import PreferencesRepo from '../common/data/repos/PreferencesRepo';
+import { PreferenceKeys } from '../common/constants/PreferenceKeys';
+
+import * as navActions from "../common/redux/actions/NavigationActions";
 
 class SettingsPage extends Component {
 
@@ -74,10 +78,34 @@ class SettingsPage extends Component {
         authActions.signOutAction()(this.props.dispatch);
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            loggedUser: null
+        }
+
+        this.preferencesRepo = new PreferencesRepo();
+    }
+
+    async componentWillReceiveProps(nextProps) {
+        let userReducer = nextProps.userReducer;
+
+        if(userReducer && userReducer.viewModel) {
+            this.setState({
+                loggedUser: userReducer.viewModel.userProfileViewModel
+            })
+        }
+    }
+
+    navigateToMyProfile(loggedUser: string) {
+        navActions.navigateToProfilePage(loggedUser)(this.props.dispatch);
+    }
+
 
     render() {
+        
+        
         return (
-
             <LinearGradient
                 start={{ x: 0.0, y: 1.0 }}
                 end={{ x: 1.0, y: 0.1 }}
@@ -95,6 +123,7 @@ class SettingsPage extends Component {
                         buttonTitle={strings.myProfile}
                         style={{ marginTop: 30, marginBottom: 10 }}
                         onPress={() => {
+                            this.navigateToMyProfile(this.state.loggedUser)
                         }}
                     />
 
@@ -132,6 +161,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
+        userReducer: state.userReducer, 
         navigationReducer: state.navigationReducer
     };
 }
