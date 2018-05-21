@@ -24,7 +24,6 @@ import NavTitleUI from '../components/navigation/NavTitleUI';
 
 // strings
 import { strings } from "../common/localization/strings-repository";
-import CustomTextInput from '../components/CustomTextInput';
 import CustomBigTextInput from '../components/CustomBigTextInput';
 import CustomButton from '../components/CustomButton';
 

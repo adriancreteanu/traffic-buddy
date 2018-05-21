@@ -45,6 +45,7 @@ sendMessage: "Send a message",
 
 // Search page
 searchPageTitle: "Search",
+searchPlaceholder: "Type a plate number", 
 
 // Alerts
 yesAlertOption: "Yes", 

@@ -16,7 +16,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import * as colors from "../styles/Colors";
 
 //custom components
-import CustomTextInput from "../components/CustomTextInput";
 import CustomButton from "../components/CustomButton";
 
 //helpers

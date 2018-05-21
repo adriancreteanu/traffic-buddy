@@ -20,7 +20,6 @@ import { connect } from 'react-redux';
 import CustomButton from '../components/CustomButton';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CustomTextInput from '../components/CustomTextInput';
 
 import * as navActions from "../common/redux/actions/NavigationActions";
 import PostModel from '../common/data/models/PostModel';

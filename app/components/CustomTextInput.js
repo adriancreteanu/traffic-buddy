@@ -12,14 +12,15 @@ class CustomTextInput extends Component {
           {
             color: '#000',
             //fontWeight: 'bold',
-            fontSize: 16,
+            fontSize: this.props.fontSize,
             width: this.props.width,
             height: this.props.height,
             borderColor: "transparent",
             borderWidth: 1,
             backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            paddingLeft: 20,
-            borderRadius: this.props.borderRadius
+            paddingLeft: this.props.paddingLeft,
+            borderRadius: this.props.borderRadius, 
+            textAlign: this.props.textAlign, 
           }
         ]}
         onChangeText={this.props.onChangeText}
@@ -35,6 +36,7 @@ class CustomTextInput extends Component {
         autoCapitalize={this.props.autoCapitalize}
         secureTextEntry={this.props.isPassword}
         keyboardType={this.props.keyboardType}
+        onEndEditing={this.props.onEndEditing}
       />
     );
   }

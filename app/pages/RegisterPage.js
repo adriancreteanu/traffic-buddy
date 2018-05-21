@@ -123,6 +123,8 @@ class RegisterPage extends Component {
                             autoCapitalize="characters"
                             maxLength={7}
                             borderRadius={5}
+                            paddingLeft={20}
+                            fontSize={16}
                         />
 
                         <CustomTextInput
@@ -139,6 +141,8 @@ class RegisterPage extends Component {
                             value={this.state.firstName}
                             //autoCapitalize="characters"
                             borderRadius={5}
+                            paddingLeft={20}
+                            fontSize={16}
                         />
 
                         <CustomTextInput
@@ -154,7 +158,8 @@ class RegisterPage extends Component {
                             }
                             value={this.state.lastName}
                             borderRadius={5}
-                        //autoCapitalize="characters"
+                            paddingLeft={20}
+                            fontSize={16}
                         />
 
                         <CustomTextInput
@@ -170,6 +175,8 @@ class RegisterPage extends Component {
                             }
                             value={this.state.email}
                             borderRadius={5}
+                            paddingLeft={20}
+                            fontSize={16}
                         />
 
                         <CustomTextInput
@@ -187,6 +194,8 @@ class RegisterPage extends Component {
                             maxLength={20}
                             isPassword={true}
                             borderRadius={5}
+                            paddingLeft={20}
+                            fontSize={16}
                         />
 
                         <CustomTextInput
@@ -204,6 +213,8 @@ class RegisterPage extends Component {
                             maxLength={20}
                             isPassword={true}
                             borderRadius={5}
+                            paddingLeft={20}
+                            fontSize={16}
                         />
 
                         <CustomButton
@@ -217,8 +228,9 @@ class RegisterPage extends Component {
                                 Keyboard.dismiss()
                                 this.validateRegisterCredentials();
                             }}
-
                             borderRadius={5}
+                            paddingLeft={20}
+                            fontSize={16}
                         />
 
                         {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (

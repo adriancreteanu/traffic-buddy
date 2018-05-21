@@ -45,6 +45,7 @@ sendMessage: "Trimite un mesaj",
 
 // Search page
 searchPageTitle: "Căutare",
+searchPlaceholder: "Tastați un număr de înmatriculare", 
 
 // Alerts
 yesAlertOption: "Da", 
