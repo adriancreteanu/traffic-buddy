@@ -27,6 +27,9 @@ import PostModel from '../common/data/models/PostModel';
 
 import LinearGradient from 'react-native-linear-gradient';
 
+import * as userActions from "../common/redux/actions/UserActions";
+import { LinesLoader } from 'react-native-indicator';
+
 class ProfilePage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
@@ -62,12 +65,31 @@ class ProfilePage extends Component {
         };
     }
 
+    async componentDidMount() {
+        const username = this.props.navigation.state.params.user.username;
+
+        if (username) {
+            let y = 2;
+            await userActions.fetchUserProfile(username)(this.props.dispatch);
+
+            let x = 2;
+        }
+    }
+
     navigateToChatPage(post: PostModel) {
         navActions.navigateToChatPage(post)(this.props.dispatch);
     }
 
     render() {
-        return (
+
+        let userReducer = this.props.userReducer;
+        let userData = null;
+
+        if (userReducer.viewModel) {
+            userData = userReducer.viewModel.userProfileViewModel;
+        }
+
+        return userData ? (
             <ScrollView
                 style={styles.container}
                 contentContainerStyle={{ flex: 1, justifyContent: 'center', backgroundColor: colors.General.whiteColor }} >
@@ -88,9 +110,9 @@ class ProfilePage extends Component {
                             </View>
 
                             <View style={styles.numbersSection}>
-                                <Text style={styles.numberStyle}>15</Text>
-                                <Text style={styles.numberStyle}>77</Text>
-                                <Text style={styles.numberStyle}>134</Text>
+                                <Text style={styles.numberStyle}>{userData.ranking.rank}</Text>
+                                <Text style={styles.numberStyle}>{userData.ranking.likes}</Text>
+                                <Text style={styles.numberStyle}>{userData.ranking.dislikes}</Text>
                             </View>
                         </View>
                     </View>
@@ -172,7 +194,24 @@ class ProfilePage extends Component {
                 </LinearGradient>
 
             </ScrollView>
-        );
+        ) : (
+                <LinearGradient
+                    start={{ x: 0.0, y: 1.0 }}
+                    end={{ x: 1.0, y: 0.1 }}
+                    colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
+                    style={{ flex: 2 }}
+                >
+                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
+                        <LinesLoader
+                            //color='rgba(169, 20, 20, 0.9)'
+                            color={colors.General.appSecondary}
+                            barHeight={65}
+                            barWidth={6}
+                            betweenSpace={7}
+                        />
+                    </View>
+                </LinearGradient>
+            );
     }
 }
 
@@ -232,7 +271,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        userReducer: state.userReducer
+        loggedUserReducer: state.loggedUserReducer,
+        userReducer: state.userReducer,
     };
 }
 

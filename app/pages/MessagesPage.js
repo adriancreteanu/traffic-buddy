@@ -96,10 +96,10 @@ class MessagesPage extends Component {
 
 
     // componentWillReceiveProps(nextProps) {
-    //     let userReducer = nextProps.userReducer;
+    //     let loggedUserReducer = nextProps.loggedUserReducer;
 
-    //     if (userReducer && userReducer.viewModel) {
-    //         let threads = userReducer.viewModel.userProfileViewModel.threads.threadsList;
+    //     if (loggedUserReducer && loggedUserReducer.viewModel) {
+    //         let threads = loggedUserReducer.viewModel.userProfileViewModel.threads.threadsList;
     //         this.setState({
     //             threads: threads
     //         })
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        userReducer: state.userReducer
+        loggedUserReducer: state.loggedUserReducer
     }
 }
 

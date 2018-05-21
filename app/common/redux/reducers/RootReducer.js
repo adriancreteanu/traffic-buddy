@@ -5,6 +5,7 @@ import { signOutReducer } from "./SignOutReducer";
 import { appReducer } from "./AppReducer";
 import { registerReducer } from "./RegisterReducer";
 import { postReducer } from "./PostReducer";
+import { loggedUserReducer } from "./LoggedUserReducer";
 import { userReducer } from "./UserReducer";
 import { fetchPostsReducer } from "./FetchPostsReducer";
 import { fetchMessagesReducer } from "./FetchMessagesReducer";
@@ -21,6 +22,7 @@ export const RootReducer = combineReducers({
     appReducer: appReducer,
     registerReducer: registerReducer,
     postReducer: postReducer,
+    loggedUserReducer: loggedUserReducer,
     userReducer: userReducer,
     fetchPostsReducer: fetchPostsReducer,
     fetchMessagesReducer: fetchMessagesReducer,

@@ -88,11 +88,11 @@ class SettingsPage extends Component {
     }
 
     async componentWillReceiveProps(nextProps) {
-        let userReducer = nextProps.userReducer;
+        let loggedUserReducer = nextProps.loggedUserReducer;
 
-        if(userReducer && userReducer.viewModel) {
+        if(loggedUserReducer && loggedUserReducer.viewModel) {
             this.setState({
-                loggedUser: userReducer.viewModel.userProfileViewModel
+                loggedUser: loggedUserReducer.viewModel.userProfileViewModel
             })
         }
     }
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        userReducer: state.userReducer, 
+        loggedUserReducer: state.loggedUserReducer, 
         navigationReducer: state.navigationReducer
     };
 }

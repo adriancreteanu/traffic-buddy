@@ -3,10 +3,23 @@ import UserProfileViewModel from "../../data/viewmodels/UserProfileViewModel";
 import ErrorViewModel from "../../data/viewmodels/error/ErrorViewModel";
 
 export const userActionTypes = {
+    fetchLoggedUserInProgress: "fetchLoggedUserInProgress", 
+    fetchLoggedUserSuccess: "fetchLoggedUserSuccess",
+    fetchLoggedUserFailure: "fetchLoggedUserFailure",
     fetchUserInProgress: "fetchUserInProgress", 
     fetchUserSuccess: "fetchUserSuccess",
     fetchUserFailure: "fetchUserFailure"
 }
+
+export function fetchLoggedUserProfile(username: ?string) {
+    return async function(dispatch: any) {
+        let type = userActionTypes.fetchLoggedUserInProgress;
+        dispatchInProgressAction(dispatch, true, type);
+        let userManager = new UserManager();
+        let response = await userManager.fetchUserProfile(username);
+        handleResponse(dispatch, response);
+    }
+} 
 
 export function fetchUserProfile(username: ?string) {
     return async function(dispatch: any) {
@@ -14,7 +27,7 @@ export function fetchUserProfile(username: ?string) {
         dispatchInProgressAction(dispatch, true, type);
         let userManager = new UserManager();
         let response = await userManager.fetchUserProfile(username);
-        handleResponse(dispatch, response);
+        handleUserResponse(dispatch, response);
     }
 } 
 
@@ -34,6 +47,33 @@ function dispatchInProgressAction(
 }
 
 function handleResponse(
+    dispatch: any,
+    response: UserProfileViewModel | ErrorViewModel
+) {
+    let action = null;
+    if (response instanceof UserProfileViewModel) {
+        action = {
+            type: userActionTypes.fetchLoggedUserSuccess,
+            isInProgress: false,
+            errorViewModel: null,
+            viewModel: response,
+            isFinishedWithSuccess: true
+        };
+        dispatch(action);
+    } else if (response instanceof ErrorViewModel) {
+        action = {
+            type: userActionTypes.fetchLoggedUserFailure,
+            isInProgress: false,
+            errorViewModel: response,
+            viewModel: null,
+            isFinishedWithSuccess: false,
+        };
+        dispatch(action);
+    }
+}
+
+
+function handleUserResponse(
     dispatch: any,
     response: UserProfileViewModel | ErrorViewModel
 ) {

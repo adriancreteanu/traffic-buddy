@@ -166,7 +166,7 @@ class HomePage extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        //let userProfile = nextProps.userReducer;
+        //let userProfile = nextProps.loggedUserReducer;
 
         //let postsReducer = nextProps.fetchPostsReducer;
         //let posts = null;   
@@ -195,7 +195,7 @@ class HomePage extends Component {
         await this.getDataFromPreferences();
 
         if (this.state.username) {
-            await userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
+            await userActions.fetchLoggedUserProfile(this.state.username)(this.props.dispatch);
             await newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
 
             this.saveInitialPostsToState();
@@ -316,7 +316,7 @@ class HomePage extends Component {
 function mapStateToProps(state) {
     return {
         navigationReducer: state.navigationReducer,
-        userReducer: state.userReducer,
+        loggedUserReducer: state.loggedUserReducer,
         fetchPostsReducer: state.fetchPostsReducer,
     };
 }

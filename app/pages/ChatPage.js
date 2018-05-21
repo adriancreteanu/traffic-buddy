@@ -194,7 +194,7 @@ class ChatPage extends Component {
 
 function mapStateToProps(state) {
     return {
-        userReducer: state.userReducer,
+        loggedUserReducer: state.loggedUserReducer,
         fetchMessagesReducer: state.fetchMessagesReducer
     };
 }
