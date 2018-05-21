@@ -29,6 +29,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import * as userActions from "../common/redux/actions/UserActions";
 import { LinesLoader } from 'react-native-indicator';
+import PreferencesRepo from '../common/data/repos/PreferencesRepo';
+import { PreferenceKeys } from '../common/constants/PreferenceKeys';
 
 class ProfilePage extends Component {
 
@@ -61,19 +63,26 @@ class ProfilePage extends Component {
 
         this.state = {
             likeIconClicked: false,
-            dislikeIconClicked: false
+            dislikeIconClicked: false, 
+            isLoggedUserProfile: false,
         };
+
+        this.preferencesRepo = new PreferencesRepo();
     }
 
     async componentDidMount() {
         const username = this.props.navigation.state.params.user.username;
+        const loggedUser = await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername);
 
-        if (username) {
-            let y = 2;
-            await userActions.fetchUserProfile(username)(this.props.dispatch);
-
-            let x = 2;
+    
+        if(username == loggedUser) {
+            await this.setState({
+                isLoggedUserProfile: true
+            });
+            return;
         }
+        
+        userActions.fetchUserProfile(username)(this.props.dispatch);
     }
 
     navigateToChatPage(post: PostModel) {
@@ -82,11 +91,12 @@ class ProfilePage extends Component {
 
     render() {
 
-        let userReducer = this.props.userReducer;
         let userData = null;
-
-        if (userReducer.viewModel) {
-            userData = userReducer.viewModel.userProfileViewModel;
+        
+        if(this.state.isLoggedUserProfile) {
+            userData = this.props.loggedUserReducer.viewModel.userProfileViewModel;
+        } else if(this.props.userReducer.viewModel) {
+            userData = this.props.userReducer.viewModel.userProfileViewModel
         }
 
         return userData ? (
@@ -205,9 +215,9 @@ class ProfilePage extends Component {
                         <LinesLoader
                             //color='rgba(169, 20, 20, 0.9)'
                             color={colors.General.appSecondary}
-                            barHeight={65}
-                            barWidth={6}
-                            betweenSpace={7}
+                            barHeight={60}
+                            barWidth={4}
+                            betweenSpace={5}
                         />
                     </View>
                 </LinearGradient>
