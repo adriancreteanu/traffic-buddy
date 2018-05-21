@@ -39,79 +39,9 @@ import NewsFeedItem from '../components/news_feed/NewsFeedItem';
 import { LinesLoader } from 'react-native-indicator';
 import PostModel from '../common/data/models/PostModel';
 
-
-const mockNewsFeedItems = [
-    {
-        id: 1,
-        username: "TM15ABI",
-        rank: 14,
-        category: "Radar",
-        message: "Atentie Radar pe Take Ionescu",
-        hour: "13:55"
-    }, {
-        id: 2,
-        username: "GJ22KJI",
-        rank: -2,
-        category: "Accident",
-        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
-        hour: "16:22"
-    }, {
-        id: 3,
-        username: "AR12OPI",
-        rank: 0,
-        category: "Trafic",
-        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
-        hour: "09:32"
-    }, {
-        id: 4,
-        username: "TM15ABI",
-        rank: 14,
-        category: "Radar",
-        message: "Atentie Radar pe Take Ionescu acesta este un mesaj foarte lung asda ad adsnasd asdnasjdas asdnajsdna asdnajdasnd saadsdjnajdnasj andjsandajsnd saanjsnqwnqwnenasd lireajsdsandas najdnjasndjandajn nasjdnasasdas najsdnajsnd andasjnsnasjdnajndasj",
-        hour: "16:22"
-    }, {
-        id: 5,
-        username: "GJ22KJI",
-        rank: -2,
-        category: "Accident",
-        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
-        hour: "05:12"
-    }, {
-        id: 6,
-        username: "AR12OPI",
-        rank: 0,
-        category: "Trafic",
-        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
-        hour: "00:12"
-    }, {
-        id: 7,
-        username: "TM15ABI",
-        rank: 14,
-        category: "Radar",
-        message: "Atentie Radar pe Take Ionescu",
-        hour: "11:10"
-    }, {
-        id: 8,
-        username: "GJ22KJI",
-        rank: -2,
-        category: "Accident",
-        message: "Accident la iesire din oras pe Calea Lugojului. Se merge bara la bara",
-        hour: "19:45"
-    }, {
-        id: 9,
-        username: "AR12OPI",
-        rank: 0,
-        category: "Trafic",
-        message: "Trafic infernal pe strada Paris. Ocoliti zona daca aveti drum pe aici",
-        hour: "06:42"
-    }
-]
-
-
 class HomePage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        //title: DateHelper.generateCurrentDate(),
         headerTitle: <NavTitleUI title={DateHelper.generateCurrentDate()} />,
         headerLeft:
             <View style={{
@@ -120,7 +50,12 @@ class HomePage extends Component {
                 justifyContent: 'center',
                 flexDirection: 'row'
             }}>
-                <NavLeftIcon icon="search" />
+                <NavLeftIcon
+                    icon="search"
+                    onPress={() => {
+                        navActions.navigateToSearchPage()(navigation.dispatch);
+                    }}
+                />
                 <NavLeftAddIcon
                     onPress={() => {
                         navActions.navigateToPostPage()(navigation.dispatch);
@@ -136,7 +71,6 @@ class HomePage extends Component {
                 }}
             />,
         headerStyle: {
-            //backgroundColor: '#c6bf69',
             backgroundColor: "#FA1",
             borderBottomColor: 'transparent',
             borderBottomWidth: 1
@@ -283,9 +217,9 @@ class HomePage extends Component {
                             hour={item.hour}
                             onUserPress={() => this.navigateToProfilePage(item)}
                         />
-                        
+
                     )}
-                    
+
                     keyExtractor={item => item.id}
                     ListFooterComponent={this.renderFooter}
                     onEndReached={this.handleLoadMore.bind(this)}
@@ -295,7 +229,7 @@ class HomePage extends Component {
                     style={{
                         backgroundColor: '#f8f8f8'
                     }}
-                    
+
                 />
             </View>
         ) : (

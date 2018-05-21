@@ -9,6 +9,7 @@ export const navigationActionTypes = {
     navigateToPostPage: "navigateToPostPage",
     navigateToProfilePage: "navigateToProfilePage",
     navigateToChatPage: "navigateToChatPage",
+    navigateToSearchPage: "navigateToSearchPage",
 };
 
 export function navigateToLoginPage() {
@@ -71,6 +72,15 @@ export function navigateToChatPage(user: Any) {
         let action = {
             type: navigationActionTypes.navigateToChatPage, 
             user: user
+        };
+        dispatch(action);
+    }
+}
+
+export function navigateToSearchPage() {
+    return function(dispatch: any) {
+        let action = {
+            type: navigationActionTypes.navigateToSearchPage
         };
         dispatch(action);
     }

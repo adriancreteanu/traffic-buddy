@@ -43,6 +43,9 @@ dislikes: "Dislikes",
 connect: "Connect",
 sendMessage: "Send a message",
 
+// Search page
+searchPageTitle: "Search",
+
 // Alerts
 yesAlertOption: "Yes", 
 cancelAlertOption: "Cancel", 

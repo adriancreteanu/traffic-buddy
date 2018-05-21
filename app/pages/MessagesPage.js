@@ -40,7 +40,12 @@ class MessagesPage extends Component {
                 justifyContent: 'center',
                 flexDirection: 'row'
             }}>
-                <NavLeftIcon icon="search" />
+                <NavLeftIcon
+                    icon="search"
+                    onPress={() => {
+                        navActions.navigateToSearchPage()(navigation.dispatch);
+                    }}
+                />
                 <NavLeftAddIcon
                     onPress={() => {
                         navActions.navigateToPostPage()(navigation.dispatch);

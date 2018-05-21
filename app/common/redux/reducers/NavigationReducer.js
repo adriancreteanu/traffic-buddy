@@ -102,7 +102,19 @@ export const navigationReducer = (state: any = initialNavigationState, action: a
         case navigationActionTypes.navigateToChatPage:
             nextState = AppNavigator.router.getStateForAction(
                 NavigationActions.navigate({
-                    routeName: "Chat", 
+                    routeName: "Chat",
+                    params: {
+                        user: action.user
+                    }
+                }),
+                state
+            );
+            break;
+
+        case navigationActionTypes.navigateToSearchPage:
+            nextState = AppNavigator.router.getStateForAction(
+                NavigationActions.navigate({
+                    routeName: "Search",
                     params: {
                         user: action.user
                     }

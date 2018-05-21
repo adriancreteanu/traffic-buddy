@@ -43,6 +43,9 @@ dislikes: "Hateri",
 connect: "Conectare",
 sendMessage: "Trimite un mesaj",
 
+// Search page
+searchPageTitle: "Căutare",
+
 // Alerts
 yesAlertOption: "Da", 
 cancelAlertOption: "Anulare", 

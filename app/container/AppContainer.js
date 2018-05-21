@@ -34,6 +34,7 @@ import ChatPage from '../pages/ChatPage';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ProfilePage from '../pages/ProfilePage';
+import SearchPage from '../pages/SearchPage';
 
 
 let stackNavigationOptions = {
@@ -47,9 +48,6 @@ let stackNavigationOptions = {
         shadowRadius: 0,
         borderBottomWidth: 0,
         elevation: 0,
-        //backgroundColor: "red",
-        //paddingTop: 25,
-        //height: 70
     }
 };
 
@@ -75,7 +73,6 @@ const tabBarOptionsIOS = {
     }, 
     style: {
         height: 48, 
-        //backgroundColor: '#aa9f3f',
     },
 }
 
@@ -88,10 +85,6 @@ const tabBarOptionsAndroid = {
         backgroundColor: "#FFF"
     },
     style: {
-        //backgroundColor: "#a94242"
-        //backgroundColor: 'rgba(169, 20, 20, 0.9)',
-        //backgroundColor: 'rgba(221,211,122, 0.8)'
-        //backgroundColor: colors.General.appGradientPrimary
         backgroundColor: 'rgba(51,102,136, 0.5)',
     }
 }
@@ -137,11 +130,9 @@ export const AppNavigator = StackNavigator(
     {
         Main: {
             screen: MainNavigator,
-            //navigationOptions: stackNavigationOptions
         },
         Register: {
             screen: RegisterPage,
-            //navigationOptions: stackNavigationOptions
         },
         Settings: {
             screen: SettingsPage
@@ -155,15 +146,12 @@ export const AppNavigator = StackNavigator(
         Chat: {
             screen: ChatPage
         },
+        Search: {
+            screen: SearchPage
+        },
         Login: {
             screen: LoginNavigator,
             navigationOptions: {
-                // backgroundColor: "transparent",
-                // height: 0,
-                // statusBarStyle: "light-content",
-                // backgroundColor: "red",
-                // headerMode: "none",
-                // mode: "card"
                 header: null
             }
         }
