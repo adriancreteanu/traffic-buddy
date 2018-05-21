@@ -63,7 +63,7 @@ class ProfilePage extends Component {
 
         this.state = {
             likeIconClicked: false,
-            dislikeIconClicked: false, 
+            dislikeIconClicked: false,
             isLoggedUserProfile: false,
         };
 
@@ -74,14 +74,14 @@ class ProfilePage extends Component {
         const username = this.props.navigation.state.params.user.username;
         const loggedUser = await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername);
 
-    
-        if(username == loggedUser) {
+
+        if (username == loggedUser) {
             await this.setState({
                 isLoggedUserProfile: true
             });
             return;
         }
-        
+
         userActions.fetchUserProfile(username)(this.props.dispatch);
     }
 
@@ -89,13 +89,88 @@ class ProfilePage extends Component {
         navActions.navigateToChatPage(post)(this.props.dispatch);
     }
 
+    renderSocialButtons() {
+        return !this.state.isLoggedUserProfile ? (
+            <View style={styles.bottomContainer}>
+                <View style={styles.iconsSection}>
+                    <TouchableHighlight
+                        onShowUnderlay={() => this.setState({
+                            likeIconClicked: true
+                        })}
+                        onHideUnderlay={() => this.setState({
+                            likeIconClicked: false
+                        })}
+                        onPress={() => console.log("Icon pressed")}
+                        underlayColor="transparent"
+                    >
+
+                        <Icon
+                            name={"thumbs-up"}
+                            size={50}
+                            color={
+                                !this.state.likeIconClicked ?
+                                    colors.General.appSecondary :
+                                    colors.General.blueColor
+                            }
+                        />
+                    </TouchableHighlight>
+
+                    <TouchableHighlight
+                        onShowUnderlay={() => this.setState({
+                            dislikeIconClicked: true
+                        })}
+                        onHideUnderlay={() => this.setState({
+                            dislikeIconClicked: false
+                        })}
+                        onPress={() => console.log("Icon pressed")}
+                        underlayColor="transparent"
+                    >
+
+                        <Icon
+                            name={"thumbs-down"}
+                            size={50}
+                            color={
+                                !this.state.dislikeIconClicked ?
+                                    colors.General.appSecondary :
+                                    colors.General.redColor
+                            }
+                        />
+                    </TouchableHighlight>
+
+                </View>
+                <CustomButton
+                    width={260}
+                    height={45}
+                    buttonColor={colors.General.appSecondary}
+                    pressedColor={colors.General.appSecondary}
+                    buttonTitle={strings.connect.toUpperCase()}
+                    style={{ marginTop: 30 }}
+                    borderRadius={5}
+                    onPress={() => {
+                    }}
+                />
+
+                <CustomButton
+                    width={260}
+                    height={45}
+                    buttonColor={colors.General.appSecondary}
+                    pressedColor={colors.General.appSecondary}
+                    buttonTitle={strings.sendMessage.toUpperCase()}
+                    style={{ marginTop: 30 }}
+                    borderRadius={5}
+                    onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user.username)}
+                />
+            </View>
+        ) : null;
+    }
+
     render() {
 
         let userData = null;
-        
-        if(this.state.isLoggedUserProfile) {
+
+        if (this.state.isLoggedUserProfile) {
             userData = this.props.loggedUserReducer.viewModel.userProfileViewModel;
-        } else if(this.props.userReducer.viewModel) {
+        } else if (this.props.userReducer.viewModel) {
             userData = this.props.userReducer.viewModel.userProfileViewModel
         }
 
@@ -127,82 +202,9 @@ class ProfilePage extends Component {
                         </View>
                     </View>
 
-                    <View style={styles.bottomContainer}>
-                        <View style={styles.iconsSection}>
-                            <TouchableHighlight
-                                onShowUnderlay={() => this.setState({
-                                    likeIconClicked: true
-                                })}
-                                onHideUnderlay={() => this.setState({
-                                    likeIconClicked: false
-                                })}
-                                onPress={() => console.log("Icon pressed")}
-                                underlayColor="transparent"
-                            >
-
-                                <Icon
-                                    name={"thumbs-up"}
-                                    size={50}
-                                    color={
-                                        !this.state.likeIconClicked ?
-                                            colors.General.appSecondary :
-                                            colors.General.blueColor
-                                    }
-                                />
-                            </TouchableHighlight>
-
-                            <TouchableHighlight
-                                onShowUnderlay={() => this.setState({
-                                    dislikeIconClicked: true
-                                })}
-                                onHideUnderlay={() => this.setState({
-                                    dislikeIconClicked: false
-                                })}
-                                onPress={() => console.log("Icon pressed")}
-                                underlayColor="transparent"
-                            >
-
-                                <Icon
-                                    name={"thumbs-down"}
-                                    size={50}
-                                    color={
-                                        !this.state.dislikeIconClicked ?
-                                            colors.General.appSecondary :
-                                            colors.General.redColor
-                                    }
-                                />
-                            </TouchableHighlight>
-
-                        </View>
-
-                        <CustomButton
-                            width={260}
-                            height={45}
-                            buttonColor={colors.General.appSecondary}
-                            pressedColor={colors.General.appSecondary}
-                            buttonTitle={strings.connect.toUpperCase()}
-                            style={{ marginTop: 30 }}
-                            borderRadius={5}
-                            onPress={() => {
-
-                            }}
-                        />
-
-                        <CustomButton
-                            width={260}
-                            height={45}
-                            buttonColor={colors.General.appSecondary}
-                            pressedColor={colors.General.appSecondary}
-                            buttonTitle={strings.sendMessage.toUpperCase()}
-                            style={{ marginTop: 30 }}
-                            borderRadius={5}
-                            onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user.username)}
-                        />
-                    </View>
-
+                    {this.renderSocialButtons()}
 
                 </LinearGradient>
-
             </ScrollView>
         ) : (
                 <LinearGradient
@@ -215,9 +217,9 @@ class ProfilePage extends Component {
                         <LinesLoader
                             //color='rgba(169, 20, 20, 0.9)'
                             color={colors.General.appSecondary}
-                            barHeight={60}
-                            barWidth={4}
-                            betweenSpace={5}
+                            barHeight={65}
+                            barWidth={6}
+                            betweenSpace={7}
                         />
                     </View>
                 </LinearGradient>
