@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    StyleSheet, 
+    StyleSheet,
     TouchableHighlight,
+    Image,
 } from 'react-native';
 
 import { connect } from "react-redux";
@@ -83,7 +84,7 @@ class SearchPage extends Component {
 
     navigateToUserProfile() {
         let userReducer = this.props.userReducer;
-        if(userReducer && userReducer.viewModel) {
+        if (userReducer && userReducer.viewModel) {
             navActions.navigateToProfilePage(userReducer.viewModel.userProfileViewModel)(this.props.dispatch);
         }
     }
@@ -104,43 +105,59 @@ class SearchPage extends Component {
         } else if (this.state.userExists != null) {
             return (
                 <TouchableHighlight
-                    onPress={() => this.state.userExists ? this.navigateToUserProfile() : {}} 
+                    onPress={() => this.state.userExists ? this.navigateToUserProfile() : {}}
                     underlayColor={"transparent"}>
-                <View style={styles.userContainer}>
-                    <View style={styles.userContainerContent}>
-                        <Text style={styles.usernameTextStyle}>{this.state.username}</Text>
-                        <Text style={styles.defaultText}>
-                            {
-                                this.state.userExists ?
-                                    strings.found :
-                                    strings.notFound
-                            }
-                        </Text>
-
-                        <View style={styles.sendInviteContainer}>
-                            <Text style={styles.viewTextStyle}>
+                    <View style={styles.userContainer}>
+                        <View style={styles.userContainerContent}>
+                            <Text style={styles.usernameTextStyle}>{this.state.username}</Text>
+                            <Text style={styles.defaultText}>
                                 {
                                     this.state.userExists ?
-                                        strings.viewProfile.toUpperCase() :
-                                        strings.sendInvite.toUpperCase()
+                                        strings.found :
+                                        strings.notFound
                                 }
                             </Text>
-                            <Icon
-                                name={this.state.userExists ? "user-circle" : "envelope-open"}
-                                size={30}
-                                color={colors.General.appSecondary}
-                                style={{
-                                    textAlign: 'center',
-                                    marginTop: 10,
-                                }}
-                            />
+
+                            <View style={styles.sendInviteContainer}>
+                                <Text style={styles.viewTextStyle}>
+                                    {
+                                        this.state.userExists ?
+                                            strings.viewProfile.toUpperCase() :
+                                            strings.sendInvite.toUpperCase()
+                                    }
+                                </Text>
+                                <Icon
+                                    name={this.state.userExists ? "user-circle" : "envelope-open"}
+                                    size={30}
+                                    color={colors.General.appSecondary}
+                                    style={{
+                                        textAlign: 'center',
+                                        marginTop: 10,
+                                    }}
+                                />
+                            </View>
                         </View>
                     </View>
-                </View>
                 </TouchableHighlight>
             )
         } else {
-            return null;
+            return (
+                <View
+                    style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                    <Image
+                        source={require('../assets/images/search_page_icon.png')}
+                        style={{
+                            width: 150,
+                            height: 150,
+                            marginTop: 100,
+                            marginLeft: 5,
+                        }}
+                        resizeMode="contain" />
+                </View>
+            );
         }
     }
 
