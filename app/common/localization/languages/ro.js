@@ -45,7 +45,7 @@ sendMessage: "Trimite un mesaj",
 
 // Search page
 searchPageTitle: "Căutare",
-searchPlaceholder: "Tastați un număr de înmatriculare", 
+searchPlaceholder: "Număr de înmatriculare", 
 viewProfile: "Vedeți profilul",
 sendInvite: "Trimiteți invitație",
 found: "găsit", 

@@ -45,7 +45,7 @@ sendMessage: "Send a message",
 
 // Search page
 searchPageTitle: "Search",
-searchPlaceholder: "Type a plate number", 
+searchPlaceholder: "Plate number", 
 viewProfile: "View profile",
 sendInvite: "Send invite",
 found: "found", 
