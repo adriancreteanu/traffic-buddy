@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet, 
+    TouchableHighlight,
 } from 'react-native';
 
 import { connect } from "react-redux";
@@ -17,6 +18,8 @@ import { strings } from "../common/localization/strings-repository";
 import CustomTextInput from '../components/CustomTextInput';
 
 import * as userActions from "../common/redux/actions/UserActions";
+import * as navActions from "../common/redux/actions/NavigationActions";
+import { LinesLoader } from 'react-native-indicator';
 
 class SearchPage extends Component {
 
@@ -48,17 +51,16 @@ class SearchPage extends Component {
         super(props);
         this.state = {
             username: "",
-            userExists: false,
+            userExists: null,
+            searchInProgress: false,
         };
-    }
-
-    componentDidMount() {
-
     }
 
     async onEndEditing() {
 
-
+        this.setState({
+            searchInProgress: true,
+        })
 
         await userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
 
@@ -66,30 +68,81 @@ class SearchPage extends Component {
 
         if (userReducer.viewModel) {
             this.setState({
+                userExists: true,
+            })
+        } else if (userReducer.errorViewModel) {
+            this.setState({
                 userExists: false,
             })
         }
 
+        this.setState({
+            searchInProgress: false,
+        })
     }
 
-
-    renderUserSection() {
-
-        if (this.state.userExists) {
-            return (
-                <View>
-                    <Text> User exists </Text>
-                </View>
-            )
-        } else {
-            return (
-                <View>
-                    <Text> User does not exist </Text>
-                </View>
-            )
+    navigateToUserProfile() {
+        let userReducer = this.props.userReducer;
+        if(userReducer && userReducer.viewModel) {
+            navActions.navigateToProfilePage(userReducer.viewModel.userProfileViewModel)(this.props.dispatch);
         }
     }
 
+
+    renderUserSection(searchInProgress: boolean) {
+        if (searchInProgress) {
+            return (
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
+                    <LinesLoader
+                        color={colors.General.appSecondary}
+                        barHeight={65}
+                        barWidth={6}
+                        betweenSpace={7}
+                    />
+                </View>
+            )
+        } else if (this.state.userExists != null) {
+            return (
+                <TouchableHighlight
+                    onPress={() => this.state.userExists ? this.navigateToUserProfile() : {}} 
+                    underlayColor={"transparent"}>
+                <View style={styles.userContainer}>
+                    <View style={styles.userContainerContent}>
+                        <Text style={styles.usernameTextStyle}>{this.state.username}</Text>
+                        <Text style={styles.defaultText}>
+                            {
+                                this.state.userExists ?
+                                    strings.found :
+                                    strings.notFound
+                            }
+                        </Text>
+
+                        <View style={styles.sendInviteContainer}>
+                            <Text style={styles.viewTextStyle}>
+                                {
+                                    this.state.userExists ?
+                                        strings.viewProfile.toUpperCase() :
+                                        strings.sendInvite.toUpperCase()
+                                }
+                            </Text>
+                            <Icon
+                                name={this.state.userExists ? "user-circle" : "envelope-open"}
+                                size={30}
+                                color={colors.General.appSecondary}
+                                style={{
+                                    textAlign: 'center',
+                                    marginTop: 10,
+                                }}
+                            />
+                        </View>
+                    </View>
+                </View>
+                </TouchableHighlight>
+            )
+        } else {
+            return null;
+        }
+    }
 
     render() {
 
@@ -107,12 +160,14 @@ class SearchPage extends Component {
                         height={60}
                         style={{ marginTop: 30 }}
                         placeholder={strings.searchPlaceholder}
-                        onChangeText={text =>
+                        onChangeText={text => {
                             this.setState({
                                 ...this.state,
                                 username: text
                             })
-                        }
+                            // To clear user section for a new search
+                            text.length == 1 ? this.setState({ userExists: null }) : null
+                        }}
                         value={this.state.username}
                         maxLength={7}
                         isPassword={false}
@@ -123,28 +178,7 @@ class SearchPage extends Component {
                         onEndEditing={() => this.onEndEditing()}
                     />
 
-
-                    <View style={styles.userContainer}>
-                        <View style={styles.userContainerContent}>
-                            <Text style={styles.usernameTextStyle}>TM15ABI</Text>
-                            <Text style={styles.defaultText}>not found</Text>
-
-                            <View style={styles.sendInviteContainer}>
-                                <Text style={styles.viewTextStyle}>View profile</Text>
-                                <Icon
-                                    //name={"envelope-open"}
-                                    name={"user-circle"}
-                                    size={30}
-                                    color={colors.General.appSecondary}
-                                    style={{
-                                        textAlign: 'center', 
-                                        marginTop: 10,
-                                    }}
-                                />
-                            </View>
-                        </View>
-                    </View>
-
+                    {this.renderUserSection(this.state.searchInProgress)}
 
                 </View>
             </LinearGradient>
@@ -153,6 +187,7 @@ class SearchPage extends Component {
     }
 
 }
+
 
 
 

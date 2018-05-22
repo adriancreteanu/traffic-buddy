@@ -3,7 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableHighlight
 } from 'react-native';
 
 import * as colors from "../../styles/Colors";
@@ -63,15 +63,16 @@ class NewsFeedItem extends Component {
                     </View>
 
 
-                    <TouchableOpacity
+                    <TouchableHighlight
                         onPress={this.props.onUserPress}
+                        underlayColor={"transparent"}
                         
                     >
                         <View style={styles.userContainerStyle}>
                             <Text style={styles.usernameTextStyle}>{this.props.username}</Text>
                             <Text style={styles.defaultTextStyle}>Rank {this.props.rank}</Text>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableHighlight>
                 </View>
             </View>
         );

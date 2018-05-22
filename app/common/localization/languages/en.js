@@ -46,6 +46,10 @@ sendMessage: "Send a message",
 // Search page
 searchPageTitle: "Search",
 searchPlaceholder: "Type a plate number", 
+viewProfile: "View profile",
+sendInvite: "Send invite",
+found: "found", 
+notFound: "not found",
 
 // Alerts
 yesAlertOption: "Yes", 
