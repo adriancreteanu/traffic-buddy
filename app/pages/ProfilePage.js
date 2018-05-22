@@ -74,13 +74,18 @@ class ProfilePage extends Component {
         const loggedUser = await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername);
 
 
+         /* If we navigate from search page, we don't need to fetch the user again, hence the second if. */
+       
         if (username == loggedUser) {
             await this.setState({
                 isLoggedUserProfile: true
             });
             return;
+        } else if(this.props.userReducer.viewModel) {
+            return;
         }
 
+        /* Action called only when we navigate from home page. */
         userActions.fetchUserProfile(username)(this.props.dispatch);
     }
 
