@@ -25,6 +25,7 @@ registerButton: "Register",
 settingsPageTitle: "Settings", 
 myProfile: "My profile", 
 friends: "Friends",
+general: "General", 
 logOut: "Log out",
 
 // Post page

@@ -154,6 +154,7 @@ class ProfilePage extends Component {
                     borderRadius={5}
                     onPress={() => {
                     }}
+                    fontSize={16}
                 />
 
                 <CustomButton
@@ -165,6 +166,7 @@ class ProfilePage extends Component {
                     style={{ marginTop: 30 }}
                     borderRadius={5}
                     onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user.username)}
+                    fontSize={16}
                 />
             </View>
         ) :

@@ -4,7 +4,9 @@ import {
     Text,
     StyleSheet,
     Alert,
-    ImageBackground
+    ImageBackground,
+    Platform,
+    Dimensions
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -85,12 +87,17 @@ class SettingsPage extends Component {
         }
 
         this.preferencesRepo = new PreferencesRepo();
+
+        
+
+        this.width = Dimensions.get('window').width,
+        this.height = Dimensions.get('window').height
     }
 
     async componentWillReceiveProps(nextProps) {
         let loggedUserReducer = nextProps.loggedUserReducer;
 
-        if(loggedUserReducer && loggedUserReducer.viewModel) {
+        if (loggedUserReducer && loggedUserReducer.viewModel) {
             this.setState({
                 loggedUser: loggedUserReducer.viewModel.userProfileViewModel
             })
@@ -103,8 +110,8 @@ class SettingsPage extends Component {
 
 
     render() {
-        
-        
+
+
         return (
             <LinearGradient
                 start={{ x: 0.0, y: 1.0 }}
@@ -116,8 +123,8 @@ class SettingsPage extends Component {
 
 
                     <CustomButton
-                        width={300}
-                        height={50}
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
                         buttonColor={colors.General.appSecondary}
                         pressedColor={colors.General.appSecondary}
                         buttonTitle={strings.myProfile}
@@ -125,20 +132,58 @@ class SettingsPage extends Component {
                         onPress={() => {
                             this.navigateToMyProfile(this.state.loggedUser)
                         }}
+                        fontSize={24}
+                        borderRadius={5}
                     />
 
                     <CustomButton
-                        width={300}
-                        height={50}
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
+                        buttonColor={colors.General.appSecondary}
+                        pressedColor={colors.General.appSecondary}
+                        buttonTitle={strings.friends}
+                        style={{ marginTop: 20, marginBottom: 10 }}
+                        onPress={() => {
+                            this.navigateToMyProfile(this.state.loggedUser)
+                        }}
+                        fontSize={24}
+                        borderRadius={5}
+                    />
+
+                    <CustomButton
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
+                        buttonColor={colors.General.appSecondary}
+                        pressedColor={colors.General.appSecondary}
+                        buttonTitle={strings.general}
+                        style={{ marginTop: 20, marginBottom: 10 }}
+                        onPress={() => {
+                            this.navigateToMyProfile(this.state.loggedUser)
+                        }}
+                        fontSize={24}
+                        borderRadius={5}
+                    />
+
+                    <CustomButton
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
+                        style={{
+                            position: 'absolute',
+                            height: 40,
+                            left: this.width/8,
+                            top: Platform.OS == "ios" ? this.height - 140 : this.height - 180 ,
+                            width: this.width,
+                        }}
                         buttonColor={colors.General.appSecondary}
                         pressedColor={colors.General.appSecondary}
                         buttonTitle={strings.logOut}
-                        style={{ marginTop: 10, marginBottom: 40 }}
+                        //style={{ marginTop: 160, marginBottom: 10 }}
                         //borderRadius={5}
                         onPress={() => {
                             this.logOutAlert();
                         }}
-                    //flexDirection={"row"}
+                        fontSize={24}
+                        borderRadius={Platform.OS == "ios" ? 30 : 35}
                     />
 
                 </View>
@@ -153,15 +198,17 @@ class SettingsPage extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center'
+        //justifyContent: 'flex-end',
+        alignItems: 'center',
+        // backgroundColor: '#f00', 
+
 
     }
 });
 
 function mapStateToProps(state) {
     return {
-        loggedUserReducer: state.loggedUserReducer, 
+        loggedUserReducer: state.loggedUserReducer,
         navigationReducer: state.navigationReducer
     };
 }

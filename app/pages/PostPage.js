@@ -193,6 +193,7 @@ class PostPage extends Component {
                                 Keyboard.dismiss()
                                 this.validatePostDetails()
                             }}
+                            fontSize={16}
                         />
 
 

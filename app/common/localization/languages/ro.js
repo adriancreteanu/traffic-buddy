@@ -25,6 +25,7 @@ registerButton: "Înregistrare",
 settingsPageTitle: "Setări", 
 myProfile: "Profilul meu", 
 friends: "Prieteni",
+general: "Generale", 
 logOut: "Deconectare",
 
 // Post page

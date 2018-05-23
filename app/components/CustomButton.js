@@ -29,7 +29,7 @@ class CustomButton extends Component {
       >
         <Text style={{
           color: "#FFFFFF",
-          fontSize: 16, 
+          fontSize: this.props.fontSize, 
         }}>
           {this.props.buttonTitle}
         </Text>

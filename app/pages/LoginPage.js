@@ -187,6 +187,7 @@ class LoginPage extends Component {
                 Keyboard.dismiss()
                 this.validateLoginCredentials()
               }}
+              fontSize={16}
             />
 
             {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
