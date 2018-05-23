@@ -11,6 +11,8 @@ import NavTitleUI from '../components/navigation/NavTitleUI';
 import NavLeftIcon from '../components/navigation/NavLeftIcon';
 import NavRightIcon from '../components/navigation/NavRightIcon';
 
+import UserProfileData from "../components/UserProfileData";
+
 import * as colors from "../styles/Colors";
 
 // strings
@@ -74,14 +76,14 @@ class ProfilePage extends Component {
         const loggedUser = await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername);
 
 
-         /* If we navigate from search page, we don't need to fetch the user again, hence the second if. */
-       
+        /* If we navigate from search page, we don't need to fetch the user again, hence the second if. */
+
         if (username == loggedUser) {
             await this.setState({
-                isLoggedUserProfile: true
+                isLoggedUserProfile: true, 
             });
             return;
-        } else if(this.props.userReducer.viewModel) {
+        } else if (this.props.userReducer.viewModel) {
             return;
         }
 
@@ -165,7 +167,11 @@ class ProfilePage extends Component {
                     onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user.username)}
                 />
             </View>
-        ) : null;
+        ) :
+            <UserProfileData
+                containerFlex={2.5}
+            />
+
     }
 
     render() {
@@ -179,37 +185,37 @@ class ProfilePage extends Component {
         }
 
         return userData ? (
-            <ScrollView
-                style={styles.container}
-                contentContainerStyle={{ flex: 1, justifyContent: 'center', backgroundColor: colors.General.whiteColor }} >
 
-                <LinearGradient
-                    start={{ x: 0.0, y: 1.0 }}
-                    end={{ x: 1.0, y: 0.1 }}
-                    colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
-                    style={{ flex: 2 }}
-                >
-                    <View style={styles.topContainer}>
 
-                        <View style={styles.statisticsSection}>
-                            <View style={styles.textsSection}>
-                                <Text style={styles.textStyle}>{strings.rank}</Text>
-                                <Text style={styles.textStyle}>{strings.likes}</Text>
-                                <Text style={styles.textStyle}>{strings.dislikes}</Text>
-                            </View>
+            <LinearGradient
+                start={{ x: 0.0, y: 1.0 }}
+                end={{ x: 1.0, y: 0.1 }}
+                colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
+                style={{ flex: 2 }}
+            >
+                <View style={styles.topContainer}>
+                    <View style={styles.statisticsSection}>
+                        <View style={styles.textsSection}>
+                            <Text style={styles.textStyle}>{strings.rank}</Text>
+                            <Text style={styles.textStyle}>{strings.likes}</Text>
+                            <Text style={styles.textStyle}>{strings.dislikes}</Text>
+                        </View>
 
-                            <View style={styles.numbersSection}>
-                                <Text style={styles.numberStyle}>{userData.ranking.rank}</Text>
-                                <Text style={styles.numberStyle}>{userData.ranking.likes}</Text>
-                                <Text style={styles.numberStyle}>{userData.ranking.dislikes}</Text>
-                            </View>
+                        <View style={styles.numbersSection}>
+                            <Text style={styles.numberStyle}>{userData.ranking.rank}</Text>
+                            <Text style={styles.numberStyle}>{userData.ranking.likes}</Text>
+                            <Text style={styles.numberStyle}>{userData.ranking.dislikes}</Text>
                         </View>
                     </View>
+                </View>
+
+                <ScrollView
+                    contentContainerStyle={{ flex: 1, justifyContent: 'center', backgroundColor: "transparent" }} >
 
                     {this.renderSocialButtons()}
 
-                </LinearGradient>
-            </ScrollView>
+                </ScrollView>
+            </LinearGradient>
         ) : (
                 <LinearGradient
                     start={{ x: 0.0, y: 1.0 }}
@@ -231,12 +237,18 @@ class ProfilePage extends Component {
     }
 }
 
+const styles2 = StyleSheet.create({
+    hello: {
+        flex: 1,
+    }
+});
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     topContainer: {
-        flex: 1,
+        //flex: 1,
         paddingTop: 30,
         paddingBottom: 10,
         alignItems: 'center',

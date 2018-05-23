@@ -43,6 +43,30 @@ dislikes: "Dislikes",
 connect: "Connect",
 sendMessage: "Send a message",
 
+name: "Name", 
+email: "Email", 
+carBrand: "Brand", 
+carBrandHint: "eg. VW, Audi, Renault",
+carModel: "Model", 
+carModelHint: "eg. Polo, Q8, Megane", 
+carFabricationYear: "Fabrication year", 
+carFabricationYearHint: "eg. 2018", 
+carEngine: "Engine", 
+carEngineHint: "eg. 1.6", 
+carNumberOfDoors: "Doors", 
+carNumberOfDoorsHint: "eg. 5", 
+carFuel: "Fuel", 
+carFuelHint: "eg. Diesel",
+carHorsePower: "Horsepower", 
+carHorsePowerHint: "eg. 144",
+carCoupeType: "Coupe type", 
+carCoupeTypeHint: "eg. Hatchback", 
+
+personalInfoLabel: "Personal info", 
+carInfoLabel: "Car info",
+
+
+
 // Search page
 searchPageTitle: "Search",
 searchPlaceholder: "Plate number", 

@@ -43,6 +43,33 @@ dislikes: "Hateri",
 connect: "Conectare",
 sendMessage: "Trimite un mesaj",
 
+name: "Nume", 
+email: "Email", 
+carBrand: "Brand", 
+carBrandHint: "eg. VW, Audi, Renault",
+carModel: "Model", 
+carModelHint: "eg. Polo, Q8, Megane", 
+carFabricationYear: "Fabrication year", 
+carFabricationYearHint: "eg. 2018", 
+carEngine: "Engine", 
+carEngineHint: "eg. 1.6", 
+carNumberOfDoors: "Doors", 
+carNumberOfDoorsHint: "eg. 5", 
+carFuel: "Fuel", 
+carFuelHint: "eg. Diesel",
+carHorsePower: "Horsepower", 
+carHorsePowerHint: "eg. 144",
+carCoupeType: "Coupe type", 
+carCoupeTypeHint: "Coupe type", 
+
+personalInfoLabel: "Personal info", 
+carInfoLabel: "Car info",
+
+// engine: 1.4
+// fuel: gas/diesel
+// doors: 5
+// type coupe: hatchback
+
 // Search page
 searchPageTitle: "Căutare",
 searchPlaceholder: "Număr de înmatriculare", 
@@ -50,6 +77,7 @@ viewProfile: "Vedeți profilul",
 sendInvite: "Trimiteți invitație",
 found: "găsit", 
 notFound: "nu a fost găsit",
+
 
 // Alerts
 yesAlertOption: "Da", 
