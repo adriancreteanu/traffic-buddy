@@ -79,14 +79,16 @@ const tabBarOptionsIOS = {
 const tabBarOptionsAndroid = {
 
     labelStyle: {
-        fontSize: 16
+        fontSize: 12
     },
     indicatorStyle: {
         backgroundColor: "#FFF"
     },
     style: {
-        backgroundColor: 'rgba(51,102,136, 0.5)',
-    }
+        backgroundColor: 'rgba(51,102,136, 0.7)',
+        paddingTop: 10,
+    }, 
+    
 }
 
 export const MainNavigator = TabNavigator({
@@ -116,7 +118,7 @@ export const MainNavigator = TabNavigator({
     {
         initialRouteName: "Home", 
         swipeEnabled: true, 
-        animationEnabled: true, 
+        animationEnabled: false, 
         lazy: true, 
         backBehavior: "none", 
         tabBarOptions: Platform.OS == "ios" ? tabBarOptionsIOS :  tabBarOptionsAndroid

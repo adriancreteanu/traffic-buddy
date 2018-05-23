@@ -26,7 +26,8 @@ class NewsFeedItem extends Component {
 
                     <View style={{
                         borderBottomColor: "#bbb",
-                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        borderBottomWidth: 1,
+                        //borderBottomWidth: StyleSheet.hairlineWidth,
                         //marginRight: '60%',
                         alignSelf: 'flex-start'
 
@@ -44,7 +45,7 @@ class NewsFeedItem extends Component {
                             <Icon
                                 name='thumbs-up'
                                 size={25}
-                                color={colors.General.appGradientPrimary}
+                                color={colors.General.appSecondary}
                                 style={{
                                     marginRight: 5,
                                 }}
@@ -54,7 +55,7 @@ class NewsFeedItem extends Component {
                         <Icon
                             name='comments'
                             size={25}
-                            color={colors.General.appGradientPrimary}
+                            color={colors.General.appSecondaryTransparent}
                             style={{
                                 marginRight: 5,
                             }}
@@ -84,15 +85,16 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 20,
-        borderBottomColor: colors.General.appPrimary,
-        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomColor: colors.General.appPrimaryTransparent,
+        //borderBottomWidth: StyleSheet.hairlineWidth,
+        borderBottomWidth: 1, 
         flexDirection: "column",
         backgroundColor: "#f8f8f8",
         borderTopColor: colors.General.appPrimary,
     },
     usernameTextStyle: {
         flex: 1,
-        color: colors.General.appPrimary,
+        color: colors.General.appSecondary,
         fontWeight: "bold",
         fontSize: 18,
         width: 100, 
@@ -112,9 +114,11 @@ const styles = StyleSheet.create({
         paddingLeft: 15, 
         paddingRight: 10,
         marginTop: 15,
-        borderBottomLeftRadius: 40, 
+        borderBottomLeftRadius: 40,  // 40 to make it round
         borderTopLeftRadius: 40,
-        backgroundColor: colors.General.whiteColor
+        backgroundColor: colors.General.whiteColorTransparent, 
+        borderWidth: 2, 
+        borderColor: colors.General.appSecondary
     },
     hourContainerStyle: {
         flex: 1,
