@@ -54,6 +54,7 @@ class SearchPage extends Component {
             username: "",
             userExists: null,
             searchInProgress: false,
+            searchedUsername: "",
         };
     }
 
@@ -61,6 +62,7 @@ class SearchPage extends Component {
 
         this.setState({
             searchInProgress: true,
+            searchedUsername: this.state.username
         })
 
         await userActions.fetchUserProfile(this.state.username)(this.props.dispatch);
@@ -109,7 +111,7 @@ class SearchPage extends Component {
                     underlayColor={"transparent"}>
                     <View style={styles.userContainer}>
                         <View style={styles.userContainerContent}>
-                            <Text style={styles.usernameTextStyle}>{this.state.username}</Text>
+                            <Text style={styles.usernameTextStyle}>{this.state.searchedUsername}</Text>
                             <Text style={styles.defaultText}>
                                 {
                                     this.state.userExists ?
