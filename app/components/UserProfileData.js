@@ -4,6 +4,7 @@ import {
     Text,
     StyleSheet,
     ScrollView, 
+    Platform,
 } from 'react-native';
 
 import CustomTextInput from "./CustomTextInput";
@@ -11,6 +12,8 @@ import FancyTextInput from "./FancyTextInput";
 
 import { strings } from "../common/localization/strings-repository";
 import * as colors from "../styles/Colors";
+
+
 
 class UserProfileData extends Component {
 
@@ -34,8 +37,8 @@ class UserProfileData extends Component {
                 </Text>
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 70 : 80}
                     style={{ marginTop: 0 }}
                     onChangeText={() => { }
 
@@ -53,19 +56,19 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 70 : 80}
                     style={{ marginTop: 0 }}
                     onChangeText={() => { }
 
                     }
-                    value={"decebal.popescu@gmail.com"}
+                    value={"decebal.popescu.georgel.mihai@gmail.com"}
                     maxLength={40}
                     isPassword={false}
                     borderRadius={5}
                     paddingLeft={20}
                     fontSize={16}
-                    editable={false}
+                    editable={true}
                     marginTop={20}
                     hint={strings.email}
                     placeholder={strings.email}
@@ -76,8 +79,8 @@ class UserProfileData extends Component {
                 </Text>
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 60 : 70}
                     onChangeText={() => { }
 
                     }
@@ -94,8 +97,8 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 60 : 70}
                     onChangeText={() => { }
 
                     }
@@ -112,7 +115,7 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
+                    width={'85%'}
                     height={65}
                     onChangeText={(text) => { 
                         this.setState({
@@ -135,8 +138,8 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 60 : 70}
                     onChangeText={() => { }
 
                     }
@@ -154,8 +157,8 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 60 : 70}
                     onChangeText={() => { }
 
                     }
@@ -173,8 +176,8 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 60 : 70}
                     onChangeText={() => { }
 
                     }
@@ -191,8 +194,8 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 60 : 70}
                     onChangeText={() => { }
 
                     }
@@ -210,8 +213,8 @@ class UserProfileData extends Component {
                 />
 
                 <FancyTextInput
-                    width={'80%'}
-                    height={60}
+                    width={'85%'}
+                    height={Platform.OS == "ios" ? 60 : 70}
                     onChangeText={() => { }
 
                     }

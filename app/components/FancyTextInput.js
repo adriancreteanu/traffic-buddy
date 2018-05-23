@@ -4,7 +4,8 @@ import {
     View,
     Text,
     StyleSheet,
-    TextInput
+    TextInput, 
+    Platform,
 } from "react-native";
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -36,7 +37,7 @@ class FancyTextInput extends Component {
                             borderWidth: 1,  
                             //backgroundColor: '#f00', 
                             marginLeft: 50,
-                            paddingBottom: 5, 
+                            paddingBottom: Platform.OS == "ios" ? 10 : 8, 
                             //fontWeight: '400',
                             // new line
                             //marginTop: 5,
@@ -49,7 +50,8 @@ class FancyTextInput extends Component {
                     editable={this.props.editable}
                     maxLength={40}
                     underlineColorAndroid='transparent'
-                    clearTextOnFocus={true}
+                    clearTextOnFocus={false}
+                    multiline={true}
                     placeholder={this.props.hint}
                     placeholderTextColor="#000"
                     autoCorrect={false}
@@ -77,9 +79,9 @@ const styles = StyleSheet.create({
         marginRight: 6,
         //paddingRight: 10, 
         alignSelf: 'flex-start',
-       // backgroundColor: '#00f',
+         //backgroundColor: '#00f',
         fontWeight: '100',
-        color: colors.General.blackColor,
+        color: "#222",
         width: 200,
     }
 });
