@@ -193,7 +193,8 @@ class ProfilePage extends Component {
                 start={{ x: 0.0, y: 1.0 }}
                 end={{ x: 1.0, y: 0.1 }}
                 colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
-                style={{ flex: 2 }}
+                locations={[0,0.4,0.7]}
+                style={{ flex: 1 }}
             >
                 <View style={styles.topContainer}>
                     <View style={styles.statisticsSection}>

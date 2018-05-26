@@ -28,6 +28,8 @@ class App extends React.Component {
             RootReducer,
             applyMiddleware(middleware)
         )
+
+        console.disableYellowBox = true;
     }
 
     render() {

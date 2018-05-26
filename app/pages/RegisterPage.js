@@ -4,8 +4,9 @@ import {
     Text,
     StyleSheet,
     Keyboard,
-    TouchableWithoutFeedback,
-    Alert
+    Alert,
+    Platform,
+    ScrollView
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -106,12 +107,16 @@ class RegisterPage extends Component {
                 colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
                 style={{ flex: 1 }}
             >
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                    <View style={styles.container}>
+                
+                    <ScrollView 
+                        contentContainerStyle={styles.container}
+                        keyboardDismissMode="on-drag"
+                        keyboardShouldPersistTaps="handled"
+                        >
                         <CustomTextInput
-                            width={270}
-                            height={50}
-                            style={{ marginTop: 20 }}
+                            width={'75%'}
+                            height={Platform.OS == "ios" ? 50 : 70}
+                            style={{ marginTop: 40 }}
                             placeholder={strings.plateNumber}
                             onChangeText={text =>
                                 this.setState({
@@ -124,12 +129,12 @@ class RegisterPage extends Component {
                             maxLength={7}
                             borderRadius={5}
                             paddingLeft={20}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
                         <CustomTextInput
-                            width={270}
-                            height={50}
+                            width={'75%'}
+                            height={Platform.OS == "ios" ? 50 : 70}
                             style={{ marginTop: 10 }}
                             placeholder={strings.firstName}
                             onChangeText={text =>
@@ -142,12 +147,12 @@ class RegisterPage extends Component {
                             //autoCapitalize="characters"
                             borderRadius={5}
                             paddingLeft={20}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
                         <CustomTextInput
-                            width={270}
-                            height={50}
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
                             style={{ marginTop: 10 }}
                             placeholder={strings.lastName}
                             onChangeText={text =>
@@ -159,12 +164,12 @@ class RegisterPage extends Component {
                             value={this.state.lastName}
                             borderRadius={5}
                             paddingLeft={20}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
                         <CustomTextInput
-                            width={270}
-                            height={50}
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
                             style={{ marginTop: 10 }}
                             placeholder={strings.email}
                             onChangeText={text =>
@@ -176,12 +181,12 @@ class RegisterPage extends Component {
                             value={this.state.email}
                             borderRadius={5}
                             paddingLeft={20}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
                         <CustomTextInput
-                            width={270}
-                            height={50}
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
                             style={{ marginTop: 10 }}
                             placeholder={strings.password}
                             onChangeText={text =>
@@ -195,12 +200,12 @@ class RegisterPage extends Component {
                             isPassword={true}
                             borderRadius={5}
                             paddingLeft={20}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
                         <CustomTextInput
-                            width={270}
-                            height={50}
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
                             style={{ marginTop: 10 }}
                             placeholder={strings.confirmPassword}
                             onChangeText={text =>
@@ -214,23 +219,23 @@ class RegisterPage extends Component {
                             isPassword={true}
                             borderRadius={5}
                             paddingLeft={20}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
                         <CustomButton
-                            width={270}
-                            height={40}
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 60}
                             buttonColor={colors.General.appSecondary}
                             pressedColor={colors.General.appSecondary}
                             buttonTitle={strings.registerButton}
-                            style={{ marginTop: 30 }}
+                            style={{ marginTop: 40 }}
                             onPress={() => {
                                 Keyboard.dismiss()
                                 this.validateRegisterCredentials();
                             }}
                             borderRadius={5}
                             paddingLeft={20}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
                         {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (
@@ -249,8 +254,8 @@ class RegisterPage extends Component {
                         ) : (
                                 <View style={{ height: 50, backgroundColor: "transparent" }} />
                             )}
-                    </View>
-                </TouchableWithoutFeedback>
+                    </ScrollView>
+                
             </LinearGradient>
         );
     }
