@@ -85,6 +85,15 @@ yesAlertOption: "Da",
 cancelAlertOption: "Anulare", 
 confirmSignOut: "Confirmare", 
 areYouSureSignOut: "Sunteți sigur că doriți să vă deconectați?",
+emptyUsernameAlertTitle: "Empty username", 
+emptyUsernameAlertMessage: "Please enter a username",
+emptyPasswordAlertTitle: "Empty password", 
+emptyPasswordAlertMessage: "Please enter a password",
+emptyRegisterFieldTitle: "Empty field", 
+emptyRegisterFieldMessage: "Please fill all fields", 
+error: "Error", 
+passwordsDoNotMatchMessage: "Passwords do no match",
+emailAddressBadlyFormatted: "Email address badly formatted",
 
 
 // Months

@@ -28,7 +28,7 @@ class CustomTextInput extends Component {
         editable={true}
         maxLength={40}
         underlineColorAndroid='transparent'
-        clearTextOnFocus={true}
+        clearTextOnFocus={false}
         placeholder={this.props.placeholder}
         placeholderTextColor="#000"
         autoCorrect={false}

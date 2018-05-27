@@ -83,7 +83,11 @@ export default class AuthenticationService extends SuperService {
                 email: payload.email,
                 firstName: payload.firstName,
                 lastName: payload.lastName, 
-                rank: 0
+                ranking: {
+                    rank: 0, 
+                    likes: 0, 
+                    dislikes: 0
+                }
             })
             .then(() => {
                 console.log("Synchronization succeeded");

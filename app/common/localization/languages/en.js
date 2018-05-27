@@ -81,6 +81,16 @@ yesAlertOption: "Yes",
 cancelAlertOption: "Cancel", 
 confirmSignOut: "Confirm", 
 areYouSureSignOut: "Are you sure you want to sign out?", 
+emptyUsernameAlertTitle: "Empty username", 
+emptyUsernameAlertMessage: "Please enter a username",
+emptyPasswordAlertTitle: "Empty password", 
+emptyPasswordAlertMessage: "Please enter a password",
+emptyRegisterFieldTitle: "Empty field", 
+emptyRegisterFieldMessage: "Please fill all fields", 
+error: "Error", 
+passwordsDoNotMatchMessage: "Passwords do no match",
+emailAddressBadlyFormatted: "Email address badly formatted",
+
 
 
 // Months

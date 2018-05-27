@@ -19,7 +19,7 @@ import * as colors from "../styles/Colors";
 import CustomButton from "../components/CustomButton";
 
 //helpers
-import Validation from "../common/helpers/Validation";
+import InputValidationHelper from "../common/helpers/InputValidationHelper";
 
 //Navigation
 import * as navActions from "../common/redux/actions/NavigationActions";
@@ -36,19 +36,14 @@ import { strings } from "../common/localization/strings-repository";
 import { LinesLoader } from 'react-native-indicator';
 import LoginTextInput from "../components/LoginTextInput";
 
+import AlertHelper from "../common/helpers/AlertHelper";
+
 
 class LoginPage extends Component {
   static navigationOptions = {
     header: null
-    // headerStyle: {
-    //   //backgroundColor: '#c6bf69',
-    //   backgroundColor: 'transparent',
-    //   borderBottomColor: 'transparent',
-    // },
   };
 
-
-  /* Lifecycle methods */
   constructor(props) {
     super(props);
     this.state = {
@@ -74,24 +69,16 @@ class LoginPage extends Component {
   }
 
   validateLoginCredentials() {
-
-    //move this to validation
-    if (Validation.fieldIsEmpty(this.state.username)) {
-      Alert.alert(
-        "Empty username",
-        "Please enter a username",
-        [
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
-        ],
-        { cancelable: false }
-      )
+    if (InputValidationHelper.fieldIsEmpty(this.state.username)) {
+      AlertHelper.createInfoAlert(strings.emptyUsernameAlertTitle, strings.emptyUsernameAlertMessage);
+    } else if (InputValidationHelper.fieldIsEmpty(this.state.password)) {
+      AlertHelper.createInfoAlert(strings.emptyPasswordAlertTitle, strings.emptyPasswordAlertMessage);
     } else {
       let payload: authPayloads.loginCredentialsPayloadType = {
         username: this.state.username,
         email: "", // empty because we don't have user's email initially
         password: this.state.password
       };
-      //let payload = authPayloads.createLoginCredentialsPayload(loginPayload);
       authActions.loginUser(payload)(this.props.dispatch);
     }
   }
@@ -120,8 +107,6 @@ class LoginPage extends Component {
           marginBottom: 30,
           width: undefined,
           height: '25%',
-          //backgroundColor: colors.General.redColor
-
         }}>
           <Image
             source={require('../assets/images/login_icon.png')}
@@ -130,7 +115,6 @@ class LoginPage extends Component {
               alignSelf: 'center',
               width: '100%',
               height: '100%',
-              //backgroundColor: colors.General.blueColor
             }}
             resizeMode="contain" />
 
@@ -182,7 +166,6 @@ class LoginPage extends Component {
               buttonTitle={strings.loginButton.toUpperCase()}
               style={{ marginTop: 30 }}
               borderRadius={5}
-              //onPress={() => navigate("HomePage", { screen: "Home page" })}
               onPress={() => {
                 Keyboard.dismiss()
                 this.validateLoginCredentials()
@@ -214,8 +197,8 @@ class LoginPage extends Component {
               underlayColor="transparent"
             >
               <View style={{
-                justifyContent: 'center', 
-                
+                justifyContent: 'center',
+
               }}>
                 <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
 
@@ -236,10 +219,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: 'center',
-
-    //backgroundColor: "#a94242" //initial red color
-    //backgroundColor: "#4F6D7A"
-    //backgroundColor: "#c6bf69"
   },
   appTitle: {
     fontSize: 26,
@@ -250,7 +229,7 @@ const styles = StyleSheet.create({
   accountText: {
     fontSize: 16,
     color: "#000",
-    marginTop: 50, 
+    marginTop: 50,
     textAlign: 'center',
   },
   registerText: {

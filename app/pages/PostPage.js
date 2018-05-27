@@ -28,7 +28,7 @@ import CustomBigTextInput from '../components/CustomBigTextInput';
 import CustomButton from '../components/CustomButton';
 
 //helpers
-import Validation from "../common/helpers/Validation";
+import InputValidationHelper from "../common/helpers/InputValidationHelper";
 
 // redux
 import * as newsFeedPayloads from "../common/data/payloads/NewsFeedPayloads";
@@ -70,7 +70,7 @@ class PostPage extends Component {
     }
 
     validatePostDetails() {
-        if (Validation.fieldIsEmpty(this.state.category)) {
+        if (InputValidationHelper.fieldIsEmpty(this.state.category)) {
             Alert.alert(
                 "Empty category",
                 "Please enter a category",

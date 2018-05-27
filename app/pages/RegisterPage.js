@@ -31,6 +31,10 @@ import { strings } from "../common/localization/strings-repository";
 import NavTitleUI from '../components/navigation/NavTitleUI';
 import NavRightIcon from '../components/navigation/NavRightIcon';
 
+import InputValidationHelper from "../common/helpers/InputValidationHelper";
+
+import AlertHelper from "../common/helpers/AlertHelper";
+
 class RegisterPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
@@ -82,15 +86,36 @@ class RegisterPage extends Component {
     }
 
     validateRegisterCredentials() {
-        let registerPayload: authPayloads.registerCredentialsPayloadType = {
-            plateNumber: this.state.plateNumber,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password
-        };
-        let payload = authPayloads.createRegisterCredentialsPayload(registerPayload);
-        authActions.registerAction(payload)(this.props.dispatch);
+
+
+
+
+
+        // Validation 
+        if (InputValidationHelper.fieldIsEmpty(this.state.firstName) ||
+            InputValidationHelper.fieldIsEmpty(this.state.lastName) ||
+            InputValidationHelper.fieldIsEmpty(this.state.plateNumber) ||
+            InputValidationHelper.fieldIsEmpty(this.state.email) ||
+            InputValidationHelper.fieldIsEmpty(this.state.password) ||
+            InputValidationHelper.fieldIsEmpty(this.state.confirmPassword)
+        ) {
+            AlertHelper.createInfoAlert(strings.emptyRegisterFieldTitle, strings.emptyRegisterFieldMessage);
+        } else if (!InputValidationHelper.validateEmailAddress(this.state.email)) {
+            AlertHelper.createInfoAlert(strings.error, strings.emailAddressBadlyFormatted);
+        } else if (this.state.password !== this.state.confirmPassword) {
+            AlertHelper.createInfoAlert(strings.error, strings.passwordsDoNotMatchMessage);
+        } else {
+            let registerPayload: authPayloads.registerCredentialsPayloadType = {
+                plateNumber: this.state.plateNumber,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                password: this.state.password
+            };
+
+            let payload = authPayloads.createRegisterCredentialsPayload(registerPayload);
+            authActions.registerAction(payload)(this.props.dispatch);
+        }
     }
 
     displayMessage(title: String, message: String) {
@@ -107,155 +132,157 @@ class RegisterPage extends Component {
                 colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
                 style={{ flex: 1 }}
             >
-                
-                    <ScrollView 
-                        contentContainerStyle={styles.container}
-                        keyboardDismissMode="on-drag"
-                        keyboardShouldPersistTaps="handled"
-                        >
-                        <CustomTextInput
-                            width={'75%'}
-                            height={Platform.OS == "ios" ? 50 : 70}
-                            style={{ marginTop: 40 }}
-                            placeholder={strings.plateNumber}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    plateNumber: text
-                                })
-                            }
-                            value={this.state.plateNumber}
-                            autoCapitalize="characters"
-                            maxLength={7}
-                            borderRadius={5}
-                            paddingLeft={20}
-                            fontSize={18}
-                        />
 
-                        <CustomTextInput
-                            width={'75%'}
-                            height={Platform.OS == "ios" ? 50 : 70}
-                            style={{ marginTop: 10 }}
-                            placeholder={strings.firstName}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    firstName: text
-                                })
-                            }
-                            value={this.state.firstName}
-                            //autoCapitalize="characters"
-                            borderRadius={5}
-                            paddingLeft={20}
-                            fontSize={18}
-                        />
-
-                        <CustomTextInput
+                <ScrollView
+                    contentContainerStyle={styles.container}
+                    keyboardDismissMode="on-drag"
+                    keyboardShouldPersistTaps="handled"
+                >
+                    <CustomTextInput
                         width={'75%'}
                         height={Platform.OS == "ios" ? 50 : 70}
-                            style={{ marginTop: 10 }}
-                            placeholder={strings.lastName}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    lastName: text
-                                })
-                            }
-                            value={this.state.lastName}
-                            borderRadius={5}
-                            paddingLeft={20}
-                            fontSize={18}
-                        />
+                        style={{ marginTop: 40 }}
+                        placeholder={strings.plateNumber}
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                plateNumber: text
+                            })
+                        }
+                        value={this.state.plateNumber}
+                        autoCapitalize="characters"
+                        maxLength={7}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={18}
+                    />
 
-                        <CustomTextInput
+                    <CustomTextInput
                         width={'75%'}
                         height={Platform.OS == "ios" ? 50 : 70}
-                            style={{ marginTop: 10 }}
-                            placeholder={strings.email}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    email: text
-                                })
-                            }
-                            value={this.state.email}
-                            borderRadius={5}
-                            paddingLeft={20}
-                            fontSize={18}
-                        />
+                        style={{ marginTop: 10 }}
+                        placeholder={strings.firstName}
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                firstName: text
+                            })
+                        }
+                        value={this.state.firstName}
+                        //autoCapitalize="characters"
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={18}
+                    />
 
-                        <CustomTextInput
+                    <CustomTextInput
                         width={'75%'}
                         height={Platform.OS == "ios" ? 50 : 70}
-                            style={{ marginTop: 10 }}
-                            placeholder={strings.password}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    password: text
-                                })
-                            }
-                            value={this.state.password}
-                            maxLength={20}
-                            isPassword={true}
-                            borderRadius={5}
-                            paddingLeft={20}
-                            fontSize={18}
-                        />
+                        style={{ marginTop: 10 }}
+                        placeholder={strings.lastName}
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                lastName: text
+                            })
+                        }
+                        value={this.state.lastName}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={18}
+                    />
 
-                        <CustomTextInput
+                    <CustomTextInput
                         width={'75%'}
                         height={Platform.OS == "ios" ? 50 : 70}
-                            style={{ marginTop: 10 }}
-                            placeholder={strings.confirmPassword}
-                            onChangeText={text =>
-                                this.setState({
-                                    ...this.state,
-                                    confirmPassword: text
-                                })
-                            }
-                            value={this.state.confirmPassword}
-                            maxLength={20}
-                            isPassword={true}
-                            borderRadius={5}
-                            paddingLeft={20}
-                            fontSize={18}
-                        />
+                        style={{ marginTop: 10 }}
+                        placeholder={strings.email}
+                        onChangeText={text =>
 
-                        <CustomButton
+
+                            this.setState({
+                                ...this.state,
+                                email: text
+                            })
+                        }
+                        value={this.state.email}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={18}
+                    />
+
+                    <CustomTextInput
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
+                        style={{ marginTop: 10 }}
+                        placeholder={strings.password}
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                password: text
+                            })
+                        }
+                        value={this.state.password}
+                        maxLength={20}
+                        isPassword={true}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={18}
+                    />
+
+                    <CustomTextInput
+                        width={'75%'}
+                        height={Platform.OS == "ios" ? 50 : 70}
+                        style={{ marginTop: 10 }}
+                        placeholder={strings.confirmPassword}
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                confirmPassword: text
+                            })
+                        }
+                        value={this.state.confirmPassword}
+                        maxLength={20}
+                        isPassword={true}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={18}
+                    />
+
+                    <CustomButton
                         width={'75%'}
                         height={Platform.OS == "ios" ? 50 : 60}
-                            buttonColor={colors.General.appSecondary}
-                            pressedColor={colors.General.appSecondary}
-                            buttonTitle={strings.registerButton}
-                            style={{ marginTop: 40 }}
-                            onPress={() => {
-                                Keyboard.dismiss()
-                                this.validateRegisterCredentials();
-                            }}
-                            borderRadius={5}
-                            paddingLeft={20}
-                            fontSize={18}
-                        />
+                        buttonColor={colors.General.appSecondary}
+                        pressedColor={colors.General.appSecondary}
+                        buttonTitle={strings.registerButton}
+                        style={{ marginTop: 40 }}
+                        onPress={() => {
+                            Keyboard.dismiss()
+                            this.validateRegisterCredentials();
+                        }}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={18}
+                    />
 
-                        {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (
-                            <View style={{
-                                marginTop: 40,
-                                marginBottom: 30,
-                                backgroundColor: 'transparent',
-                            }}>
-                                <LinesLoader
-                                    color={colors.General.appSecondary}
-                                    barHeight={60}
-                                    barWidth={5}
-                                    betweenSpace={5}
-                                />
-                            </View>
-                        ) : (
-                                <View style={{ height: 50, backgroundColor: "transparent" }} />
-                            )}
-                    </ScrollView>
-                
+                    {typeof this.props.registerReducer !== 'undefined' && this.props.registerReducer != null && this.props.registerReducer.isInProgress ? (
+                        <View style={{
+                            marginTop: 40,
+                            marginBottom: 30,
+                            backgroundColor: 'transparent',
+                        }}>
+                            <LinesLoader
+                                color={colors.General.appSecondary}
+                                barHeight={60}
+                                barWidth={5}
+                                betweenSpace={5}
+                            />
+                        </View>
+                    ) : (
+                            <View style={{ height: 50, backgroundColor: "transparent" }} />
+                        )}
+                </ScrollView>
+
             </LinearGradient>
         );
     }
