@@ -3,12 +3,15 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView, 
+    ScrollView,
     Platform,
 } from 'react-native';
 
 import CustomTextInput from "./CustomTextInput";
 import FancyTextInput from "./FancyTextInput";
+import FancyPicker from "./FancyPicker";
+
+import { Picker } from 'native-base';
 
 import { strings } from "../common/localization/strings-repository";
 import * as colors from "../styles/Colors";
@@ -21,215 +24,224 @@ class UserProfileData extends Component {
         super(props);
         this.state = {
             fabricationYear: "",
+            location: "",
+            user: this.props.user,
         }
 
     }
 
     render() {
         return (
-            <ScrollView 
-                style={[styles.container, { flex: this.props.containerFlex }]}
-                
-                >
+            <ScrollView>
+                <View style={[styles.container, { flex: this.props.containerFlex }]} >
+                    <Text style={styles.subtitle}>
+                        {strings.personalInfoLabel.toUpperCase()}
+                    </Text>
 
-                <Text style={styles.subtitle}>
-                    {strings.personalInfoLabel.toUpperCase()}
-                </Text>
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 70 : 80}
+                        style={{ marginTop: 0 }}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 70 : 80}
-                    style={{ marginTop: 0 }}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.firstName + " " + this.state.user.lastName}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={false}
+                        marginTop={20}
+                        hint={strings.name}
+                        placeholder={strings.name}
+                    />
 
-                    }
-                    value={"Decebal Popescu"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={false}
-                    marginTop={20}
-                    hint={strings.name}
-                    placeholder={strings.name}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 70 : 80}
+                        style={{ marginTop: 0 }}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 70 : 80}
-                    style={{ marginTop: 0 }}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.email}
+                        maxLength={40}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={false}
+                        marginTop={20}
+                        hint={strings.email}
+                        placeholder={strings.email}
+                    />
 
-                    }
-                    value={"decebal.popescu.georgel.mihai@gmail.com"}
-                    maxLength={40}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    hint={strings.email}
-                    placeholder={strings.email}
-                />
+                    <FancyPicker
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        borderRadius={5}
+                        marginTop={20}
+                        placeholder={strings.location}
+                        selectedValue={this.state.user.location}
+                    />
 
-                <Text style={styles.subtitle}>
-                    {strings.carInfoLabel.toUpperCase()}
-                </Text>
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 60 : 70}
-                    onChangeText={() => { }
+                    <Text style={styles.subtitle}>
+                        {strings.carInfoLabel.toUpperCase()}
+                    </Text>
 
-                    }
-                    value={"Audi"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    hint={strings.carBrandHint}
-                    placeholder={strings.carBrand}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 60 : 70}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.car ? this.state.user.car.brand : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        hint={strings.carBrandHint}
+                        placeholder={strings.carBrand}
+                    />
 
-                    }
-                    value={"Q8"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    hint={strings.carModelHint}
-                    placeholder={strings.carModel}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={65}
-                    onChangeText={(text) => { 
-                        this.setState({
-                            fabricationYear: text
-                        })
-                    }
+                        }
+                        value={this.state.user.car ? this.state.user.car.model : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        hint={strings.carModelHint}
+                        placeholder={strings.carModel}
+                    />
 
-                    }
-                    value={this.state.fabricationYear}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    keyboardType={"numeric"}
-                    hint={strings.carFabricationYearHint}
-                    placeholder={strings.carFabricationYear}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={65}
+                        onChangeText={(text) => {
+                            this.setState({
+                                fabricationYear: text
+                            })
+                        }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 60 : 70}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.car && this.state.user.car.fabricationYear ? String(this.state.user.car.fabricationYear) : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        keyboardType={"numeric"}
+                        hint={strings.carFabricationYearHint}
+                        placeholder={strings.carFabricationYear}
+                    />
 
-                    }
-                    value={"1.8"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    keyboardType={"numeric"}
-                    hint={strings.carEngineHint}
-                    placeholder={strings.carEngine}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 60 : 70}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.car && this.state.user.car.engine ? String(this.state.user.car.engine) : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        keyboardType={"numeric"}
+                        hint={strings.carEngineHint}
+                        placeholder={strings.carEngine}
+                    />
 
-                    }
-                    value={"4"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    keyboardType={"numeric"}
-                    hint={strings.carNumberOfDoorsHint}
-                    placeholder={strings.carNumberOfDoors}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 60 : 70}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.car && this.state.user.car.doors ? String(this.state.user.car.doors) : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        keyboardType={"numeric"}
+                        hint={strings.carNumberOfDoorsHint}
+                        placeholder={strings.carNumberOfDoors}
+                    />
 
-                    }
-                    value={"Gas"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    hint={strings.carFuelHint}
-                    placeholder={strings.carFuel}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 60 : 70}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.car ? this.state.user.car.fuel : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        hint={strings.carFuelHint}
+                        placeholder={strings.carFuel}
+                    />
 
-                    }
-                    value={"144"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    keyboardType={"numeric"}
-                    hint={strings.carHorsePowerHint}
-                    placeholder={strings.carHorsePower}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        onChangeText={() => { }
 
-                <FancyTextInput
-                    width={'85%'}
-                    height={Platform.OS == "ios" ? 60 : 70}
-                    onChangeText={() => { }
+                        }
+                        value={this.state.user.car && this.state.user.car.horsepower ? String(this.state.user.car.horsepower) : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        keyboardType={"numeric"}
+                        hint={strings.carHorsePowerHint}
+                        placeholder={strings.carHorsePower}
+                    />
 
-                    }
-                    value={"Hatchback"}
-                    maxLength={20}
-                    isPassword={false}
-                    borderRadius={5}
-                    paddingLeft={20}
-                    fontSize={16}
-                    editable={true}
-                    marginTop={20}
-                    hint={strings.carCoupeTypeHint}
-                    placeholder={strings.carCoupeType}
-                />
+                    <FancyTextInput
+                        width={'85%'}
+                        height={Platform.OS == "ios" ? 60 : 70}
+                        onChangeText={() => { }
 
+                        }
+                        value={this.state.user.car ? this.state.user.car.coupeType : null}
+                        maxLength={20}
+                        isPassword={false}
+                        borderRadius={5}
+                        paddingLeft={20}
+                        fontSize={16}
+                        editable={true}
+                        marginTop={20}
+                        hint={strings.carCoupeTypeHint}
+                        placeholder={strings.carCoupeType}
+                    />
+                </View>
             </ScrollView>
         )
     }
@@ -248,7 +260,6 @@ const styles = StyleSheet.create({
         marginTop: 40,
         fontSize: 20,
         textAlign: 'left',
-        //backgroundColor: '#F00', 
         fontWeight: 'bold',
         width: 200,
         paddingLeft: 5,

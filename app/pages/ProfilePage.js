@@ -66,6 +66,7 @@ class ProfilePage extends Component {
             likeIconClicked: false,
             dislikeIconClicked: false,
             isLoggedUserProfile: false,
+            user: null, 
         };
 
         this.preferencesRepo = new PreferencesRepo();
@@ -80,12 +81,14 @@ class ProfilePage extends Component {
 
         if (username == loggedUser) {
             await this.setState({
-                isLoggedUserProfile: true, 
+                isLoggedUserProfile: true,
+                user: this.props.loggedUserReducer.viewModel.userProfileViewModel,
             });
             return;
-        } else if (this.props.userReducer.viewModel) {
-            return;
-        }
+        } 
+        // else if (this.props.userReducer.viewModel) {
+        //     return;
+        // }
 
         /* Action called only when we navigate from home page. */
         userActions.fetchUserProfile(username)(this.props.dispatch);
@@ -172,6 +175,7 @@ class ProfilePage extends Component {
         ) :
             <UserProfileData
                 containerFlex={2.5}
+                user={this.state.user}
             />
 
     }
@@ -193,7 +197,7 @@ class ProfilePage extends Component {
                 start={{ x: 0.0, y: 1.0 }}
                 end={{ x: 1.0, y: 0.1 }}
                 colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
-                locations={[0,0.4,0.7]}
+                locations={[0, 0.4, 0.7]}
                 style={{ flex: 1 }}
             >
                 <View style={styles.topContainer}>

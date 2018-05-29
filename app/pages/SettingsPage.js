@@ -98,7 +98,7 @@ class SettingsPage extends Component {
         let loggedUserReducer = nextProps.loggedUserReducer;
 
         if (loggedUserReducer && loggedUserReducer.viewModel) {
-            this.setState({
+            await this.setState({
                 loggedUser: loggedUserReducer.viewModel.userProfileViewModel
             })
         }

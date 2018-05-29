@@ -180,7 +180,7 @@ class LoginPage extends Component {
                 backgroundColor: 'transparent',
               }}>
                 <LinesLoader
-                  color='#368'
+                  color={colors.General.appSecondary}
                   barHeight={60}
                   barWidth={5}
                   betweenSpace={5}

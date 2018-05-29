@@ -13,7 +13,7 @@ import {
     Platform
 } from 'react-native';
 
-import { Picker } from 'native-base'
+import { Picker } from 'native-base';
 
 import LinearGradient from 'react-native-linear-gradient';
 import * as colors from "../styles/Colors";
@@ -35,6 +35,8 @@ import * as newsFeedPayloads from "../common/data/payloads/NewsFeedPayloads";
 import * as newsFeedActions from "../common/redux/actions/NewsFeedActions";
 import { connect } from 'react-redux';
 import { LinesLoader } from 'react-native-indicator';
+
+import AlertHelper from "../common/helpers/AlertHelper";
 
 class PostPage extends Component {
 
@@ -66,23 +68,60 @@ class PostPage extends Component {
             location: "",
             category: "",
             message: "",
+            pickerItems: [],
+            user: null,
         }
     }
 
+    async componentDidMount() {
+        let judete = [
+            "Timis",
+            "Arad",
+            "Bihor",
+            "Iasi",
+            "Cluj",
+        ];
+
+        let judeteObject = {
+            "Arad": "AR",
+            "Bihor": "BH",
+            "Constanta": "CT",
+            "Gorj": "GJ",
+            "Timis": "TM"
+        };
+
+        // this.setState({
+        //     pickerItems: judete.map((k, i) => {
+        //         return <Picker.Item key={i} value={s} label={s} />
+        //     })
+        // });
+
+        if (this.props.loggedUserReducer.viewModel) {
+            await this.setState({
+                location: this.props.loggedUserReducer.viewModel.userProfileViewModel.location,
+                user: this.props.loggedUserReducer.viewModel.userProfileViewModel,
+
+            });
+        }
+
+        this.setState({
+            pickerItems: Object.keys(judeteObject).map((key, index) => {
+                return <Picker.Item key={index} label={key} value={judeteObject[key]} />
+            })
+        });
+    }
+
     validatePostDetails() {
-        if (InputValidationHelper.fieldIsEmpty(this.state.category)) {
-            Alert.alert(
-                "Empty category",
-                "Please enter a category",
-                [
-                    { text: 'OK', onPress: () => console.log('OK Pressed') },
-                ],
-                { cancelable: false }
-            )
+        if (InputValidationHelper.fieldIsEmpty(this.state.location)) {
+            AlertHelper.createInfoAlert(strings.emptyLocationAlertTitle, strings.emptyLocationAlertMessage);
+        } else if (InputValidationHelper.fieldIsEmpty(this.state.category)) {
+            AlertHelper.createInfoAlert(strings.emptyCategoryAlertTitle, strings.emptyCategoryAlertMessage);
+        } else if (InputValidationHelper.fieldIsEmpty(this.state.message)) {
+            AlertHelper.createInfoAlert(strings.emptyMessageAlertTitle, strings.emptyMessageAlertMessage);
         } else {
             let postPayload: newsFeedPayloads.postGeneralMessagePayloadType = {
-                username: "TM15ABI",
-                rank: 2,
+                username: this.state.user.username,
+                rank: this.state.user.ranking.rank,
                 category: this.state.category,
                 location: this.state.location,
                 message: this.state.message,
@@ -109,7 +148,7 @@ class PostPage extends Component {
                                 selectedValue={this.state.location}
                                 onValueChange={(itemValue, itemIndex) => this.setState({ location: itemValue })}
                                 prompt={strings.location} // Android
-                                placeholder={strings.location} //iOS
+                                placeholder={this.state.location ? this.state.location : strings.location} //iOS
                                 style={styles.pickerStyle}
                                 // text shown on picker
                                 textStyle={styles.pickerTextStyle}
@@ -118,27 +157,7 @@ class PostPage extends Component {
                                 itemStyle={styles.pickerItemStyle}
                             >
 
-                                <Picker.Item label="Timis" value="TM" />
-                                <Picker.Item label="Bihor" value="BH" />
-                                <Picker.Item label="Arad" value="AR" />
-                                <Picker.Item label="Gorj" value="GJ" />
-                                <Picker.Item label="Cluj" value="CJ" />
-                                <Picker.Item label="Iasi" value="IS" />
-                                <Picker.Item label="Brasov" value="BV" />
-                                <Picker.Item label="Timis" value="TM" />
-                                <Picker.Item label="Bihor" value="BH" />
-                                <Picker.Item label="Arad" value="AR" />
-                                <Picker.Item label="Gorj" value="GJ" />
-                                <Picker.Item label="Cluj" value="CJ" />
-                                <Picker.Item label="Iasi" value="IS" />
-                                <Picker.Item label="Brasov" value="BV" />
-                                <Picker.Item label="Timis" value="TM" />
-                                <Picker.Item label="Bihor" value="BH" />
-                                <Picker.Item label="Arad" value="AR" />
-                                <Picker.Item label="Gorj" value="GJ" />
-                                <Picker.Item label="Cluj" value="CJ" />
-                                <Picker.Item label="Iasi" value="IS" />
-                                <Picker.Item label="Brasov" value="BV" />
+                                {this.state.pickerItems}
                             </Picker>
                         </View>
 
@@ -157,11 +176,11 @@ class PostPage extends Component {
                                 itemTextStyle={styles.pickerItemTextStyle}
                                 itemStyle={styles.pickerItemStyle}
                             >
-                                <Picker.Item label="Accident" value="ACC" />
-                                <Picker.Item label="Radar" value="RAD" />
-                                <Picker.Item label="Politie" value="PLT" />
-                                <Picker.Item label="Trafic" value="TRF" />
-                                <Picker.Item label="General" value="GNL" />
+                                <Picker.Item label="Accident" value="Accident" />
+                                <Picker.Item label="Radar" value="Radar" />
+                                <Picker.Item label="Politie" value="Politie" />
+                                <Picker.Item label="Trafic" value="Trafic" />
+                                <Picker.Item label="General" value="General" />
                             </Picker>
                         </View>
 
@@ -206,7 +225,7 @@ class PostPage extends Component {
                                 backgroundColor: 'transparent',
                             }}>
                                 <LinesLoader
-                                    color='rgba(169, 20, 20, 0.9)'
+                                    color={colors.General.appSecondary}
                                     barHeight={60}
                                     barWidth={5}
                                     betweenSpace={5}
@@ -263,7 +282,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         borderColor: "transparent",
-        overflow: "hidden",
+        //overflow: "hidden",
         backgroundColor: 'rgba(255, 255, 255, 0.3)',
         paddingLeft: Platform.OS == "ios" ? 0 : 10,
         marginTop: 30,
@@ -273,7 +292,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        postReducer: state.postReducer
+        postReducer: state.postReducer,
+        loggedUserReducer: state.loggedUserReducer,
     };
 }
 

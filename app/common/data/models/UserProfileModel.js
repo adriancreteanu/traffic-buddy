@@ -1,5 +1,6 @@
 import ThreadsListModel from "./ThreadsListModel";
 import RankingModel from "./RankingModel";
+import CarModel from "./CarModel";
 
 export default class UserProfileModel {
 
@@ -7,8 +8,11 @@ export default class UserProfileModel {
     email: string;
     firstName: string;
     lastName: string;
+    location: string;
     ranking: RankingModel;
     threads: ThreadsListModel;
+    car: CarModel;
+    
 
 
     constructor(firebaseObject, key: string) {
@@ -17,7 +21,12 @@ export default class UserProfileModel {
         this.email = userProfile.email;
         this.firstName = userProfile.firstName;
         this.lastName = userProfile.lastName;
+        this.location = userProfile.location;
         this.ranking = new RankingModel(userProfile.ranking);
-        this.threads = new ThreadsListModel(userProfile.threads);
+        this.threads = new ThreadsListModel(userProfile.threads)
+        this.car = typeof userProfile.car ==='undefined' ? null : new CarModel(userProfile.car);
+
+
+
     }
 }
