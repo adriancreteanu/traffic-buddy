@@ -39,6 +39,8 @@ import NewsFeedItem from '../components/news_feed/NewsFeedItem';
 import { LinesLoader } from 'react-native-indicator';
 import PostModel from '../common/data/models/PostModel';
 
+import * as colors from '../styles/Colors';
+
 class HomePage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
@@ -183,8 +185,10 @@ class HomePage extends Component {
                     flex: 1,
                     alignItems: 'center',
                     paddingVertical: 20,
+                    paddingVertical: 70,
                     borderTopWidth: 1,
-                    borderColor: "#CED0CE"
+                    borderColor: colors.General.appPrimary, 
+                    backgroundColor: colors.General.appPrimaryBackground,
                 }}
             >
                 <ActivityIndicator animating size="large" />
@@ -226,17 +230,17 @@ class HomePage extends Component {
                     onEndReachedThreshold={1}
                     onRefresh={this.handleRefresh.bind(this)}
                     refreshing={this.state.refreshing}
-                    style={{
-                        backgroundColor: '#f8f8f8'
-                    }}
-
                 />
             </View>
         ) : (
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <View style={{ 
+                    flex: 1,
+                    alignItems: 'center', 
+                    justifyContent: 'center',  
+                    backgroundColor: colors.General.appPrimaryBackground,
+                }}>
                     <LinesLoader
-                        //color='rgba(169, 20, 20, 0.9)'
-                        color='#FA1'
+                        color={colors.General.appPrimary}
                         barHeight={65}
                         barWidth={6}
                         betweenSpace={7}

@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         //borderBottomWidth: StyleSheet.hairlineWidth,
         borderBottomWidth: 1, 
         flexDirection: "column",
-        backgroundColor: "#f8f8f8",
+        backgroundColor: colors.General.appPrimaryBackground,
         borderTopColor: colors.General.appPrimary,
     },
     usernameTextStyle: {
