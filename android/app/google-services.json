@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1063669393598",
+    "firebase_url": "https://traffic-buddy.firebaseio.com",
+    "project_id": "traffic-buddy",
+    "storage_bucket": "traffic-buddy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063669393598:android:f87ff4aad18bac53",
+        "android_client_info": {
+          "package_name": "com.adriancreteanu.trafficbuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063669393598-0av0sgp8rckosfj1cvnn7uqq2qt34m9m.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1063669393598-0av0sgp8rckosfj1cvnn7uqq2qt34m9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGFaa_tEFHmV3J3RGSMYv3oW6uwp0fOkA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
