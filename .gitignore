@@ -47,6 +47,8 @@ local.properties
 
 #iOS
 /ios/build
+/ios/Pods
+/ios/Podfile.lock
 
 # Node
 node_modules
