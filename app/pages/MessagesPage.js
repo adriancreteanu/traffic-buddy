@@ -23,7 +23,6 @@ import * as colors from "../styles/Colors";
 import { connect } from "react-redux";
 
 import MessageItem from "../components/MessageItem";
-import { Item } from 'native-base';
 import ChatService from '../common/data/services/ChatService';
 import ThreadModel from '../common/data/models/ThreadModel';
 import PreferencesRepo from '../common/data/repos/PreferencesRepo';
