@@ -11,6 +11,7 @@ import SplashScreen from 'react-native-splash-screen';
 import UserProfileModel from "../models/UserProfileModel";
 
 import { PreferenceKeys } from "../../constants/PreferenceKeys";
+import firebase from "react-native-firebase";
 
 export default class AuthenticationService extends SuperService {
 
@@ -82,10 +83,10 @@ export default class AuthenticationService extends SuperService {
             .set({
                 email: payload.email,
                 firstName: payload.firstName,
-                lastName: payload.lastName, 
+                lastName: payload.lastName,
                 ranking: {
-                    rank: 0, 
-                    likes: 0, 
+                    rank: 0,
+                    likes: 0,
                     dislikes: 0
                 }
             })
@@ -163,11 +164,19 @@ export default class AuthenticationService extends SuperService {
     }
 
     async verifyAuth(dispatch: any) {
+
+        let FCM = firebase.messaging();
+        let ref = this.firebaseApp.database().ref("users/TM/TM15ABI/pushToken");
+
         await this.firebaseApp
             .auth()
             .onAuthStateChanged(user => {
                 if (user) {
-                    //do nothing for now
+                    FCM.requestPermission();
+                    FCM.getToken().then(token => {
+                        // stores the token in user's profile
+                        ref.update({ pushToken: token });
+                    });
                 } else {
                     navActions.navigateToLoginPage()(dispatch);
                 }

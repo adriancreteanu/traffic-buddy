@@ -1,4 +1,4 @@
-package com.trafficbuddy;
+package com.adriancreteanu.trafficbuddy;
 
 import android.content.Intent;
 import android.os.Bundle;

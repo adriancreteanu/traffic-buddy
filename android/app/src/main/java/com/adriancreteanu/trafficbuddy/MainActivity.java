@@ -1,4 +1,4 @@
-package com.trafficbuddy;
+package com.adriancreteanu.trafficbuddy;
 
 import android.os.Bundle; 
 import com.facebook.react.ReactActivity;
