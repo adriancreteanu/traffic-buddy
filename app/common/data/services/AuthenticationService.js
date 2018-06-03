@@ -166,7 +166,7 @@ export default class AuthenticationService extends SuperService {
     async verifyAuth(dispatch: any) {
 
         let FCM = firebase.messaging();
-        let ref = this.firebaseApp.database().ref("users/TM/TM15ABI/pushToken");
+        let ref = this.firebaseApp.database().ref("users/TM/TM15ABI");
 
         await this.firebaseApp
             .auth()
