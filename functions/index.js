@@ -1,24 +1,28 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const _ = require('lodash');
 
 admin.initializeApp(functions.config().firebase);
 
 exports.sendPushNotification = functions.database
-    .ref("/threads/{threadId}/messages/{messageId}")
-    .onCreate(event => {
+    .ref("/threads/{thread_id}/messages/{message_id}")
+    .onWrite(event => {
 
-        // the payload is what will be delivered to the device(s)
-        let payload = {
+
+        var after = event.after;
+
+        let message = after._data.text;
+        let user_id = after._data.user._id;
+
+        const payload = {
             notification: {
-                title: "Titlu",
-                body: "Mesaj",
-                sound: true,
-                badge: false,
-            }, 
-            pushToken: event.val()
-        }
+                title: user_id,
+                body: message
+            }
+        };
 
-        let deviceToken = event.val()
+        return admin.messaging()
+            .sendToDevice("fviFOiEV2ow:APA91bFZPjdRO88yGv_pdGhzcvRydSZQeXdWntcMChTS3GZUkVWQ0X0qf_zt1lZLo_Dxmrt4Px3u0RAO2TEun-p0hLjyE39voJq0LuAFzAbLbhnXoheTUh8nHjOPGybKL9nGlB9cAdrS", payload);
 
-        return admin.messaging().sendToDevice()
+
     });

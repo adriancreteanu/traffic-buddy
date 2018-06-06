@@ -2,7 +2,11 @@ import { Component } from 'react';
 
 import firebase from 'react-native-firebase';
 
-import type { Notification, NotificationOpen } from 'react-native-firebase';
+import type {
+     Notification,
+     NotificationOpen,
+     RemoteMessage
+} from 'react-native-firebase';
 
 export default class NotificationHelper extends Component {
 
@@ -21,6 +25,11 @@ export default class NotificationHelper extends Component {
             }
         }
 
+        this.onTokenRefreshListener = firebase.messaging().onTokenRefresh((fcmToken: string) => {
+            // Process your token as required
+            // i.e. Save the new token in database
+            console.log(fcmToken)
+        });
 
         this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification: Notification) => {
             // Process your notification as required
@@ -48,13 +57,21 @@ export default class NotificationHelper extends Component {
         }
 
 
+        // Cloud messaging
+        this.messageListener = firebase.messaging().onMessage((message: RemoteMessage) => {
+            // Process your message as required
+        });
+
+
     }
 
 
     componentWillUnmount() {
+        this.onTokenRefreshListener();
         this.notificationDisplayedListener();
         this.notificationListener();
         this.notificationOpenedListener();
+        this.messageListener();
     }
 
     render() {
