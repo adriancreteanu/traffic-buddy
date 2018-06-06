@@ -36,6 +36,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ProfilePage from '../pages/ProfilePage';
 import SearchPage from '../pages/SearchPage';
 
+// Notifications 
+import NotificationHelper from "../common/helpers/NotificationsHelper";
+
 
 let stackNavigationOptions = {
     statusBarStyle: "dark-content",
@@ -206,6 +209,9 @@ class AppContainer extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
+
+                <NotificationHelper />
+
                 <AppNavigator
                     navigation={addNavigationHelpers({
                         dispatch: this.props.dispatch,
