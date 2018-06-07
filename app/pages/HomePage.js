@@ -132,7 +132,7 @@ class HomePage extends Component {
 
         if (this.state.username) {
             await userActions.fetchLoggedUserProfile(this.state.username)(this.props.dispatch);
-            await newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
+            await newsFeedActions.fetchPosts("TM")(this.props.dispatch);
 
             this.saveInitialPostsToState();
         }
@@ -156,13 +156,13 @@ class HomePage extends Component {
             lastPostId: ""
         });
 
-        await newsFeedActions.fetchPosts("Timis")(this.props.dispatch);
+        await newsFeedActions.fetchPosts("TM")(this.props.dispatch);
         this.saveInitialPostsToState();
     }
 
     async handleLoadMore() {
         if (!this.state.postsHaveEnded) {
-            await newsFeedActions.fetchMorePosts("Timis", this.state.lastPostId)(this.props.dispatch);
+            await newsFeedActions.fetchMorePosts("TM", this.state.lastPostId)(this.props.dispatch);
 
             let newPosts = this.props.fetchPostsReducer.viewModel.postsViewModel.postsModel;
 

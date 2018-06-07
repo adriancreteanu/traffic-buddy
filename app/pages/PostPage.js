@@ -36,6 +36,10 @@ import * as newsFeedActions from "../common/redux/actions/NewsFeedActions";
 import { connect } from 'react-redux';
 import { LinesLoader } from 'react-native-indicator';
 
+// locations
+import { locations } from "../common/constants/Locations";
+import { categories } from "../common/constants/Categories";
+
 import AlertHelper from "../common/helpers/AlertHelper";
 
 class PostPage extends Component {
@@ -66,36 +70,17 @@ class PostPage extends Component {
         super(props);
         this.state = {
             location: "",
-            category: "",
+            category: categories.General,
             message: "",
-            pickerItems: [],
             user: null,
+            locationsList: locations,
+            locationPickerItems: [],
+            categoriesList: categories,
+            categoriesPickerItems: []
         }
     }
 
     async componentDidMount() {
-        let judete = [
-            "Timis",
-            "Arad",
-            "Bihor",
-            "Iasi",
-            "Cluj",
-        ];
-
-        let judeteObject = {
-            "Arad": "AR",
-            "Bihor": "BH",
-            "Constanta": "CT",
-            "Gorj": "GJ",
-            "Timis": "TM"
-        };
-
-        // this.setState({
-        //     pickerItems: judete.map((k, i) => {
-        //         return <Picker.Item key={i} value={s} label={s} />
-        //     })
-        // });
-
         if (this.props.loggedUserReducer.viewModel) {
             await this.setState({
                 location: this.props.loggedUserReducer.viewModel.userProfileViewModel.location,
@@ -105,9 +90,14 @@ class PostPage extends Component {
         }
 
         this.setState({
-            pickerItems: Object.keys(judeteObject).map((key, index) => {
-                return <Picker.Item key={index} label={key} value={judeteObject[key]} />
-            })
+            locationPickerItems: this.formatPickerItems(this.state.locationsList),
+            categoriesPickerItems: this.formatPickerItems(this.state.categoriesList)
+        });
+    }
+
+    formatPickerItems(list) {
+        return Object.keys(list).map((key, index) => {
+            return <Picker.Item key={index} label={key} value={list[key]} />
         });
     }
 
@@ -157,7 +147,7 @@ class PostPage extends Component {
                                 itemStyle={styles.pickerItemStyle}
                             >
 
-                                {this.state.pickerItems}
+                                {this.state.locationPickerItems}
                             </Picker>
                         </View>
 
@@ -176,11 +166,7 @@ class PostPage extends Component {
                                 itemTextStyle={styles.pickerItemTextStyle}
                                 itemStyle={styles.pickerItemStyle}
                             >
-                                <Picker.Item label="Accident" value="Accident" />
-                                <Picker.Item label="Radar" value="Radar" />
-                                <Picker.Item label="Politie" value="Politie" />
-                                <Picker.Item label="Trafic" value="Trafic" />
-                                <Picker.Item label="General" value="General" />
+                                {this.state.categoriesPickerItems}
                             </Picker>
                         </View>
 
