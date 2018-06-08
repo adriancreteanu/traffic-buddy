@@ -47,7 +47,7 @@ export default class NewsFeedService extends SuperService {
             .database()
             .ref("feed")
             .child(location)
-            .limitToLast(10)
+            .limitToLast(11)
             .once("value")
             .then(snapshot => {
                 response = new PostsModel(snapshot.val());
@@ -65,14 +65,12 @@ export default class NewsFeedService extends SuperService {
     ) {
         var response: PostModel[] | ApiErrorModel;
 
-        let x = 2;
-
         await this.firebaseApp
             .database()
             .ref("feed")
             .child(location)
             .endAt(null, lastPostId)
-            .limitToLast(10)
+            .limitToLast(11)
             .once("value")
             .then(snapshot => {
                 response = new PostsModel(snapshot.val());

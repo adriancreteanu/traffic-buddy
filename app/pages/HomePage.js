@@ -40,6 +40,7 @@ import { LinesLoader } from 'react-native-indicator';
 import PostModel from '../common/data/models/PostModel';
 
 import * as colors from '../styles/Colors';
+import PostsModel from '../common/data/models/PostsModel';
 
 class HomePage extends Component {
 
@@ -111,16 +112,33 @@ class HomePage extends Component {
     saveInitialPostsToState = () => {
         let postsReducer = this.props.fetchPostsReducer;
         if (postsReducer && postsReducer.viewModel) {
-            let posts = postsReducer.viewModel.postsViewModel.postsModel;
+            let posts: PostsModel[] = postsReducer.viewModel.postsViewModel.postsModel;
+
+            let numberOfPosts = posts.length;
+            let lastPostId = "";
+            let postsHaveEnded = false;
+
+            if (numberOfPosts > 0) {
+                // Get the last post id, indifferent of how many posts we have, but at least one
+                lastPostId = posts[numberOfPosts - 1].id;
+            }
+
+
+            if (posts.length != 11) {
+                // End of the list so we don't fetch anymore
+                postsHaveEnded = true
+            } else {
+                // Remove the 11'th item from list (the one used just for the next fetch)
+                posts.pop();
+            }
 
             if (posts) {
                 this.setState({
                     ...this.state,
-                    //posts: [...this.state.posts, ...newPosts], 
-                    // posts: [...this.state.posts, ...posts],
                     posts: posts,
-                    lastPostId: posts[posts.length - 1].id,
+                    lastPostId: lastPostId,
                     refreshing: false,
+                    postsHaveEnded: postsHaveEnded,
                 })
             }
         }
@@ -166,10 +184,28 @@ class HomePage extends Component {
 
             let newPosts = this.props.fetchPostsReducer.viewModel.postsViewModel.postsModel;
 
+            let numberOfPosts = newPosts.length;
+            let lastPostId = "";
+            let postsHaveEnded = false;
+
+            if (numberOfPosts > 0) {
+                // Get the last post id, indifferent of how many posts we have, but at least one
+                lastPostId = newPosts[numberOfPosts - 1].id;
+            }
+
+
+            if (newPosts.length != 11) {
+                // End of the list so we don't fetch anymore
+                postsHaveEnded = true
+            } else {
+                // Remove the 11'th item from list (the one used just for the next fetch)
+                newPosts.pop();
+            }
+
             this.setState({
-                postsHaveEnded: newPosts.length < 5 ? true : false,
+                postsHaveEnded: postsHaveEnded,
                 posts: [...this.state.posts, ...newPosts],
-                lastPostId: newPosts[newPosts.length - 1].id
+                lastPostId: lastPostId
             });
         }
     }
@@ -187,7 +223,7 @@ class HomePage extends Component {
                     paddingVertical: 20,
                     paddingVertical: 70,
                     borderTopWidth: 1,
-                    borderColor: colors.General.appPrimary, 
+                    borderColor: colors.General.appPrimary,
                     backgroundColor: colors.General.appPrimaryBackground,
                 }}
             >
@@ -233,10 +269,10 @@ class HomePage extends Component {
                 />
             </View>
         ) : (
-                <View style={{ 
+                <View style={{
                     flex: 1,
-                    alignItems: 'center', 
-                    justifyContent: 'center',  
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     backgroundColor: colors.General.appPrimaryBackground,
                 }}>
                     <LinesLoader

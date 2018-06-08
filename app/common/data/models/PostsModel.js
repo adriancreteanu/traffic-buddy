@@ -14,18 +14,7 @@ export default class PostsModel {
             this.postsModel.push(post);
         }
 
-        // define loadMoreLimit as a consts
-        const loadMoreLimit = 5;
-
-        // Remove the last item from list i.e. the with the lastItemId
-        this.postsModel.pop();
-
-        // If we are not at the end of the list, then we have fetched one to many items, so we remove the last one
-        if(this.postsModel.length > loadMoreLimit) {
-            this.postsModel.shift();
-        }
-
-        // Reverse the items so they are in chronological order
+        // Reverse the posts because we display then in reversed chronological order
         this.postsModel.reverse();
     }
 }
