@@ -83,11 +83,6 @@ class LoginPage extends Component {
     }
   }
 
-
-  navigateToHomePage() {
-    navActions.navigateToHomePage()(this.props.dispatch);
-  }
-
   navigateToRegisterPage() {
     navActions.navigateToRegisterPage()(this.props.dispatch);
   }

@@ -86,12 +86,7 @@ class RegisterPage extends Component {
     }
 
     validateRegisterCredentials() {
-
-
-
-
-
-        // Validation 
+        // Register validation 
         if (InputValidationHelper.fieldIsEmpty(this.state.firstName) ||
             InputValidationHelper.fieldIsEmpty(this.state.lastName) ||
             InputValidationHelper.fieldIsEmpty(this.state.plateNumber) ||
@@ -110,7 +105,12 @@ class RegisterPage extends Component {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 email: this.state.email,
-                password: this.state.password
+                password: this.state.password,
+                ranking: {
+                    rank: 0, 
+                    likes: 0, 
+                    dislikes: 0,
+                }
             };
 
             let payload = authPayloads.createRegisterCredentialsPayload(registerPayload);

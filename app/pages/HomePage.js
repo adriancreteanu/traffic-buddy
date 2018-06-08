@@ -103,10 +103,20 @@ class HomePage extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        //let userProfile = nextProps.loggedUserReducer;
+        let postReducer = nextProps.postReducer;
+        let loginReducer = nextProps.loginReducer;
+        
+        // Refresh Home after sending a Post
+        if(postReducer.viewModel) {
+            nextProps.postReducer.viewModel = null;
+            this.handleRefresh()
+        }
 
-        //let postsReducer = nextProps.fetchPostsReducer;
-        //let posts = null;   
+        // Refresh Home after login
+        if(loginReducer.viewModel) {
+            nextProps.loginReducer.viewModel = null;
+            this.handleRefresh();
+        }
     }
 
     saveInitialPostsToState = () => {
@@ -292,6 +302,8 @@ function mapStateToProps(state) {
         navigationReducer: state.navigationReducer,
         loggedUserReducer: state.loggedUserReducer,
         fetchPostsReducer: state.fetchPostsReducer,
+        postReducer: state.postReducer,
+        loginReducer: state.loginReducer, 
     };
 }
 

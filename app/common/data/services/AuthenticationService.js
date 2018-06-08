@@ -34,7 +34,7 @@ export default class AuthenticationService extends SuperService {
             await this.firebaseApp
                 .auth()
                 .createUserWithEmailAndPassword(payload.email, payload.password)
-                .then(async () => {
+                .then(async snapshot => {
                     // Write user data to firebase
                     let insertResponse: ApiErrorModel | bool = await this.insertUserDataInDatabase(payload);
                     if (insertResponse instanceof ApiErrorModel) {
@@ -42,6 +42,12 @@ export default class AuthenticationService extends SuperService {
                     } else {
                         // User data successfully inserted into firebase
                         response = new UserProfileModel(payload);
+                        // Save user data to preferences
+                        this.saveUserDataInPreferences(
+                            payload.plateNumber,
+                            payload.email,
+                            snapshot.uid
+                        );
                     }
                 })
                 .catch(error => {
