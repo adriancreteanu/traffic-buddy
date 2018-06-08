@@ -6,6 +6,8 @@ import ErrorViewModel from "../../data/viewmodels/error/ErrorViewModel";
 import * as navActions from "../actions/NavigationActions";
 import UserProfileViewModel from "../../data/viewmodels/UserProfileViewModel";
 
+import firebase from "react-native-firebase";
+
 export const authenticationActionTypes = {
     loginInProgress: "loginInProgress",
     loginSuccess: "loginSuccess",
@@ -30,6 +32,15 @@ export function registerAction(
     }
 }
 
+export function updateUserToken(
+    username: string, 
+    location: string,
+) {
+    return async function (dispatch: any) {
+        let authManager = new AuthenticationManager();
+        authManager.updateUserToken(username, location);
+    }
+}
 
 
 export function loginUser(

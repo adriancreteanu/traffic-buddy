@@ -107,10 +107,11 @@ class RegisterPage extends Component {
                 email: this.state.email,
                 password: this.state.password,
                 ranking: {
-                    rank: 0, 
-                    likes: 0, 
+                    rank: 0,
+                    likes: 0,
                     dislikes: 0,
-                }
+                },
+                location: InputValidationHelper.extractLocationFromUsername(this.state.plateNumber)
             };
 
             let payload = authPayloads.createRegisterCredentialsPayload(registerPayload);

@@ -12,6 +12,7 @@ import UserProfileModel from "../models/UserProfileModel";
 
 import { PreferenceKeys } from "../../constants/PreferenceKeys";
 import firebase from "react-native-firebase";
+import InputValidationHelper from "../../helpers/InputValidationHelper";
 
 export default class AuthenticationService extends SuperService {
 
@@ -59,9 +60,11 @@ export default class AuthenticationService extends SuperService {
 
     async checkIfUsernameExists(plateNumber: ?string) {
         var response: boolean | ApiErrorModel;
+        let location = InputValidationHelper.extractLocationFromUsername(plateNumber);
         await this.firebaseApp
             .database()
-            .ref("users/TM") // de vazut cum manipulez stringul ai sa fie parametrizat
+            .ref("users")
+            .child(location)
             .child(plateNumber)
             .once("value")
             .then(snapshot => {
@@ -84,7 +87,8 @@ export default class AuthenticationService extends SuperService {
         var response: bool | ApiErrorModel;
         await this.firebaseApp
             .database()
-            .ref("users/TM")
+            .ref("users")
+            .child(payload.location)
             .child(payload.plateNumber)
             .set({
                 email: payload.email,
@@ -94,7 +98,8 @@ export default class AuthenticationService extends SuperService {
                     rank: 0,
                     likes: 0,
                     dislikes: 0
-                }
+                },
+                location: payload.location
             })
             .then(() => {
                 console.log("Synchronization succeeded");
@@ -120,7 +125,7 @@ export default class AuthenticationService extends SuperService {
                 this.saveUserDataInPreferences(
                     payload.username,
                     payload.email,
-                    user.uid
+                    user.uid,
                 );
                 response = new UserModel(user);
             })
@@ -130,19 +135,22 @@ export default class AuthenticationService extends SuperService {
         return response;
     }
 
-    async saveUserDataInPreferences(username: string, email: string, uid: string) {
+    async saveUserDataInPreferences(username: string, email: string, uid: string, location: string) {
         await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUsername, username);
         await this.preferencesRepo.saveValue(PreferenceKeys.loggedInEmail, email);
         await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUID, uid);
+        await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUserLocation, location)
     }
 
     async fetchUserProfile(
         payload: authPayloads.loginCredentialsPayloadType
     ) {
         var response: UserProfileModel | ApiErrorModel;
+        let location = InputValidationHelper.extractLocationFromUsername(payload.username);
         await this.firebaseApp
             .database()
-            .ref("users/TM")
+            .ref("users")
+            .child(location)
             .child(payload.username)
             .once("value")
             .then(async snapshot => {
@@ -169,20 +177,23 @@ export default class AuthenticationService extends SuperService {
         return response;
     }
 
-    async verifyAuth(dispatch: any) {
-
+    async updateUserToken(username: string, location: string) {
         let FCM = firebase.messaging();
-        let ref = this.firebaseApp.database().ref("users/TM/TM15ABI");
+        let ref = this.firebaseApp.database().ref(`users/${location}/${username}`);
 
+        FCM.requestPermission();
+        FCM.getToken().then(token => {
+            // stores the token in user's profile
+            ref.update({ pushToken: token });
+        });
+    }
+
+    async verifyAuth(dispatch: any) {
         await this.firebaseApp
             .auth()
             .onAuthStateChanged(user => {
                 if (user) {
-                    FCM.requestPermission();
-                    FCM.getToken().then(token => {
-                        // stores the token in user's profile
-                        ref.update({ pushToken: token });
-                    });
+                    // do nothing 
                 } else {
                     navActions.navigateToLoginPage()(dispatch);
                 }

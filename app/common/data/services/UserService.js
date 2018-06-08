@@ -1,15 +1,19 @@
 import SuperService from "./SuperService";
 import UserProfileModel from "../models/UserProfileModel";
 import ApiErrorModel from "../models/error/ApiErrorModel";
+import InputValidationHelper from "../../helpers/InputValidationHelper";
 
 
 export default class UserService extends SuperService {
 
     async fetchUserProfile(username: ?string) {
         var response: UserProfileModel | ApiErrorModel;
+        let location = InputValidationHelper.extractLocationFromUsername(username);
+
         await this.firebaseApp
             .database()
-            .ref("users/TM")
+            .ref("users")
+            .child(location)
             .child(username)
             .once("value")
             .then(snapshot => {

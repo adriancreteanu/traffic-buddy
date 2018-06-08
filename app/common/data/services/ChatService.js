@@ -4,6 +4,7 @@ import ApiErrorModel from "../models/error/ApiErrorModel";
 
 import * as chatPayloads from "../payloads/ChatPayloads";
 import MessageModel from "../models/MessageModel";
+import InputValidationHelper from "../../helpers/InputValidationHelper";
 
 
 export default class ChatService extends SuperService {
@@ -19,11 +20,11 @@ export default class ChatService extends SuperService {
         payload: chatPayloads.fetchChatMessagesPayloadType
     ) {
         var response: MessagesModel | ApiErrorModel = null;
-
+        let location = InputValidationHelper.extractLocationFromUsername(payload.loggedInUser);
         await this.firebaseApp
             .database()
             .ref("messages")
-            .child("TM")
+            .child(location)
             .child(payload.loggedInUser)
             .child(payload.chatPartner)
             .limitToLast(15)
@@ -39,7 +40,8 @@ export default class ChatService extends SuperService {
 
     async loadThreads(loggedUser: string, callback) {
 
-        this.messagesRef = this.firebaseApp.database().ref(`users/TM/${loggedUser}/threads`);
+        let location = InputValidationHelper.extractLocationFromUsername(loggedUser);
+        this.messagesRef = this.firebaseApp.database().ref(`users/${location}/${loggedUser}/threads`);
         this.messagesRef.off();
 
         const onReceive = (data) => {
@@ -84,17 +86,20 @@ export default class ChatService extends SuperService {
 
     async createNewThread(threadKey: string, user1_id: string, user2_id: string) {
 
+        let user1Location = InputValidationHelper.extractLocationFromUsername(user1_id);
+        let user2Location = InputValidationHelper.extractLocationFromUsername(user2_id);
+
         this.messagesRef = this.firebaseApp.database().ref("users");
 
         // Create new thread for users
         this.messagesRef
-            .child(`TM/${user1_id}/threads/${threadKey}`)
+            .child(`${user1Location}/${user1_id}/threads/${threadKey}`)
             .set({
                 chatPartner: user2_id
             });
 
         this.messagesRef
-            .child(`TM/${user2_id}/threads/${threadKey}`)
+            .child(`${user2Location}/${user2_id}/threads/${threadKey}`)
             .set({
                 chatPartner: user1_id
             });
@@ -110,7 +115,9 @@ export default class ChatService extends SuperService {
     }
 
     async checkIfThreadExists(loggedUser: string, chatPartner: string) {
-        this.messagesRef = this.firebaseApp.database().ref("users/TM");
+
+        let location = InputValidationHelper.extractLocationFromUsername(loggedUser);
+        this.messagesRef = this.firebaseApp.database().ref(`users/${location}`);
 
         let threadId: string = null;
 

@@ -69,6 +69,10 @@ export default class AuthenticationManager {
         this._service.verifyAuth(dispatch);
     }
 
+    async updateUserToken(username: string, location: string) {
+        this._service.updateUserToken(username, location);
+    }
+
     async signOut() {
         return response = await this._service.signOut();
     }

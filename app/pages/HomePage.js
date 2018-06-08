@@ -41,6 +41,7 @@ import PostModel from '../common/data/models/PostModel';
 
 import * as colors from '../styles/Colors';
 import PostsModel from '../common/data/models/PostsModel';
+import InputValidationHelper from '../common/helpers/InputValidationHelper';
 
 class HomePage extends Component {
 
@@ -96,25 +97,32 @@ class HomePage extends Component {
             lastPostId: "",
             posts: [],
             postsHaveEnded: false,
-            refreshing: false
+            refreshing: false,
+            location: "",
         };
         this.preferencesRepo = new PreferencesRepo();
     }
 
 
-    componentWillReceiveProps(nextProps) {
+    async componentWillReceiveProps(nextProps) {
         let postReducer = nextProps.postReducer;
         let loginReducer = nextProps.loginReducer;
-        
+
         // Refresh Home after sending a Post
-        if(postReducer.viewModel) {
+        if (postReducer.viewModel) {
             nextProps.postReducer.viewModel = null;
             this.handleRefresh()
         }
 
         // Refresh Home after login
-        if(loginReducer.viewModel) {
+        if (loginReducer.viewModel) {
             nextProps.loginReducer.viewModel = null;
+            await this.getDataFromPreferences();
+            await this.setState({
+                // Sustache - dupa login, va calcula locatia dupa usename, nu dupa ce are user-ul
+                // Dar la handleRefresh, isi va da refresh pagina si va fi ok.
+                location: InputValidationHelper.extractLocationFromUsername(this.state.username)
+            });
             this.handleRefresh();
         }
     }
@@ -160,9 +168,19 @@ class HomePage extends Component {
 
         if (this.state.username) {
             await userActions.fetchLoggedUserProfile(this.state.username)(this.props.dispatch);
-            await newsFeedActions.fetchPosts("TM")(this.props.dispatch);
 
-            this.saveInitialPostsToState();
+            if (this.props.loggedUserReducer.viewModel) {
+                let location = this.props.loggedUserReducer.viewModel.userProfileViewModel.location;
+
+                await this.setState({
+                    location: location
+                });
+
+                authActions.updateUserToken(this.state.username, this.state.location)(this.props.dispatch);
+                await newsFeedActions.fetchPosts(this.state.location)(this.props.dispatch);
+                this.saveInitialPostsToState();
+            }
+
         }
     }
 
@@ -184,13 +202,13 @@ class HomePage extends Component {
             lastPostId: ""
         });
 
-        await newsFeedActions.fetchPosts("TM")(this.props.dispatch);
+        await newsFeedActions.fetchPosts(this.state.location)(this.props.dispatch);
         this.saveInitialPostsToState();
     }
 
     async handleLoadMore() {
         if (!this.state.postsHaveEnded) {
-            await newsFeedActions.fetchMorePosts("TM", this.state.lastPostId)(this.props.dispatch);
+            await newsFeedActions.fetchMorePosts(this.state.location, this.state.lastPostId)(this.props.dispatch);
 
             let newPosts = this.props.fetchPostsReducer.viewModel.postsViewModel.postsModel;
 
@@ -303,7 +321,7 @@ function mapStateToProps(state) {
         loggedUserReducer: state.loggedUserReducer,
         fetchPostsReducer: state.fetchPostsReducer,
         postReducer: state.postReducer,
-        loginReducer: state.loginReducer, 
+        loginReducer: state.loginReducer,
     };
 }
 

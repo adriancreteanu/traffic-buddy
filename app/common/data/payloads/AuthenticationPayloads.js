@@ -1,21 +1,22 @@
 
 export type loginCredentialsPayloadType = {
-    username: ?string,
-    email: ?string,
-    password: ?string,
+    username: string,
+    email: string,
+    password: string,
 };
 
 export type registerCredentialsPayloadType = {
-    plateNumber: ?string,
-    firstName: ?string,
-    lastName: ?string,
-    email: ?string,
-    password: ?string,
+    plateNumber: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
     ranking: {
         rank: number, 
         likes: number, 
         dislikes: number,
-    }
+    }, 
+    location: string,
 };
 
 
@@ -39,5 +40,6 @@ export function createRegisterCredentialsPayload(
         email: registerCredentials.email,
         password: registerCredentials.password, 
         ranking: registerCredentials.ranking,
+        location: registerCredentials.location,
     };
 };
