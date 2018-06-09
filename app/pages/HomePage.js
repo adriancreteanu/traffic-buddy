@@ -121,7 +121,8 @@ class HomePage extends Component {
             await this.setState({
                 // Sustache - dupa login, va calcula locatia dupa usename, nu dupa ce are user-ul
                 // Dar la handleRefresh, isi va da refresh pagina si va fi ok.
-                location: InputValidationHelper.extractLocationFromUsername(this.state.username)
+                //location: InputValidationHelper.extractLocationFromUsername(this.state.username)
+                location: "TM",
             });
             this.handleRefresh();
         }
@@ -176,11 +177,11 @@ class HomePage extends Component {
                     location: location
                 });
 
-                authActions.updateUserToken(this.state.username, this.state.location)(this.props.dispatch);
-                await newsFeedActions.fetchPosts(this.state.location)(this.props.dispatch);
+                // Update user token at users/user_original_location/username
+                authActions.updateUserToken(this.state.username, InputValidationHelper.extractLocationFromUsername(this.state.username))(this.props.dispatch);
+                await newsFeedActions.fetchPosts("TM")(this.props.dispatch);
                 this.saveInitialPostsToState();
             }
-
         }
     }
 
@@ -202,13 +203,13 @@ class HomePage extends Component {
             lastPostId: ""
         });
 
-        await newsFeedActions.fetchPosts(this.state.location)(this.props.dispatch);
+        await newsFeedActions.fetchPosts("TM")(this.props.dispatch);
         this.saveInitialPostsToState();
     }
 
     async handleLoadMore() {
         if (!this.state.postsHaveEnded) {
-            await newsFeedActions.fetchMorePosts(this.state.location, this.state.lastPostId)(this.props.dispatch);
+            await newsFeedActions.fetchMorePosts("TM", this.state.lastPostId)(this.props.dispatch);
 
             let newPosts = this.props.fetchPostsReducer.viewModel.postsViewModel.postsModel;
 
