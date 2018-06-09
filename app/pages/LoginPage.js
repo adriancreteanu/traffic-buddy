@@ -9,7 +9,8 @@ import {
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
-  Image
+  Image,
+  ScrollView
 } from "react-native";
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -101,22 +102,23 @@ class LoginPage extends Component {
           marginTop: 70,
           marginBottom: 30,
           width: undefined,
-          height: '25%',
+          height: '30%',
         }}>
           <Image
             source={require('../assets/images/login_icon.png')}
             style={{
-
               alignSelf: 'center',
               width: '100%',
               height: '100%',
             }}
-            resizeMode="contain" />
+            resizeMode='contain' />
 
         </View>
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.container}>
+          <ScrollView
+            contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled">
 
             <LoginTextInput
               icon={"car"}
@@ -193,7 +195,7 @@ class LoginPage extends Component {
             >
               <View style={{
                 justifyContent: 'center',
-
+                marginBottom: 20,
               }}>
                 <Text style={styles.accountText}>{strings.dontHaveAccount}</Text>
 
@@ -202,7 +204,7 @@ class LoginPage extends Component {
             </TouchableHighlight>
 
 
-          </View>
+          </ScrollView>
         </TouchableWithoutFeedback>
       </LinearGradient>
     );
@@ -211,7 +213,7 @@ class LoginPage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingTop: 20,
     alignItems: "center",
     justifyContent: 'center',
   },

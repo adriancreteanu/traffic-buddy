@@ -100,7 +100,7 @@ class ProfilePage extends Component {
 
     renderSocialButtons() {
         return !this.state.isLoggedUserProfile ? (
-            <View style={styles.bottomContainer}>
+            <ScrollView contentContainerStyle={styles.bottomContainer}>
                 <View style={styles.iconsSection}>
                     <TouchableHighlight
                         onShowUnderlay={() => this.setState({
@@ -171,7 +171,7 @@ class ProfilePage extends Component {
                     onPress={() => this.navigateToChatPage(this.props.navigation.state.params.user.username)}
                     fontSize={16}
                 />
-            </View>
+            </ScrollView>
         ) :
             <UserProfileData
                 containerFlex={2.5}
@@ -217,7 +217,7 @@ class ProfilePage extends Component {
                 </View>
 
                 <ScrollView
-                    contentContainerStyle={{ flex: 1, justifyContent: 'center', backgroundColor: "transparent" }} >
+                    contentContainerStyle={{ justifyContent: 'center', backgroundColor: "transparent" }} >
 
                     {this.renderSocialButtons()}
 
@@ -266,7 +266,6 @@ const styles = StyleSheet.create({
         elevation: 6,
     },
     bottomContainer: {
-        flex: 2.5,
         padding: 40,
         alignItems: 'center',
     },

@@ -6,7 +6,8 @@ import {
     Alert,
     ImageBackground,
     Platform,
-    Dimensions
+    Dimensions,
+    ScrollView
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -88,10 +89,10 @@ class SettingsPage extends Component {
 
         this.preferencesRepo = new PreferencesRepo();
 
-        
+
 
         this.width = Dimensions.get('window').width,
-        this.height = Dimensions.get('window').height
+            this.height = Dimensions.get('window').height
     }
 
     async componentWillReceiveProps(nextProps) {
@@ -120,11 +121,9 @@ class SettingsPage extends Component {
                 style={{ flex: 1 }}
             >
                 <View style={styles.container}>
-
-
                     <CustomButton
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
+                        height={Platform.OS == "ios" ? 50 : 60}
                         buttonColor={colors.General.appSecondary}
                         pressedColor={colors.General.appSecondary}
                         buttonTitle={strings.myProfile}
@@ -138,13 +137,13 @@ class SettingsPage extends Component {
 
                     <CustomButton
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
+                        height={Platform.OS == "ios" ? 50 : 60}
                         buttonColor={colors.General.appSecondary}
                         pressedColor={colors.General.appSecondary}
                         buttonTitle={strings.friends}
                         style={{ marginTop: 20, marginBottom: 10 }}
                         onPress={() => {
-                            this.navigateToMyProfile(this.state.loggedUser)
+                            alert("Not implemented");
                         }}
                         fontSize={24}
                         borderRadius={5}
@@ -152,26 +151,12 @@ class SettingsPage extends Component {
 
                     <CustomButton
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
-                        buttonColor={colors.General.appSecondary}
-                        pressedColor={colors.General.appSecondary}
-                        buttonTitle={strings.general}
-                        style={{ marginTop: 20, marginBottom: 10 }}
-                        onPress={() => {
-                            this.navigateToMyProfile(this.state.loggedUser)
-                        }}
-                        fontSize={24}
-                        borderRadius={5}
-                    />
-
-                    <CustomButton
-                        width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
+                        height={Platform.OS == "ios" ? 50 : 60}
                         style={{
                             position: 'absolute',
                             height: 40,
-                            left: this.width/8,
-                            top: Platform.OS == "ios" ? this.height - 140 : this.height - 180 ,
+                            left: this.width / 8,
+                            top: Platform.OS == "ios" ? this.height - 140 : this.height - 180,
                             width: this.width,
                         }}
                         buttonColor={colors.General.appSecondary}
@@ -197,12 +182,7 @@ class SettingsPage extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        //justifyContent: 'flex-end',
         alignItems: 'center',
-        // backgroundColor: '#f00', 
-
-
     }
 });
 

@@ -136,12 +136,12 @@ class RegisterPage extends Component {
 
                 <ScrollView
                     contentContainerStyle={styles.container}
-                    keyboardDismissMode="on-drag"
+                    // keyboardDismissMode="on-drag"
                     keyboardShouldPersistTaps="handled"
                 >
                     <CustomTextInput
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
+                        height={Platform.OS == "ios" ? 50 : 60}
                         style={{ marginTop: 40 }}
                         placeholder={strings.plateNumber}
                         onChangeText={text =>
@@ -160,8 +160,8 @@ class RegisterPage extends Component {
 
                     <CustomTextInput
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
-                        style={{ marginTop: 10 }}
+                        height={Platform.OS == "ios" ? 50 : 60}
+                        style={{ marginTop: 15 }}
                         placeholder={strings.firstName}
                         onChangeText={text =>
                             this.setState({
@@ -178,8 +178,8 @@ class RegisterPage extends Component {
 
                     <CustomTextInput
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
-                        style={{ marginTop: 10 }}
+                        height={Platform.OS == "ios" ? 50 : 60}
+                        style={{ marginTop: 15 }}
                         placeholder={strings.lastName}
                         onChangeText={text =>
                             this.setState({
@@ -195,8 +195,8 @@ class RegisterPage extends Component {
 
                     <CustomTextInput
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
-                        style={{ marginTop: 10 }}
+                        height={Platform.OS == "ios" ? 50 : 60}
+                        style={{ marginTop: 15 }}
                         placeholder={strings.email}
                         onChangeText={text =>
 
@@ -214,8 +214,8 @@ class RegisterPage extends Component {
 
                     <CustomTextInput
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
-                        style={{ marginTop: 10 }}
+                        height={Platform.OS == "ios" ? 50 : 60}
+                        style={{ marginTop: 15 }}
                         placeholder={strings.password}
                         onChangeText={text =>
                             this.setState({
@@ -233,8 +233,8 @@ class RegisterPage extends Component {
 
                     <CustomTextInput
                         width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 70}
-                        style={{ marginTop: 10 }}
+                        height={Platform.OS == "ios" ? 50 : 60}
+                        style={{ marginTop: 15 }}
                         placeholder={strings.confirmPassword}
                         onChangeText={text =>
                             this.setState({
@@ -292,9 +292,7 @@ class RegisterPage extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
-
     }
 });
 

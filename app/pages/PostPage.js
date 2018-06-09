@@ -128,10 +128,10 @@ class PostPage extends Component {
                 start={{ x: 0.0, y: 1.0 }}
                 end={{ x: 1.0, y: 0.1 }}
                 colors={[colors.General.whiteColor, colors.General.appGradientPrimary, colors.General.appPrimary]}
-                style={styles.container}
+                style={{ flex: 1 }}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                    <View style={styles.container}>
+                    <ScrollView contentContainerStyle={styles.container}>
 
                         <View style={styles.pickerViewStyle}>
                             <Picker
@@ -186,6 +186,8 @@ class PostPage extends Component {
                             maxLength={400}
                         />
 
+                        
+
                         <CustomButton
                             width={300}
                             height={45}
@@ -200,8 +202,6 @@ class PostPage extends Component {
                             }}
                             fontSize={16}
                         />
-
-
 
 
                         {typeof this.props.postReducer !== 'undefined' && this.props.postReducer != null && this.props.postReducer.isInProgress ? (
@@ -221,7 +221,7 @@ class PostPage extends Component {
                                 <View style={{ height: 50, backgroundColor: "transparent" }} />
                             )}
 
-                    </View>
+                    </ScrollView>
                 </TouchableWithoutFeedback>
             </LinearGradient>
         )
@@ -230,7 +230,6 @@ class PostPage extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         paddingHorizontal: 20
     },
