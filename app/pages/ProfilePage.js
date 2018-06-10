@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     },
     textsSection: {
         paddingRight: 25,
-        width: 150,
+        width: 160,
     },
     numbersSection: {
         paddingRight: 60

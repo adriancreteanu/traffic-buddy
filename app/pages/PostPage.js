@@ -131,7 +131,9 @@ class PostPage extends Component {
                 style={{ flex: 1 }}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-                    <ScrollView contentContainerStyle={styles.container}>
+                    <ScrollView
+                        contentContainerStyle={styles.container}
+                        keyboardShouldPersistTaps="handled" >
 
                         <View style={styles.pickerViewStyle}>
                             <Picker
@@ -186,7 +188,7 @@ class PostPage extends Component {
                             maxLength={400}
                         />
 
-                        
+
 
                         <CustomButton
                             width={300}
@@ -204,10 +206,10 @@ class PostPage extends Component {
                         />
 
 
-                        {typeof this.props.postReducer !== 'undefined' && this.props.postReducer != null && this.props.postReducer.isInProgress ? (
+                        {this.props.postReducer.isInProgress ? (
                             <View style={{
                                 marginTop: 40,
-                                marginBottom: -50,
+
                                 backgroundColor: 'transparent',
                             }}>
                                 <LinesLoader
@@ -218,7 +220,7 @@ class PostPage extends Component {
                                 />
                             </View>
                         ) : (
-                                <View style={{ height: 50, backgroundColor: "transparent" }} />
+                                <View style={{ height: 50, width: 50, backgroundColor: 'transparent' }} />
                             )}
 
                     </ScrollView>
