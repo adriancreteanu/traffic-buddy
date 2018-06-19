@@ -5,6 +5,7 @@ import ApiErrorModel from "../models/error/ApiErrorModel";
 import * as chatPayloads from "../payloads/ChatPayloads";
 import MessageModel from "../models/MessageModel";
 import InputValidationHelper from "../../helpers/InputValidationHelper";
+import DateHelper from "../../helpers/DateHelper";
 
 
 export default class ChatService extends SuperService {
@@ -48,10 +49,12 @@ export default class ChatService extends SuperService {
             const thread = data.val();
             callback({
                 id: data.key,
-                chatPartner: thread.chatPartner
+                chatPartner: thread.chatPartner, 
+                lastMessageTime: thread.lastMessageTime ? DateHelper.formatTime(new Date(thread.lastMessageTime)) : "",
             });
         };
         this.messagesRef.limitToLast(20).on('child_added', onReceive);
+        
     }
     
 
@@ -161,13 +164,25 @@ export default class ChatService extends SuperService {
         // Create new message
         this.messagesRef = this.firebaseApp.database().ref(`threads/${threadKey}/messages`)
 
+        let lastMessageTime = new Date().getTime();
+
         for (let i = 0; i < message.length; i++) {
             this.messagesRef.push({
                 text: message[i].text,
                 user: message[i].user,
-                createdAt: new Date().getTime()
+                createdAt: lastMessageTime
             });
         }
+
+        // Update last message time for first user
+        let loggedUserLocation = InputValidationHelper.extractLocationFromUsername(loggedUser);
+        this.messagesRef = this.firebaseApp.database().ref(`users/${loggedUserLocation}/${loggedUser}/threads/${threadKey}`);
+        await this.messagesRef.update({ lastMessageTime: lastMessageTime });
+
+        // Update last message time for second user
+        let chatPartnerLocation = InputValidationHelper.extractLocationFromUsername(chatPartner);
+        this.messagesRef = this.firebaseApp.database().ref(`users/${chatPartnerLocation}/${chatPartner}/threads/${threadKey}`);
+        await this.messagesRef.update({ lastMessageTime: lastMessageTime });        
     }
 
     async closeChat() {

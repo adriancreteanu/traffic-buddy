@@ -124,7 +124,7 @@ class MessagesPage extends Component {
                     renderItem={({ item }) => (
                         <MessageItem
                             chatPartner={item.chatPartner}
-                            lastMessageHour={"22:34"}
+                            lastMessageTime={item.lastMessageTime}
                             onThreadPress={() => this.navigateToChatPage(item.chatPartner)}
                         />
                     )}

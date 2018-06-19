@@ -68,10 +68,6 @@ carCoupeTypeHint: "ex. Hatchback",
 personalInfoLabel: "Date personale", 
 carInfoLabel: "Informații mașină",
 
-// engine: 1.4
-// fuel: gas/diesel
-// doors: 5
-// type coupe: hatchback
 
 // Search page
 searchPageTitle: "Căutare",

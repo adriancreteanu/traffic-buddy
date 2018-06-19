@@ -18,7 +18,7 @@ class MessageItem extends Component {
             >
                 <View style={styles.container}>
                     <Text style={styles.usernameStyle}>{this.props.chatPartner}</Text>
-                    <Text style={styles.hourStyle}>{this.props.lastMessageHour}</Text>
+                    <Text style={styles.hourStyle}>{this.props.lastMessageTime}</Text>
                 </View>
             </TouchableHighlight>
         )
