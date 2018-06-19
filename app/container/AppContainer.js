@@ -38,6 +38,7 @@ import SearchPage from '../pages/SearchPage';
 
 // Notifications 
 import NotificationHelper from "../common/helpers/NotificationsHelper";
+import { strings } from '../common/localization/strings-repository';
 
 
 let stackNavigationOptions = {
@@ -109,7 +110,7 @@ export const MainNavigator = TabNavigator({
     Messages: {
         screen: MessagesPage,
         navigationOptions: {
-            tabBarLabel: "Messages",
+            tabBarLabel: strings.messagesPageTitle,
             tabBarIcon: <Icon
                 name='envelope'
                 size={20}

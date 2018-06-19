@@ -45,7 +45,7 @@ import AlertHelper from "../common/helpers/AlertHelper";
 class PostPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: <NavTitleUI title="Post" />,
+        headerTitle: <NavTitleUI title={strings.postPageTitle} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => navigation.goBack()}

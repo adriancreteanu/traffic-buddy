@@ -29,6 +29,7 @@ general: "Generale",
 logOut: "Deconectare",
 
 // Post page
+postPageTitle: "Adăugare",
 location: "Locație",
 category: "Categorie", 
 message: "Mesaj",

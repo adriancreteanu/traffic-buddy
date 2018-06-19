@@ -43,7 +43,6 @@ class FancyPicker extends Component {
                         this.props.style,
                         {
                             flex: 1,
-                            color: '#000',
                             fontSize: 16,
                             borderColor: "transparent",
                             borderWidth: 1,

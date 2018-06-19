@@ -29,6 +29,7 @@ general: "General",
 logOut: "Log out",
 
 // Post page
+postPageTitle: "Post",
 location: "Location",
 category: "Category", 
 message: "Message",
