@@ -24,7 +24,7 @@ import * as authActions from "../common/redux/actions/AuthenticationActions";
 import { connect } from 'react-redux';
 
 // spinner
-import { LinesLoader } from 'react-native-indicator';
+import { CirclesLoader } from 'react-native-indicator';
 
 // strings
 import { strings } from "../common/localization/strings-repository";
@@ -38,7 +38,7 @@ import AlertHelper from "../common/helpers/AlertHelper";
 class RegisterPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: <NavTitleUI title={strings.registerPageTitle} />,
+        headerTitle: <NavTitleUI title={strings.registerPageTitle.toUpperCase()} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => {
@@ -272,11 +272,10 @@ class RegisterPage extends Component {
                             marginBottom: 30,
                             backgroundColor: 'transparent',
                         }}>
-                            <LinesLoader
-                                color={colors.General.appSecondary}
-                                barHeight={60}
-                                barWidth={5}
-                                betweenSpace={5}
+                            <CirclesLoader
+                                size={60}
+                                color={colors.General.appPrimary}
+                                dotRadius={10}
                             />
                         </View>
                     ) : (

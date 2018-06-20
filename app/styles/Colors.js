@@ -4,6 +4,7 @@ let General = {
     appGradientPrimary: "#e2a000",
     appSecondary: "#368",
     appSecondaryTransparent: "rgba(51,102,136, 0.7)",
+    appSecondaryMono: "#254a63", 
     whiteColor: "#FFF",
     whiteColorTransparent: 'rgba(248, 248, 248, 0.1)',
     blackColor: "#000", 

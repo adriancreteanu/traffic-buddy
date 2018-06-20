@@ -29,7 +29,7 @@ import PostModel from '../common/data/models/PostModel';
 import LinearGradient from 'react-native-linear-gradient';
 
 import * as userActions from "../common/redux/actions/UserActions";
-import { LinesLoader } from 'react-native-indicator';
+import { CirclesLoader } from 'react-native-indicator';
 import PreferencesRepo from '../common/data/repos/PreferencesRepo';
 import { PreferenceKeys } from '../common/constants/PreferenceKeys';
 
@@ -66,7 +66,7 @@ class ProfilePage extends Component {
             likeIconClicked: false,
             dislikeIconClicked: false,
             isLoggedUserProfile: false,
-            user: null, 
+            user: null,
         };
 
         this.preferencesRepo = new PreferencesRepo();
@@ -85,7 +85,7 @@ class ProfilePage extends Component {
                 user: this.props.loggedUserReducer.viewModel.userProfileViewModel,
             });
             return;
-        } 
+        }
         // else if (this.props.userReducer.viewModel) {
         //     return;
         // }
@@ -231,12 +231,10 @@ class ProfilePage extends Component {
                     style={{ flex: 2 }}
                 >
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
-                        <LinesLoader
-                            //color='rgba(169, 20, 20, 0.9)'
-                            color={colors.General.appSecondary}
-                            barHeight={65}
-                            barWidth={6}
-                            betweenSpace={7}
+                        <CirclesLoader
+                            size={60}
+                            color={colors.General.appPrimary}
+                            dotRadius={10}
                         />
                     </View>
                 </LinearGradient>

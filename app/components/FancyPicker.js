@@ -66,7 +66,7 @@ class FancyPicker extends Component {
                         onValueChange={(itemValue, itemIndex) => this.setState({ location: itemValue })}
                         prompt={strings.locationHint} // Android
                         placeholder={strings.locationHint} //iOS
-                        style={styles.pickerStyle}
+                        style={{marginRight: 20}}
                         // text shown on picker
                         textStyle={styles.pickerTextStyle}
                         // text shown on picker list items

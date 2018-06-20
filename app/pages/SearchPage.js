@@ -20,13 +20,13 @@ import CustomTextInput from '../components/CustomTextInput';
 
 import * as userActions from "../common/redux/actions/UserActions";
 import * as navActions from "../common/redux/actions/NavigationActions";
-import { LinesLoader } from 'react-native-indicator';
+import { CirclesLoader } from 'react-native-indicator';
 
 class SearchPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
 
-        headerTitle: <NavTitleUI title={strings.searchPageTitle} />,
+        headerTitle: <NavTitleUI title={strings.searchPageTitle.toUpperCase()} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => {
@@ -96,11 +96,10 @@ class SearchPage extends Component {
         if (searchInProgress) {
             return (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
-                    <LinesLoader
-                        color={colors.General.appSecondary}
-                        barHeight={65}
-                        barWidth={6}
-                        betweenSpace={7}
+                    <CirclesLoader
+                        size={60}
+                        color={colors.General.appPrimary}
+                        dotRadius={10}
                     />
                 </View>
             )

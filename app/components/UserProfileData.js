@@ -15,6 +15,7 @@ import { Picker } from 'native-base';
 
 import { strings } from "../common/localization/strings-repository";
 import * as colors from "../styles/Colors";
+import CustomButton from './CustomButton';
 
 
 
@@ -39,7 +40,7 @@ class UserProfileData extends Component {
                     </Text>
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 70 : 80}
                         style={{ marginTop: 0 }}
                         onChangeText={() => { }
@@ -58,7 +59,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 70 : 80}
                         style={{ marginTop: 0 }}
                         onChangeText={() => { }
@@ -77,7 +78,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyPicker
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         borderRadius={5}
                         marginTop={20}
@@ -91,7 +92,7 @@ class UserProfileData extends Component {
                     </Text>
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         onChangeText={() => { }
 
@@ -109,7 +110,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         onChangeText={() => { }
 
@@ -127,7 +128,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={65}
                         onChangeText={(text) => {
                             this.setState({
@@ -150,7 +151,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         onChangeText={() => { }
 
@@ -169,7 +170,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         onChangeText={() => { }
 
@@ -188,7 +189,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         onChangeText={() => { }
 
@@ -206,7 +207,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         onChangeText={() => { }
 
@@ -225,7 +226,7 @@ class UserProfileData extends Component {
                     />
 
                     <FancyTextInput
-                        width={'85%'}
+                        width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
                         onChangeText={() => { }
 
@@ -241,6 +242,23 @@ class UserProfileData extends Component {
                         hint={strings.carCoupeTypeHint}
                         placeholder={strings.carCoupeType}
                     />
+
+                    <CustomButton
+                        width={'100%'}
+                        height={Platform.OS == "ios" ? 50 : 60}
+                        buttonColor={colors.General.appSecondary}
+                        pressedColor={colors.General.appSecondaryMono}
+                        buttonTitle={strings.update.toUpperCase()}
+                        style={{ marginTop: 30 }}
+                        borderRadius={5}
+                        onPress={() => {
+                            
+                        }}
+                        fontSize={18}
+                        fontWeight={'bold'}
+                        textWidth={150}
+                    />
+
                 </View>
             </ScrollView>
         )
@@ -253,7 +271,8 @@ class UserProfileData extends Component {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'column',
-        marginLeft: 20,
+        marginLeft: 30,
+        marginRight: 30,
         marginBottom: 40,
     },
     subtitle: {

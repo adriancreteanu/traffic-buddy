@@ -44,6 +44,7 @@ likes: "Likes",
 dislikes: "Dislikes",
 connect: "Connect",
 sendMessage: "Send a message",
+update: "Update",
 
 name: "Name", 
 email: "Email", 

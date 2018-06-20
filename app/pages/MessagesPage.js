@@ -31,7 +31,7 @@ import { PreferenceKeys } from '../common/constants/PreferenceKeys';
 class MessagesPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: <NavTitleUI title={strings.messagesPageTitle} />,
+        headerTitle: <NavTitleUI title={strings.messagesPageTitle.toUpperCase()} />,
         headerLeft:
             <View style={{
                 flex: 1,

@@ -34,7 +34,7 @@ import { connect } from 'react-redux';
 import { strings } from "../common/localization/strings-repository";
 
 // spinner 
-import { LinesLoader } from 'react-native-indicator';
+import { CirclesLoader } from 'react-native-indicator';
 import LoginTextInput from "../components/LoginTextInput";
 
 import AlertHelper from "../common/helpers/AlertHelper";
@@ -176,11 +176,10 @@ class LoginPage extends Component {
                 marginBottom: -40,
                 backgroundColor: 'transparent',
               }}>
-                <LinesLoader
-                  color={colors.General.appSecondary}
-                  barHeight={60}
-                  barWidth={5}
-                  betweenSpace={5}
+                <CirclesLoader
+                  size={60}
+                  color={colors.General.appPrimary}
+                  dotRadius={10}
                 />
               </View>
             ) : (

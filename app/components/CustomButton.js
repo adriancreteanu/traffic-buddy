@@ -30,6 +30,9 @@ class CustomButton extends Component {
         <Text style={{
           color: "#FFFFFF",
           fontSize: this.props.fontSize, 
+          fontWeight: this.props.fontWeight,
+          width: this.props.textWidth,
+          textAlign: 'center',
         }}>
           {this.props.buttonTitle}
         </Text>

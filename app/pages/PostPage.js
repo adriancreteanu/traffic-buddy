@@ -34,7 +34,7 @@ import InputValidationHelper from "../common/helpers/InputValidationHelper";
 import * as newsFeedPayloads from "../common/data/payloads/NewsFeedPayloads";
 import * as newsFeedActions from "../common/redux/actions/NewsFeedActions";
 import { connect } from 'react-redux';
-import { LinesLoader } from 'react-native-indicator';
+import { CirclesLoader } from 'react-native-indicator';
 
 // locations
 import { locations } from "../common/constants/Locations";
@@ -45,7 +45,7 @@ import AlertHelper from "../common/helpers/AlertHelper";
 class PostPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
-        headerTitle: <NavTitleUI title={strings.postPageTitle} />,
+        headerTitle: <NavTitleUI title={strings.postPageTitle.toUpperCase()} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => navigation.goBack()}
@@ -173,7 +173,7 @@ class PostPage extends Component {
                         </View>
 
                         <CustomBigTextInput
-                            width={300}
+                            width={'85%'}
                             height={200}
                             style={{ marginTop: 30 }}
                             borderRadius={5}
@@ -191,8 +191,8 @@ class PostPage extends Component {
 
 
                         <CustomButton
-                            width={300}
-                            height={45}
+                            width={'85%'}
+                            height={Platform.OS == 'ios' ? 50 : 60}
                             buttonColor={colors.General.appSecondary}
                             pressedColor={colors.General.appSecondary}
                             buttonTitle={strings.send.toUpperCase()}
@@ -202,7 +202,7 @@ class PostPage extends Component {
                                 Keyboard.dismiss()
                                 this.validatePostDetails()
                             }}
-                            fontSize={16}
+                            fontSize={18}
                         />
 
 
@@ -212,11 +212,10 @@ class PostPage extends Component {
 
                                 backgroundColor: 'transparent',
                             }}>
-                                <LinesLoader
-                                    color={colors.General.appSecondary}
-                                    barHeight={60}
-                                    barWidth={5}
-                                    betweenSpace={5}
+                                <CirclesLoader
+                                    size={60}
+                                    color={colors.General.appPrimary}
+                                    dotRadius={10}
                                 />
                             </View>
                         ) : (
@@ -249,7 +248,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     pickerStyle: {
-        width: 285,
+        width: '95%',
     },
     pickerTextStyle: {
         color: colors.General.blackColor,
@@ -264,8 +263,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     pickerViewStyle: {
-        height: 50,
-        width: 300,
+        height: Platform.OS == 'ios' ? 50 : 60,
+        width: '85%',
         borderWidth: 1,
         borderRadius: 5,
         borderColor: "transparent",

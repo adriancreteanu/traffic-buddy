@@ -36,7 +36,7 @@ import { List, SearchBar } from 'react-native-elements';
 import NewsFeedItem from '../components/news_feed/NewsFeedItem';
 
 // spinner
-import { LinesLoader } from 'react-native-indicator';
+import { CirclesLoader } from 'react-native-indicator';
 import PostModel from '../common/data/models/PostModel';
 
 import * as colors from '../styles/Colors';
@@ -304,11 +304,10 @@ class HomePage extends Component {
                     justifyContent: 'center',
                     backgroundColor: colors.General.appPrimaryBackground,
                 }}>
-                    <LinesLoader
+                    <CirclesLoader 
+                        size={60}
                         color={colors.General.appPrimary}
-                        barHeight={65}
-                        barWidth={6}
-                        betweenSpace={7}
+                        dotRadius={10}
                     />
                 </View>
             );

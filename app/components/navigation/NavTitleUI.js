@@ -10,13 +10,15 @@ import {
 class NavTitleUI extends Component {
   render() {
     return (
-     
-
+    
         <Text style={{
             textAlign: "center",
             alignSelf: "center",
             fontSize: 20, 
-            color: "#FFF"
+            color: "#FFF", 
+            fontWeight: 'bold', 
+            width: 200, 
+            
         }}> 
         {this.props.title}
          </Text>

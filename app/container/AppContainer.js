@@ -83,13 +83,14 @@ const tabBarOptionsIOS = {
 const tabBarOptionsAndroid = {
 
     labelStyle: {
-        fontSize: 12
+        fontSize: 14
     },
     indicatorStyle: {
         backgroundColor: "#FFF"
     },
     style: {
-        backgroundColor: 'rgba(51,102,136, 0.7)',
+        //backgroundColor: 'rgba(51,102,136, 0.7)',
+        backgroundColor: colors.General.appSecondaryMono,
         paddingTop: 10,
     }, 
     

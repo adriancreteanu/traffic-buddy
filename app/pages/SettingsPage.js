@@ -35,7 +35,7 @@ class SettingsPage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
 
-        headerTitle: <NavTitleUI title={strings.settingsPageTitle} />,
+        headerTitle: <NavTitleUI title={strings.settingsPageTitle.toUpperCase()} />,
         headerLeft: <NavLeftIcon
             icon="chevron-left"
             onPress={() => {

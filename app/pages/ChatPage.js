@@ -84,7 +84,7 @@ class ChatPage extends Component {
 
     async componentWillReceiveProps(nextProps) {
 
-        if(this.state.messages.length == 0) {
+        if (this.state.messages.length == 0) {
             this.setState({
                 isNewConversation: true
             });
@@ -118,7 +118,7 @@ class ChatPage extends Component {
             });
         });
 
-       
+
 
 
     }
@@ -178,12 +178,10 @@ class ChatPage extends Component {
         ) :
             (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <LinesLoader
-                        //color='rgba(169, 20, 20, 0.9)'
-                        color='#FA1'
-                        barHeight={65}
-                        barWidth={6}
-                        betweenSpace={7}
+                    <CirclesLoader
+                        size={60}
+                        color={colors.General.appPrimary}
+                        dotRadius={10}
                     />
                 </View>
             );

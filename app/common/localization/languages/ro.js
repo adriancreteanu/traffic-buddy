@@ -44,6 +44,7 @@ likes: "Aprecieri",
 dislikes: "Dezacorduri",
 connect: "Conectare",
 sendMessage: "Trimite un mesaj",
+update: "Actualizare",
 
 name: "Nume", 
 email: "Email", 
