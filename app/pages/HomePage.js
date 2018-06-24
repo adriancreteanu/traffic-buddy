@@ -284,6 +284,7 @@ class HomePage extends Component {
                             category={item.category}
                             message={item.message}
                             hour={item.hour}
+                            likes={item.likes}
                             onUserPress={() => this.navigateToProfilePage(item)}
                         />
 

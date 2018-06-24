@@ -44,23 +44,15 @@ class NewsFeedItem extends Component {
                         <View style={styles.likeIconStyle}>
                             <Icon
                                 name='thumbs-up'
-                                size={25}
+                                size={30}
                                 color={colors.General.appSecondary}
                                 style={{
-                                    marginRight: 5,
+                                    marginRight: 8,
                                 }}
                             />
-                            <Text style={styles.iconCountStyle}>121</Text>
+                            <Text style={styles.iconCountStyle}>{this.props.likes}</Text>
                         </View>
-                        <Icon
-                            name='comments'
-                            size={25}
-                            color={colors.General.appSecondaryTransparent}
-                            style={{
-                                marginRight: 5,
-                            }}
-                        />
-                        <Text style={styles.iconCountStyle}>96</Text>
+                        
                     </View>
 
 
@@ -117,7 +109,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 40,  // 40 to make it round
         borderTopLeftRadius: 40,
         backgroundColor: colors.General.whiteColorTransparent, 
-        borderWidth: 2, 
+        borderWidth: 3, 
         borderColor: colors.General.appSecondary
     },
     hourContainerStyle: {
@@ -154,7 +146,7 @@ const styles = StyleSheet.create({
         marginTop: 35
     },
     iconCountStyle: {
-        paddingTop: 8,
+        paddingTop: 11,
         fontSize: 14,
     },
     likeIconStyle: {
@@ -164,3 +156,17 @@ const styles = StyleSheet.create({
 });
 
 export default NewsFeedItem;
+
+// comments section
+
+/**
+                        <Icon
+                            name='comments'
+                            size={25}
+                            color={colors.General.appSecondaryTransparent}
+                            style={{
+                                marginRight: 5,
+                            }}
+                        />
+                        <Text style={styles.iconCountStyle}>96</Text>
+ */

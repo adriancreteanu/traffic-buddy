@@ -26,7 +26,8 @@ export default class NewsFeedService extends SuperService {
                 rank: payload.rank,
                 category: payload.category,
                 message: payload.message,
-                date: payload.date
+                date: payload.date, 
+                likes: 0,
             })
             .then(() => {
                 response = new PostModel(payload);

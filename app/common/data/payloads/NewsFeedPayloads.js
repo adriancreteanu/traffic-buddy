@@ -6,6 +6,7 @@ export type postGeneralMessagePayloadType = {
     category: ?string,
     message: ?string, 
     date: ?Date,
+    likes: ?number,
 };
 
 export function createPostGeneralMessagePayload(
@@ -18,5 +19,6 @@ export function createPostGeneralMessagePayload(
         category: postDetails.category, 
         message: postDetails.message, 
         date: postDetails.date,
+        likes: postDetails.likes,
     };
 };

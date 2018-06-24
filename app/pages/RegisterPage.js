@@ -274,7 +274,7 @@ class RegisterPage extends Component {
                         }}>
                             <CirclesLoader
                                 size={60}
-                                color={colors.General.appPrimary}
+                                color={colors.General.whiteColor}
                                 dotRadius={10}
                             />
                         </View>

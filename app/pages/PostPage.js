@@ -116,6 +116,7 @@ class PostPage extends Component {
                 location: this.state.location,
                 message: this.state.message,
                 date: new Date().getTime(),
+                likes: 0,
             };
             let payload = newsFeedPayloads.createPostGeneralMessagePayload(postPayload);
             newsFeedActions.postAction(payload)(this.props.dispatch);
@@ -214,7 +215,7 @@ class PostPage extends Component {
                             }}>
                                 <CirclesLoader
                                     size={60}
-                                    color={colors.General.appPrimary}
+                                    color={colors.General.whiteColor}
                                     dotRadius={10}
                                 />
                             </View>

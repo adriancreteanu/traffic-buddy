@@ -35,6 +35,7 @@ class NewsFeedList extends Component {
                 category={item.category}
                 message={item.message}
                 hour={item.hour}
+                likes={item.likes}
             />
         );
     };

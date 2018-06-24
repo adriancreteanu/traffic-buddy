@@ -147,18 +147,7 @@ class ProfilePage extends Component {
                     </TouchableHighlight>
 
                 </View>
-                <CustomButton
-                    width={260}
-                    height={45}
-                    buttonColor={colors.General.appSecondary}
-                    pressedColor={colors.General.appSecondary}
-                    buttonTitle={strings.connect.toUpperCase()}
-                    style={{ marginTop: 30 }}
-                    borderRadius={5}
-                    onPress={() => {
-                    }}
-                    fontSize={16}
-                />
+                
 
                 <CustomButton
                     width={260}
@@ -233,7 +222,7 @@ class ProfilePage extends Component {
                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' }}>
                         <CirclesLoader
                             size={60}
-                            color={colors.General.appPrimary}
+                            color={colors.General.whiteColor}
                             dotRadius={10}
                         />
                     </View>
@@ -310,3 +299,21 @@ function mapStateToProps(state) {
 
 
 export default connect(mapStateToProps)(ProfilePage);
+
+
+// Friend request button
+
+/* <CustomButton
+                    width={260}
+                    height={45}
+                    buttonColor={colors.General.appSecondary}
+                    pressedColor={colors.General.appSecondary}
+                    buttonTitle={strings.connect.toUpperCase()}
+                    style={{ marginTop: 30 }}
+                    borderRadius={5}
+                    onPress={() => {
+                    }}
+                    fontSize={16}
+                />
+
+*/
