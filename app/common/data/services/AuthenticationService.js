@@ -139,7 +139,7 @@ export default class AuthenticationService extends SuperService {
         await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUsername, username);
         await this.preferencesRepo.saveValue(PreferenceKeys.loggedInEmail, email);
         await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUID, uid);
-        await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUserLocation, location)
+        //await this.preferencesRepo.saveValue(PreferenceKeys.loggedInUserLocation, location)
     }
 
     async fetchUserProfile(

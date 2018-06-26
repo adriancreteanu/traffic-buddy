@@ -308,7 +308,7 @@ class HomePage extends Component {
                     <CirclesLoader 
                         size={60}
                         color={colors.General.appPrimary}
-                        dotRadius={10}
+                        dotRadius={7}
                     />
                 </View>
             );

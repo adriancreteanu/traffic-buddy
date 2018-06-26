@@ -91,11 +91,14 @@ class MessagesPage extends Component {
         });
 
         /* Load all threads for logged user */
-        await this.chatService.loadThreads(this.state.loggedUser, (thread) => {
-            this.setState({
-                threads: [...this.state.threads, new ThreadModel(thread, thread.id)]
+        if (this.state.loggedUser) {
+            await this.chatService.loadThreads(this.state.loggedUser, (thread) => {
+                this.setState({
+                    threads: [...this.state.threads, new ThreadModel(thread, thread.id)]
+                });
             });
-        });
+        }
+
     }
 
 

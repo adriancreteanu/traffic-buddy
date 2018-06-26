@@ -172,18 +172,19 @@ class LoginPage extends Component {
 
             {typeof this.props.loginReducer !== 'undefined' && this.props.loginReducer != null && this.props.loginReducer.isInProgress ? (
               <View style={{
+                height: 40,
                 marginTop: 30,
-                marginBottom: -40,
+                marginBottom: -30,
                 backgroundColor: 'transparent',
               }}>
                 <CirclesLoader
-                  size={60}
-                  color={colors.General.appPrimary}
-                  dotRadius={10}
+                  size={40}
+                  color={colors.General.whiteColor}
+                  dotRadius={5}
                 />
               </View>
             ) : (
-                <View style={{ height: 50, backgroundColor: "transparent" }} />
+                <View style={{ height: 40, backgroundColor: "transparent" }} />
               )}
 
             <TouchableHighlight
