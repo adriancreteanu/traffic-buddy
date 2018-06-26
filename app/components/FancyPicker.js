@@ -43,22 +43,11 @@ class FancyPicker extends Component {
                         this.props.style,
                         {
                             flex: 1,
-                            fontSize: 16,
                             borderColor: "transparent",
                             borderWidth: 1,
-                            //backgroundColor: '#f00', 
                             marginLeft: 35,
                             paddingBottom: Platform.OS == "ios" ? 10 : 8,
-                            //fontWeight: '400',
-                            // new line
-                            //marginTop: 5,
-                            textAlignVertical: 'center',
-                            //marginBottom: 20,
                             overflow: "hidden",
-                            
-                            
-                            
-
                         }
                     ]}>
                     <Picker
@@ -80,7 +69,6 @@ class FancyPicker extends Component {
                         <Picker.Item label="Gorj" value="GJ" />
                         <Picker.Item label="Cluj" value="CJ" />
                         <Picker.Item label="Iasi" value="IS" />
-
                     </Picker>
                 </View>
             </View>

@@ -27,7 +27,19 @@ class UserProfileData extends Component {
             fabricationYear: "",
             location: "",
             user: this.props.user,
+
+            // car data
+            brand: this.props.user.car ? this.props.user.car.brand : null,
+            model: this.props.user.car ? this.props.user.car.model : null,
+            fabricationYear: this.props.user.car && this.props.user.car.fabricationYear ? String(this.props.user.car.fabricationYear) : null,
+            engine: this.props.user.car && this.props.user.car.engine ? String(this.props.user.car.engine) : null,
+            doors: this.props.user.car && this.props.user.car.doors ? String(this.props.user.car.doors) : null,
+            fuel: this.props.user.car ? this.props.user.car.fuel : null,
+            horsepower: this.props.user.car && this.props.user.car.horsepower ? String(this.props.user.car.horsepower) : null,
+            coupeType: this.props.user.car ? this.props.user.car.coupeType : null,
         }
+
+        
 
     }
 
@@ -94,10 +106,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
-                        onChangeText={() => { }
-
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                brand: text
+                            })
                         }
-                        value={this.state.user.car ? this.state.user.car.brand : null}
+                        value={this.state.brand}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -112,10 +127,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
-                        onChangeText={() => { }
-
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                model: text
+                            })
                         }
-                        value={this.state.user.car ? this.state.user.car.model : null}
+                        value={this.state.model}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -130,14 +148,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={65}
-                        onChangeText={(text) => {
+                        onChangeText={text =>
                             this.setState({
+                                ...this.state,
                                 fabricationYear: text
                             })
                         }
-
-                        }
-                        value={this.state.user.car && this.state.user.car.fabricationYear ? String(this.state.user.car.fabricationYear) : null}
+                        value={this.state.fabricationYear}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -153,10 +170,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
-                        onChangeText={() => { }
-
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                engine: text
+                            })
                         }
-                        value={this.state.user.car && this.state.user.car.engine ? String(this.state.user.car.engine) : null}
+                        value={this.state.engine}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -172,10 +192,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
-                        onChangeText={() => { }
-
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                doors: text
+                            })
                         }
-                        value={this.state.user.car && this.state.user.car.doors ? String(this.state.user.car.doors) : null}
+                        value={this.state.doors}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -191,10 +214,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
-                        onChangeText={() => { }
-
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                fuel: text
+                            })
                         }
-                        value={this.state.user.car ? this.state.user.car.fuel : null}
+                        value={this.state.fuel}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -209,10 +235,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
-                        onChangeText={() => { }
-
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                horsepower: text
+                            })
                         }
-                        value={this.state.user.car && this.state.user.car.horsepower ? String(this.state.user.car.horsepower) : null}
+                        value={this.state.horsepower}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -228,10 +257,13 @@ class UserProfileData extends Component {
                     <FancyTextInput
                         width={'100%'}
                         height={Platform.OS == "ios" ? 60 : 70}
-                        onChangeText={() => { }
-
+                        onChangeText={text =>
+                            this.setState({
+                                ...this.state,
+                                coupeType: text
+                            })
                         }
-                        value={this.state.user.car ? this.state.user.car.coupeType : null}
+                        value={this.state.coupeType}
                         maxLength={20}
                         isPassword={false}
                         borderRadius={5}
@@ -252,7 +284,7 @@ class UserProfileData extends Component {
                         style={{ marginTop: 30 }}
                         borderRadius={5}
                         onPress={() => {
-                            
+                            this.props.updateUserProfileData
                         }}
                         fontSize={18}
                         fontWeight={'bold'}
