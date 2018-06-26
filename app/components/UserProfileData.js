@@ -17,6 +17,10 @@ import { strings } from "../common/localization/strings-repository";
 import * as colors from "../styles/Colors";
 import CustomButton from './CustomButton';
 
+import { userDataPayloadType } from "../common/data/payloads/UserPayloads";
+
+import InputValidationHelper from '../common/helpers/InputValidationHelper';
+
 
 
 class UserProfileData extends Component {
@@ -38,9 +42,6 @@ class UserProfileData extends Component {
             horsepower: this.props.user.car && this.props.user.car.horsepower ? String(this.props.user.car.horsepower) : null,
             coupeType: this.props.user.car ? this.props.user.car.coupeType : null,
         }
-
-        
-
     }
 
     render() {
@@ -284,7 +285,19 @@ class UserProfileData extends Component {
                         style={{ marginTop: 30 }}
                         borderRadius={5}
                         onPress={() => {
-                            this.props.updateUserProfileData
+                            let userDataPayload: userDataPayloadType = {
+                                username: this.state.user.username,
+                                location: InputValidationHelper.extractLocationFromUsername(this.state.user.username),
+                                brand: this.state.brand,
+                                model: this.state.model,
+                                fabricationYear: parseInt(this.state.fabricationYear),
+                                engine: parseFloat(this.state.engine),
+                                doors: parseInt(this.state.doors),
+                                fuel: this.state.fuel,
+                                horsepower: parseInt(this.state.horsepower),
+                                coupeType: this.state.coupeType
+                            }
+                            this.props.updateUserProfileData(userDataPayload)
                         }}
                         fontSize={18}
                         fontWeight={'bold'}

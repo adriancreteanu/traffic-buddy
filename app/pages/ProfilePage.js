@@ -33,6 +33,8 @@ import { CirclesLoader } from 'react-native-indicator';
 import PreferencesRepo from '../common/data/repos/PreferencesRepo';
 import { PreferenceKeys } from '../common/constants/PreferenceKeys';
 
+import { userDataPayloadType } from "../common/data/payloads/UserPayloads";
+
 class ProfilePage extends Component {
 
     static navigationOptions = ({ navigation }) => ({
@@ -97,6 +99,14 @@ class ProfilePage extends Component {
     navigateToChatPage(post: PostModel) {
         navActions.navigateToChatPage(post)(this.props.dispatch);
     }
+
+    updateUserProfileData(userData: userDataPayloadType) {
+        if(userData) {
+            // call tp Firebase to update data
+            userActions.updateUserProfile(userData)(this.props.dispatch);
+        }
+    }
+
 
     renderSocialButtons() {
         return !this.state.isLoggedUserProfile ? (
@@ -165,6 +175,7 @@ class ProfilePage extends Component {
             <UserProfileData
                 containerFlex={2.5}
                 user={this.state.user}
+                updateUserProfileData={this.updateUserProfileData.bind(this)}
             />
 
     }

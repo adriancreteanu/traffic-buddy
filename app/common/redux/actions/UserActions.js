@@ -2,13 +2,18 @@ import UserManager from "../../data/managers/UserManager";
 import UserProfileViewModel from "../../data/viewmodels/UserProfileViewModel";
 import ErrorViewModel from "../../data/viewmodels/error/ErrorViewModel";
 
+import * as userDataPayloads from "../../data/payloads/UserPayloads";
+
 export const userActionTypes = {
     fetchLoggedUserInProgress: "fetchLoggedUserInProgress", 
     fetchLoggedUserSuccess: "fetchLoggedUserSuccess",
     fetchLoggedUserFailure: "fetchLoggedUserFailure",
     fetchUserInProgress: "fetchUserInProgress", 
     fetchUserSuccess: "fetchUserSuccess",
-    fetchUserFailure: "fetchUserFailure"
+    fetchUserFailure: "fetchUserFailure", 
+    updateUserProfileInProgress: "updateUserProfileInProgress", 
+    updateUserProfileSuccess: "updateUserProfileSuccess", 
+    updateUserProfileFailure: "updateUserProfileFailure",
 }
 
 export function fetchLoggedUserProfile(username: ?string) {
@@ -30,6 +35,18 @@ export function fetchUserProfile(username: ?string) {
         handleUserResponse(dispatch, response);
     }
 } 
+
+export function updateUserProfile(payload: userDataPayloads.userDataPayloadType) {
+    return async function(dispatch: any) {
+        let type = userActionTypes.updateUserProfileInProgress;
+        dispatchInProgressAction(dispatch, true, type);
+        let userManager = new UserManager();
+        let response = await userManager.updateUserProfile(payload);
+        handleResponse(dispatch, response);
+    }
+}
+
+
 
 
 ///INTERNAL FUNCTIONS
