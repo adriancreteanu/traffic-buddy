@@ -156,17 +156,3 @@ const styles = StyleSheet.create({
 });
 
 export default NewsFeedItem;
-
-// comments section
-
-/**
-                        <Icon
-                            name='comments'
-                            size={25}
-                            color={colors.General.appSecondaryTransparent}
-                            style={{
-                                marginRight: 5,
-                            }}
-                        />
-                        <Text style={styles.iconCountStyle}>96</Text>
- */

@@ -88,9 +88,6 @@ class ProfilePage extends Component {
             });
             return;
         }
-        // else if (this.props.userReducer.viewModel) {
-        //     return;
-        // }
 
         /* Action called only when we navigate from home page. */
         userActions.fetchUserProfile(username)(this.props.dispatch);
@@ -310,21 +307,3 @@ function mapStateToProps(state) {
 
 
 export default connect(mapStateToProps)(ProfilePage);
-
-
-// Friend request button
-
-/* <CustomButton
-                    width={260}
-                    height={45}
-                    buttonColor={colors.General.appSecondary}
-                    pressedColor={colors.General.appSecondary}
-                    buttonTitle={strings.connect.toUpperCase()}
-                    style={{ marginTop: 30 }}
-                    borderRadius={5}
-                    onPress={() => {
-                    }}
-                    fontSize={16}
-                />
-
-*/

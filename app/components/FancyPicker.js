@@ -86,18 +86,14 @@ const styles = StyleSheet.create({
         marginTop: 2,
         padding: 5,
         paddingBottom: 0,
-        //paddingBottom: 20, 
         marginRight: 6,
-        //paddingRight: 10, 
         alignSelf: 'flex-start',
-        //backgroundColor: '#00f',
         fontWeight: '100',
         color: "#222",
         width: 200,
     },
     pickerStyle: {
         width: 250,
-        //backgroundColor: colors.General.blueColor
     },
     pickerTextStyle: {
         color: colors.General.blackColor,

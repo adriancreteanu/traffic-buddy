@@ -182,23 +182,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(SettingsPage);
-
-
-// friends button
-
-/*
-<CustomButton
-                        width={'75%'}
-                        height={Platform.OS == "ios" ? 50 : 60}
-                        buttonColor={colors.General.appSecondary}
-                        pressedColor={colors.General.appSecondary}
-                        buttonTitle={strings.friends}
-                        style={{ marginTop: 20, marginBottom: 10 }}
-                        onPress={() => {
-                            alert("Not implemented");
-                        }}
-                        fontSize={24}
-                        borderRadius={5}
-                    />
-
-                    */

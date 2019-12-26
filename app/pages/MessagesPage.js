@@ -101,19 +101,6 @@ class MessagesPage extends Component {
 
     }
 
-
-    // componentWillReceiveProps(nextProps) {
-    //     let loggedUserReducer = nextProps.loggedUserReducer;
-
-    //     if (loggedUserReducer && loggedUserReducer.viewModel) {
-    //         let threads = loggedUserReducer.viewModel.userProfileViewModel.threads.threadsList;
-    //         this.setState({
-    //             threads: threads
-    //         })
-    //     }
-    // }
-
-
     navigateToChatPage(chatPartner: string) {
         navActions.navigateToChatPage(chatPartner)(this.props.dispatch);
     }

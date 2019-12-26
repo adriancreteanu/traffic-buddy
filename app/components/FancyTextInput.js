@@ -35,12 +35,8 @@ class FancyTextInput extends Component {
                             fontSize: 16,
                             borderColor: "transparent",
                             borderWidth: 1,  
-                            //backgroundColor: '#f00', 
                             marginLeft: 50,
                             paddingBottom: Platform.OS == "ios" ? 10 : 8, 
-                            //fontWeight: '400',
-                            // new line
-                            //marginTop: 5,
                             textAlignVertical: 'center',
                             
                         }
@@ -75,11 +71,8 @@ const styles = StyleSheet.create({
         marginTop: 2,
         padding: 5,
         paddingBottom: 0,  
-        //paddingBottom: 20, 
         marginRight: 6,
-        //paddingRight: 10, 
         alignSelf: 'flex-start',
-         //backgroundColor: '#00f',
         fontWeight: '100',
         color: "#222",
         width: 200,

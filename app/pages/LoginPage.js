@@ -246,10 +246,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(LoginPage);
-
-
-// <ImageBackground
-//           source={require("../assets/images/traffic-buddy.jpg")}
-//           style={{ width: "100%", height: "100%" }}
-//           resizeMode="cover"
-//         >

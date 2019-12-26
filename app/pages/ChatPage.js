@@ -83,32 +83,18 @@ class ChatPage extends Component {
     }
 
     async componentWillReceiveProps(nextProps) {
-
         if (this.state.messages.length == 0) {
             this.setState({
                 isNewConversation: true
             });
         }
-
     }
 
     async componentDidMount() {
-
         this.setState({
             loggedInUser: await this.preferencesRepo.getValue(PreferenceKeys.loggedInUsername),
             chatPartner: this.props.navigation.state.params.user,
         });
-
-        // let payload: chatPayloads.fetchChatMessagesPayloadType = {
-        //     loggedInUser: this.state.loggedInUser,
-        //     chatPartner: this.props.navigation.state.params.user.username
-        // };
-
-        // await chatActions.fetchMessages(payload)(this.props.dispatch);
-        // this.saveInitialMessagesToState();
-
-        let x = 2;
-
 
         await this.chatService.loadMessages(this.state.loggedInUser, this.state.chatPartner, async (message) => {
             await this.setState((previousState) => {
@@ -117,10 +103,6 @@ class ChatPage extends Component {
                 };
             });
         });
-
-
-
-
     }
 
     renderBubble(props) {
@@ -135,22 +117,6 @@ class ChatPage extends Component {
             />
         )
     }
-
-    // onSend(messages = []) {
-    //     this.setState(previousState => ({
-    //         messages: GiftedChat.append(previousState.messages, messages),
-    //     }))
-
-    //     let payload: chatPayloads.sendChatMessagePayloadType = {
-    //         loggedInUser: this.state.loggedInUser,
-    //         chatPartner: this.props.navigation.state.params.user.username,
-    //         regionCode: "TM", 
-    //         message: messages[0].text, 
-    //         createdAt: messages[0].createdAt.getTime()
-    //     };
-
-    //     chatActions.sendMessage(payload)(this.props.dispatch);
-    // }
 
     render() {
         return !this.props.fetchMessagesReducer.isInProgress ? (

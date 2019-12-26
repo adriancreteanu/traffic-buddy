@@ -147,19 +147,11 @@ export default class ChatService extends SuperService {
         // Check if thread exists first
         let threadKey = await this.checkIfThreadExists(loggedUser, chatPartner);
 
-        let x = threadKey;
-
-        let y = 2;
-
-
         if (!threadKey) {
             // Create new thread 
-            let yyy = 55;
             threadKey = this.messagesRef.push().key;
             await this.createNewThread(threadKey, loggedUser, chatPartner);
         }
-
-        let z = 99;
 
         // Create new message
         this.messagesRef = this.firebaseApp.database().ref(`threads/${threadKey}/messages`)

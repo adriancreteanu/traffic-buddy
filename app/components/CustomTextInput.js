@@ -11,7 +11,6 @@ class CustomTextInput extends Component {
           this.props.style,
           {
             color: '#000',
-            //fontWeight: 'bold',
             fontSize: this.props.fontSize,
             width: this.props.width,
             height: this.props.height,
